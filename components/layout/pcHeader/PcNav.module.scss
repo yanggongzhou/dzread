@@ -1,0 +1,61 @@
+.navLeft {
+  display: flex;
+  justify-content: space-between;
+
+  .logoTxtBox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .logoTxt {
+      width: 0.4rem;
+      height: 0.4rem;
+      margin-right: 0.1rem;
+    }
+
+    span {
+      font-size: 0.28rem;
+      font-weight: 600;
+      color: #FFFFFF;
+    }
+  }
+}
+
+.navBox {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+
+  .navItem, .navItemActive {
+    height: 100%;
+    padding: 0.2rem 0.25rem;
+    display: flex;
+    align-items: center;
+    font-weight: 400;
+    font-size: 0.18rem;
+    color: rgba(255, 255, 255, 0.6);
+
+    .navItemLabel {
+      padding: 0.04rem 0.1rem;
+      word-break: keep-all;
+      min-width: 1rem;
+      text-align: center;
+    }
+
+    &:hover {
+      color: $theme_color;
+      font-weight: 500;
+    }
+
+    &:hover .navItemLabel {
+      background-color: rgba(255, 255, 255, 0.08);
+      border-radius: 0.03rem;
+    }
+  }
+
+  .navItemActive {
+    color: $theme_color;
+    font-weight: 500;
+  }
+}

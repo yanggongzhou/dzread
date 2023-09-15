@@ -1,0 +1,44 @@
+
+.unlockWrap {
+  position: relative;
+  top: -1.7rem;
+  left: 0;
+  width: 100%;
+  z-index: 9;
+}
+
+.logoBox {
+  width: 100%;
+  padding: 1rem 0.64rem 0.4rem;
+  position: relative;
+}
+
+.logoBox p {
+  text-align: center;
+  line-height: 0.48rem;
+  font-weight: 400;
+  font-size: 0.28rem
+}
+
+.logoIcon {
+  width: 1.44rem;
+  height: 1.44rem;
+  margin: 0.2rem auto;
+  border-radius: 0.15rem;
+  overflow: hidden;
+}
+
+.iconBox {
+  background-color: $theme_color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  width: 6.68rem;
+  height: 0.88rem;
+  border-radius: 0.44rem;
+  font-size: 0.32rem;
+  font-weight: 500;
+  color: #FFFFFF;
+  letter-spacing: 0.02rem;
+}

@@ -1,0 +1,143 @@
+.controlWrap {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  /*height: 100%;*/
+  bottom: -5rem;
+  z-index: 9999;
+  background-color: #FFFFFF;
+  transition: bottom 0.3s;
+}
+.controlSize {
+  height: 1.2rem;
+  padding: 0 0.32rem;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.sizeTitle {
+  font-size: 0.24rem;
+  font-weight: 500;
+}
+.sizeBox {
+  flex: 1;
+  margin-left: 0.48rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.size, .sizeNight, .sizeActive {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.7rem;
+  height: 0.72rem;
+  border-radius: 0.08rem;
+  font-size: 0.2rem;
+  border: 0.02rem solid;
+  font-weight: 400;
+  border-color: #FFFFFF66;
+  color: #2F3031;
+  background-color: rgba(246, 246, 246, 1);
+}
+
+.sizeNight {
+  color: #FFFFFF66;
+  background-color: rgba(246, 246, 246, 0.1);
+}
+
+.sizeActive {
+  font-weight: 500;
+  border-color: $theme_color;
+  color: $theme_color;
+  background-color: transparent;
+}
+
+.bgBox {
+  margin-left: 0.48rem;
+  display: flex;
+  align-items: center;
+}
+.bg, .bgActive {
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  margin-right: 0.4rem;
+  border: 0.02rem solid transparent;
+}
+
+.bgActive {
+  border: 0.02rem solid $theme_color;
+}
+
+.controlBg {
+  height: 1.2rem;
+  padding: 0 0.32rem;
+  display: flex;
+  align-items: center;
+}
+
+
+.bottomTabs {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 1.1rem;
+}
+
+.tabItem {
+  flex: 1;
+  height: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #2F3031;
+}
+.tabIcon {
+  margin: 0 auto;
+  width: 0.44rem;
+  height: 0.44rem;
+}
+.tabLabel, .tabLabelActive, .tabLabelNight {
+  margin-top: 0.04rem;
+  font-size: 0.22rem;
+  font-weight: 400;
+  color: #2F3031;
+}
+.tabLabelNight {
+  color: #FFFFFF66;
+}
+.tabLabelActive {
+  color: $theme_color;
+}
+
+.chapterBtnBox {
+  border-top: 0.01rem solid;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.48rem;
+  height: 1.2rem;
+}
+.chapterBtn, .pageItem {
+  width: 3.03rem;
+  height: 0.72rem;
+  border-radius: 0.08rem;
+  border: 0.01rem solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.24rem;
+  font-weight: 400;
+  color: #2F3031;
+}
+
+.pageItem {
+  background-color: #F6F6F6;
+  border: 0.01rem solid #EBEBEB;
+  color: #d1d1d2;
+}

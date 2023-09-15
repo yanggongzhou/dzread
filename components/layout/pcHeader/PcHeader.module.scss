@@ -1,0 +1,56 @@
+.navOccupy {
+  width: 100%;
+  height: 0.8rem;
+}
+
+.navWrap {
+  width: 100%;
+  height: 0.8rem;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+
+  .navContent {
+    width: 14.4rem;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .qrCode {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+}
+
+
+
+.slideLeft {
+  position: fixed;
+  top: 50%;
+  right: 0.4rem;
+  z-index: 99;
+
+  .slideLogo {
+    width: 0.8rem;
+    height: 0.8rem;
+    position: absolute;
+    left: 0.4rem;
+    z-index: 1;
+  }
+
+  .slideQrCode {
+    background-color: #FFFFFF;
+    border-radius: 0.06rem;
+    padding: 0.1rem;
+    width: 1.2rem;
+    height: 1.2rem;
+    position: relative;
+    top: 0.7rem;
+    z-index: 9;
+  }
+}
