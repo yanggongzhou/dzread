@@ -16,6 +16,7 @@ interface IProps {
 const CrumbsCom: FC<IProps> = ({ position, bookName, bookId, chapterName, isPc }) => {
 
   // const pos = useAppSelector(state => state.app?.position);
+
   let pos;
   const _position = pos ?? position;
   return <div className={styles.crumbsWrapBox} style={!isPc ? { width: 0, height: 0, overflow: "hidden" } : {}}>

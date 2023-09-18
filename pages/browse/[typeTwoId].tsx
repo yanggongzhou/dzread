@@ -7,6 +7,7 @@ import { ownOs } from "@/utils/ownOs";
 import MBrowse from "@/components/browse";
 import PcBrowse from "@/components/pcBrowse";
 import { IBrowseTypes } from "@/typings/browse.interface";
+import Breadcrumb from "@/components/pcBrowse/Breadcrumb";
 
 interface IProps {
   isPc: boolean;
@@ -20,8 +21,13 @@ interface IProps {
 
 const Browse: NextPage<IProps> = (
   { isPc, types, bookList, pageNo, pages, typeTwoId }) => {
-
+  const data = [
+    { title: '首页', link: "/home" },
+    { title: '小说分类', link: "/browse/0" },
+    { title: '都市小说' },
+  ]
   return <>
+    <Breadcrumb data={data} />
     {isPc ?
       <PcBrowse
         pageNo={pageNo}
