@@ -6,6 +6,7 @@ import ReaderPagination from "@/components/PcReader/readerPagination/ReaderPagin
 import Link from "next/link";
 import Image from "next/image";
 import { IBookItem } from "@/typings/home.interface";
+import SlideOperate from "@/components/PcReader/slideOperate/SlideOperate";
 
 interface IProps {
   bookId: string;
@@ -17,7 +18,9 @@ interface IProps {
 const PcReader: FC<IProps> = ({ bookId, chapterContent, chapterInfo,bookInfo}) => {
 
   return <div className={ styles.pcBookWrap }>
-    <div className={styles.readerWrap} id='pcReadPage'>
+    <SlideOperate/>
+
+    <div className={styles.readerWrap}>
       <div>
         <div className={styles.bookCoverBox}>
           <Image

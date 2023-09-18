@@ -1,0 +1,85 @@
+.moreBox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  background: linear-gradient(140deg, #FF7E42 0%, #FF3E64 100%);
+  font-size: 0.34rem;
+  font-weight: 600;
+  padding: 0.24rem 0.32rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 0.88rem;
+
+  .moreBack {
+    .backIcon {
+      width: 0.32rem;
+      height: 0.32rem;
+    }
+  }
+
+  .moreBoxTitle {
+    font-size: 0.36rem;
+    font-weight: 600;
+    color: #FFFFFF;
+    flex: 1;
+    text-align: center;
+    padding-right: 0.42rem;
+    padding-left: 0.2rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: Roboto-Medium, Roboto;
+  }
+}
+
+.tagWrap {
+  padding: 1.2rem 0.04rem 1.2rem;
+  font-family: Roboto-Regular, Roboto;
+
+  .keywordBox {
+
+    .title {
+      font-size: 0.36rem;
+      color: #2F3031;
+      font-weight: bold;
+      font-style: italic;
+      line-height: 0.48rem;
+      padding: 0 0.32rem;
+      margin-bottom: 0.16rem;
+      font-family: Roboto-Bold, Roboto;
+    }
+
+    .sub {
+      font-size: 0.26rem;
+      line-height: 0.32rem;
+      color: #333333;
+      padding: 0 0.32rem;
+      white-space: pre-wrap;
+      font-family: Roboto-Regular, Roboto;
+    }
+
+    .keywordConnect {
+      padding: 0.32rem 0.04rem 0.48rem;
+
+      .keywordConnectTitle {
+        padding: 0 0.28rem;
+        font-size: 0.32rem;
+        color: #2F3031;
+        line-height: 0.4rem;
+        font-family: Roboto-Regular, Roboto;
+      }
+
+      .keywordConnectItem {
+        display: inline-block;
+        font-size: 0.32rem;
+        line-height: 0.4rem;
+        padding: 0.16rem 0.28rem 0.08rem;
+        color: $theme_color;
+        text-decoration: underline !important;
+        font-family: Roboto-Regular, Roboto;
+      }
+    }
+  }
+}

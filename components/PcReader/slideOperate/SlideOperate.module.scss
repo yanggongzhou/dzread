@@ -1,0 +1,41 @@
+.operateBox {
+  left: 50%;
+  position: fixed;
+  z-index: 999;
+  transform: translate3d(500px, -50%, 0px);
+  top: 50%;
+
+  li {
+    display: block;
+    border-radius: 0 6px 6px 0;
+    margin-bottom: 4px;
+    position: relative;
+    background-color: transparent;
+    padding-left: 10px;
+    width: 86px;
+
+
+    .itemBox {
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      align-items: center;
+      background: hsla(0,0%,100%,.5);
+      border-radius: 6px;
+      color: #666;
+      cursor: pointer;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      height: 76px;
+      justify-content: center;
+      width: 76px;
+    }
+
+  }
+}

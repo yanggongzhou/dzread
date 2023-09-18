@@ -1,0 +1,44 @@
+.keywordsWrap {
+  padding-bottom: 0.5rem;
+  min-height: calc(100vh - 2rem);
+  background-color: #F5F6FA;
+  font-family: Ubuntu-Regular, Ubuntu;
+
+  .tagLetter {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    align-items: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+
+    .letter {
+      display: inline-block;
+      font-size: 20px;
+      padding: 5px 10px;
+
+      &:hover {
+        color: #0bafff;
+      }
+    }
+  }
+
+  .keywordBox {
+    width: 13rem;
+    margin: 0 auto;
+    padding: 0.5rem 0;
+    height: 100%;
+
+    .keywordItem {
+      font-size: 0.16rem;
+      padding: 0.08rem 0.2rem;
+      color: $theme_color;
+      display: inline-block;
+      text-decoration: underline !important;
+    }
+  }
+}

@@ -1,0 +1,61 @@
+.moreBox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  background: linear-gradient(140deg, #FF7E42 0%, #FF3E64 100%);
+  font-size: 0.34rem;
+  font-weight: 600;
+  padding: 0.24rem 0.32rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 0.88rem;
+
+  .moreBack {
+    .backIcon {
+      width: 0.32rem;
+      height: 0.32rem;
+    }
+  }
+
+  .moreBoxTitle {
+    font-size: 0.36rem;
+    font-weight: 600;
+    color: #FFFFFF;
+    flex: 1;
+    text-align: center;
+    padding-right: 0.32rem;
+  }
+}
+
+.keywordsWrap {
+  padding: 0.9rem 0.04rem 1.2rem;
+  font-family: Roboto-Regular, Roboto;
+
+  .tagLetter {
+
+    .letter {
+      box-sizing: content-box;
+      color: #059fff;
+      display: inline-block;
+      font-size: .32rem;
+      padding: 0.2rem 0.28rem;
+      text-align: center;
+      width: 0.2rem;
+    }
+  }
+
+  .keywordBox {
+    min-height: calc(100vh - 2.1rem);
+
+    .keywordItem {
+      font-size: 0.3rem;
+      padding: 0.2rem 0.28rem;
+      color: $theme_color;
+      display: inline-block;
+      font-weight: 400;
+      line-height: 0.48rem;
+    }
+  }
+}

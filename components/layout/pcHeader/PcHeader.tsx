@@ -6,6 +6,7 @@ import { Popover } from "antd-mobile";
 import QRCode from "qrcode.react";
 import PcNav from "@/components/layout/pcHeader/PcNav";
 import HeaderSearch from "@/components/layout/pcHeader/Search";
+import { useRouter } from "next/router";
 
 interface IProps {
 
@@ -30,6 +31,8 @@ const PcSlide: FC = () => {
 
 const PcHeader: FC<IProps> = () => {
 
+  const router = useRouter();
+
   return <>
     <div className={styles.navWrap}>
       <div className={styles.navContent}>
@@ -49,7 +52,7 @@ const PcHeader: FC<IProps> = () => {
       </div>
     </div>
     <div className={styles.navOccupy}/>
-    <PcSlide />
+    {router.pathname !== '/chapter/[bookId]/[chapterId]' ? <PcSlide/> : null}
   </>
 }
 

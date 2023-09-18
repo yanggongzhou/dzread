@@ -49,7 +49,7 @@ const VerticalItem: FC<IProps> = ({ list }) => {
   </div>
 }
 
-const VerticalList: FC<IProps> = ({ list }) => {
+const VerticalList: FC<IProps> = ({ list = [] }) => {
 
   return <div className={styles.verticalListBox}>
     <VerticalItem key={1} list={list}/>

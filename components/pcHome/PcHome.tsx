@@ -27,7 +27,7 @@ const PcHome: FC<IProps> = ({ bigList, smallData }) => {
         })
       }
       <PcHomeTitle title={'排行榜'} href={`/more/rankings`}/>
-      <VerticalList list={smallData[0].items}/>
+      <VerticalList list={smallData[0]?.items}/>
       {bigList.length === 0 && smallData.length === 0 ? <PcEmpty/> : null}
     </>
   )
