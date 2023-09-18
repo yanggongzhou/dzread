@@ -7,6 +7,7 @@ import Link from "next/link";
 import SecondList from "@/components/pcHome/secondList/SecondList";
 import { PcEmpty } from "@/components/common/empty";
 import Image from "next/image";
+import FirstList from "@/components/common/firstList/FirstList";
 
 interface IProps {
   moreData: IHomeResItem;
@@ -17,34 +18,13 @@ interface IProps {
 const PcMore: FC<IProps> = ({ moreData, pages, pageNo }) => {
 
   return <>
-    <div className={styles.backHead}>
-      <div className={styles.backBox}>
-        <Link href={'/'} className={styles.backBoxLink}>
-          <Image
-            className={styles.backIcon}
-            width={16}
-            height={16}
-            src={'/images/home/pc-more.png'}
-            alt={''}
-          />
-          <Image
-            className={styles.backIconActive}
-            width={16}
-            height={16}
-            src={'/images/home/pc-more-active.png'}
-            alt={''}
-          />
-          <span>back</span>
-        </Link>
-      </div>
-    </div>
     <div className={styles.moreContent}>
 
       {moreData?.items && moreData.items.length > 0 ?
         <>
           <PcHomeTitle title={moreData.name} />
           <div className={styles.moreBookList}>
-            <SecondList dataSource={moreData.items} />
+            <FirstList dataSource={moreData.items} />
             {pages && pages > 1 ? <PaginationCom
               path={`/more/${moreData.name}/`}
               pageNo={pageNo}

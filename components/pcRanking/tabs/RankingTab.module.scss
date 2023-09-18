@@ -1,0 +1,45 @@
+.slideTabBox {
+  position: fixed;
+  top: 64px;
+  z-index: 9;
+
+  border-right: 0.5px solid hsla(0,0%,85%,.5);
+  font-size: 14px;
+  margin-top: 40px;
+  max-height: calc(100vh - 384px);
+  overflow-y: scroll;
+  overflow: -moz-scrollbars-none;
+  text-align: center;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  width: 160px;
+
+  &::-webkit-scrollbar { display: none; }
+
+  .tabOneItem {
+    margin-bottom: 20px;
+
+    .oneItemBox {
+
+
+      .tabChild, .tabChildActive {
+        color: #b2b2b2;
+        display: block;
+        line-height: 40px;
+        border-right: 2px solid transparent;
+
+        &:hover {
+          color: #0bafff;
+        }
+      }
+
+      .tabChildActive {
+        background-color: rgba(11,175,255,.1);
+        border-right: 2px solid #0bafff;
+        color: #0bafff;
+      }
+
+    }
+  }
+
+}
