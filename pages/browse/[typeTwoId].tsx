@@ -7,7 +7,7 @@ import { ownOs } from "@/utils/ownOs";
 import MBrowse from "@/components/browse";
 import PcBrowse from "@/components/pcBrowse";
 import { IBrowseTypes } from "@/typings/browse.interface";
-import Breadcrumb from "@/components/pcBrowse/Breadcrumb";
+import Breadcrumb from "@/components/common/breadcrumb";
 
 interface IProps {
   isPc: boolean;

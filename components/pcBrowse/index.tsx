@@ -1,11 +1,11 @@
 import React, { FC } from "react";
 import styles from "@/components/pcBrowse/index.module.scss";
-import Link from "next/link";
 import { IBookItem } from "@/typings/home.interface";
 import PaginationCom from "@/components/common/paginationCom";
 import { IBrowseTypes } from "@/typings/browse.interface";
 import { PcEmpty } from "@/components/common/empty";
-import SecondList from "@/components/pcHome/secondList/SecondList";
+import PcCapsuleTabs from "@/components/pcBrowse/PcCapsuleTabs";
+import FirstList from "@/components/common/firstList/FirstList";
 
 interface IProps {
   bookList: IBookItem[];
@@ -16,27 +16,24 @@ interface IProps {
 }
 
 const PcBrowse: FC<IProps> = ({ bookList, pageNo, pages, typeTwoId, types }) => {
+  const data = [
+    { id: 1, title: "男生", children: types },
+    { id: 2, title: "女生", children: types },
+    { id: 3, title: "出版", children: types }
+  ]
 
   return <div className={styles.browseWrap}>
 
-    <div className={styles.browseHeader}>
-      <div className={styles.tabsBox}>
-        {types.map((item) => {
-          const typeName = item.id === 0 ? '全部' : item.name;
-          if (item.id === typeTwoId) {
-            return <div key={item.id} className={styles.tabItemActive}>{typeName}</div>
-          }
-          return <Link href={`/browse/${item.id}`} key={item.id}
-                       className={styles.tabItem}>
-            {typeName}
-          </Link>
-        })}
-      </div>
-    </div>
+    <PcCapsuleTabs data={data} typeTwoId={typeTwoId}/>
 
     <div className={styles.browseContent}>
+
+      <div className={styles.browseTitle}>
+        都市小说
+      </div>
+
       {bookList.length === 0 ? <PcEmpty/> :
-        <SecondList dataSource={bookList}/>}
+        <FirstList dataSource={bookList}/>}
 
       {pages && pages > 1 ?
         <PaginationCom

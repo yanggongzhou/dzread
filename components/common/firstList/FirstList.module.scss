@@ -1,0 +1,88 @@
+.moreBookWrap {
+  width: 13rem;
+  margin: 0 auto;
+}
+
+
+.imageItemMoreWrap {
+  display: grid;
+  grid-template-columns: 1.7rem auto 1.2rem;
+  align-items: center;
+  width: 100%;
+  height: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.bookNumber {
+  font-size: 0.4rem;
+  font-style: italic;
+  color: #333333;
+  font-family: Ubuntu-Regular, Ubuntu;
+  font-style: italic;
+}
+
+.bookImage {
+  width: 1.5rem;
+  height: 2rem;
+  border-radius: 0.04rem;
+  overflow: hidden;
+}
+
+.bookInfo {
+  height: 100%;
+  width: 100%;
+  padding-right: 0.4rem;
+}
+
+.bookName {
+  color: #333333;
+  font-size: 0.2rem;
+  font-weight: 600;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-family: Ubuntu-Bold, Ubuntu;
+}
+
+.rankBox {
+  display: flex;
+  align-items: center;
+  margin: 0.08rem 0;
+}
+
+.rankBox span {
+  font-size: 0.14rem;
+  font-weight: 400;
+  color: #3A4A5A;
+  margin-left: 0.08rem;
+  font-family: Ubuntu-Regular, Ubuntu;
+}
+
+.bookLine2 {
+  font-family: Ubuntu-Regular, Ubuntu;
+  font-style: italic;
+  font-size: 0.14rem;
+  font-weight: 400;
+  color: #545862;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.moreIntro {
+  margin-top: 0.26rem;
+  color: #545862;
+  font-size: 0.16rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  word-wrap: break-word;
+  line-height: 0.22rem;
+  font-family: Ubuntu-Regular, Ubuntu;
+  overflow-wrap: anywhere;
+}

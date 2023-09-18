@@ -17,9 +17,10 @@
     font-size: 0.14rem;
     cursor: pointer;
     border-radius: 0.04rem;
-    color: rgba(255,255,255,0.9);
-    background-color: rgba(255,255,255,0.08);
+    color: #666;
+    background-color: #f5f5f7;
     transition: all 0.3s;
+    text-decoration: none !important;
 
     &:hover {
       background-color: rgba(255,255,255,0.16);
@@ -27,7 +28,8 @@
   }
 
   .activePage {
-    background-color: $theme_color;
+    color: #0bafff;
+    background-color: rgba(11,175,255,.12);
   }
 
   .prevNextIcon {

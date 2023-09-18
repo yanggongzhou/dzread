@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React, { CSSProperties, FC } from "react";
 import Image from "next/image";
-import styles from "@/components/pcBrowse/Breadcrumb.module.scss";
+import styles from "@/components/common/breadcrumb/index.module.scss";
 
 export interface IBreadcrumb {
   title: string;
