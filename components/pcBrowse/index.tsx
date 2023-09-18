@@ -6,6 +6,7 @@ import { IBrowseTypes } from "@/typings/browse.interface";
 import { PcEmpty } from "@/components/common/empty";
 import PcCapsuleTabs from "@/components/pcBrowse/PcCapsuleTabs";
 import FirstList from "@/components/common/firstList/FirstList";
+import { useRouter } from "next/router";
 
 interface IProps {
   bookList: IBookItem[];
@@ -21,6 +22,7 @@ const PcBrowse: FC<IProps> = ({ bookList, pageNo, pages, typeTwoId, types }) => 
     { id: 2, title: "女生", children: types },
     { id: 3, title: "出版", children: types }
   ]
+  const router = useRouter();
 
   return <div className={styles.browseWrap}>
 
@@ -38,6 +40,9 @@ const PcBrowse: FC<IProps> = ({ bookList, pageNo, pages, typeTwoId, types }) => 
       {pages && pages > 1 ?
         <PaginationCom
           path={`/browse/${typeTwoId}/`}
+          onJumpChange={(page) => {
+            router.push(`/browse/${typeTwoId}/${page}`)
+          }}
           pageNo={pageNo}
           totalPage={pages}
           isScroll={true}/> : null}

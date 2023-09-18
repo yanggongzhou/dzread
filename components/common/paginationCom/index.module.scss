@@ -57,3 +57,31 @@
     background-color: rgba(255,255,255,0.08) !important;
   }
 }
+
+
+.jumpInputBox {
+  font-size: 0.14rem;
+  color: #666;
+  margin-left: 0.2rem;
+
+
+  .jumpInput {
+    font-size: 0.14rem !important;
+    color: #666 !important;
+    width: 0.4rem;
+    height: 0.4rem;
+    background-color: #f5f5f7;
+    border-radius: 0.04rem;
+    text-align: center;
+    margin: 0 0.08rem;
+
+    &:enabled:read-write:-webkit-any(:focus, :hover)::-webkit-inner-spin-button {
+      display: none;
+      -webkit-appearance:none;
+    }
+    &::-webkit-inner-spin-button {
+      display: none;
+      -webkit-appearance:none;
+    }
+  }
+}
