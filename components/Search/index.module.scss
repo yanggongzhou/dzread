@@ -1,0 +1,88 @@
+.searchWrap {
+  background-color: #FFFFFF;
+  min-height: 100vh;
+  font-family: Roboto-Regular, Roboto;
+}
+
+.searchBox {
+  padding: 0.24rem 0.32rem;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.backIcon {
+  width: 0.32rem;
+  height: 0.32rem;
+}
+
+.searchInputBox {
+  flex: 1;
+  margin: 0 0.2rem;
+  height: 0.82rem;
+  background-color: #f7f6f5;
+  border-radius: 0.41rem;
+  padding-left: 0.3rem;
+  display: flex;
+  align-items: center;
+}
+
+.searchIcon {
+  width: 0.48rem;
+  height: 0.48rem;
+}
+
+.searchForm {
+  flex: 1;
+}
+
+.searchInput {
+  margin-left: 0.15rem;
+  flex: 1;
+  height: 100%;
+  background-color: transparent;
+  word-wrap: break-word;
+  font-size: 0.28rem;
+  font-weight: 400;
+}
+
+.searchInput :focus-visible {
+  outline-offset: unset;
+}
+
+.cancelBox {
+  padding: 0.1rem;
+}
+
+.cancelIcon {
+  width: 0.48rem;
+  height: 0.48rem;
+}
+
+.noSearch {
+  margin-top: 2.24rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 1.32rem;
+}
+
+.noSearchTxt {
+  margin-top: 0.32rem;
+  font-size: 0.28rem;
+  color: #a1a1a1;
+  font-weight: 300;
+  text-align: center;
+}
+
+.noSearchIcon {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.searchList {
+  padding: 0.24rem 0.32rem 1.24rem;
+}

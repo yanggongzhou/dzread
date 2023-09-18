@@ -13,6 +13,7 @@ import {
 } from "@/typings/sitemap.interface";
 import { INetBrowseReq, INetBrowseRes, INetBrowseTypeRes } from "@/typings/browse.interface";
 import { INetKeywordsReq, INetKeywordsRes, INetKeywordTagReq, INetKeywordTagRes } from "@/typings/tag.interface";
+import { INetSearchReq, INetSearchRes } from "@/typings/search.interface";
 
 // 获取首页index
 export const netHomeData = (): Promise<IHomeResItem[] | 'BadRequest_404' | 'BadRequest_500'> => {
@@ -97,6 +98,17 @@ export const netKeywordTag = async (params: INetKeywordTagReq): Promise<INetKeyw
   return await Service.post('/webfic/keyword/info', { pageSize: 10, ...params }, {
     baseURL: "https://yfbwww.webfic.com",
     headers: {
+      "pline": "WEBFIC"
+    } as any
+  })
+}
+
+// 搜索接口
+export const netSearch = async (params: INetSearchReq, language?: ELanguage): Promise<INetSearchRes | 'BadRequest_404' | 'BadRequest_500'> => {
+  return await Service.post('/webfic/book/search', { pageNo: 1, pageSize: 30, ...params }, {
+    baseURL: "https://yfbwww.webfic.com",
+    headers: {
+      language: ELanguage.English,
       "pline": "WEBFIC"
     } as any
   })
