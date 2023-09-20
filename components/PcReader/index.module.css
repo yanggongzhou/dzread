@@ -1,18 +1,18 @@
 .pcBookWrap {
-  background-color: #F4F6F8;
+  background-color: rgb(224, 224, 224);
   padding: 1rem 0 0.5rem;
 }
 
 .readerWrap {
   padding: 0.6rem 0.78rem 0.48rem;
   min-height: 9rem;
-  width: 8.56rem;
+  width: 1000px;
   margin: 0 auto;
   border-radius: 0.04rem;
   position: relative;
   box-shadow: 0 0 0.06rem 0 #ededed;
   color: #2F3031;
-  background-color: #FFFFFF;
+  background-color: hsla(0,0%,100%,.5);
 }
 
 .bookCoverBox {

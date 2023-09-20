@@ -1,5 +1,5 @@
 import Link from "next/link";
-import styles from "@/components/film/crumbs/index.module.scss";
+import styles from "@/components/book/crumbs/index.module.scss";
 import React, { FC } from "react";
 import Image from "next/image";
 import { IBookItem } from "@/typings/home.interface";

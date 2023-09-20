@@ -19,7 +19,7 @@ const FirstList: FC<IProps> = ({ dataSource = [], priority = false }) => {
   return <div className={styles.moreBookWrap}>
     {dataSource.map((book) => {
       const { bookId, bookName, introduction, cover, ratings = 0, firstChapterId, author } = book;
-      const routerToBookInfo = `/film/${bookId}`
+      const routerToBookInfo = `/book/${bookId}`
       const ratingStr = ratings.toFixed(1)
 
       return <div key={bookId} className={styles.imageItemMoreWrap}>

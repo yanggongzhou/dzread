@@ -1,5 +1,5 @@
 import Service from "@/server/request";
-import { ELanguage, IHomeResItem } from "@/typings/home.interface";
+import { ELanguage, INetHomeItem } from "@/typings/home.interface";
 import { INetMoreReq, INetMoreResult } from "@/typings/more.interface";
 import {
   INetBookReq,
@@ -16,13 +16,8 @@ import { INetKeywordsReq, INetKeywordsRes, INetKeywordTagReq, INetKeywordTagRes 
 import { INetSearchReq, INetSearchRes } from "@/typings/search.interface";
 
 // 获取首页index
-export const netHomeData = (): Promise<IHomeResItem[] | 'BadRequest_404' | 'BadRequest_500'> => {
-  return Service.post('/webfic/home/index', undefined, {
-    // @ts-ignore
-    headers: {
-      language: ELanguage.ZhHans
-    } as any
-  })
+export const netHomeData = (): Promise<INetHomeItem[] | 'BadRequest_404' | 'BadRequest_500'> => {
+  return Service.get('/index.do')
 }
 // 浏览
 export const netBrowse = async (params: INetBrowseReq): Promise<INetBrowseRes | 'BadRequest_404' | 'BadRequest_500'> => {
@@ -43,15 +38,8 @@ export const netMoreBook = async (params: INetMoreReq,): Promise<INetMoreResult 
 }
 
 // 获取书籍详情
-export const netBook = async (params: INetBookReq): Promise<INetBookRes | 'BadRequest_404' | 'BadRequest_500'> => {
-  return await Service.post('/webfic/book/detail', {
-    ...params,
-    language: ELanguage.ZhHans,
-  }, {
-    headers: {
-      language: ELanguage.ZhHans
-    } as any
-  })
+export const netBook = (bookId: string): Promise<INetBookRes | 'BadRequest_404' | 'BadRequest_500'> => {
+  return Service.get('/detail.do', { params: { bookId } })
 }
 
 // 获取所有书籍id

@@ -1,29 +1,22 @@
 import React, { FC, useState } from 'react'
-import styles from "@/components/film/index.module.scss";
+import styles from "@/components/book/index.module.scss";
 import Link from "next/link";
 import Image from "next/image";
 import { onImgError } from "@/components/common/image/ImageCover";
 import { IBookItem } from "@/typings/home.interface";
 import { netIpUa } from "@/server/clientLog";
 import { useAppSelector } from "@/store";
-import ClientConfig from "@/client.config";
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import useHiveLog from "@/hooks/useHiveLog";
 
 interface IProps {
   bookInfo: IBookItem;
-  isApple: boolean;
 }
 
-const MFilm: FC<IProps> = ({ bookInfo, isApple }) => {
+const MBook: FC<IProps> = ({ bookInfo }) => {
   const clipboard = useAppSelector(state => state.hive.clipboard)
   const copyText = useAppSelector(state => state.hive.copyText);
-  const shopLink = useAppSelector(state => {
-    if (isApple) {
-      return ClientConfig.ios.deeplink + state.hive.copyText;
-    }
-    return ClientConfig.android.link;
-  });
+
   const HiveLog = useHiveLog();
   const {
     bookId,
@@ -61,7 +54,7 @@ const MFilm: FC<IProps> = ({ bookInfo, isApple }) => {
         netIpUa(clipboard)
         HiveLog.trackDownload('turnPage_click', { book_ID: bookId, chapter_id: 0 })
       }}>
-        <Link className={styles.footerBtn} href={shopLink}>
+        <Link className={styles.footerBtn} href={'/xxx'}>
           <Image
             className={styles.playIcon}
             width={48}
@@ -83,4 +76,4 @@ const MFilm: FC<IProps> = ({ bookInfo, isApple }) => {
   </div>
 }
 
-export default MFilm;
+export default MBook;

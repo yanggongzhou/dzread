@@ -10,10 +10,12 @@ import { EDevice } from "@/store/store.interfaces";
 import MHeader from "@/components/layout/mHeader/MHeader";
 import styles from "@/components/layout/index.module.scss"
 import { EnumBackGround, EnumFontSize, EnumTabs } from "typings/reader.interface";
+import { Router } from "next/dist/client/router";
 
 interface IProps {
   children: React.ReactNode;
   pageProps: any
+  router: Router
 }
 
 interface IAppState {
@@ -25,7 +27,7 @@ interface IAppState {
 const Context = createContext([{}, {}] as [IAppState, React.Dispatch<React.SetStateAction<IAppState>>]);
 
 
-const DLayout: FC<IProps> = ({ children, pageProps }) => {
+const DLayout: FC<IProps> = ({ children, pageProps, router }) => {
   const [appState, setAppState] = useState<IAppState>({
     theme: EnumTabs.日間,
     fontSize: EnumFontSize.normal,
@@ -72,15 +74,22 @@ const DLayout: FC<IProps> = ({ children, pageProps }) => {
     }
   }
   if ((Reflect.has(pageProps, 'isPc') && Reflect.get(pageProps, 'isPc')) || (device === EDevice.pc && domVisible)) {
-    return <>
+    return (
       <Context.Provider value={[appState, setAppState]}>
-        <PcHeader />
-        <main className={styles.pcWrap}>
-          {children}
-        </main>
-        <PcFooter />
+        { router.pathname !== '/chapter/[bookId]/[chapterId]' ?
+          <>
+            <PcHeader />
+            <main className={styles.pcWrap}>
+              {children}
+            </main>
+            <PcFooter />
+          </> :
+          <main>
+            {children}
+          </main>
+        }
       </Context.Provider>
-    </>
+    )
   }
 
   return (

@@ -1,7 +1,6 @@
 import React, { FC } from 'react'
-import styles from "@/components/pcFilm/index.module.scss";
+import styles from "@/components/pcBook/index.module.scss";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { onImgError } from "@/components/common/image/ImageCover";
 import { IBookItem } from "@/typings/home.interface";
@@ -9,39 +8,13 @@ import SecondList from "@/components/pcHome/secondList/SecondList";
 
 interface IProps {
   bookInfo: IBookItem;
-  firstChapterId: string;
   recommends: IBookItem[];
 }
 
-const PcFilm: FC<IProps> = ({ bookInfo, firstChapterId, recommends = []  }) => {
+const PcBook: FC<IProps> = ({ bookInfo, recommends = []  }) => {
   const routerToBook = `/download?${bookInfo.bookId}`;
 
-  const router = useRouter();
-
   return <>
-    <div className={styles.backHead}>
-      <div className={styles.backBox}>
-        <div className={styles.backBoxLink} onClick={() => {
-          router.back();
-        }}>
-          <Image
-            className={styles.backIcon}
-            width={16}
-            height={16}
-            src={'/images/home/pc-more.png'}
-            alt={''}
-          />
-          <Image
-            className={styles.backIconActive}
-            width={16}
-            height={16}
-            src={'/images/home/pc-more-active.png'}
-            alt={''}
-          />
-          <span>back</span>
-        </div>
-      </div>
-    </div>
     <div className={styles.detailBox}>
       <Image
         onError={onImgError}
@@ -93,4 +66,4 @@ const PcFilm: FC<IProps> = ({ bookInfo, firstChapterId, recommends = []  }) => {
   </>
 }
 
-export default PcFilm;
+export default PcBook;

@@ -26,7 +26,7 @@ function App({ Component, pageProps, router }: AppProps) {
   }, []); // eslint-disable-line
 
   return <Provider store={store}>
-    <DLayout pageProps={pageProps}>
+    <DLayout pageProps={pageProps} router={router}>
       <>
         <HeadNormal pageProps={pageProps}/>
         <Component {...pageProps} />

@@ -12,7 +12,7 @@ const FirstItem: FC<IProps> = ({ dataSource }) => {
   return <div className={styles.firstItemWrap}>
     {dataSource && dataSource.length > 0 ? (dataSource as IBookItem[]).map((book, bookInd) => {
       const { bookId, cover, bookName } = book;
-      const routerToBookInfo = `/film/${bookId}`
+      const routerToBookInfo = `/book/${bookId}`
       return <div key={bookId} className={styles.itemBox}>
         <ImageCover
           priority={bookInd < 6}

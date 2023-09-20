@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const path = require("path");
+
+
 // 网站域名
 const WebDomainObj = {
   test: 'http://192.168.1.70:3000',
@@ -8,23 +10,21 @@ const WebDomainObj = {
 }
 // 网站服务api
 const BaseUrlObj = {
-  test: 'http://192.168.0.253:8080',
-  // test: 'http://192.168.1.70:8080',
-  staging: 'https://yfbwww.webfic.com',
-  prod: 'https://www.webfic.com'
+  test: 'https://241.qcread.cn',
+  staging: 'https://yfb.klynf.com',
+  prod: 'https://api.klynf.com'
 }
 // ipua
 const IpUaUrlObj = {
-  // https://hotdrama.hw.dzods.cn/drama-box
-  test: 'https://drama.hw.dzods.cn/drama-box/ad/cache/ua',
-  staging: 'https://yfbapi.dramaboxdb.com/drama-box/ad/cache/ua',
-  prod: 'https://api.dramaboxdb.com/drama-box/ad/cache/ua'
+  test: '/asg/cacheua.do',
+  staging: '/asg/cacheua.do',
+  prod: '/asg/cacheua.do',
 }
 
 /** ⬇⬇⬇⬇⬇⬇✨✨✨✨✨✨ 环境,手动更换 ✨✨✨✨✨✨⬇⬇⬇⬇⬇⬇*/
-const environment = 'test'; // 部署环境 "test" | "staging" | "prod"
+const environment = 'staging'; // 部署环境 "test" | "staging" | "prod"
 /** ⬆⬆⬆⬆⬆⬆✨✨✨✨✨✨ ℹℹℹℹℹℹℹℹℹℹ ✨✨✨✨✨✨⬆⬆⬆⬆⬆⬆ */
-const buildId = 'dzread-010001'; // 构建ID
+const buildId = 'dzread-010000'; // 构建ID
 const WebDomain = WebDomainObj[environment]
 const BaseUrl = BaseUrlObj[environment]
 const IpUaUrl = IpUaUrlObj[environment]

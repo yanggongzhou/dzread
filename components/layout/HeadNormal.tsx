@@ -10,7 +10,7 @@ const { googleCode, baiduCode } = ClientConfig;
 export const pathnameData = {
   browse: '/browse/[typeTwoId]',
   more: '/more/[position]',
-  book: '/film/[bookId]',
+  book: '/book/[bookId]',
   download: '/download',
   error404: '/404',
   error500: '/500',

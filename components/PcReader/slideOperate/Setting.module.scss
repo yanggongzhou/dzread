@@ -1,0 +1,85 @@
+.settingBox {
+  background-color: #333333;
+  position: absolute;
+  right: 96px;
+  top: -200px;
+}
+
+
+.settingTitle {
+  font-size: 0.18rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  height: 0.49rem;
+  border-bottom: 0.01rem solid rgba(244, 246, 248, 0.1);
+  padding: 0 0.24rem;
+  line-height: 0.49rem;
+  font-family: Ubuntu-Bold, Ubuntu;
+}
+.controlBg {
+  padding: 0.22rem 0.24rem 0.46rem;
+}
+
+
+.sizeTitle {
+  font-size: 0.16rem;
+  font-weight: 400;
+  color: #FFFFFF;
+  margin-bottom: 0.2rem;
+}
+
+.bgBox {
+  display: flex;
+  align-items: center;
+}
+
+.bg {
+  width: 0.44rem;
+  height: 0.44rem;
+  border-radius: 50%;
+  margin-right: 0.24rem;
+  position: relative;
+  cursor: pointer;
+}
+
+.bgChecked {
+  width: 0.18rem;
+  height: 0.18rem;
+  position: absolute !important;
+  right: 0;
+  bottom: -0.06rem;
+}
+
+.controlSize {
+  padding: 0.22rem 0.24rem 2.46rem;
+}
+
+.sizeBox {
+  display: flex;
+  align-items: center;
+  width: 1.36rem;
+  justify-content: space-between;
+}
+
+.size {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 0.4rem;
+  height: 0.3rem;
+  border-radius: 0.04rem;
+  font-size: 0.2rem;
+  color: #FFFFFF80;
+  border: 1px solid #FFFFFF;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: all 0.3s;
+
+  &:hover {
+    border: 1px solid $theme_color;
+    opacity: 1;
+    color: $theme_color;
+  }
+}
+
+

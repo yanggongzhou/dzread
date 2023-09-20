@@ -12,7 +12,7 @@ const VerticalItem: FC<IProps> = ({ list }) => {
 
   return <div className={styles.verticalItemBox}>
     {list.map((book, bookInd) => {
-      const routerToBookInfo = `/film/${book.bookId}`
+      const routerToBookInfo = `/book/${book.bookId}`
 
       return <div key={book.bookId} className={styles.itemBox}>
         <Link href={routerToBookInfo} className={styles.imageBox}>

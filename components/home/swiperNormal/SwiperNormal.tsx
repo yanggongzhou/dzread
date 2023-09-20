@@ -6,15 +6,15 @@ import Link from "next/link";
 import ImageCover from "@/components/common/image/ImageCover";
 
 interface IProps {
-  bigList: IBookItem[];
+  bannerList: IBookItem[];
 }
 
-const SwiperNormal: FC<IProps> = ({ bigList }) => {
-  const items = bigList.map((item) => (
+const SwiperNormal: FC<IProps> = ({ bannerList }) => {
+  const items = bannerList.map((item) => (
     <Swiper.Item key={item.bookId} className={styles.content}>
       <div className={styles.swiperItem}>
         <ImageCover
-          href={`/film/${item.bookId}`}
+          href={`/book/${item.bookId}`}
           className={styles.contentImgBox}
           src={item.cover}
           width={218}
@@ -22,7 +22,7 @@ const SwiperNormal: FC<IProps> = ({ bigList }) => {
           alt={item.bookName}
         />
 
-        <Link className={styles.rightCard} href={`/film/${item.bookId}`}>
+        <Link className={styles.rightCard} href={`/book/${item.bookId}`}>
           <div className={styles.rightCardTop}>
             <h2 className={styles.bookName} >
               {item.bookName}
@@ -40,6 +40,7 @@ const SwiperNormal: FC<IProps> = ({ bigList }) => {
     </Swiper.Item>
   ))
   return <Swiper
+    autoplayInterval={2000}
     style={{
       '--height': '3.16rem',
     }}

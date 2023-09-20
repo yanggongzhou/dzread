@@ -2,15 +2,17 @@ import axios, { AxiosError, CreateAxiosDefaults } from 'axios'
 
 // 取消重复请求
 const Service = axios.create({
-  baseURL: process.env.BaseUrl,
+  baseURL: 'https://yfb.klynf.com/asg/portal/website', // process.env.BaseUrl,
   timeout: 10 * 1000,
 } as CreateAxiosDefaults);
 
 // 添加请求拦截器
 Service.interceptors.request.use(
   (request) => {
-    if (request.headers) {
-      Reflect.set(request.headers, 'pline', "DRAMABOX") // DRAMABOX
+    if (request.method === 'get') {
+      Reflect.has(request, 'params') && typeof Reflect.get(request, 'params') === 'object' ?
+        Reflect.set(request.params, 'pline', 3)
+        : Reflect.set(request, 'params', { pline: 3})
     }
     return request
   },

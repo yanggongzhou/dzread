@@ -86,7 +86,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx): Promise<GetSe
         ...options,
         lastmod: isNewBook ? book.utime : options.lastmod,
         changefreq: isNewBook ? 'daily' : options.changefreq,
-        loc: `${options.loc}/film/${book.bookId}`,
+        loc: `${options.loc}/book/${book.bookId}`,
         trailingSlash: false
       })
     });
@@ -104,7 +104,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx): Promise<GetSe
         ...options,
         changefreq: 'daily',
         lastmod: book.utime,
-        loc: `${options.loc}/film/${book.bookId}`,
+        loc: `${options.loc}/book/${book.bookId}`,
         trailingSlash: false
       }
     }) as ISitemapField[]
