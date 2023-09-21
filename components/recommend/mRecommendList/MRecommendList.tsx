@@ -1,16 +1,16 @@
 import React, { FC } from 'react'
-import styles from '@/components/home/firstList/FirstList.module.scss'
 import { IBookItem } from "@/typings/home.interface";
 import Link from "next/link";
 import ImageCover from "@/components/common/image/ImageCover";
+import styles from '@/components/recommend/mRecommendList/MRecommendList.module.scss';
 
 interface IProps {
-  dataSource: IBookItem[];
+  list: IBookItem[];
 }
 
-const MFirstList: FC<IProps> = ({ dataSource }) => {
+const MRecommendList: FC<IProps> = ({ list }) => {
   return <div className={styles.browseListBox}>
-    {dataSource.map(item => {
+    {list.map(item => {
       return <div key={item.bookId} className={styles.featuredItem}>
         <ImageCover
           href={`/book/${item.bookId}`}
@@ -26,6 +26,12 @@ const MFirstList: FC<IProps> = ({ dataSource }) => {
           <div className={styles.contentFooter}>
             {item.author ? <Link href={`/book/${item.bookId}`} className={styles.bookAuthor}>{item.author}</Link> : null}
             <Link href={`/book/${item.bookId}`} className={styles.bookType}>{`三级标签`}</Link>
+            <Link href={`/book/${item.bookId}`} className={styles.bookType}>{`完结`}</Link>
+            <Link href={`/book/${item.bookId}`} className={styles.bookType}>{`132万字`}</Link>
+          </div>
+          <div className={styles.contentFooter}>
+            <Link href={`/book/${item.bookId}`} className={styles.bookAuthor}>{`最新章节 第708章`}</Link>
+            <Link href={`/book/${item.bookId}`} className={styles.bookType}>{`2023-10-26`}</Link>
           </div>
         </div>
       </div>
@@ -33,4 +39,4 @@ const MFirstList: FC<IProps> = ({ dataSource }) => {
   </div>
 }
 
-export default MFirstList;
+export default MRecommendList;

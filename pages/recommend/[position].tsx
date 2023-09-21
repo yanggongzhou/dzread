@@ -6,6 +6,7 @@ import { ownOs } from "@/utils/ownOs";
 // import MMore from "@/components/more";
 import PcRecommend from "@/components/pcRecommend";
 import Breadcrumb from "@/components/common/breadcrumb";
+import MRecommend from "@/components/recommend";
 
 interface IProps {
   isPc: boolean;
@@ -28,9 +29,9 @@ const Recommend: NextPage<IProps> = ({ isPc, bookList = [], pageNo, totalPage, p
     { title: '男频精选' },
   ]
   return <>
-    <Breadcrumb data={data} />
-    {isPc ? <PcRecommend pageNo={pageNo} totalPage={totalPage} bookList={bookList} position={position} /> : null
-      // <MMore pageNo={pageNo} pages={pages} moreData={moreData}/>
+    <Breadcrumb data={data} style={isPc ? {} : { width: 0, height: 0, display: "none" }} />
+    {isPc ? <PcRecommend pageNo={pageNo} totalPage={totalPage} bookList={bookList} position={position} /> :
+      <MRecommend pageNo={pageNo} totalPage={totalPage} bookList={bookList} position={position}/>
     }
   </>
 }
@@ -44,10 +45,9 @@ export const getServerSideProps: GetServerSideProps = async ({ req, query, local
   const _position = position.split('-')[0] || '??';
 
   const response = await netMoreBook({
-    position: 2,
+    position: 1,
     pageNo: page,
   })
-  console.log('response', response);
   if (response === 'BadRequest_404') {
     return { notFound: true }
   }
