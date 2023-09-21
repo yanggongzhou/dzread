@@ -10,9 +10,9 @@ interface IProps {
 }
 
 const BrowseList: FC<{ list: IBookItem[] }> = ({ list = [] }) => {
-  return <ul className={styles.browseListBox}>
+  return <div className={styles.browseListBox}>
     {list.map(item => {
-      return <li className={styles.featuredItem}>
+      return <div className={styles.featuredItem}>
         <ImageCover
           href={`/book/${item.bookId}`}
           className={styles.itemImg}
@@ -29,9 +29,9 @@ const BrowseList: FC<{ list: IBookItem[] }> = ({ list = [] }) => {
             <Link href={`/book/${item.bookId}`} className={styles.bookType}>{`三级标签`}</Link>
           </div>
         </div>
-      </li>
+      </div>
     })}
-  </ul>
+  </div>
 }
 
 

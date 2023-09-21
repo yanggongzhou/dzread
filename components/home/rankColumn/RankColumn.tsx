@@ -10,9 +10,9 @@ interface IProps {
 }
 
 const RankList: FC<{ list: IBookItem[] }> = ({ list = [] }) => {
-  return <ul className={styles.rankList}>
+  return <div className={styles.rankList}>
     {list.map(item => {
-      return <li className={styles.rankItem}>
+      return <div className={styles.rankItem}>
         <ImageCover
           href={`/book/${item.bookId}`}
           className={styles.itemImg}
@@ -25,9 +25,9 @@ const RankList: FC<{ list: IBookItem[] }> = ({ list = [] }) => {
           <h4><Link className={styles.bookName} href={`/book/${item.bookId}`}>{item.bookName}</Link></h4>
           {item.author ? <Link href={`/book/${item.bookId}`} className={styles.bookAuthor}>{item.author}</Link> : null}
         </div>
-      </li>
+      </div>
     })}
-  </ul>
+  </div>
 }
 
 

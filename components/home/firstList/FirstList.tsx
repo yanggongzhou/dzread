@@ -9,9 +9,9 @@ interface IProps {
 }
 
 const MFirstList: FC<IProps> = ({ dataSource }) => {
-  return <ul className={styles.browseListBox}>
+  return <div className={styles.browseListBox}>
     {dataSource.map(item => {
-      return <li className={styles.featuredItem}>
+      return <div className={styles.featuredItem}>
         <ImageCover
           href={`/book/${item.bookId}`}
           className={styles.itemImg}
@@ -28,9 +28,9 @@ const MFirstList: FC<IProps> = ({ dataSource }) => {
             <Link href={`/book/${item.bookId}`} className={styles.bookType}>{`三级标签`}</Link>
           </div>
         </div>
-      </li>
+      </div>
     })}
-  </ul>
+  </div>
 }
 
 export default MFirstList;

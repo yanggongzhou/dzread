@@ -28,12 +28,8 @@ export const netBrowse = async (params: INetBrowseReq): Promise<INetBrowseRes | 
 }
 
 // 查看更多
-export const netMoreBook = async (params: INetMoreReq,): Promise<INetMoreResult | 'BadRequest_404' | 'BadRequest_500'> => {
-  return await Service.post('/webfic/home/more', { pageNum: 1, pageSize: 30, ...params }, {
-    headers: {
-      language: ELanguage.ZhHans
-    } as any
-  })
+export const netMoreBook = (params: INetMoreReq): Promise<INetMoreResult | 'BadRequest_404' | 'BadRequest_500'> => {
+  return Service.get('/moreList.do', { params: { pageNo: 1, pageSize: 10, ...params } })
 }
 
 // 获取书籍详情

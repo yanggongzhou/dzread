@@ -1,13 +1,13 @@
-import { IHomeResItem } from "@/typings/home.interface";
+import { INetHomeItem } from "@/typings/home.interface";
 
 export interface INetMoreReq {
-  name: string;
-  pageNum?: number;
+  position: number;
+  pageNo?: number;
   pageSize?: number;
 }
 
 export interface INetMoreResult {
-  data: IHomeResItem;
+  data: INetHomeItem;
   currentPage: number;
   pages: number;
 }

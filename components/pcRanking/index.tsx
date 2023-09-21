@@ -1,7 +1,5 @@
 import React, { FC } from 'react'
-import styles from '@/components/pcMore/index.module.scss'
 import PcHomeTitle from "@/components/pcHome/homeTitle/HomeTitle";
-import { IHomeResItem } from "@/typings/home.interface";
 import PaginationCom from "@/components/common/paginationCom";
 import Link from "next/link";
 import { PcEmpty } from "@/components/common/empty";
@@ -9,9 +7,11 @@ import Image from "next/image";
 import FirstList from "@/components/common/firstList/FirstList";
 import { useRouter } from "next/router";
 import RankingTab from "@/components/pcRanking/tabs/RankingTab";
+import styles from '@/components/pcRanking/index.module.scss'
+import { INetHomeItem } from "@/typings/home.interface";
 
 interface IProps {
-  moreData: IHomeResItem;
+  moreData: INetHomeItem;
   pageNo: number;
   pages: number;
 }

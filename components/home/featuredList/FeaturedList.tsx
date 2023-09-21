@@ -9,9 +9,9 @@ interface IProps {
 }
 
 const FeaturedList: FC<IProps> = ({ list }) => {
-  return <ul className={styles.featuredBox}>
+  return <div className={styles.featuredBox}>
     {list.map(item => {
-      return <li className={styles.featuredItem}>
+      return <div className={styles.featuredItem}>
         <ImageCover
           href={`/book/${item.bookId}`}
           className={styles.itemImg}
@@ -28,9 +28,9 @@ const FeaturedList: FC<IProps> = ({ list }) => {
             <Link href={`/book/${item.bookId}`} className={styles.bookType}>{`三级标签`}</Link>
           </div>
         </div>
-      </li>
+      </div>
     })}
-  </ul>
+  </div>
 }
 
 export default FeaturedList;

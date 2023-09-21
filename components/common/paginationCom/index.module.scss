@@ -23,7 +23,8 @@
     text-decoration: none !important;
 
     &:hover {
-      background-color: rgba(255,255,255,0.16);
+      //background-color: rgba(255,255,255,0.16);
+      background-color: rgba(245, 245, 247, 0.9);
     }
   }
 
@@ -48,13 +49,15 @@
   .omission {
     border: none !important;
     margin: 0;
-    background-color: rgba(255,255,255,0.08) !important;
+    //background-color: rgba(255,255,255,0.08) !important;
+    background-color: rgba(245, 245, 247, 0.9) !important;
     cursor: default;
   }
 
   .prevNoMore, .nextNoMore {
     cursor: not-allowed;
-    background-color: rgba(255,255,255,0.08) !important;
+    //background-color: rgba(255,255,255,0.08) !important;
+    background-color: rgba(245, 245, 247, 0.9) !important;
   }
 }
 
