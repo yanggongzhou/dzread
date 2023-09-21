@@ -1,0 +1,71 @@
+.rankColumnWrap {
+  padding: 0.24rem;
+
+  .swiperBox {
+    overflow: hidden;
+  }
+  .content {
+    padding: 0 0.08rem;
+
+    .contentImgBox {
+      border-radius: 0.08rem;
+      width: 100%;
+      height: 2.94rem;
+    }
+  }
+}
+
+
+.rankList {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: .24rem;
+  padding: 0;
+  width: 100%;
+
+  .rankItem {
+    border-radius: 0.08rem;
+    overflow: hidden;
+    position: relative;
+    //width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    padding-right: 0.24rem;
+    column-gap: 0.15rem;
+
+    .itemImg {
+      border: 1px solid rgba(0,0,0,.08);
+      border-radius: 0.08rem;
+      flex-shrink: 0;
+      height: 1.22rem;
+      overflow: hidden;
+      position: relative;
+      width: 0.92rem;
+    }
+
+    .itemContent {
+      .bookName {
+        font-size: .32rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        display: -webkit-box;
+        font-weight: 500;
+        line-height: .36rem;
+        margin-bottom: 0.08rem;
+        word-break: break-all;
+      }
+
+      .bookAuthor {
+        font-size: .24rem;
+        line-height: 1.2;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color: #b2b2b2;
+      }
+    }
+  }
+}

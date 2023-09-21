@@ -8,7 +8,7 @@ import DropMenu from "@/components/browse/detail/DropMenu";
 import { IBrowseTypes } from "@/typings/browse.interface";
 import { useRouter } from "next/router";
 import { MEmpty } from "@/components/common/empty";
-import FirstItem from "@/components/home/firstItem/FirstItem";
+import MFirstList from "@/components/home/firstList/FirstList";
 
 interface IProps {
   bookList: IBookItem[];
@@ -47,7 +47,7 @@ const MBrowse: FC<IProps> = ({ bookList, pageNo, pages, typeTwoId, types }) => {
 
     {bookList.length > 0 ? <div className={styles.browseContent}>
       <div className={styles.browseContent2} ref={browseRef}>
-        <FirstItem dataSource={bookList} />
+        <MFirstList dataSource={bookList} />
         {pages && pages > 1 ? <MorePagination
           prevPath={`/browse/${typeTwoId}/`}
           page={pageNo}

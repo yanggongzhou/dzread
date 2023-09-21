@@ -2,7 +2,6 @@ import Service from "@/server/request";
 import { ELanguage, INetHomeItem } from "@/typings/home.interface";
 import { INetMoreReq, INetMoreResult } from "@/typings/more.interface";
 import {
-  INetBookReq,
   INetBookRes, INetChapterDetailRes,
 } from "@/typings/book.interface";
 import {

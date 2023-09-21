@@ -7,7 +7,7 @@ import useLogParams from "@/hooks/useLogParams";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { setDevice } from "@/store/modules/app.module";
 import { EDevice } from "@/store/store.interfaces";
-import MHeader from "@/components/layout/mHeader/MHeader";
+import MHeader from "@/components/home/mHeader/MHeader";
 import styles from "@/components/layout/index.module.scss"
 import { EnumBackGround, EnumFontSize, EnumTabs } from "typings/reader.interface";
 import { Router } from "next/dist/client/router";
@@ -95,7 +95,6 @@ const DLayout: FC<IProps> = ({ children, pageProps, router }) => {
   return (
     <>
       <Context.Provider value={[appState, setAppState]}>
-        <MHeader/>
         <main className={styles.mWrap}>
           {children}
         </main>

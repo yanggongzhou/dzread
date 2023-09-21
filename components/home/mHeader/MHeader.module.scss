@@ -1,0 +1,78 @@
+.headerBox {
+  background-color: #fff;
+  left: 0;
+  position: fixed;
+  top: 0;
+  -webkit-transform: translateZ(1px);
+  transform: translateZ(1px);
+  width: 100%;
+  z-index: 999;
+
+  .headerContent {
+    height: 0.88rem;
+    width: 100%;
+    padding: 0 0.32rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid;
+
+    .logoBox {
+      width: 0.4rem;
+      height: 0.4rem;
+    }
+
+    .downloadBtn {
+      font-size: .28rem;
+      background-color: #059fff;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      border-radius: 0.36rem;
+      -webkit-box-shadow: 0 4px 8px rgba(71,131,185,.08), 0 4px 8px rgba(0,0,0,.02);
+      box-shadow: 0 4px 8px rgba(71,131,185,.08), 0 4px 8px rgba(0,0,0,.02);
+      color: #fff;
+      font-weight: 500;
+      justify-content: center;
+      margin-left: auto;
+      padding: 0.16rem 0.24rem;
+    }
+  }
+
+  .navMenu {
+    padding: 0 0.32rem;
+    height: 0.88rem;
+    display: flex;
+    position: relative;
+
+
+    .navItem, .navItemActive {
+      padding: 0 0.26rem;
+      display: flex;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      font-weight: 500;
+      color: #666;
+      font-size: 0.28rem;
+    }
+
+    .navItemActive {
+      position: relative;
+      background: rgba(255, 255, 255, 0.08);
+      color: $theme_color;
+
+      &:after {
+        content: "";
+        left: 50%;
+        -webkit-transform: translateX(-50%);
+        transform: translateX(-50%);
+        background: #059fff;
+        border-radius: 0.06rem;
+        bottom: 0;
+        height: 0.06rem;
+        position: absolute;
+        width: 0.22rem;
+      }
+    }
+  }
+}

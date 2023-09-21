@@ -1,9 +1,8 @@
-import { Swiper } from 'antd-mobile'
-import React, { FC } from 'react'
-import styles from '@/components/home/swiperNormal/SwiperNormal.module.scss'
+import React, { FC } from 'react';
+import { Swiper } from 'antd-mobile';
 import { IBookItem } from "@/typings/home.interface";
-import Link from "next/link";
 import ImageCover from "@/components/common/image/ImageCover";
+import styles from '@/components/home/swiperNormal/SwiperNormal.module.scss';
 
 interface IProps {
   bannerList: IBookItem[];
@@ -12,31 +11,14 @@ interface IProps {
 const SwiperNormal: FC<IProps> = ({ bannerList }) => {
   const items = bannerList.map((item) => (
     <Swiper.Item key={item.bookId} className={styles.content}>
-      <div className={styles.swiperItem}>
-        <ImageCover
-          href={`/book/${item.bookId}`}
-          className={styles.contentImgBox}
-          src={item.cover}
-          width={218}
-          height={294}
-          alt={item.bookName}
-        />
-
-        <Link className={styles.rightCard} href={`/book/${item.bookId}`}>
-          <div className={styles.rightCardTop}>
-            <h2 className={styles.bookName} >
-              {item.bookName}
-            </h2>
-            <p className={styles.chapterCount}>{item.chapterCount || 0} episodes</p>
-            <p className={styles.intro}>{item.introduction}</p>
-          </div>
-          <div className={styles.rightCardBottom}>
-            { (item.tags || []).map(val => {
-              return <div key={val} className={styles.rightTag}>{val}</div>
-            })}
-          </div>
-        </Link>
-      </div>
+      <ImageCover
+        href={`/book/${item.bookId}`}
+        className={styles.contentImgBox}
+        src={item.cover}
+        width={218}
+        height={294}
+        alt={item.bookName}
+      />
     </Swiper.Item>
   ))
   return <Swiper
@@ -56,4 +38,4 @@ const SwiperNormal: FC<IProps> = ({ bannerList }) => {
     loop>{items}</Swiper>
 }
 
-export default SwiperNormal
+export default SwiperNormal;
