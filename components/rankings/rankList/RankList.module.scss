@@ -1,0 +1,79 @@
+.rankListBox {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.24rem;
+
+  .rankItem {
+    border-radius: 0.08rem;
+    overflow: hidden;
+    position: relative;
+    //width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    padding-right: 0.24rem;
+
+    .itemImg {
+      border-radius: 0.07rem;
+      height: 1.18rem;
+      margin-right: 0.24rem;
+      overflow: hidden;
+      width: 0.9rem;
+      flex-shrink: 0;
+    }
+
+    .itemContent {
+      h4 {
+        max-width: 4.3rem;
+      }
+      .bookName {
+        display: inline-block;
+        color: #222222;
+        font-size: .3rem;
+        font-weight: 500;
+        font-family: PingFangSC-Medium, PingFang SC;
+        line-height: 0.36rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .bookIntro {
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        color: #6a6b6c;
+        display: -webkit-box;
+        font-size: .24rem;
+        line-height: .32rem;
+        margin-bottom: 0.2rem;
+        margin-top: 0.12rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-break: break-all;
+      }
+
+      .bookAuthor {
+        display: block;
+        font-size: .26rem;
+        line-height: 0.32rem;
+        font-family: PingFangSC-Regular, PingFang SC;
+        font-weight: 400;
+        color: #9C9C9C;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .bookType {
+        font-size: .24rem;
+        line-height: 0.3rem;
+        font-family: PingFangSC-Regular, PingFang SC;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color: #F67C00;
+        font-weight: 400;
+      }
+    }
+  }
+}

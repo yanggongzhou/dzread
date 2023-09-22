@@ -5,9 +5,9 @@ import { netDetailChapter } from "@/server/home";
 import { INetChapterDetailRes } from "@/typings/book.interface";
 import Reader from "@/components/Reader";
 import PcReader from "@/components/PcReader";
-import CrumbsCom from "@/components/common/Crumbs";
 import { ownOs } from "@/utils/ownOs";
 import { IBookItem } from "@/typings/home.interface";
+import Breadcrumb from "@/components/common/breadcrumb";
 
 interface IProps {
   isPc: boolean;
@@ -19,7 +19,6 @@ interface IProps {
 }
 
 const delDomTag = (str: string = '', replaceTxt: string) => {
-
   const name = replaceTxt ? replaceTxt.replace(/\s*/g,"") : '';
   if (!str) return '';
   // 去除样式 去除标题
@@ -28,8 +27,14 @@ const delDomTag = (str: string = '', replaceTxt: string) => {
 }
 
 const Chapter: NextPage<IProps> = ({ isPc, bookId, chapterContent, bookInfo, chapterInfo, contentList }) => {
+  const data = [
+    { title: '首页', link: "/home" },
+    { title: '??', link: "/rankings" },
+    { title: bookInfo.bookName, link: `/book/${bookId}` },
+    { title: chapterInfo.chapterName },
+  ]
   return <>
-    <CrumbsCom position={chapterInfo.position} bookName={bookInfo.bookName} chapterName={chapterInfo.chapterName} bookId={bookId} isPc={isPc}/>
+    <Breadcrumb data={data} style={isPc ? {} : { width: 0, height: 0, display: "none" }} />
     {isPc ?
       <PcReader
         chapterContent={chapterContent}

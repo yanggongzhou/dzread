@@ -16,7 +16,7 @@ interface IProps {
   typeTwoId: number;
 }
 
-const PcBrowse: FC<IProps> = ({ bookList, pageNo, pages, typeTwoId, types }) => {
+const PcBrowse: FC<IProps> = ({ bookList = [], pageNo, pages, typeTwoId, types }) => {
   const data = [
     { id: 1, title: "男生", children: types },
     { id: 2, title: "女生", children: types },

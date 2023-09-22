@@ -27,7 +27,7 @@ const Browse: NextPage<IProps> = (
     { title: '都市小说' },
   ]
   return <>
-    <Breadcrumb data={data} style={isPc ? {} : { width: 0, height: 0, display: "none" }} />
+    <Breadcrumb data={data} style={isPc ? {} : { width: 0, height: 0, display: "none" }}/>
     {isPc ?
       <PcBrowse
         pageNo={pageNo}
@@ -46,7 +46,7 @@ const Browse: NextPage<IProps> = (
   </>
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ req, query, locale }): Promise<GetServerSidePropsResult<IProps>> => {
+export const getServerSideProps: GetServerSideProps = async ({ req, query }): Promise<GetServerSidePropsResult<IProps>> => {
   const ua = req?.headers['user-agent'] || ''
   const { page = '1', typeTwoId = 0 } = query;
 

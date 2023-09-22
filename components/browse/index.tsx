@@ -8,7 +8,7 @@ import MFirstList from "@/components/home/firstList/FirstList";
 import MorePagination from "@/components/recommend/pagination/MorePagination";
 import NavBar from "@/components/recommend/navBar/NavBar";
 import BrowseType from "@/components/browse/browseType/BrowseType";
-import DownloadBanner from "@/components/browse/downloadBanner/DownloadBanner";
+import DownloadBanner from "@/components/common/downloadBanner/DownloadBanner";
 import { setIsShowBrowse } from "@/store/modules/app.module";
 import { useAppDispatch } from "@/store";
 
@@ -20,7 +20,7 @@ interface IProps {
   typeTwoId: number;
 }
 
-const MBrowse: FC<IProps> = ({ bookList, pageNo, pages, typeTwoId, types }) => {
+const MBrowse: FC<IProps> = ({ bookList = [], pageNo, pages, typeTwoId, types }) => {
   const browseRef = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
   useEffect(() => {
@@ -49,43 +49,21 @@ const MBrowse: FC<IProps> = ({ bookList, pageNo, pages, typeTwoId, types }) => {
     }
   }, []);
 
-  const [isFooter, setIsFooter] = useState(false);
-  const intersectionRef = useRef<Element | null>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver((e) => {
-      e.forEach((dom) => {
-        // isIntersecting为true则dom出现在页面上
-        setIsFooter(dom.isIntersecting)
-      });
-    }, {});
-    if (intersectionRef.current) {
-      observer.observe(intersectionRef.current as Element)
-    }
-    return () => {
-      if (intersectionRef.current) {
-        observer.unobserve(intersectionRef.current as Element)
-      }
-    };
-  }, []);
-
   return (<div className={styles.browseWrap}>
     <NavBar backHref={'/'} title={"男生小说分类"}/>
-
     <BrowseType isShowBox={isShowBox} typeTwoId={typeTwoId} types={types}/>
-
-    {bookList.length > 0 ? <div className={styles.browseContent}>
-      <div className={styles.browseContent2} ref={browseRef}>
-        <MFirstList dataSource={bookList} />
-        {pages && pages > 1 ? <MorePagination
-          prevPath={`/browse/${typeTwoId}/`}
-          page={pageNo}
-          totalPage={pages}
-        /> : null}
-      </div>
-    </div> : <MEmpty />}
-    <DownloadBanner isFooter={isFooter} />
-    <div style={{ width: '0.2rem', height: 1 }} ref={intersectionRef} />
+    <DownloadBanner height={10}>
+      {bookList.length > 0 ? <div className={styles.browseContent}>
+        <div className={styles.browseContent2} ref={browseRef}>
+          <MFirstList dataSource={bookList} />
+          {pages && pages > 1 ? <MorePagination
+            prevPath={`/browse/${typeTwoId}/`}
+            page={pageNo}
+            totalPage={pages}
+          /> : null}
+        </div>
+      </div> : <MEmpty />}
+    </DownloadBanner>
   </div>)
 }
 

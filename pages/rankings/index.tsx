@@ -1,59 +1,81 @@
 import React from "react";
 import { GetServerSideProps, GetServerSidePropsResult, NextPage } from "next";
-import { netMoreBook } from "@/server/home";
+import { netBrowse } from "@/server/home";
 import { ownOs } from "@/utils/ownOs";
-// import PcMore from "@/components/pcMore";
-// import MMore from "@/components/more";
 import Breadcrumb from "@/components/common/breadcrumb";
+import { IBookItem } from "@/typings/home.interface";
+import { IBrowseTypes } from "@/typings/browse.interface";
 import PcRanking from "@/components/pcRanking";
-import { INetHomeItem } from "@/typings/home.interface";
+import MRankings from "@/components/rankings";
 
 interface IProps {
   isPc: boolean;
-  moreData: INetHomeItem;
-  positionName: string; // 勿删，tdk用
+  bookList: IBookItem[];
+  types: IBrowseTypes[];
   pageNo: number;
   pages: number;
+  typeTwoId: number;
+  typeTwoName: string;
 }
 
-const Rankings: NextPage<IProps> = ({ isPc, moreData, pageNo, pages }) => {
+const Rankings: NextPage<IProps> = (
+  { isPc, types, bookList, pageNo, pages, typeTwoId }) => {
   const data = [
     { title: '首页', link: "/home" },
-    { title: '排行榜', link: "/rankings" },
-    { title: '男生小说口碑榜' },
+    { title: '小说分类', link: "/browse/0" },
+    { title: '都市小说' },
   ]
   return <>
-    <Breadcrumb data={data} />
-    {/*{isPc ? <PcRanking pageNo={pageNo} pages={pages} moreData={moreData} /> :*/}
-    {/*  <MMore pageNo={pageNo} pages={pages} moreData={moreData}/>*/}
-    {/*}*/}
+    <Breadcrumb data={data} style={isPc ? {} : { width: 0, height: 0, display: "none" }}/>
+    {isPc ?
+      <PcRanking
+        pageNo={pageNo}
+        types={types}
+        bookList={bookList}
+        pages={pages}
+        typeTwoId={typeTwoId}
+      /> :
+      <MRankings
+        pageNo={pageNo}
+        types={types}
+        bookList={bookList}
+        pages={pages}
+        typeTwoId={typeTwoId}
+      />}
   </>
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ req, query, locale }): Promise<GetServerSidePropsResult<IProps>> => {
+export const getServerSideProps: GetServerSideProps = async ({ req, query }): Promise<GetServerSidePropsResult<IProps>> => {
   const ua = req?.headers['user-agent'] || ''
-  const { page = '1', position = '' } = query;
+  const { page = '1', typeTwoId = 0 } = query;
 
-  const response = await netMoreBook({
-    name: '当前热播',
-    pageNum: Number(page),
+  const response = await netBrowse({
+    typeTwoId: Number(typeTwoId) || 0,
+    pageNo: Number(page),
+    pageSize: 15
   })
-
   if (response === 'BadRequest_404') {
     return { notFound: true }
   }
   if (response === 'BadRequest_500') {
     return { redirect: { destination: '/500', permanent: false } }
   }
-  const { currentPage = 1, pages = 0, data = {} as IHomeResItem } = response;
-  // 返回的参数将会按照 key 值赋值到 HomePage 组件的同名入参中
+  const { currentPage = 1, pages = 0, bookList = [], types = [] } = response;
+  if (bookList.length !== 0 || types.length !== 0) {
+    types.unshift({ id: 0, name: 'all', replaceName: 'all', checked: false });
+  }
+  const typeItem = types.find(val => val.id === Number(typeTwoId));
+  const typeTwoName = typeItem && typeItem.name ? typeItem.name : "all";
+
   return {
     props: {
-      moreData: data,
+      types,
+      bookList,
       pageNo: currentPage,
-      positionName: '当前热播',
       pages,
       isPc: ownOs(ua).isPc,
+      typeTwoName,
+      typeTwoId: Number(typeTwoId),
     }
   }
 }

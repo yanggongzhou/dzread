@@ -8,38 +8,46 @@ import FirstList from "@/components/common/firstList/FirstList";
 import { useRouter } from "next/router";
 import RankingTab from "@/components/pcRanking/tabs/RankingTab";
 import styles from '@/components/pcRanking/index.module.scss'
-import { INetHomeItem } from "@/typings/home.interface";
+import { IBookItem, INetHomeItem } from "@/typings/home.interface";
+import { IBrowseTypes } from "@/typings/browse.interface";
+import PcCapsuleTabs from "@/components/pcBrowse/PcCapsuleTabs";
 
 interface IProps {
-  moreData: INetHomeItem;
+  bookList: IBookItem[];
+  types: IBrowseTypes[];
   pageNo: number;
   pages: number;
+  typeTwoId: number;
 }
 
-const PcRanking: FC<IProps> = ({ moreData, pages, pageNo }) => {
+const PcRanking: FC<IProps> = ({ bookList = [], pageNo, pages, typeTwoId, types }) => {
+
   const router = useRouter();
-  return <>
-    <div className={styles.rankingWrap}>
-      <RankingTab />
-      <div className={styles.rankingContent}>
-        {moreData?.items && moreData.items.length > 0 ?
-          <>
-            <PcHomeTitle title={moreData.name} />
-            <div className={styles.moreBookList}>
-              <FirstList dataSource={moreData.items} />
-              {pages && pages > 1 ? <PaginationCom
-                path={`/more/${moreData.name}/`}
-                pageNo={pageNo}
-                totalPage={pages}
-                isScroll={true}
-                onJumpChange={(page) => {
-                  router.push(`/rankings/${moreData.name}/${page}`)
-                }}/> : null}
-            </div>
-          </> : <PcEmpty/>}
+
+  return <div className={styles.browseWrap}>
+
+    <RankingTab />
+
+    <div className={styles.browseContent}>
+
+      <div className={styles.browseTitle}>
+        都市小说
       </div>
+
+      {bookList.length === 0 ? <PcEmpty/> :
+        <FirstList dataSource={bookList}/>}
+
+      {pages && pages > 1 ?
+        <PaginationCom
+          path={`/browse/${typeTwoId}/`}
+          onJumpChange={(page) => {
+            router.push(`/browse/${typeTwoId}/${page}`)
+          }}
+          pageNo={pageNo}
+          totalPage={pages}
+          isScroll={true}/> : null}
     </div>
-  </>
+  </div>
 }
 
 export default PcRanking

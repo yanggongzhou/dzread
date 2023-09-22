@@ -14,3 +14,25 @@
     }
   }
 }
+
+.browseWrap {
+  padding: 0.4rem 0 0.6rem;
+  display: grid;
+  grid-template-columns: 260px auto;
+  grid-column-gap: 20px;
+
+
+  .browseContent {
+    min-height: 7rem;
+    position: relative;
+    z-index: 9;
+    width: 100%;
+
+    .browseTitle {
+      font-size: 0.16rem;
+      font-weight: 400;
+    }
+  }
+}
+
+

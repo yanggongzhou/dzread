@@ -1,0 +1,73 @@
+.rankWrap {
+  max-height: calc(100vh - 0.88rem);
+  display: flex;
+  overflow: hidden;
+
+  .slideBox {
+    width: 1.42rem;
+    flex: none;
+
+    :global {
+      .adm-side-bar-item {
+        padding: 0 0 0 0.32rem;
+        height: 1.2rem;
+        position: relative;
+      }
+      .adm-badge-wrapper {
+        position: static;
+      }
+      .adm-side-bar-item-highlight {
+        height: 1.2rem;
+        width: 0.08rem;
+        left: 0;
+        border-radius: 0.02rem;
+        background: #F67C00;
+      }
+    }
+  }
+
+  .mainBox {
+    background-color: #FFFFFF;
+    flex: auto;
+
+    .rankDateBox {
+      height: 0.54rem;
+      padding-right: 0.32rem;
+      display: flex;
+      justify-content: right;
+      align-items: center;
+
+      .rankDate {
+        width: 1.72rem;
+        height: 0.46rem;
+        background-color: #F5F4F2;
+        border-radius: 0.3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .rankDateItem {
+          flex-shrink: 0;
+          width: 0.8rem;
+          height: 0.38rem;
+          border-radius: 0.19rem;
+          line-height: 0.38rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .active {
+          background-color: #FFFFFF;
+        }
+      }
+    }
+
+    .rankContent {
+      padding: 0 0.32rem;
+      width: 6.08rem;
+      max-height: calc(100vh - 1.42rem);
+      overflow-y: auto;
+    }
+  }
+}

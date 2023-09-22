@@ -1,12 +1,13 @@
-import React, { FC, useEffect, useRef, useState } from "react";
-import styles from "@/components/browse/downloadBanner/DownloadBanner.module.scss";
+import React, { FC } from "react";
 import Image from "next/image";
+import styles from "@/components/rankings/rankBanner/DownloadBanner.module.scss";
 
 interface IProps {
   isFooter: boolean;
 }
 
-const DownloadBanner: FC<IProps> = ({ isFooter }) => {
+const RankDownloadBanner: FC<IProps> = ({ isFooter }) => {
+
   return <>
     <div className={isFooter ? styles.downloadFooter : styles.downloadBox}>
       <div className={styles.downloadContent}>
@@ -28,4 +29,4 @@ const DownloadBanner: FC<IProps> = ({ isFooter }) => {
   </>
 }
 
-export default DownloadBanner;
+export default RankDownloadBanner;
