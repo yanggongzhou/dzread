@@ -21,8 +21,10 @@ export const netHomeData = (): Promise<INetHomeItem[] | 'BadRequest_404' | 'BadR
 // 浏览
 export const netBrowse = async (params: INetBrowseReq): Promise<INetBrowseRes | 'BadRequest_404' | 'BadRequest_500'> => {
   return await Service.post('/webfic/home/browse', { pageSize: 60, ...params }, {
+    baseURL: "https://yfbwww.webfic.com",
     headers: {
-      language: ELanguage.ZhHans
+      language: 'zhHans',
+      pline: "DRAMABOX"
     }  as any
   })
 }
@@ -56,7 +58,6 @@ export const netIncrementBook = async (pageNo = 1, pageSize = 10): Promise<INetI
 export const netBrowseType = async (): Promise<INetBrowseTypeRes[] | 'BadRequest_404' | 'BadRequest_500'> => {
   return await Service.get('/webfic/website/type/list')
 }
-
 
 // 获取章节详情
 export const netDetailChapter = async (bookId: string, chapterId?: string): Promise<INetChapterDetailRes | 'BadRequest_404' | 'BadRequest_500'> => {

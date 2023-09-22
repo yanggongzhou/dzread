@@ -1,31 +1,34 @@
 .paginationWrap {
-  position: fixed;
-  z-index: 99;
-  bottom: 0;
-  left: 0;
-  background-color: #000000;
+  background-color: #FFFFFF;
   width: 100%;
-  padding: 0.16rem 0.32rem;
-  height: 1.2rem;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-column-gap: 0.16rem;
+  padding: 0.32rem 0;
+  height: 1.28rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .linkItem, .pageItem {
-  width: 100%;
-  height: 0.88rem;
-  background-color: rgba(255, 255, 255, 0.08);
-  border-radius: 0.04rem;
+  width: 2.6rem;
+  height: 0.64rem;
+  background-color: #FFEFDF;
+  border-radius: 0.08rem;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 0.24rem;
   font-weight: 400;
-  color: rgba(255,255,255,0.9);
-  text-align: center;
+  font-family: PingFangSC-Regular, PingFang SC;
+  color: #F67C00;
 }
 
 .pageItem {
-  color: rgba(255,255,255,0.2);
+  opacity: 0.9;
+}
+
+.middleItem {
+  font-size: 0.24rem;
+  font-weight: 400;
+  font-family: PingFangSC-Regular, PingFang SC;
+  color: #9C9C9C;
 }

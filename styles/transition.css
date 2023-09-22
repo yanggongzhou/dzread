@@ -1,0 +1,19 @@
+.fadeInDown-enter {
+  opacity: 0;
+  transform: translateY(-100%);
+}
+.fadeInDown-enter-active {
+  opacity: 1;
+  transform: translateY(0%);
+  transition: all 300ms;
+}
+/*.fadeInDown-exit {*/
+/*  opacity: 1;*/
+/*  transform: translateY(0%);*/
+/*}*/
+/*.fadeInDown-exit-active {*/
+/*  display: none;*/
+/*  opacity: 0;*/
+/*  transform: translateY(100%);*/
+/*  transition: opacity 300ms, transform 300ms;*/
+/*}*/

@@ -15,7 +15,7 @@ export enum EDevice {
 
 export interface IAppStore {
   device: EDevice;
-  isPopChange: boolean;
+  isShowBrowse: boolean;
 }
 
 export interface IReadStore {

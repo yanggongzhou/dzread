@@ -24,7 +24,7 @@ const MorePagination: FC<IProps> = ({ prevPath, totalPage, page, query = '' }) =
         }}
         className={styles.pageItem}
       >上一页</div>}
-    <div className={styles.linkItem}>{page}/{totalPage}</div>
+    <div className={styles.middleItem}>{page}/{totalPage}</div>
     {Number(page) < totalPage ? <Link href={prevPath + nextPage + query} replace scroll className={styles.linkItem}>
         下一页
       </Link> :

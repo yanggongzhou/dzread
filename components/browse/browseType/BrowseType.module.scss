@@ -1,0 +1,154 @@
+.dropdownBox {
+  position: sticky;
+  top: 0.88rem;
+  left: 0;
+  z-index: 9;
+  width: 100%;
+}
+
+.dropdownTitle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background-color: #FFFFFF;
+
+  width: 100%;
+  height: 0.72rem;
+  text-align: center;
+  color: #333333;
+  box-shadow: 0 0 0.06rem 0 #ededed;
+
+  .titleIcon {
+    background-color: red;
+    width: 0.4rem;
+    height: 0.4rem;
+  }
+}
+
+.browseBox {
+  //position: fixed;
+  //top: 0.88rem;
+  //left: 0;
+  //z-index: 9;
+  position: relative;
+  z-index: 9;
+  background-color: #FFFFFF;
+  padding: 0.12rem 0;
+
+  width: 100%;
+
+  .tabBox {
+    padding: 0 0.32rem 0 0.12rem;
+    position: relative;
+    //height: 0.8rem;
+
+    .moreIcon {
+      position: absolute !important;
+      bottom: 0.1rem;
+      right: 0rem;
+      z-index: 1111;
+      background-color: red;
+      width: 0.4rem;
+      height: 0.4rem;
+    }
+
+    .tabContent, .tabContentMore {
+      transition: all 0.3s;
+      :global {
+
+        .adm-tabs-tab-list {
+          //column-gap: 0.16rem !important;
+          //gap: 0.16rem !important;
+        }
+
+        .adm-tabs-tab-line {
+          display: none;
+        }
+
+        .adm-tabs-tab-wrapper {
+          padding: 0;
+          //margin-right: 0.16rem;
+        }
+
+        .adm-tabs-tab {
+          padding: 0.08rem 0.18rem;
+          border-radius: 0.24rem;
+          font-size: 0.26rem;
+          font-weight: 500;
+          color: #FF375F;
+          line-height: 0.32rem;
+          border: 0.01rem solid transparent;
+        }
+
+        .adm-tabs-header {
+          border-bottom: none;
+        }
+
+        .adm-tabs-tab {
+          a {
+            color: #222222;
+          }
+        }
+
+        .adm-tabs-tab-active {
+          border-color: $theme_color;
+
+          a {
+            color: $theme_color;
+          }
+        }
+      }
+    }
+
+    .tabContentMore {
+
+      :global {
+        .adm-tabs-tab-list {
+          flex-wrap: wrap;
+          row-gap: 0.2rem;
+          column-gap: 0.1rem;
+        }
+
+        .adm-tabs-tab-wrapper-stretch {
+          flex: none;
+        }
+      }
+    }
+  }
+
+  .statusBox {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 0.2rem;
+    column-gap: 0.1rem;
+    padding: 0.2rem 0.12rem 0;
+
+    .item {
+      flex-shrink: 0;
+      padding: 0.08rem 0.18rem;
+      border-radius: 0.24rem;
+      font-size: 0.26rem;
+      font-weight: 500;
+      color: #222222;
+      line-height: 0.32rem;
+      border: 0.01rem solid transparent;
+    }
+  }
+}
+
+
+.my-node-enter {
+  opacity: 0;
+}
+.my-node-enter-active {
+  opacity: 1;
+  transition: opacity 200ms;
+}
+.my-node-exit {
+  opacity: 1;
+}
+.my-node-exit-active {
+  opacity: 0;
+  transition: opacity 200ms;
+}

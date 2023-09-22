@@ -21,11 +21,25 @@ const PcSlide: FC = () => {
       src={'/images/logo.png'}
       alt={ClientConfig.name}
     />
-    <QRCode
-      renderAs={"canvas"}
-      className={styles.slideQrCode}
-      value="'https://gitcode.gitcode.host/docs-cn/video.js-docs-cn/docs/guides/components.html#resize-manager'"
-      />
+    <Popover
+      trigger={"hover"}
+      content={<QRCode
+        renderAs={"canvas"}
+        className={styles.slideQrCode}
+        value="'https://gitcode.gitcode.host/docs-cn/video.js-docs-cn/docs/guides/components.html#resize-manager'"
+      />}
+      placement='left'>
+      <div className={styles.qrCodeBox}>
+        <Image
+          className={styles.qrCodeIcon}
+          width={40}
+          height={40}
+          src={'/images/home/qrcode.png'}
+          alt={ClientConfig.name}
+        />
+        <span>手机版</span>
+      </div>
+    </Popover>
   </div>
 }
 

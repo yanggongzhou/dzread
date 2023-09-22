@@ -1,6 +1,7 @@
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 import '@/styles/globals.scss'
+import '@/styles/transition.css'
 import type { AppProps } from 'next/app'
 import { Provider } from 'react-redux'
 import { debounce } from "throttle-debounce";

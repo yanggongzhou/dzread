@@ -21,6 +21,6 @@ export const readSlice = createSlice<IReadStore, SliceCaseReducers<IReadStore>>(
   }
 });
 
-export const { setDevice, setIsPopChange } = readSlice.actions;
+export const { setDevice } = readSlice.actions;
 
 export const readReducer = readSlice.reducer;

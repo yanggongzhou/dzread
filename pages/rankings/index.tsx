@@ -1,16 +1,16 @@
 import React from "react";
 import { GetServerSideProps, GetServerSidePropsResult, NextPage } from "next";
 import { netMoreBook } from "@/server/home";
-import { IHomeResItem } from "typings/home.interface";
 import { ownOs } from "@/utils/ownOs";
-import PcMore from "@/components/pcMore";
-import MMore from "@/components/more";
+// import PcMore from "@/components/pcMore";
+// import MMore from "@/components/more";
 import Breadcrumb from "@/components/common/breadcrumb";
 import PcRanking from "@/components/pcRanking";
+import { INetHomeItem } from "@/typings/home.interface";
 
 interface IProps {
   isPc: boolean;
-  moreData: IHomeResItem;
+  moreData: INetHomeItem;
   positionName: string; // 勿删，tdk用
   pageNo: number;
   pages: number;
@@ -24,9 +24,9 @@ const Rankings: NextPage<IProps> = ({ isPc, moreData, pageNo, pages }) => {
   ]
   return <>
     <Breadcrumb data={data} />
-    {isPc ? <PcRanking pageNo={pageNo} pages={pages} moreData={moreData} /> :
-      <MMore pageNo={pageNo} pages={pages} moreData={moreData}/>
-    }
+    {/*{isPc ? <PcRanking pageNo={pageNo} pages={pages} moreData={moreData} /> :*/}
+    {/*  <MMore pageNo={pageNo} pages={pages} moreData={moreData}/>*/}
+    {/*}*/}
   </>
 }
 
