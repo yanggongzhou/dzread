@@ -1,130 +1,42 @@
 .bookWrap {
 
-  .firstChapterBox {
-    padding: 0.24rem 0.32rem;
+  .navMenu {
     background-color: #FFFFFF;
+    padding: 0.24rem 0.32rem 0;
+    height: 0.84rem;
+    display: flex;
+    justify-content: center;
+    position: relative;
 
-    .navMenu {
-      padding: 0 0.32rem;
-      height: 0.6rem;
-      display: flex;
-      justify-content: center;
-      position: relative;
-
-      .navItem {
-        padding: 0 0.26rem;
-        display: flex;
-        align-items: center;
-        color: #666666;
-        font-size: 0.3rem;
-        font-weight: 600;
-        line-height: 0.36rem;
-      }
-
-      .active {
-        font-size: 0.34rem;
-        line-height: 0.42rem;
-        position: relative;
-        color: #222222;
-
-        &:after {
-          content: "";
-          -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
-          background-color: $theme_color;
-          border-radius: 0.06rem;
-          height: 0.08rem;
-          position: absolute;
-          left: 50%;
-          bottom: -0.08rem;
-          width: 30%;
-        }
-      }
-    }
-
-    .updateCatalogTitle {
-      height: 0.78rem;
-      padding: 0.32rem 0 0.16rem;
+    .navItem {
+      padding: 0 0.26rem;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      span {
-        font-size: 0.24rem;
-        font-weight: 400;
-        &:last-child {
-          color: #9C9C9C;
-        }
-      }
-    }
-
-    .updateCatalog {
-      padding: 0.16rem 0 0.32rem;
-      border-top: 0.01rem solid #E9E9E9;
-      border-bottom: 0.01rem solid #E9E9E9;
+      color: #666666;
       font-size: 0.3rem;
-      font-weight: 400;
-      color: #222222;
+      font-weight: 600;
       line-height: 0.36rem;
-      display: flex;
-      flex-direction: column;
-      row-gap: 0.3rem;
-
-      a {
-        display: block;
-      }
     }
-    .firstChapter {
+
+    .active {
+      font-size: 0.34rem;
+      line-height: 0.42rem;
       position: relative;
+      color: #222222;
 
-      h4 {
-        font-size: 0.36rem;
-        font-weight: 500;
-        color: #222222;
-        line-height: 0.44rem;
-        margin: 0.32rem 0 0.48rem;
-      }
-      p {
-        text-indent: 2em;
-        font-size: 0.36rem;
-        font-weight: 400;
-        color: #222222;
-        line-height: 2;
-        white-space: pre-wrap;
-        margin-bottom: 0.3rem;
-
-        &:last-child {
-          margin-bottom: 0;
-        }
-      }
-
-      .mark {
+      &:after {
+        content: "";
+        -webkit-transform: translateX(-50%);
+        transform: translateX(-50%);
+        background-color: $theme_color;
+        border-radius: 0.06rem;
+        height: 0.08rem;
         position: absolute;
-        bottom: 0;
-        left: 0;
-        z-index: 1;
-        width: 100%;
-        height: 1.4rem;
-        background: linear-gradient(180deg, rgba(255,255,255,0) 0%, #FFFFFF 100%);
+        left: 50%;
+        bottom: -0.08rem;
+        width: 30%;
       }
     }
-
-    .chapterLink {
-      margin-top: 0.32rem;
-      width: 100%;
-      height: 0.84rem;
-      border-radius: 0.42rem;
-      border: 0.01rem solid #FA3123;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      column-gap: 0.24rem;
-
-      .icon {
-        width: 0.24rem;
-        height: 0.24rem;
-      }
-    }
-
   }
 
   .recommendBox {

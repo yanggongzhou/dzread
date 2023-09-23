@@ -2,11 +2,11 @@ import React from "react";
 import { GetServerSideProps, GetServerSidePropsResult, NextPage } from "next";
 import { netBook } from "@/server/home";
 import PcBook from "@/components/pcBook";
-import MFilm from "@/components/book";
-import { isIos, ownOs } from "@/utils/ownOs";
+import { ownOs } from "@/utils/ownOs";
 import { EnumPosition, IBookItem } from "@/typings/home.interface";
 import { IChapterListItem } from "@/typings/book.interface";
 import Breadcrumb from "@/components/common/breadcrumb";
+import MBook from "@/components/book";
 
 interface IProps {
   isPc: boolean;
@@ -33,7 +33,7 @@ const Book: NextPage<IProps> = (
         bookInfo={bookInfo}
         recommends={recommendList}
       /> :
-      <MFilm
+      <MBook
         bookInfo={bookInfo}
       />
     }

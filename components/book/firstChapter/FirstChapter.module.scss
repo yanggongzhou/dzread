@@ -1,0 +1,88 @@
+.firstChapterBox {
+  padding: 0 0.32rem 0.32rem;
+  background-color: #FFFFFF;
+
+  .updateCatalogTitle {
+    height: 0.78rem;
+    padding: 0.32rem 0 0.16rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    span {
+      font-size: 0.24rem;
+      font-weight: 400;
+      &:last-child {
+        color: #9C9C9C;
+      }
+    }
+  }
+
+  .updateCatalog {
+    padding: 0.16rem 0 0.32rem;
+    border-top: 0.01rem solid #E9E9E9;
+    border-bottom: 0.01rem solid #E9E9E9;
+    font-size: 0.3rem;
+    font-weight: 400;
+    color: #222222;
+    line-height: 0.36rem;
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.3rem;
+
+    a {
+      display: block;
+    }
+  }
+  .firstChapter {
+    position: relative;
+
+    h4 {
+      font-size: 0.36rem;
+      font-weight: 500;
+      color: #222222;
+      line-height: 0.44rem;
+      margin: 0.32rem 0 0.48rem;
+    }
+    p {
+      text-indent: 2em;
+      font-size: 0.36rem;
+      font-weight: 400;
+      color: #222222;
+      line-height: 2;
+      white-space: pre-wrap;
+      margin-bottom: 0.3rem;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    .mark {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      z-index: 1;
+      width: 100%;
+      height: 1.4rem;
+      background: linear-gradient(180deg, rgba(255,255,255,0) 0%, #FFFFFF 100%);
+    }
+  }
+
+  .chapterLink {
+    margin-top: 0.32rem;
+    width: 100%;
+    height: 0.84rem;
+    border-radius: 0.42rem;
+    border: 0.01rem solid #FA3123;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 0.24rem;
+
+    .icon {
+      width: 0.24rem;
+      height: 0.24rem;
+    }
+  }
+
+}

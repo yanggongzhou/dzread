@@ -1,6 +1,5 @@
 import React, { FC } from 'react'
 import Link from "next/link";
-import Image from "next/image";
 import { IBookItem } from "@/typings/home.interface";
 import NavBar from "@/components/common/navBar/NavBar";
 import BookDetail from "@/components/book/bookDetail";
@@ -8,6 +7,8 @@ import { useRouter } from "next/router";
 import classNames from "classnames";
 import BrowseList from "@/components/home/browseList";
 import styles from "@/components/book/index.module.scss";
+import FirstChapter from "@/components/book/firstChapter/FirstChapter";
+import CatalogBox from "@/components/book/catalogBox";
 
 interface IProps {
   bookInfo: IBookItem;
@@ -101,49 +102,19 @@ const MBook: FC<IProps> = ({ bookInfo }) => {
 
     <BookDetail bookInfo={bookInfo}/>
 
-    <div className={styles.firstChapterBox}>
-      <nav className={styles.navMenu}>
-        <Link
-          className={classNames(styles.navItem, router.pathname === '/book/[bookId]' && styles.active)}
-          href={`/book/${bookInfo.bookId}`}>
-          书籍信息
-        </Link>
-        <Link
-          className={classNames(styles.navItem, router.pathname !== '/book/[bookId]' && styles.active)}
-          href={`/catalog/${bookInfo.bookId}`}>
-          目录
-        </Link>
-      </nav>
-
-      <div className={styles.updateCatalogTitle}>
-        <span>最新章节</span>
-        <span>更新时间：2023-07-06 23:2</span>
-      </div>
-      <div className={styles.updateCatalog}>
-        <Link href={`/chapter/${bookInfo.bookId}/xxxxxx`}>第九百八十一章</Link>
-        <Link href={`/chapter/${bookInfo.bookId}/xxxxxx`}>第九百八十er章</Link>
-        <Link href={`/chapter/${bookInfo.bookId}/xxxxxx`}>第九百八十san章</Link>
-      </div>
-
-      <div className={styles.firstChapter}>
-        <h4>第1章</h4>
-        <p>36号字周三晚上7点，苏溪准时出现的府酒店门外。</p>
-        <p>手机响了一下，苏溪打开微信，是苏俄正荣：【西西，谢谢你肯帮爸爸，我这里吃有点堵车，你先进去。】</p>
-        <p>苏溪放慢脚步，想着等下见道林九则佛该怎么打招呼。</p>
-        <p> 结婚三年，他们从来没见过面，不用费手机响了一下，苏溪打开微信，是苏俄正荣：【西西，谢谢你肯帮爸爸，我这里吃有点堵车，你先进去。】</p>
-        <div className={styles.mark}/>
-      </div>
-      <Link href={'/'} className={styles.chapterLink}>
-        剩余未加载内容，点击继续阅读
-        <Image
-          className={styles.icon}
-          width={24}
-          height={24}
-          src={'/images/common/search/backIcon.png'}
-          alt={''}
-        />
+    <nav className={styles.navMenu}>
+      <Link
+        className={classNames(styles.navItem, router.pathname === '/book/[bookId]' && styles.active)}
+        href={`/book/${bookInfo.bookId}`}>
+        书籍信息
       </Link>
-    </div>
+      <Link
+        className={classNames(styles.navItem, router.pathname === '/catalog/[bookId]' && styles.active)}
+        href={`/catalog/${bookInfo.bookId}`}>
+        目录
+      </Link>
+    </nav>
+    { router.pathname === '/book/[bookId]' ? <FirstChapter bookInfo={bookInfo}/> : <CatalogBox bookInfo={bookInfo}/> }
 
     <div className={styles.recommendBox}>
       <div className={styles.columnHead}>

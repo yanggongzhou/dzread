@@ -1,33 +1,32 @@
-.crumbsWrap {
-  height: 0.8rem;
-  width: 100%;
-  padding: 0 0.32rem;
-  display: flex;
-  align-items: center;
-  flex-direction: row;
+.catalogBox {
+  padding: 0 0.32rem 0.32rem;
+  background-color: #FFFFFF;
 
-  .crumbsItem {
-    font-size: 0.24rem;
+
+  .catalogItem {
+    height: 0.96rem;
+    border-bottom: 0.01rem solid #E9E9E9;
     display: flex;
     align-items: center;
-    margin-right: 0.12rem;
-    font-weight: 400;
-    color: rgba(255,255,255,0.6);
-    line-height: 0.33rem;
+    justify-content: space-between;
 
-    .crumbsIcon {
-      margin-left: 0.12rem;
-      width: 0.24rem;
-      height: 0.24rem;
+    &:last-child {
+      border-bottom: 0.01rem solid transparent;
     }
-  }
 
-  .crumbsItemTxt {
-    font-size: 0.24rem;
-    display: flex;
-    align-items: center;
-    margin-right: 0.1rem;
-    font-weight: 400;
-    color: rgba(255,255,255,0.6);
+    .itemTxt {
+      font-size: 0.3rem;
+      font-weight: 400;
+      color: #222222;
+    }
+
+    .lockTxt {
+      color: #9C9C9C;
+    }
+
+    .itemIcon {
+      width: 0.36rem;
+      height: 0.36rem;
+    }
   }
 }
