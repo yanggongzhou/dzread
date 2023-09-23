@@ -31,7 +31,6 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  font-family: Roboto-Regular, Roboto;
 }
 
 .bookName {
@@ -42,7 +41,6 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   margin-bottom: 0.08rem;
-  font-family: Roboto-Medium, Roboto;
 }
 
 .bookLine2 {
@@ -68,7 +66,6 @@
 
   .bookTypeTwoName {
     font-size: 0.24rem;
-    font-family: Roboto-Regular, Roboto;
     font-weight: 400;
     color: $theme_color;
     line-height: 32px;

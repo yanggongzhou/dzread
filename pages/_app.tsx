@@ -1,5 +1,6 @@
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
+import 'animate.css'
 import '@/styles/globals.scss'
 import '@/styles/transition.css'
 import type { AppProps } from 'next/app'

@@ -30,13 +30,11 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-family: Roboto-Medium, Roboto;
   }
 }
 
 .tagWrap {
   padding: 1.2rem 0.04rem 1.2rem;
-  font-family: Roboto-Regular, Roboto;
 
   .keywordBox {
 
@@ -48,7 +46,6 @@
       line-height: 0.48rem;
       padding: 0 0.32rem;
       margin-bottom: 0.16rem;
-      font-family: Roboto-Bold, Roboto;
     }
 
     .sub {
@@ -57,7 +54,6 @@
       color: #333333;
       padding: 0 0.32rem;
       white-space: pre-wrap;
-      font-family: Roboto-Regular, Roboto;
     }
 
     .keywordConnect {
@@ -68,7 +64,6 @@
         font-size: 0.32rem;
         color: #2F3031;
         line-height: 0.4rem;
-        font-family: Roboto-Regular, Roboto;
       }
 
       .keywordConnectItem {
@@ -78,7 +73,6 @@
         padding: 0.16rem 0.28rem 0.08rem;
         color: $theme_color;
         text-decoration: underline !important;
-        font-family: Roboto-Regular, Roboto;
       }
     }
   }

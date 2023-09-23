@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { MEmpty } from "@/components/common/empty";
 import MFirstList from "@/components/home/firstList/FirstList";
 import MorePagination from "@/components/recommend/pagination/MorePagination";
-import NavBar from "@/components/recommend/navBar/NavBar";
+import NavBar from "@/components/common/navBar/NavBar";
 import BrowseType from "@/components/browse/browseType/BrowseType";
 import DownloadBanner from "@/components/common/downloadBanner/DownloadBanner";
 import { setIsShowBrowse } from "@/store/modules/app.module";

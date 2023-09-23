@@ -4,7 +4,7 @@ import { IBrowseTypes } from "@/typings/browse.interface";
 import { useRouter } from "next/router";
 import { MEmpty } from "@/components/common/empty";
 import MorePagination from "@/components/recommend/pagination/MorePagination";
-import NavBar from "@/components/recommend/navBar/NavBar";
+import NavBar from "@/components/common/navBar/NavBar";
 import styles from "@/components/rankings/index.module.scss";
 import { SideBar } from "antd-mobile";
 import Link from "next/link";

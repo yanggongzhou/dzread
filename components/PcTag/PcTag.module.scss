@@ -2,7 +2,6 @@
   background-color: #F5F6FA;
   padding-bottom: 0.5rem;
   min-height: calc(100vh - 2rem);
-  font-family: Ubuntu-Regular, Ubuntu;
 
   .keywordBox {
     width: 13rem;
@@ -14,7 +13,6 @@
       color: $theme_color;
       font-weight: bold;
       line-height: 0.32rem;
-      font-family: Ubuntu-Bold, Ubuntu;
     }
     .sub {
       margin: 0.1rem 0 0.3rem;
@@ -33,7 +31,6 @@
         font-weight: bold;
         color: #435366;
         line-height: 0.19rem;
-        font-family: Ubuntu-Bold, Ubuntu;
       }
 
       .keywordConnectItem {

@@ -44,7 +44,6 @@
     text-overflow: ellipsis;
     margin-right: 0.08rem;
     line-height: 0.24rem;
-    font-family: Ubuntu-Bold, Ubuntu;
   }
 }
 
@@ -61,7 +60,6 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   margin-bottom: 0.08rem;
-  font-family: Ubuntu-Regular, Ubuntu;
   font-style: italic;
 }
 
@@ -71,7 +69,6 @@
   color: $theme_color;
   line-height: 0.2rem;
   margin-bottom: 0.08rem;
-  font-family: Ubuntu-Regular, Ubuntu;
 }
 
 .intro {
@@ -84,5 +81,4 @@
   -webkit-line-clamp: 5;
   word-wrap: break-word;
   line-height: 0.22rem;
-  font-family: Ubuntu-Regular, Ubuntu;
 }

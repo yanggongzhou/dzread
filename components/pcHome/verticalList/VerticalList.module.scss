@@ -42,7 +42,6 @@
       font-size: 0.24rem;
       font-weight: 600;
       color: $theme_color;
-      font-family: Ubuntu-Bold, Ubuntu;
     }
 
     .bookIndex {
@@ -53,7 +52,6 @@
       width: 2.5rem;
 
       .bookName {
-        font-family: Ubuntu-Bold, Ubuntu;
         display: block;
         color: #333333;
         font-size: 0.16rem;
@@ -69,12 +67,10 @@
         font-size: 0.14rem;
         font-weight: 400;
         color: #7F8493;
-        font-family: Ubuntu-Regular, Ubuntu;
 
         span {
           color: $theme_color;
           font-weight: 600;
-          font-family: Ubuntu-Bold, Ubuntu;
         }
       }
 

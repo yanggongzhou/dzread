@@ -9,7 +9,8 @@
 }
 
 .linkItem, .pageItem {
-  width: 2.6rem;
+  max-width: 2.6rem;
+  flex: 1;
   height: 0.64rem;
   background-color: #FFEFDF;
   border-radius: 0.08rem;
@@ -18,7 +19,6 @@
   justify-content: center;
   font-size: 0.24rem;
   font-weight: 400;
-  font-family: PingFangSC-Regular, PingFang SC;
   color: #F67C00;
 }
 
@@ -27,8 +27,10 @@
 }
 
 .middleItem {
+  text-align: center;
+  flex-shrink: 0;
+  width: 1.68rem;
   font-size: 0.24rem;
   font-weight: 400;
-  font-family: PingFangSC-Regular, PingFang SC;
   color: #9C9C9C;
 }

@@ -34,7 +34,6 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   margin-bottom: 0.08rem;
-  font-family: Roboto-Medium, Roboto;
 }
 
 .author {
@@ -45,7 +44,6 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   display: inline-block;
-  font-family: Roboto-Regular, Roboto;
 }
 
 .intro {
@@ -59,5 +57,4 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   word-wrap: break-word;
-  font-family: Roboto-Regular, Roboto;
 }

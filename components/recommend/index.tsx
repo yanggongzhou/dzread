@@ -4,7 +4,7 @@ import { MEmpty } from "@/components/common/empty";
 import MorePagination from "@/components/recommend/pagination/MorePagination";
 import MRecommendList from "@/components/recommend/mRecommendList/MRecommendList";
 import styles from '@/components/recommend/index.module.scss';
-import NavBar from "@/components/recommend/navBar/NavBar";
+import NavBar from "@/components/common/navBar/NavBar";
 import DownloadBanner from "@/components/common/downloadBanner/DownloadBanner";
 
 interface IProps {

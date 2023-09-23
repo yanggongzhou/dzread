@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import Link from "next/link";
 import Image from "next/image";
-import styles from '@/components/recommend/navBar/NavBar.module.scss';
+import styles from '@/components/common/navBar/NavBar.module.scss';
 
 interface IProps {
   backHref: string;

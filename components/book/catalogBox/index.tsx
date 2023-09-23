@@ -9,7 +9,7 @@ interface IProps {
   isPc?: boolean;
 }
 
-const BookCrumbs: FC<IProps> = ({ bookInfo, isPc }) => {
+const CatalogBox: FC<IProps> = ({ bookInfo, isPc }) => {
 
   const typeTwoId = bookInfo.typeTwoIds?.[0] || 0;
   let typeTwoName: string | undefined = '全部'
@@ -42,4 +42,4 @@ const BookCrumbs: FC<IProps> = ({ bookInfo, isPc }) => {
   </div>
 }
 
-export default BookCrumbs;
+export default CatalogBox;

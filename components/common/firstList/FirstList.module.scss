@@ -17,7 +17,6 @@
   font-size: 0.4rem;
   font-style: italic;
   color: #333333;
-  font-family: Ubuntu-Regular, Ubuntu;
   font-style: italic;
 }
 
@@ -41,7 +40,6 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  font-family: Ubuntu-Bold, Ubuntu;
 }
 
 .rankBox {
@@ -55,11 +53,9 @@
   font-weight: 400;
   color: #3A4A5A;
   margin-left: 0.08rem;
-  font-family: Ubuntu-Regular, Ubuntu;
 }
 
 .bookLine2 {
-  font-family: Ubuntu-Regular, Ubuntu;
   font-style: italic;
   font-size: 0.14rem;
   font-weight: 400;
@@ -83,6 +79,5 @@
   -webkit-line-clamp: 3;
   word-wrap: break-word;
   line-height: 0.22rem;
-  font-family: Ubuntu-Regular, Ubuntu;
   overflow-wrap: anywhere;
 }

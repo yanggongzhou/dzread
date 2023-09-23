@@ -5,8 +5,8 @@ import PcBook from "@/components/pcBook";
 import MFilm from "@/components/book";
 import { isIos, ownOs } from "@/utils/ownOs";
 import { EnumPosition, IBookItem } from "@/typings/home.interface";
-import BookCrumbs from "@/components/book/crumbs";
 import { IChapterListItem } from "@/typings/book.interface";
+import Breadcrumb from "@/components/common/breadcrumb";
 
 interface IProps {
   isPc: boolean;
@@ -21,8 +21,13 @@ const Book: NextPage<IProps> = (
   { isPc, bookId, bookInfo, recommendList, lastChapter, position }
 ) => {
 
+  const data = [
+    { title: '首页', link: "/home" },
+    { title: '??', link: "/rankings" },
+    { title: bookInfo.bookName }
+  ]
   return <>
-    <BookCrumbs bookInfo={bookInfo} isPc={isPc}/>
+    <Breadcrumb data={data} style={isPc ? {} : { width: 0, height: 0, display: "none" }} />
     { isPc ?
       <PcBook
         bookInfo={bookInfo}
