@@ -24,15 +24,13 @@ const SwiperNormal: FC<IProps> = ({ bannerList }) => {
   return <Swiper
     autoplayInterval={2000}
     style={{
-      '--height': '3.16rem',
+      '--height': '2.94rem',
     }}
     indicatorProps={{
       style: {
-        '--dot-spacing': '0.08rem',
+        '--dot-spacing': '0.1rem',
       }
     }}
-    trackOffset={2}
-    slideSize={96}
     className={styles.swiperBox}
     autoplay
     loop>{items}</Swiper>

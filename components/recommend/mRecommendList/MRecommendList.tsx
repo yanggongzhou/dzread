@@ -9,9 +9,9 @@ interface IProps {
 }
 
 const MRecommendList: FC<IProps> = ({ list }) => {
-  return <div className={styles.browseListBox}>
+  return <div className={styles.recommendBox}>
     {list.map(item => {
-      return <div key={item.bookId} className={styles.featuredItem}>
+      return <div key={item.bookId} className={styles.recommendItem}>
         <ImageCover
           href={`/book/${item.bookId}`}
           className={styles.itemImg}

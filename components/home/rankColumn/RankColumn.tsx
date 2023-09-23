@@ -1,18 +1,21 @@
 import React, { FC, useRef, useState } from "react";
 import styles from "@/components/home/rankColumn/RankColumn.module.scss";
-import { CapsuleTabs, Swiper, SwiperRef } from "antd-mobile";
+import { Swiper, SwiperRef } from "antd-mobile";
 import { IBookItem, INetHomeItem } from "@/typings/home.interface";
 import ImageCover from "@/components/common/image/ImageCover";
 import Link from "next/link";
+import classNames from "classnames";
 
 interface IProps {
   smallData: INetHomeItem[];
 }
 
 const RankList: FC<{ list: IBookItem[] }> = ({ list = [] }) => {
+
   return <div className={styles.rankList}>
-    {list.map(item => {
+    {list.map((item, itemInd) => {
       return <div className={styles.rankItem}>
+        <Link className={styles.rankIndex} href={`/book/${item.bookId}`}>{itemInd + 1}</Link>
         <ImageCover
           href={`/book/${item.bookId}`}
           className={styles.itemImg}
@@ -21,10 +24,7 @@ const RankList: FC<{ list: IBookItem[] }> = ({ list = [] }) => {
           height={294}
           alt={item.bookName}
         />
-        <div className={styles.itemContent}>
-          <h4><Link className={styles.bookName} href={`/book/${item.bookId}`}>{item.bookName}</Link></h4>
-          {item.author ? <Link href={`/book/${item.bookId}`} className={styles.bookAuthor}>{item.author}</Link> : null}
-        </div>
+        <h4><Link className={styles.bookName} href={`/book/${item.bookId}`}>{item.bookName}</Link></h4>
       </div>
     })}
   </div>
@@ -34,35 +34,48 @@ const RankList: FC<{ list: IBookItem[] }> = ({ list = [] }) => {
 const RankColumn: FC<IProps> = ({ smallData }) => {
 
   const swiperRef = useRef<SwiperRef | null>(null);
-  const [activeKey, setActiveKey] = useState("1");
+  const [activeKey, setActiveKey] = useState(0);
 
-  const onIndicator = (key: string) => {
-    setActiveKey(key)
-    swiperRef.current?.swipeTo(Number(key) - 1);
+  const onIndicator = (index: number) => {
+    setActiveKey(index)
+    swiperRef.current?.swipeTo(index);
   }
+
   const onIndexChange = (index: number) => {
-    setActiveKey(String(index + 1));
+    setActiveKey(index);
   }
 
-  const items = smallData.map((item) => (
-    <Swiper.Item key={item.position} className={styles.content}>
-      <RankList list={item.bookList}/>
-    </Swiper.Item>
-  ))
-  return <div className={styles.rankColumnWrap}>
-    <CapsuleTabs activeKey={activeKey} onChange={(key) => onIndicator(key)}>
-      <CapsuleTabs.Tab title='畅销榜' key='1'/>
-      <CapsuleTabs.Tab title='完结榜' key='2'/>
-      <CapsuleTabs.Tab title='新书榜' key='3'/>
-      <CapsuleTabs.Tab title='免费榜' key='4'/>
-    </CapsuleTabs>
+  const menuData = [
+    { id: 1, title: "畅销榜" },
+    { id: 2, title: "完结榜" },
+    { id: 3, title: "新书榜" },
+    { id: 4, title: "免费榜" }
+  ]
 
+  return <div className={styles.rankColumnWrap}>
+
+    <div className={styles.tabBox}>
+      {menuData.map((val, index) => {
+        return <div
+          key={val.id}
+          className={classNames(styles.tabItem, activeKey === index && styles.active)}
+          onClick={() => onIndicator(index)}>
+          {val.title}
+        </div>
+      })}
+    </div>
     <Swiper
       ref={swiperRef}
       className={styles.swiperBox}
       indicator={() => null}
       onIndexChange={onIndexChange}
-    >{items}</Swiper>
+    >
+      {smallData.map((item) => (
+        <Swiper.Item key={item.position} className={styles.content}>
+          <RankList list={item.bookList}/>
+        </Swiper.Item>
+      ))}
+    </Swiper>
   </div>
 }
 

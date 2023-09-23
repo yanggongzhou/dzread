@@ -1,19 +1,63 @@
 .rankColumnWrap {
-  padding: 0.24rem 0.24rem 0.48rem;
+  padding: 0 0.24rem 0.7rem;
   position: relative;
 
+  .tabBox {
+    height: 0.56rem;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .tabItem {
+      width: 1.12rem;
+      height: 0.56rem;
+      border-radius: 0.28rem;
+      line-height: 0.56rem;
+      text-align: center;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      font-size: 0.26rem;
+      font-weight: 400;
+      color: #727272;
+      background-color: #F0F0F0;
+    }
+
+    .active {
+      font-weight: 600;
+      color: #FFFFFF;
+      background: linear-gradient(90deg, #FF6600 0%, #FA3123 100%);
+    }
+  }
+
   .swiperBox {
+    margin-top: 0.32rem;
     overflow: hidden;
+
+    .content {
+      padding: 0 0.02rem;
+    }
   }
 
   .footerLink {
+    padding-top: 0.4rem;
     position: absolute;
     width: 100%;
     bottom: 0.1rem;
     left: 0;
-    text-align: center;
     z-index: 1;
     font-size: .24rem;
+    color: #727272;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .linkIcon {
+      margin-left: 0.02rem;
+      width: 0.24rem;
+      height: 0.24rem;
+    }
   }
 }
 

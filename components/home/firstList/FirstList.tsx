@@ -1,17 +1,18 @@
-import React, { FC } from 'react'
-import styles from '@/components/home/firstList/FirstList.module.scss'
+import React, { FC } from 'react';
 import { IBookItem } from "@/typings/home.interface";
 import Link from "next/link";
 import ImageCover from "@/components/common/image/ImageCover";
+import styles from '@/components/home/firstList/FirstList.module.scss';
 
 interface IProps {
   dataSource: IBookItem[];
 }
 
 const MFirstList: FC<IProps> = ({ dataSource }) => {
-  return <div className={styles.browseListBox}>
+
+  return <div className={styles.firstListBox}>
     {dataSource.map(item => {
-      return <div key={item.bookId} className={styles.featuredItem}>
+      return <div key={item.bookId} className={styles.firstItem}>
         <ImageCover
           href={`/book/${item.bookId}`}
           className={styles.itemImg}

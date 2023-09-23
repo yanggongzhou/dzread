@@ -4,8 +4,8 @@ import React, { useMemo } from "react";
 import { netHomeData } from "@/server/home";
 import { EnumPosition, IBookItem, INetHomeItem } from "@/typings/home.interface";
 import PcHome from "@/components/pcHome/PcHome";
-import MHome from "@/components/home/MHome";
 import { ownOs } from "@/utils/ownOs";
+import WapHome from "@/components/home";
 
 interface IProps {
   isPc: boolean;
@@ -23,7 +23,7 @@ const Home: NextPage<IProps> = ({ isPc, homeData = [] }) => {
 
 
   return <>
-    {isPc ? <PcHome smallData={homeData} bannerList={bannerList}/> : <MHome smallData={homeData} bannerList={bannerList}/>}
+    {isPc ? <PcHome smallData={homeData} bannerList={bannerList}/> : <WapHome smallData={homeData} bannerList={bannerList}/>}
   </>
 }
 

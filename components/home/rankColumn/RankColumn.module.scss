@@ -1,71 +1,112 @@
 .rankColumnWrap {
-  padding: 0.24rem;
+  padding: 0 0.24rem;
+
+  .tabBox {
+    height: 0.56rem;
+    background-color: #F0F0F0;
+    border-radius: 0.28rem;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .tabItem {
+      width: 1.62rem;
+      height: 0.56rem;
+
+      border-radius: 0.28rem;
+      line-height: 0.56rem;
+      text-align: center;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      font-size: 0.26rem;
+      font-weight: 400;
+      color: #727272;
+    }
+
+    .active {
+      font-weight: 600;
+      color: #FFFFFF;
+      background: linear-gradient(90deg, #FF6600 0%, #FA3123 100%);
+    }
+
+  }
 
   .swiperBox {
+    margin-top: 0.32rem;
     overflow: hidden;
-  }
-  .content {
-    padding: 0 0.08rem;
 
-    .contentImgBox {
-      border-radius: 0.08rem;
-      width: 100%;
-      height: 2.94rem;
+    .content {
+      padding: 0 0.02rem;
     }
   }
 }
 
-
 .rankList {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-gap: .24rem;
-  padding: 0;
+  grid-gap: .3rem;
   width: 100%;
 
   .rankItem {
-    border-radius: 0.08rem;
     overflow: hidden;
     position: relative;
-    //width: 100%;
     display: flex;
-    align-items: center;
     flex-direction: row;
-    padding-right: 0.24rem;
-    column-gap: 0.15rem;
+    column-gap: 0.24rem;
 
-    .itemImg {
-      border: 1px solid rgba(0,0,0,.08);
-      border-radius: 0.08rem;
-      flex-shrink: 0;
-      height: 1.22rem;
-      overflow: hidden;
-      position: relative;
-      width: 0.92rem;
+    .rankIndex {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      width: 0.32rem;
+      height: 0.32rem;
+      background-color: rgba(0, 0, 0, 0.7);
+      border-radius: 0.08rem 0 0.08rem 0;
+      font-size: 0.24rem;
+      font-weight: 400;
+      color: #FFFFFF;
+      line-height: 0.32rem;
+      text-align: center;
     }
 
-    .itemContent {
-      .bookName {
-        font-size: .32rem;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
-        display: -webkit-box;
-        font-weight: 500;
-        line-height: .36rem;
-        margin-bottom: 0.08rem;
-        word-break: break-all;
-      }
+    &:first-child .rankIndex {
+      background-color: #FF472A;
+    }
 
-      .bookAuthor {
-        font-size: .24rem;
-        line-height: 1.2;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        color: #b2b2b2;
-      }
+    &:nth-child(2) .rankIndex {
+      background-color: #FF7700;
+    }
+
+    &:nth-child(3) .rankIndex {
+      background-color: #FF9A00;
+    }
+
+    .itemImg {
+      flex-shrink: 0;
+      height: 1.18rem;
+      overflow: hidden;
+      position: relative;
+      width: 0.9rem;
+      border-radius: 0.08rem;
+    }
+
+    .bookName {
+      display: inline-block;
+      width: 1.98rem;
+      font-size: .3rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      display: -webkit-box;
+      font-weight: 600;
+      line-height: .36rem;
+      margin-bottom: 0.08rem;
+      color: #222222;
+      word-break: break-all;
     }
   }
 }

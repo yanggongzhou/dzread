@@ -1,10 +1,10 @@
-.browseListBox {
+.firstListBox {
   display: flex;
   flex-direction: column;
   row-gap: 0.24rem;
   padding: 0;
 
-  .featuredItem {
+  .firstItem {
     border-radius: 0.08rem;
     overflow: hidden;
     position: relative;

@@ -1,9 +1,11 @@
 import React, { FC, useRef, useState } from "react";
 import styles from "@/components/home/browseColumn/BrowseColumn.module.scss";
-import { CapsuleTabs, Swiper, SwiperRef } from "antd-mobile";
+import { Swiper, SwiperRef } from "antd-mobile";
 import { INetHomeItem } from "@/typings/home.interface";
 import Link from "next/link";
 import BrowseList from "@/components/home/browseList";
+import classNames from "classnames";
+import Image from "next/image";
 
 interface IProps {
   smallData: INetHomeItem[];
@@ -12,37 +14,56 @@ interface IProps {
 const BrowseColumn: FC<IProps> = ({ smallData }) => {
 
   const swiperRef = useRef<SwiperRef | null>(null);
-  const [activeKey, setActiveKey] = useState("1");
+  const [activeKey, setActiveKey] = useState(0);
 
-  const onIndicator = (key: string) => {
-    setActiveKey(key)
-    swiperRef.current?.swipeTo(Number(key) - 1);
+  const onIndicator = (index: number) => {
+    setActiveKey(index)
+    swiperRef.current?.swipeTo(index);
   }
   const onIndexChange = (index: number) => {
-    setActiveKey(String(index + 1));
+    setActiveKey(index);
   }
 
-  return <div className={styles.rankColumnWrap}>
-    <CapsuleTabs activeKey={activeKey} onChange={(key) => onIndicator(key)}>
-      <CapsuleTabs.Tab title='畅销' key='1'/>
-      <CapsuleTabs.Tab title='完结' key='2'/>
-      <CapsuleTabs.Tab title='新书' key='3'/>
-      <CapsuleTabs.Tab title='免费' key='4'/>
-      <CapsuleTabs.Tab title='悬疑' key='5'/>
-    </CapsuleTabs>
+  const menuData = [
+    { id: 1, title: "畅销" },
+    { id: 2, title: "完结" },
+    { id: 3, title: "新书" },
+    { id: 4, title: "免费" },
+    { id: 5, title: "悬疑" }
+  ]
 
+  return <div className={styles.rankColumnWrap}>
+    <div className={styles.tabBox}>
+      {menuData.map((val, index) => {
+        return <div
+          key={val.id}
+          className={classNames(styles.tabItem, activeKey === index && styles.active)}
+          onClick={() => onIndicator(index)}>
+          {val.title}
+        </div>
+      })}
+    </div>
     <Swiper
       ref={swiperRef}
       className={styles.swiperBox}
       indicator={() => null}
       onIndexChange={onIndexChange}
     >{smallData.map((item) => (
-      <Swiper.Item key={item.position}>
+      <Swiper.Item key={item.position} className={styles.content}>
         <BrowseList list={item.bookList.slice(3)}/>
       </Swiper.Item>
     ))}</Swiper>
 
-    <Link className={styles.footerLink} href={`/browse/xxxxx`}>更多{activeKey}内容</Link>
+    <Link className={styles.footerLink} href={`/browse/xxxxx`}>
+      <span>更多{menuData[activeKey].title}内容</span>
+      <Image
+        className={styles.linkIcon}
+        width={48}
+        height={48}
+        src={'/images/home/link.png'}
+        alt={''}
+      />
+    </Link>
   </div>
 }
 

@@ -3,75 +3,83 @@
   left: 0;
   position: fixed;
   top: 0;
-  -webkit-transform: translateZ(1px);
-  transform: translateZ(1px);
   width: 100%;
   z-index: 999;
 
   .headerContent {
-    height: 0.88rem;
+    height: 0.96rem;
     width: 100%;
-    padding: 0 0.32rem;
+    padding: 0 0.32rem 0 0.24rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid;
 
     .logoBox {
-      width: 0.4rem;
-      height: 0.4rem;
+      width: 1.99rem;
+      height: 0.68rem;
     }
 
     .downloadBtn {
       font-size: .28rem;
-      background-color: #059fff;
-      -webkit-box-pack: center;
-      -ms-flex-pack: center;
-      border-radius: 0.36rem;
-      -webkit-box-shadow: 0 4px 8px rgba(71,131,185,.08), 0 4px 8px rgba(0,0,0,.02);
-      box-shadow: 0 4px 8px rgba(71,131,185,.08), 0 4px 8px rgba(0,0,0,.02);
       color: #fff;
       font-weight: 500;
-      justify-content: center;
       margin-left: auto;
-      padding: 0.16rem 0.24rem;
+      padding: 0 0.4rem;
+      height: 0.62rem;
+      background: linear-gradient(90deg, #FF6600 0%, #FA3123 100%);
+      border-radius: 0.31rem;
     }
   }
 
-  .navMenu {
+  .navContainer {
     padding: 0 0.32rem;
-    height: 0.88rem;
     display: flex;
-    position: relative;
+    justify-content: space-between;
+    align-items: center;
 
-
-    .navItem, .navItemActive {
-      padding: 0 0.26rem;
+    .navMenu {
+      height: 0.96rem;
       display: flex;
-      -webkit-box-align: center;
-      -ms-flex-align: center;
-      align-items: center;
-      font-weight: 500;
-      color: #666;
-      font-size: 0.28rem;
+
+      .navItem {
+        position: relative;
+        padding: 0 0.16rem;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        font-weight: 500;
+        color: #666;
+        font-size: 0.28rem;
+      }
+
+      .active {
+        position: relative;
+        background: rgba(255, 255, 255, 0.08);
+        color: $theme_color;
+        font-weight: 600;
+        font-size: 0.34rem;
+
+        &:after {
+          content: "";
+          left: 50%;
+          transform: translateX(-50%);
+          background-color: $theme_color;
+          border-radius: 0.06rem;
+          position: absolute;
+          bottom: 0;
+          height: 0.08rem;
+          width: 0.24rem;
+        }
+      }
     }
 
-    .navItemActive {
-      position: relative;
-      background: rgba(255, 255, 255, 0.08);
-      color: $theme_color;
+    .searchBox {
+      display: flex;
 
-      &:after {
-        content: "";
-        left: 50%;
-        -webkit-transform: translateX(-50%);
-        transform: translateX(-50%);
-        background: #059fff;
-        border-radius: 0.06rem;
-        bottom: 0;
-        height: 0.06rem;
-        position: absolute;
-        width: 0.22rem;
+      .searchIcon {
+        width: 0.48rem;
+        height: 0.48rem;
       }
     }
   }

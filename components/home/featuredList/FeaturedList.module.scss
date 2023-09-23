@@ -1,10 +1,36 @@
+.featuredContainer {
+  height: 6rem;
+  position: relative;
+
+  &:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    width: 0.16rem;
+    height: 6.05rem;
+    background: linear-gradient(90deg, #FFFFFF 0%, rgba(255,255,255,0) 100%);
+  }
+
+  &:after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1;
+    width: 0.16rem;
+    height: 6.05rem;
+    background: linear-gradient(270deg, #FFFFFF 0%, rgba(255,255,255,0) 100%);
+  }
+}
+
 .featuredBox {
   display: flex;
   flex-direction: column;
   height: 6rem;
   flex-wrap: wrap;
   overflow-x: scroll;
-  padding: 0 0.24rem;
   row-gap: 0.32rem;
 
   &::-webkit-scrollbar { display: none; }
@@ -13,81 +39,65 @@
     border-radius: 0.08rem;
     overflow: hidden;
     position: relative;
-    //width: 100%;
     display: flex;
     align-items: center;
     flex-direction: row;
-    padding-right: 0.24rem;
-    width: 6.48rem;
+    padding: 0 0.24rem;
+    width: 6.46rem;
+    column-gap: 0.24rem;
+    height: 1.72rem;
 
     .itemImg {
-      border: 1px solid rgba(0,0,0,.08);
       border-radius: 0.08rem;
-      height: 1.7rem;
-      margin-right: 0.24rem;
+      height: 100%;
       overflow: hidden;
-      width: 1.28rem;
+      width: 1.3rem;
       flex-shrink: 0;
     }
 
     .itemContent {
+      width: 4.44rem;
+      height: 100%;
+      display: inline-flex;
+      flex-direction: column;
+      justify-content: space-between;
+
       .bookName {
+        display: inline-block;
+        width: 4.44rem;
         font-size: .32rem;
-        font-weight: 700;
-        line-height: 1.2;
+        font-weight: 600;
+        line-height: 0.4rem;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+        color: #222222;
       }
 
       .bookIntro {
+        margin-top: 0.1rem;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 2;
-        color: #6a6b6c;
         display: -webkit-box;
-        font-size: .24rem;
+        font-size: .26rem;
         line-height: .32rem;
-        margin-bottom: 0.2rem;
-        margin-top: 0.12rem;
         overflow: hidden;
         text-overflow: ellipsis;
         word-break: break-all;
+        font-weight: 400;
+        color: #666666;
       }
 
-      .contentFooter {
-        display: flex;
-        height: 0.32rem;
-
-        .bookAuthor {
-          font-size: .24rem;
-          line-height: 1.2;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-        }
-
-        .bookType {
-          font-size: .24rem;
-          line-height: 1.2;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-          padding-left: 0.24rem;
-          position: relative;
-
-          &:before {
-            content: "";
-            position: absolute;
-            left: 0.12rem;
-            top: 0.02rem;
-            background: #059fff;
-            border-radius: 0.06rem;
-            bottom: 0;
-            height: 0.24rem;
-            width: 0.02rem;
-          }
-        }
+      .bookAuthor {
+        font-size: .26rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-weight: 400;
+        color: #9C9C9C;
+        line-height: 0.32rem;
       }
+
     }
   }
 }

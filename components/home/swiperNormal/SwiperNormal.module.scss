@@ -1,13 +1,13 @@
 .swiperBox {
-  padding-top: 0.24rem;
-  margin-bottom: 0.72rem;
-  overflow: initial;
+  padding: 0.2rem 0;
+  width: 100vw;
+  overflow: hidden;
 
   :global {
 
     .adm-page-indicator {
-      --active-dot-color: #FF375F !important;
-      --dot-color: rgba(255, 255, 255, 0.12) !important;
+      --active-dot-color: #FFFFFF !important;
+      --dot-color: rgba(238, 238, 238, 0.3) !important;
       --dot-border-radius: 50% !important;
       --active-dot-border-radius: 50% !important;
     }
@@ -21,12 +21,12 @@
 }
 
 .content {
-  height: 3.16rem;
-  padding: 0 0.08rem;
+  height: 2.54rem;
+  padding: 0 0.24rem;
 
   .contentImgBox {
-    border-radius: 0.08rem;
+    border-radius: 0.16rem;
     width: 100%;
-    height: 2.94rem;
+    height: 2.54rem;
   }
 }

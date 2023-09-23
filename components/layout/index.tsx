@@ -83,10 +83,7 @@ const DLayout: FC<IProps> = ({ children, pageProps, router }) => {
               {children}
             </main>
             <PcFooter />
-          </> :
-          <main>
-            {children}
-          </main>
+          </> : children
         }
       </Context.Provider>
     )
@@ -95,9 +92,7 @@ const DLayout: FC<IProps> = ({ children, pageProps, router }) => {
   return (
     <>
       <Context.Provider value={[appState, setAppState]}>
-        <main className={styles.mWrap}>
-          {children}
-        </main>
+        {children}
       </Context.Provider>
     </>
   );
