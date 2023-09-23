@@ -21,9 +21,6 @@ const PcRecommend: FC<IProps> = ({ bookList, totalPage, pageNo }) => {
         <RecommendList list={bookList}/>
         {/*<FirstList dataSource={moreData.items} />*/}
         {totalPage && totalPage > 1 ? <PaginationCom
-          onJumpChange={(page) => {
-            router.push(`/recommend/xxx-${page}`)
-          }}
           path={`/more/xxx-`}
           pageNo={pageNo}
           totalPage={totalPage}

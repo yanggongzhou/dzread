@@ -1,8 +1,3 @@
-export enum EHomeStyle {
-  small = 'SMALL_CARD_LIST',
-  big = 'BIG_CARD_COMBINATION',
-}
-
 export enum EnumPosition {
   顶部banner = 0,
   熱銷好文 = 1,
@@ -53,12 +48,6 @@ export enum ELanguage {
   Korean = 'ko', // 韩语
 }
 
-export const LanguageActions: { text: string; key: ELanguage }[] = [
-  { text: '简体中文', key: ELanguage.ZhHans },
-  { text: '繁體中文', key: ELanguage.Zh },
-  { text: 'English', key: ELanguage.English },
-  { text: '한국인', key: ELanguage.Korean },
-]
 
 export enum EHomeName {
   TopHits = '热门好剧',
@@ -72,11 +61,4 @@ export const ColumnNameRoute = {
   [EHomeName.MustSees]: 'must-sees',
   [EHomeName.Trending]: 'trending',
   [EHomeName.HiddenGems]: 'hidden-gems',
-}
-
-export const ColumnNameRouteReversion = {
-  'top-hits': EHomeName.TopHits,
-  'must-sees': EHomeName.MustSees,
-  'trending': EHomeName.Trending,
-  'hidden-gems': EHomeName.HiddenGems,
 }

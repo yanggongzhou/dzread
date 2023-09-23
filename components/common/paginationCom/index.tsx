@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from '@/components/common/paginationCom/index.module.scss';
 import JumpInput from "@/components/common/paginationCom/JumpInput";
+import { useRouter } from "next/router";
 
 /** 参考文献https://www.jianshu.com/p/ec9aca4764cf*/
 
@@ -10,7 +11,6 @@ interface IProps {
   path: string;
   totalPage: number; // 总页数
   pageNo: number; // 当前页码
-  onJumpChange: (page: number) => void;
   showLength?: number; // 最大长度
   groupCount?: number; // 页码分组，显示6个页码，其余用省略号显示
   isScroll?: boolean; // 是否滚动到顶部
@@ -21,13 +21,13 @@ const PaginationCom: FC<IProps> = (
     path,
     totalPage,
     pageNo,
-    onJumpChange,
     showLength = 6,
     groupCount = 5,
     isScroll = false
   }) => {
   const [currentPage, setCurrentPage] = useState(1); // 当前页码
   const [startPage, setStartPage] = useState(1);  // 分组开始页码
+  const router = useRouter();
 
   useEffect(() => {
     const _startPage = Number(pageNo) - 2 > 0
@@ -114,7 +114,9 @@ const PaginationCom: FC<IProps> = (
           />
         </Link>
       }
-      <JumpInput totalPage={totalPage} currentPage={currentPage} onJumpChange={onJumpChange}/>
+      <JumpInput totalPage={totalPage} currentPage={currentPage} onJumpChange={(p) => {
+        router.push(path + p)
+      }}/>
     </div>
   );
 }

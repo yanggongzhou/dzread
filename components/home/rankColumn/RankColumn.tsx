@@ -14,7 +14,7 @@ const RankList: FC<{ list: IBookItem[] }> = ({ list = [] }) => {
 
   return <div className={styles.rankList}>
     {list.map((item, itemInd) => {
-      return <div className={styles.rankItem}>
+      return <div key={item.bookId} className={styles.rankItem}>
         <Link className={styles.rankIndex} href={`/book/${item.bookId}`}>{itemInd + 1}</Link>
         <ImageCover
           href={`/book/${item.bookId}`}

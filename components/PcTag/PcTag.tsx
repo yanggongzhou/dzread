@@ -46,9 +46,7 @@ const PcTag: FC<IProps> = (
       pageNo={pageNo}
       totalPage={totalPage}
       isScroll={true}
-      onJumpChange={(page) => {
-        router.push(`/tag/${keywordId}/${page}`)
-      }}/> : null}
+      /> : null}
   </div>
 }
 

@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import Image from "next/image";
 import { IBookItem } from "@/typings/home.interface";
-import { onImgError } from "@/components/common/image/ImageCover";
+import ImageCover from "@/components/common/image/ImageCover";
 import { Ellipsis } from "antd-mobile";
 import styles from "@/components/book/bookDetail/index.module.scss";
 
@@ -11,20 +11,16 @@ interface IProps {
 
 const BookDetail: FC<IProps> = ({ bookInfo }) => {
 
-
   return <>
     <div className={styles.detailBox}>
-      <Image
-        onError={onImgError}
+      <ImageCover
+        href={`/chapter/${bookInfo.bookId}/${bookInfo.firstChapterId}`}
         className={styles.bookCover}
-        width={280}
-        height={378}
         src={bookInfo.cover}
-        placeholder="blur"
-        blurDataURL={bookInfo.cover || '/images/defaultBook.png'}
+        width={172}
+        height={228}
         alt={bookInfo.bookName}
       />
-
       <div className={styles.bookContent}>
         <div>
           {bookInfo.bookName ? <h1 className={styles.bookName}>{bookInfo.bookName}</h1> : null}

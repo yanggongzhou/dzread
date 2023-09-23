@@ -1,7 +1,7 @@
 import React from "react";
 import { GetServerSideProps, GetServerSidePropsResult, NextPage } from "next";
 import { netSearch } from "@/server/home";
-import { ELanguage, IBookItem } from "typings/home.interface";
+import { IBookItem } from "typings/home.interface";
 import PcSearch from "@/components/PcSearch/PcSearch";
 import { ownOs } from "@/utils/ownOs";
 import MSearch from "@/components/Search";
@@ -16,7 +16,7 @@ interface IProps {
   isEmpty: boolean;
 }
 
-const Search: NextPage<IProps> = ({ isPc, sValue, bookList = [], isEmpty, current, pages, total}) => {
+const SoPage: NextPage<IProps> = ({ isPc, sValue, bookList = [], isEmpty, current, pages, total}) => {
   return <>
     { isPc ?
       <PcSearch sValue={sValue} bookList={bookList} isEmpty={isEmpty} pages={pages} current={current} total={total}/> :
@@ -24,7 +24,7 @@ const Search: NextPage<IProps> = ({ isPc, sValue, bookList = [], isEmpty, curren
   </>
 }
 
-export default Search;
+export default SoPage;
 
 // ssr
 export const getServerSideProps: GetServerSideProps = async ({ req, query }): Promise<GetServerSidePropsResult<IProps>> => {
@@ -32,7 +32,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, query }): Pr
   const { searchValue = '', page = '1'} = query as { searchValue: string; page: string; };
   const { isPc } = ownOs(ua);
   if (searchValue) {
-    const data = await netSearch({ pageNo: Number(page), keyword: searchValue }, ELanguage.English);
+    const data = await netSearch(searchValue);
     if (data === 'BadRequest_404') {
       return { notFound: true }
     }

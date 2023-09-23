@@ -1,13 +1,13 @@
 import React, { FC, useState } from "react";
-import styles from '@/components/Search/index.module.scss'
 import { IBookItem } from "typings/home.interface";
 import Link from "next/link";
 import { Toast } from "antd-mobile";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import { MEmpty } from "@/components/common/empty";
-import MorePagination from "@/components/more/pagination/MorePagination";
 import BookList from "@/components/common/bookList/BookList";
+import MorePagination from "@/components/recommend/pagination/MorePagination";
+import styles from '@/components/Search/index.module.scss';
 
 interface IProps {
   current: number;
@@ -30,18 +30,18 @@ const MSearch: FC<IProps> = ({ sValue, bookList = [], isEmpty, current, pages })
     if (document.activeElement instanceof HTMLElement) {
       document.activeElement.blur()
     }
-    router.replace({ pathname: '/search', query: { searchValue } })
+    router.replace({ pathname: '/so', query: { searchValue } })
   }
 
-  return <div className={styles.searchWrap}>
+  return <main className={styles.searchWrap}>
     <div className={styles.searchBox}>
       <Link href="/">
         <Image
           className={styles.backIcon}
           width={48}
           height={48}
-          src={'/images/common/search/backIcon.png'}
-          alt={''}
+          src={'/images/common/back.png'}
+          alt={'back'}
         />
       </Link>
 
@@ -51,7 +51,7 @@ const MSearch: FC<IProps> = ({ sValue, bookList = [], isEmpty, current, pages })
           className={styles.searchIcon}
           width={48}
           height={48}
-          src={'/images/search/searchIcon.png'}
+          src={'/images/home/search.png'}
           alt={''}
         />
 
@@ -89,7 +89,7 @@ const MSearch: FC<IProps> = ({ sValue, bookList = [], isEmpty, current, pages })
 
       {pages && pages > 1 ?
         <MorePagination
-          prevPath={`/search/`}
+          prevPath={`/so/`}
           query={`?searchValue=${sValue}`}
           page={current}
           totalPage={pages}
@@ -97,7 +97,7 @@ const MSearch: FC<IProps> = ({ sValue, bookList = [], isEmpty, current, pages })
     </div> : null}
 
     {isEmpty ? <MEmpty/> : null}
-  </div>
+  </main>
 }
 
 export default MSearch;

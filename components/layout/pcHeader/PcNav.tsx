@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
 import ClientConfig from "@/client.config";
+import classNames from "classnames";
 
 interface IProps {
 
@@ -58,23 +59,28 @@ const PcNav: FC<IProps> = () => {
   ]
 
   return <div className={styles.navLeft}>
-    <Link href={'/'} className={styles.logoTxtBox}>
+    <Link href={'/'} title={'点众阅读'}>
       <Image
-        className={styles.logoTxt}
-        width={40}
+        className={styles.logoTxtBox}
+        width={200}
         height={40}
-        src={'/images/logo.png'}
-        alt={ClientConfig.name}
+        src={'/images/home/logo-txt.png'}
+        alt={'点众阅读'}
       />
-      <span>点众阅读</span>
     </Link>
+
     <div className={styles.navBox}>
       { MenuData.map(val => {
         if (val.id === "browse") {
           return (
             <div className={styles.browseBox} key={val.id}>
-              <Link href={val.link} className={(router.asPath === val.link || router.asPath.includes(val.id)) ? styles.navItemActive : styles.navItem}>
-                <div className={styles.navItemLabel}>{val.label}</div>
+              <Link
+                href={val.link}
+                className={classNames(
+                  styles.navItem,
+                  (router.asPath === val.link || router.asPath.includes(val.id)) && styles.active)
+                }>
+                {val.label}
               </Link>
               <div className={styles.browsePop}>
                 {rankingTypeList.map(item => {
@@ -94,8 +100,14 @@ const PcNav: FC<IProps> = () => {
           )
         }
 
-        return <Link key={val.id} href={val.link} className={(router.asPath === val.link || router.asPath.includes(val.id)) ? styles.navItemActive : styles.navItem}>
-          <div className={styles.navItemLabel}>{val.label}</div>
+        return <Link
+          key={val.id}
+          href={val.link}
+          className={classNames(
+            styles.navItem,
+            (router.asPath === val.link || router.asPath.includes(val.id)) && styles.active)
+          }>
+          {val.label}
         </Link>
       }) }
     </div>

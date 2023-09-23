@@ -1,5 +1,4 @@
-import React, { FC, useEffect, useRef, useState } from 'react'
-import styles from '@/components/Reader/index.module.scss'
+import React, { FC, useEffect, useRef, useState } from 'react';
 import { INetChapterDetailRes } from "typings/book.interface";
 import HeaderBack from "@/components/Reader/headerBack/HeaderBack";
 import Control from "@/components/Reader/control/Control";
@@ -12,6 +11,8 @@ import { EDevice } from "@/store/store.interfaces";
 import { IBookItem } from "@/typings/home.interface";
 import { useAppContext } from "@/components/layout";
 import { PullStatus } from "antd-mobile/es/components/pull-to-refresh";
+import { debounce } from "throttle-debounce";
+import styles from '@/components/Reader/index.module.scss';
 // import { useLockFn } from "ahooks";
 
 interface IProps {
@@ -56,23 +57,23 @@ const Reader: FC<IProps> = ({ bookId, chapterContent, chapterInfo, bookInfo, con
   }, [chapterContent]); // eslint-disable-line
 
   // 拖拽竖屏阅读 Add lock to an async function to prevent parallel executions.
-  // const handleScrollMove = useLockFn(async () => {
-  //   // ?设置屏幕卷曲值scrollTop
-  //   const winHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-  //   let top = (contentRef.current as HTMLDivElement)?.getBoundingClientRect().top || 0;
-  //   let height = contentRef.current?.clientHeight || 0;
-  //
-  //   if (height + top - winHeight < 10) {
-  //     if (!chapterInfo?.nextChapter) {
-  //       Toast.show('已经是最后一章')
-  //       return
-  //     }
-  //     if (chapterInfo?.isCharge) return;
-  //     setIsLoading(true)
-  //     await router.replace({ pathname: `/chapter/${bookInfo.bookId}/${chapterInfo.nextChapter.id}` }, undefined, { scroll: true });
-  //     setIsLoading(false)
-  //   }
-  // })
+  const handleScrollMove = debounce(500, async () => {
+    // ?设置屏幕卷曲值scrollTop
+    const winHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+    let top = (contentRef.current as HTMLDivElement)?.getBoundingClientRect().top || 0;
+    let height = contentRef.current?.clientHeight || 0;
+
+    if (height + top - winHeight < 10) {
+      if (!chapterInfo?.nextChapter) {
+        Toast.show('已经是最后一章')
+        return
+      }
+      if (chapterInfo?.isCharge) return;
+      setIsLoading(true)
+      await router.replace({ pathname: `/chapter/${bookInfo.bookId}/${chapterInfo.nextChapter.id}` }, undefined, { scroll: true });
+      setIsLoading(false)
+    }
+  })
 
   const preChapter = async () => {
     if (!chapterInfo.preChapter) {
@@ -102,7 +103,7 @@ const Reader: FC<IProps> = ({ bookId, chapterContent, chapterInfo, bookInfo, con
     <HeaderBack visible={controlVisible} bookId={bookId || ''} bookName={bookInfo?.bookName || ''}/>
 
     <div
-      // onTouchMove={handleScrollMove}
+      onTouchMove={handleScrollMove}
       className={styles.readerWrap}
       ref={contentRef}>
       { isLoading && <div className={styles.readerLoading}>
@@ -125,8 +126,8 @@ const Reader: FC<IProps> = ({ bookId, chapterContent, chapterInfo, bookInfo, con
             onClick={() => setControlVisible(!controlVisible)}
             className={styles.content}>
             {/*{chapterContent}*/}
-            { contentList.map(val => {
-              return val ? <p>{val}</p> : null;
+            { contentList.map((val, index) => {
+              return val ? <p key={index}>{val}</p> : null;
             }) }
           </div>
         </div>

@@ -10,7 +10,7 @@ import Breadcrumb from "@/components/common/breadcrumb";
 
 interface IProps {
   bookList: ITagBookItem[];
-  relationKeywords: IKeywordItem[];
+  keywordList: IKeywordItem[];
   isPc: boolean;
   currentPage: number;
   pages: number;
@@ -19,7 +19,7 @@ interface IProps {
 }
 
 const ConvergencePage: NextPage<IProps> = (
-  { isPc, currentPage, pages = 0, keywordId, keyword, bookList, relationKeywords = [] }) => {
+  { isPc, currentPage, pages = 0, keywordId, keyword, bookList, keywordList = [] }) => {
   const data = [
     { title: '首页', link: "/home" },
     { title: '关键词', link: "/keywords" },
@@ -29,14 +29,14 @@ const ConvergencePage: NextPage<IProps> = (
     <Breadcrumb data={data}/>
     {isPc ?
       <PcTag
-        relationKeywords={relationKeywords}
+        relationKeywords={keywordList}
         pageNo={currentPage}
         totalPage={pages}
         keywordId={keywordId}
         keyword={keyword}
         bookList={bookList}/> :
       <MTag
-        relationKeywords={relationKeywords}
+        relationKeywords={keywordList}
         pageNo={currentPage}
         totalPage={pages}
         keywordId={keywordId}
@@ -52,7 +52,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, query, local
   const { page = '1', keywordId } = query as { page: string; keywordId: string; };
   const response = await netKeywordTag({
     id: keywordId,
-    pageNum: Number(page),
+    pageNo: Number(page),
     pageSize: 30,
   })
 
@@ -62,21 +62,19 @@ export const getServerSideProps: GetServerSideProps = async ({ req, query, local
   if (response === 'BadRequest_500') {
     return { redirect: { destination: '/500', permanent: false } }
   }
-  const { books = [], relationKeywords = [], keyword = '', pages = 0, currentPage = 1, keyStatus } = response;
+  const { bookList, keywordList = [], keyword, } = response;
 
-  if (keyStatus === 0) {
-    return { notFound: true }
-  }
+  const { pageNo = 1, totalPage = 0, data = [] } = bookList
 
   return {
     props: {
-      bookList: books,
-      relationKeywords,
+      bookList: data,
+      keywordList,
       isPc: ownOs(ua).isPc,
-      currentPage,
-      pages,
+      currentPage: pageNo,
+      pages: totalPage,
       keywordId,
-      keyword: keyword.trim(),
+      keyword: (keyword.keyword || "").trim(),
     }
   }
 }

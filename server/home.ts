@@ -1,5 +1,5 @@
 import Service from "@/server/request";
-import { ELanguage, INetHomeItem } from "@/typings/home.interface";
+import { ELanguage, IBookItem, INetHomeItem } from "@/typings/home.interface";
 import { INetMoreReq, INetMoreResult } from "@/typings/more.interface";
 import {
   INetBookRes, INetChapterDetailRes,
@@ -69,31 +69,15 @@ export const netDetailChapter = async (bookId: string, chapterId?: string): Prom
 
 // 关键词列表
 export const netKeywords = async (params: INetKeywordsReq): Promise<INetKeywordsRes | 'BadRequest_404' | 'BadRequest_500'> => {
-  return await Service.post('/webfic/keyword/list', { pageSize: 10, ...params }, {
-    baseURL: "https://yfbwww.webfic.com",
-    headers: {
-      "pline": "WEBFIC"
-    } as any
-  })
+  return await Service.get('/keywordlist.do', { params: { pageSize: 10, ...params } })
 }
 
 // 关键词聚合页
 export const netKeywordTag = async (params: INetKeywordTagReq): Promise<INetKeywordTagRes | 'BadRequest_404' | 'BadRequest_500'> => {
-  return await Service.post('/webfic/keyword/info', { pageSize: 10, ...params }, {
-    baseURL: "https://yfbwww.webfic.com",
-    headers: {
-      "pline": "WEBFIC"
-    } as any
-  })
+  return await Service.get('/keywordinfo.do', { params: { pageSize: 10, ...params } })
 }
 
 // 搜索接口
-export const netSearch = async (params: INetSearchReq, language?: ELanguage): Promise<INetSearchRes | 'BadRequest_404' | 'BadRequest_500'> => {
-  return await Service.post('/webfic/book/search', { pageNo: 1, pageSize: 30, ...params }, {
-    baseURL: "https://yfbwww.webfic.com",
-    headers: {
-      language: ELanguage.English,
-      "pline": "WEBFIC"
-    } as any
-  })
+export const netSearch = async (keyWord: string): Promise<IBookItem[] | 'BadRequest_404' | 'BadRequest_500'> => {
+  return await Service.get('/search.do', { params: { keyWord } })
 }

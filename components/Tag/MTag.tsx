@@ -3,8 +3,8 @@ import styles from "@/components/Tag/MTag.module.scss";
 import Link from "next/link";
 import MTagBookList from "@/components/Tag/tagBookList/MTagBookList";
 import { IKeywordItem, ITagBookItem } from "@/typings/tag.interface";
-import MorePagination from "@/components/more/pagination/MorePagination";
-import Image from "next/image";
+import MorePagination from "@/components/recommend/pagination/MorePagination";
+import NavBar from "@/components/common/navBar/NavBar";
 
 interface IProps {
   relationKeywords: IKeywordItem[];
@@ -16,19 +16,10 @@ interface IProps {
 }
 
 const MTag: FC<IProps> = ({ pageNo, totalPage, keywordId, bookList, keyword, relationKeywords }) => {
-  return <div className={styles.tagWrap}>
-    <div className={styles.moreBox}>
-      <Link href="/" className={styles.moreBack}>
-        <Image
-          className={styles.backIcon}
-          width={48}
-          height={48}
-          src={'/images/common/search/backIcon.png'}
-          alt={''}
-        />
-      </Link>
-      <h1 className={styles.moreBoxTitle}>{keyword}</h1>
-    </div>
+  return <main className={styles.tagWrap}>
+
+    <NavBar backHref={'/'} title={keyword} />
+
     <div className={styles.keywordBox}>
       <h1 className={styles.title}>{keyword}</h1>
       <p className={styles.sub}>
@@ -41,8 +32,8 @@ const MTag: FC<IProps> = ({ pageNo, totalPage, keywordId, bookList, keyword, rel
         {relationKeywords.length > 0 ? <>
           <p className={styles.keywordConnectTitle}>相关热门搜索词：</p>
           {relationKeywords.map(val => {
-            return <Link key={val.id} href={`/tag/${val.id}`} replace>
-              <a className={styles.keywordConnectItem}>{val.name}</a>
+            return <Link key={val.id} href={`/tag/${val.id}`} className={styles.keywordConnectItem} replace>
+              {val.keyword}
             </Link>
           })}
         </> : null}
@@ -54,7 +45,7 @@ const MTag: FC<IProps> = ({ pageNo, totalPage, keywordId, bookList, keyword, rel
       page={pageNo}
       totalPage={totalPage}
     /> : null}
-  </div>
+  </main>
 }
 
 export default MTag

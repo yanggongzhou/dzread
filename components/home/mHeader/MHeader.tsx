@@ -41,7 +41,7 @@ const MHeader: FC<IProps> = () => {
         })}
       </div>
 
-      <Link href={'/search'} className={styles.searchBox}>
+      <Link href={'/so'} className={styles.searchBox}>
         <Image
           className={styles.searchIcon}
           width={48}

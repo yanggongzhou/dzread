@@ -40,9 +40,6 @@ const PcRanking: FC<IProps> = ({ bookList = [], pageNo, pages, typeTwoId, types 
       {pages && pages > 1 ?
         <PaginationCom
           path={`/browse/${typeTwoId}/`}
-          onJumpChange={(page) => {
-            router.push(`/browse/${typeTwoId}/${page}`)
-          }}
           pageNo={pageNo}
           totalPage={pages}
           isScroll={true}/> : null}

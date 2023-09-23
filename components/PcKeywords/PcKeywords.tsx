@@ -26,7 +26,7 @@ const PcKeywords: FC<IProps> = ({ pageNo, totalPage, keywordList }) => {
       <div className={styles.keywordBox}>
       {keywordList.map(val => {
         return <Link key={val.id} href={`/tag/${val.id}`} className={styles.keywordItem}>
-          {val.name}
+          {val.keyword}
         </Link>
       })}
     </div>}
@@ -35,9 +35,6 @@ const PcKeywords: FC<IProps> = ({ pageNo, totalPage, keywordList }) => {
       pageNo={pageNo}
       totalPage={totalPage}
       isScroll={true}
-      onJumpChange={(page) => {
-        router.push(`/keywords/${page}`)
-      }}
     /> : null}
   </div>
 }

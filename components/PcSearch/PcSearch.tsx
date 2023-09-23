@@ -27,14 +27,12 @@ const PcSearch: FC<IProps> = (
 
     {pages && pages > 1 ?
       <PaginationCom
-        path={`/search/`}
+        path={`/so/`}
         query={`?searchValue=${sValue}`}
         pageNo={current}
         totalPage={pages}
         isScroll={true}
-        onJumpChange={(page) => {
-          router.push(`/search/${page}`)
-        }}/> : null}
+      /> : null}
 
     { isEmpty && <PcEmpty/>}
   </div>

@@ -2,38 +2,43 @@ import { IBookItem } from "@/typings/home.interface";
 import { ESearchType } from "@/typings/sitemap.interface";
 
 export interface INetKeywordsReq {
-  searchType: ESearchType;
+  type?: ESearchType;
   pageNum: number;
   pageSize?: number;
 }
 
 export interface IKeywordItem {
   id: string;
-  name: string;
+  keyword: string;
   utime: string;
 }
 
 export interface INetKeywordsRes {
   data: IKeywordItem[];
-  currentPage: number;
-  total: number;
-  pages: number;
+  pageNo: number;
+  limit: number;
+  totalNum: number;
+  totalPage: number;
 }
 
 export interface INetKeywordTagReq {
   id: string;
-  pageNum: number;
+  pageNo: number;
   pageSize?: number;
 }
 
+export interface ITagBookList {
+  data: ITagBookItem[];
+  pageNo: number;
+  limit: string;
+  totalNum: number;
+  totalPage: number;
+}
+
 export interface INetKeywordTagRes {
-  books: IBookItem[];
-  currentPage: number;
-  pages: number;
-  total: number;
-  relationKeywords: IKeywordItem[];
-  keyword: string;
-  keyStatus: 0 | 1;
+  bookList: ITagBookList;
+  keywordList: IKeywordItem[];
+  keyword: IKeywordItem;
 }
 
 export interface ITagBookItem extends IBookItem {

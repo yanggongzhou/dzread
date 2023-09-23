@@ -11,7 +11,7 @@ interface IProps {
 const RecommendList: FC<IProps> = ({ list }) => {
   return <div className={styles.recommendBox}>
     {list.map(item => {
-      return <div className={styles.recommendItem}>
+      return <div key={item.bookId} className={styles.recommendItem}>
         <Link href={`/book/${item.bookId}`} className={styles.imgBox}>
           <Image
             className={styles.img}

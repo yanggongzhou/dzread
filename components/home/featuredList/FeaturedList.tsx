@@ -13,7 +13,7 @@ const FeaturedList: FC<IProps> = ({ list }) => {
   return <div className={styles.featuredContainer}>
     <div className={styles.featuredBox}>
       {list.map(item => {
-        return <div className={styles.featuredItem}>
+        return <div key={item.bookId} className={styles.featuredItem}>
           <ImageCover
             href={`/book/${item.bookId}`}
             className={styles.itemImg}

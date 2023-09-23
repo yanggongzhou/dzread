@@ -32,7 +32,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, query }): Pr
   const res = await netKeywords({
     pageNum: Number(page),
     pageSize: 300,
-    searchType: ESearchType.ALL
+    type: ESearchType.ALL
   })
 
   if (res === 'BadRequest_500') {
@@ -42,13 +42,14 @@ export const getServerSideProps: GetServerSideProps = async ({ req, query }): Pr
     return { notFound: true }
   }
 
-  const { data = [], currentPage = 1, pages = 1 } = res;
+  const { data = [], pageNo = 1, totalPage = 1 } = res;
+
   return {
     props: {
       keywordList: data,
       isPc: ownOs(ua).isPc,
-      currentPage,
-      totalPage: pages,
+      currentPage: pageNo,
+      totalPage,
     }
   }
 }
