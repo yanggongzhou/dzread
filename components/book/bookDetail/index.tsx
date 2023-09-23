@@ -46,11 +46,23 @@ const BookDetail: FC<IProps> = ({ bookInfo }) => {
         className={styles.introEllipsis}
         direction='end'
         expandText={<div className={styles.expandText}>
-          ww
+          <Image
+            className={styles.expandIcon}
+            width={24}
+            height={24}
+            src={'/images/browse/extend.png'}
+            alt={''}
+          />
         </div>}
         collapseText={
           <div className={styles.collapseText}>
-            收起
+            <Image
+              className={styles.collapseIcon}
+              width={24}
+              height={24}
+              src={'/images/browse/extend.png'}
+              alt={''}
+            />
           </div>
         }
         content={bookInfo.introduction} />

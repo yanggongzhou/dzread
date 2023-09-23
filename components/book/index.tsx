@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import Link from "next/link";
 import { IBookItem } from "@/typings/home.interface";
 import NavBar from "@/components/common/navBar/NavBar";
@@ -9,6 +9,7 @@ import BrowseList from "@/components/home/browseList";
 import styles from "@/components/book/index.module.scss";
 import FirstChapter from "@/components/book/firstChapter/FirstChapter";
 import CatalogBox from "@/components/book/catalogBox";
+import Image from "next/image";
 
 interface IProps {
   bookInfo: IBookItem;
@@ -97,8 +98,25 @@ const MBook: FC<IProps> = ({ bookInfo }) => {
     }
   ]
 
-  return <div className={styles.bookWrap}>
-    <NavBar backHref={'/'} />
+  const [isShowTitle, setIsShowTitle] = useState(false);
+  const onScroll = (e: Event) => {
+    if (window.scrollY > 37) {
+      setIsShowTitle(true);
+    }
+    if (window.scrollY <= 37) {
+      setIsShowTitle(false);
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+    }
+  }, []);
+
+  return <main className={styles.bookWrap}>
+    <NavBar backHref={'/'} title={isShowTitle ? bookInfo.bookName : ''}/>
 
     <BookDetail bookInfo={bookInfo}/>
 
@@ -120,12 +138,21 @@ const MBook: FC<IProps> = ({ bookInfo }) => {
       <div className={styles.columnHead}>
         <h3 className={styles.columnTitle}>{'男生精选'}</h3>
         <button className={styles.columnLink}>
-          <span>换一换  <i> > </i></span>
+          <span>换一换</span>
+          <Image
+            className={styles.linkIcon}
+            width={24}
+            height={24}
+            src={'/images/book/refresh.png'}
+            alt={''}
+          />
         </button>
       </div>
+
+
       <BrowseList list={recommendData}/>
     </div>
-  </div>
+  </main>
 }
 
 export default MBook;

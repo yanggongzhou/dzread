@@ -36,7 +36,7 @@ const FirstChapter: FC<IProps> = ({ bookInfo }) => {
         className={styles.icon}
         width={24}
         height={24}
-        src={'/images/common/search/backIcon.png'}
+        src={'/images/book/more.png'}
         alt={''}
       />
     </Link>

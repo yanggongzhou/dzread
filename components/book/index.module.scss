@@ -1,4 +1,6 @@
 .bookWrap {
+  padding-top: 0.96rem;
+  min-height: 100vh;
 
   .navMenu {
     background-color: #FFFFFF;
@@ -59,17 +61,21 @@
       }
 
       .columnLink {
-        -webkit-box-align: center;
-        -ms-flex-align: center;
         align-items: center;
-        border: 1px solid #b2b2b2;
-        border-radius: 0.2rem;
-        color: #666;
-        display: -webkit-box;
-        display: -ms-flexbox;
+        border: 0.01rem solid #CECECE;
+        border-radius: 0.22rem;
         display: flex;
-        font-size: .2rem;
-        padding: 0.06rem 0.08rem 0.06rem 0.16rem;
+        flex-direction: row;
+        column-gap: 0.16rem;
+        font-size: .24rem;
+        padding: 0.08rem 0.21rem;
+        font-weight: 400;
+        color: #727272;
+
+        .linkIcon {
+          width: 0.24rem;
+          height: 0.24rem;
+        }
       }
     }
   }
