@@ -33,7 +33,6 @@ const MRankings: FC<IProps> = ({ bookList = [], pageNo, pages, typeTwoId, types 
 
   const [activeKey, setActiveKey] = useState('key1')
 
-
   const [isFooter, setIsFooter] = useState(false);
   const intersectionRef = useRef<Element | null>(null);
   useEffect(() => {
@@ -53,13 +52,14 @@ const MRankings: FC<IProps> = ({ bookList = [], pageNo, pages, typeTwoId, types 
     };
   }, []);
 
-  return (<div className={styles.rankWrap}>
+  return (<main className={styles.rankWrap}>
     <NavBar backHref={'/'} title={"男生小说排行榜"}/>
 
     <div className={styles.slideBox}>
       <SideBar style={{
-        '--width': "1.42rem",
-        '--item-border-radius': "0.02rem",
+        '--width': '1.42rem',
+        '--item-border-radius': '0.02rem',
+        '--background-color': '#F3F3F3'
       }} activeKey={activeKey} onChange={setActiveKey}>
         {types.map(item => (
           <SideBar.Item key={item.id} title={item.name} />
@@ -89,7 +89,7 @@ const MRankings: FC<IProps> = ({ bookList = [], pageNo, pages, typeTwoId, types 
       <RankDownloadBanner isFooter={isFooter} />
 
     </div>
-  </div>)
+  </main>)
 }
 
 export default MRankings;

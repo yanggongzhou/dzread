@@ -10,8 +10,9 @@ interface IProps {
 
 const RankList: FC<IProps> = ({ dataSource }) => {
   return <div className={styles.rankListBox}>
-    {dataSource.map(item => {
+    {dataSource.map((item, itemInd) => {
       return <div key={item.bookId} className={styles.rankItem}>
+        <Link className={styles.rankIndex} href={`/book/${item.bookId}`}>{itemInd + 1}</Link>
         <ImageCover
           href={`/book/${item.bookId}`}
           className={styles.itemImg}
@@ -21,8 +22,10 @@ const RankList: FC<IProps> = ({ dataSource }) => {
           alt={item.bookName}
         />
         <div className={styles.itemContent}>
-          <h4><Link className={styles.bookName} href={`/book/${item.bookId}`}>{item.bookName}</Link></h4>
-          {item.author ? <Link href={`/book/${item.bookId}`} className={styles.bookAuthor}>{item.author}{` · ${item.typeTwoName}`}</Link> : null}
+          <div>
+            <h4><Link className={styles.bookName} href={`/book/${item.bookId}`}>{item.bookName}</Link></h4>
+            {item.author ? <Link href={`/book/${item.bookId}`} className={styles.bookAuthor}>{item.author}{' · ' + item.typeTwoNames.join(' · ')}</Link> : null}
+          </div>
           <Link href={`/book/${item.bookId}`} className={styles.bookType}>{`164万热度值`}</Link>
         </div>
       </div>

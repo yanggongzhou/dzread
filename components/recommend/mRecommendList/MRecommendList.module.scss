@@ -1,86 +1,73 @@
 .recommendBox {
   display: flex;
   flex-direction: column;
-  row-gap: 0.24rem;
-  padding: 0;
+  row-gap: 0.4rem;
 
   .recommendItem {
-    border-radius: 0.08rem;
-    overflow: hidden;
     position: relative;
-    //width: 100%;
     display: flex;
     align-items: center;
     flex-direction: row;
-    padding-right: 0.24rem;
+    column-gap: 0.24rem;
+
+    .bookRate {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 1;
+      font-size: .26rem;
+      font-weight: 600;
+      color: #F67C00;
+    }
 
     .itemImg {
-      border: 1px solid rgba(0,0,0,.08);
       border-radius: 0.08rem;
-      height: 1.7rem;
-      margin-right: 0.24rem;
-      overflow: hidden;
-      width: 1.28rem;
+      height: 1.94rem;
+      width: 1.46rem;
       flex-shrink: 0;
+      overflow: hidden;
     }
 
     .itemContent {
+      height: 1.94rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
       .bookName {
+        display: block;
+        width: 4.19rem;
         font-size: .32rem;
-        font-weight: 700;
-        line-height: 1.2;
+        font-weight: 600;
+        line-height: 0.4rem;
+        color: #222222;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
       }
 
       .bookIntro {
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
-        color: #6a6b6c;
-        display: -webkit-box;
-        font-size: .24rem;
+        font-size: .26rem;
         line-height: .32rem;
-        margin-bottom: 0.2rem;
-        margin-top: 0.12rem;
+        margin-top: 0.1rem;
         overflow: hidden;
         text-overflow: ellipsis;
-        word-break: break-all;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        word-wrap: break-word;
+        font-weight: 400;
+        color: #666666;
       }
 
-      .contentFooter {
-        display: flex;
-        height: 0.32rem;
-
-        .bookAuthor {
-          font-size: .24rem;
-          line-height: 1.2;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-        }
-
-        .bookType {
-          font-size: .24rem;
-          line-height: 1.2;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-          padding-left: 0.24rem;
-          position: relative;
-
-          &:before {
-            content: "";
-            position: absolute;
-            left: 0.12rem;
-            top: 0.02rem;
-            background: #059fff;
-            border-radius: 0.06rem;
-            bottom: 0;
-            height: 0.24rem;
-            width: 0.02rem;
-          }
-        }
+      .bookAuthor {
+        font-size: .26rem;
+        font-weight: 400;
+        color: #9C9C9C;
+        line-height: 0.32rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
     }
   }

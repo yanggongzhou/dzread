@@ -3,9 +3,9 @@ import { EnumPosition, IBookItem } from "@/typings/home.interface";
 import { MEmpty } from "@/components/common/empty";
 import MorePagination from "@/components/recommend/pagination/MorePagination";
 import MRecommendList from "@/components/recommend/mRecommendList/MRecommendList";
-import styles from '@/components/recommend/index.module.scss';
 import NavBar from "@/components/common/navBar/NavBar";
 import DownloadBanner from "@/components/common/downloadBanner/DownloadBanner";
+import styles from '@/components/recommend/index.module.scss';
 
 interface IProps {
   bookList: IBookItem[];
@@ -16,9 +16,9 @@ interface IProps {
 
 const MRecommend: FC<IProps> = ({ bookList = [], totalPage, pageNo, position }) => {
 
-  return <div className={styles.moreWrap}>
+  return <main className={styles.moreWrap}>
     <NavBar backHref={'/'} title={"男频精选"}/>
-    <DownloadBanner height={10}>
+    <DownloadBanner height={'0.1rem'}>
       {bookList.length > 0 ?
         <>
           <MRecommendList list={bookList}/>
@@ -29,7 +29,7 @@ const MRecommend: FC<IProps> = ({ bookList = [], totalPage, pageNo, position }) 
           /> : null}
         </> : <MEmpty/> }
     </DownloadBanner>
-  </div>
+  </main>
 }
 
 export default MRecommend;

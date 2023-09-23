@@ -7,27 +7,57 @@
     border-radius: 0.08rem;
     overflow: hidden;
     position: relative;
-    //width: 100%;
     display: flex;
     align-items: center;
     flex-direction: row;
-    padding-right: 0.24rem;
+    column-gap: 0.24rem;
+
+    .rankIndex {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      width: 0.32rem;
+      height: 0.32rem;
+      background-color: rgba(0, 0, 0, 0.7);
+      border-radius: 0.08rem 0 0.08rem 0;
+      font-size: 0.24rem;
+      font-weight: 400;
+      color: #FFFFFF;
+      line-height: 0.32rem;
+      text-align: center;
+    }
+
+    &:first-child .rankIndex {
+      background-color: #FF472A;
+    }
+
+    &:nth-child(2) .rankIndex {
+      background-color: #FF7700;
+    }
+
+    &:nth-child(3) .rankIndex {
+      background-color: #FF9A00;
+    }
 
     .itemImg {
+      overflow: hidden;
       border-radius: 0.07rem;
       height: 1.18rem;
-      margin-right: 0.24rem;
-      overflow: hidden;
       width: 0.9rem;
       flex-shrink: 0;
     }
 
     .itemContent {
-      h4 {
-        max-width: 4.3rem;
-      }
+      flex: 1;
+      height: 1.18rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
       .bookName {
-        display: inline-block;
+        width: 4.3rem;
+        display: block;
         color: #222222;
         font-size: .3rem;
         font-weight: 500;
@@ -37,21 +67,9 @@
         white-space: nowrap;
       }
 
-      .bookIntro {
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
-        color: #6a6b6c;
-        display: -webkit-box;
-        font-size: .24rem;
-        line-height: .32rem;
-        margin-bottom: 0.2rem;
-        margin-top: 0.12rem;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        word-break: break-all;
-      }
-
       .bookAuthor {
+        margin-top: 0.08rem;
+        width: 4.3rem;
         display: block;
         font-size: .26rem;
         line-height: 0.32rem;

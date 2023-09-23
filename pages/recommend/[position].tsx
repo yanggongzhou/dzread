@@ -1,9 +1,8 @@
 import React, { useEffect } from "react";
 import { GetServerSideProps, GetServerSidePropsResult, NextPage } from "next";
 import { netMoreBook } from "@/server/home";
-import { ColumnNameRouteReversion, EHomeName, EnumPosition, IBookItem, INetHomeItem } from "@/typings/home.interface";
+import { EnumPosition, IBookItem } from "@/typings/home.interface";
 import { ownOs } from "@/utils/ownOs";
-// import MMore from "@/components/more";
 import PcRecommend from "@/components/pcRecommend";
 import Breadcrumb from "@/components/common/breadcrumb";
 import MRecommend from "@/components/recommend";

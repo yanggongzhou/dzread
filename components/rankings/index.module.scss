@@ -1,5 +1,6 @@
 .rankWrap {
-  max-height: calc(100vh - 0.88rem);
+  padding-top: 0.96rem;
+  max-height: 100vh;
   display: flex;
   overflow: hidden;
 
@@ -55,9 +56,13 @@
           display: flex;
           align-items: center;
           justify-content: center;
+          font-size: 0.22rem;
+          font-weight: 400;
+          color: #9C9C9C;
         }
 
         .active {
+          color: #222222;
           background-color: #FFFFFF;
         }
       }

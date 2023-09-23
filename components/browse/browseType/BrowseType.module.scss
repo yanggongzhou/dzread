@@ -12,17 +12,21 @@
   left: 0;
   z-index: 1;
   background-color: #FFFFFF;
-
   width: 100%;
   height: 0.72rem;
   text-align: center;
-  color: #333333;
   box-shadow: 0 0 0.06rem 0 #ededed;
+  font-size: 0.26rem;
+  font-weight: 400;
+  color: #7A7B7F;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 0.16rem;
 
   .titleIcon {
-    background-color: red;
-    width: 0.4rem;
-    height: 0.4rem;
+    width: 0.24rem;
+    height: 0.24rem;
   }
 }
 
@@ -45,12 +49,15 @@
 
     .moreIcon {
       position: absolute !important;
-      bottom: 0.1rem;
-      right: 0rem;
+      bottom: 0;
+      right: 0.12rem;
       z-index: 1111;
-      background-color: red;
-      width: 0.4rem;
-      height: 0.4rem;
+      padding: 0.12rem;
+      width: 0.48rem;
+      height: 0.48rem;
+    }
+    .moreIconActive {
+      transform: rotateX(180deg);
     }
 
     .tabContent, .tabContentMore {

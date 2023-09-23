@@ -10,17 +10,14 @@ interface IProps {
 
 const NavBar: FC<IProps> = ({ title = '', backHref }) => {
 
-  const back = () => {
-
-  }
   return <header className={styles.navBarBox}>
     <Link href={backHref} className={styles.backBox}>
       <Image
         className={styles.backIcon}
         width={48}
         height={48}
-        src={'/images/search/backIcon.png'}
-        alt={''}
+        src={'/images/common/back.png'}
+        alt={'<'}
       />
     </Link>
     <h1>{title}</h1>

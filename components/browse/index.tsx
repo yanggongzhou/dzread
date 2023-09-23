@@ -1,16 +1,16 @@
 import React, { FC, useEffect, useRef, useState } from "react";
-import styles from "@/components/browse/index.module.scss";
 import { IBookItem } from "@/typings/home.interface";
 import { IBrowseTypes } from "@/typings/browse.interface";
 import { useRouter } from "next/router";
 import { MEmpty } from "@/components/common/empty";
-import MFirstList from "@/components/home/firstList/FirstList";
 import MorePagination from "@/components/recommend/pagination/MorePagination";
 import NavBar from "@/components/common/navBar/NavBar";
 import BrowseType from "@/components/browse/browseType/BrowseType";
 import DownloadBanner from "@/components/common/downloadBanner/DownloadBanner";
 import { setIsShowBrowse } from "@/store/modules/app.module";
 import { useAppDispatch } from "@/store";
+import MRecommendList from "@/components/recommend/mRecommendList/MRecommendList";
+import styles from "@/components/browse/index.module.scss";
 
 interface IProps {
   bookList: IBookItem[];
@@ -49,22 +49,23 @@ const MBrowse: FC<IProps> = ({ bookList = [], pageNo, pages, typeTwoId, types })
     }
   }, []);
 
-  return (<div className={styles.browseWrap}>
+  return (<main className={styles.browseWrap}>
+
     <NavBar backHref={'/'} title={"男生小说分类"}/>
+
     <BrowseType isShowBox={isShowBox} typeTwoId={typeTwoId} types={types}/>
-    <DownloadBanner height={10}>
-      {bookList.length > 0 ? <div className={styles.browseContent}>
-        <div className={styles.browseContent2} ref={browseRef}>
-          <MFirstList dataSource={bookList} />
-          {pages && pages > 1 ? <MorePagination
-            prevPath={`/browse/${typeTwoId}/`}
-            page={pageNo}
-            totalPage={pages}
-          /> : null}
-        </div>
+
+    <DownloadBanner height={'0.1rem'}>
+      {bookList.length > 0 ? <div className={styles.browseContent} ref={browseRef}>
+        <MRecommendList list={bookList} />
+        {pages && pages > 1 ? <MorePagination
+          prevPath={`/browse/${typeTwoId}/`}
+          page={pageNo}
+          totalPage={pages}
+        /> : null}
       </div> : <MEmpty />}
     </DownloadBanner>
-  </div>)
+  </main>)
 }
 
 export default MBrowse;
