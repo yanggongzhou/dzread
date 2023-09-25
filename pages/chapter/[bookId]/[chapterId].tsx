@@ -34,7 +34,7 @@ const Chapter: NextPage<IProps> = ({ isPc, bookId, chapterContent, bookInfo, cha
     { title: chapterInfo.chapterName },
   ]
   return <>
-    <Breadcrumb data={data} style={isPc ? {} : { width: 0, height: 0, display: "none" }} />
+    <Breadcrumb data={data} style={{ width: 0, height: 0, display: "none" }} />
     {isPc ?
       <PcReader
         chapterContent={chapterContent}

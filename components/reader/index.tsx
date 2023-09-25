@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
 import { INetChapterDetailRes } from "typings/book.interface";
-import HeaderBack from "@/components/reader/headerBack/HeaderBack";
+import ReadHeader from "@/components/reader/readHeader/ReadHeader";
 import Control from "@/components/reader/control/Control";
 import ChapterUnlock from "@/components/reader/chapterUnlock/ChapterUnlock";
 import { DotLoading, PullToRefresh, Toast } from "antd-mobile";
@@ -11,6 +11,9 @@ import { IBookItem } from "@/typings/home.interface";
 import { PullStatus } from "antd-mobile/es/components/pull-to-refresh";
 import { debounce } from "throttle-debounce";
 import styles from '@/components/reader/index.module.scss';
+import Link from "next/link";
+import { onImgError } from "@/components/common/image/ImageCover";
+import Image from "next/image";
 
 interface IProps {
   bookId: string;
@@ -76,19 +79,38 @@ const Reader: FC<IProps> = ({ bookId, chapterContent, chapterInfo, bookInfo, con
     complete: '',
   }
 
-  return <div
-    className={styles.bookWrap}
+  return <main
+    className={styles.readerWrap}
     style={{ backgroundColor: theme }}>
 
-    <HeaderBack theme={theme} visible={controlVisible} bookId={bookId || ''} bookName={bookInfo?.bookName || ''}/>
+    <ReadHeader visible={controlVisible} bookId={bookId || ''} bookName={bookInfo?.bookName || ''}/>
+
+    <h2><Link href={`/book/${bookInfo.bookId}`} className={styles.headBox}>{ bookInfo.bookName }</Link></h2>
 
     <div
       onTouchMove={handleScrollMove}
-      className={styles.readerWrap}
+      className={styles.readerBox}
       ref={contentRef}>
       { isLoading && <div className={styles.readerLoading}>
         <DotLoading color='#FFFFFF'/>
       </div>}
+
+      <div className={styles.topGuide}>
+        <Image
+          onError={onImgError}
+          className={styles.topGuideImg}
+          width={128}
+          height={170}
+          src={bookInfo.cover}
+          placeholder="blur"
+          blurDataURL={bookInfo.cover || '/images/defaultBook.png'}
+          alt={bookInfo.bookName}
+        />
+        <div className={styles.topGuideInfo}>
+          <h4>上点众阅读APP，体验流畅阅读</h4>
+          <button className={styles.downloadBtn}>立即打开</button>
+        </div>
+      </div>
 
       <PullToRefresh
         renderText={(status) => <div>{statusRecord[status]}</div>}
@@ -123,7 +145,7 @@ const Reader: FC<IProps> = ({ bookId, chapterContent, chapterInfo, bookInfo, con
         /> : null
       }
     </div>
-  </div>
+  </main>
 }
 
 export default Reader
