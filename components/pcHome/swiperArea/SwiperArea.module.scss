@@ -1,75 +1,87 @@
-.swiperBox {
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-  border-radius: 0.08rem;
-}
-
-.content {
-  height: 100%;
-  padding: 0;
-  position: relative;
-}
-
-.contentMark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 9;
-  height: 100%;
-  width: 100%;
-}
-
-.contentImg {
-  width: 100%;
-  height: 100%;
-  border-radius: 0.08rem;
-  overflow: hidden;
-  position: relative;
-}
-
 .swiperWrap {
   margin: 0 auto;
   padding: 0.3rem 0;
   height: 4.6rem;
-  border-radius: 0.16rem;
   position: relative;
   background-color: transparent;
-  overflow: hidden;
 
   .markQrCode {
     position: absolute;
     right: 0.4rem;
     bottom: 0.4rem;
-    z-index: 1;
+    z-index: 10;
     width: 1.2rem !important;
     height: 1.2rem !important;
     padding: 0.04rem;
     border-radius: 0.03rem;
     background-color: #FFFFFF;
   }
+  .imgBlur {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    filter: blur(30px);
+    opacity: 0.8;
+  }
 }
 
-.indicatorBox {
-  position: absolute;
-  bottom: 20px;
-  z-index: 99;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  column-gap: 6px;
 
-  .indicatorIcon {
-    margin: 0 3px;
-    width: 25px;
+.swiperBox {
+  margin: 0 auto;
+  height: 100%;
+  width: 12rem;
+  overflow: hidden;
+  border-radius: 0.08rem;
+  position: relative;
+  z-index: 9;
+
+  .indicatorBox {
+    position: absolute;
+    bottom: 20px;
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    column-gap: 6px;
+
+    .indicatorIcon {
+      margin: 0 3px;
+      width: 25px;
+    }
+
+    .indicatorItem {
+      background-color: hsla(0,0%,100%,.7);
+      border-radius: 10px;
+      cursor: pointer;
+      height: 10px;
+      width: 10px;
+    }
   }
 
-  .indicatorItem {
-    background-color: hsla(0,0%,100%,.7);
-    border-radius: 10px;
-    cursor: pointer;
-    height: 10px;
-    width: 10px;
+  .content {
+    height: 100%;
+    padding: 0;
+    position: relative;
+
+    .contentMark {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 9;
+      height: 100%;
+      width: 100%;
+    }
+
+    .contentImg {
+      width: 100%;
+      height: 100%;
+      border-radius: 0.08rem;
+      overflow: hidden;
+      position: relative;
+    }
   }
 }

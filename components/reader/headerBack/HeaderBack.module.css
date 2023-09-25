@@ -3,26 +3,25 @@
   top: 0;
   left: 0;
   z-index: 999;
-  border-bottom: 0.01rem solid;
+  border-bottom: 0.01rem solid darkgray;
   padding: 0 0.32rem 0 0.2rem;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 0.88rem;
-  background-color: #F6F6F6;
+  background-color: #EEEAE3;
+  transition: top 0.3s;
 }
 .headerLeft {
   display: flex;
   align-items: center;
   font-size: 0.34rem;
+  color: #2F3031;
 }
-.backIcon, .backBlackIcon {
+.backIcon {
   width: 0.48rem;
   height: 0.48rem;
-}
-.backBlackIcon {
-  opacity: 0.6;
 }
 
 .headerLeft span{
@@ -40,4 +39,5 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   margin-left: 0.4rem;
+  color: #2F3031;
 }

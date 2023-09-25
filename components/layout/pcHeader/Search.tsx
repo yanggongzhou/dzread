@@ -29,7 +29,7 @@ const HeaderSearch: FC<IProps> = () => {
       className={styles.navRightIcon}
       width={16}
       height={16}
-      src={'/images/home/wf_search.png'}
+      src={'/images/home/search.png'}
       alt={""}
     />
     <input

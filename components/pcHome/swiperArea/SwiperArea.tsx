@@ -1,4 +1,4 @@
-import React, { FC, useRef } from 'react'
+import React, { FC, useRef, useState } from 'react'
 import styles from '@/components/pcHome/swiperArea/SwiperArea.module.scss'
 import { IBookItem } from "@/typings/home.interface";
 import Link from "next/link";
@@ -20,6 +20,7 @@ const SwiperArea: FC<IProps> = ({ bannerList = [] }) => {
   const onIndicator = (index: number) => {
     swiperRef.current?.swipeTo(index);
   }
+  const [swiperIndex, setSwiperIndex] = useState(0);
 
   return <div className={styles.swiperWrap}>
     <Swiper
@@ -29,11 +30,12 @@ const SwiperArea: FC<IProps> = ({ bannerList = [] }) => {
       autoplay
       loop
       style={{
-        '--height': '2.64rem',
+        '--height': '2.2rem',
         '--track-padding': '0 0 0',
       }}
-      indicator={(total, current) => (
-        <div className={styles.indicatorBox}>
+      indicator={(total, current) => {
+        setSwiperIndex(current);
+        return <div className={styles.indicatorBox}>
           { Array.from({ length: total }, (v,i) =>{
             if (current === i ) {
               return <Image
@@ -50,9 +52,8 @@ const SwiperArea: FC<IProps> = ({ bannerList = [] }) => {
               className={styles.indicatorItem}
               onClick={() => onIndicator(i)}/>
           })}
-        </div>
-      )}
-      >
+        </div>}}>
+
       {bannerList.map(ban => (
         <Swiper.Item key={ban.bookId} className={styles.content}>
           <div className={styles.contentMark} onClick={() => {
@@ -79,6 +80,17 @@ const SwiperArea: FC<IProps> = ({ bannerList = [] }) => {
       renderAs={"canvas"}
       className={styles.markQrCode}
       value="'https://gitcode.gitcode.host/docs-cn/video.js-docs-cn/docs/guides/components.html#resize-manager'"
+    />
+    <Image
+      src={bannerList[swiperIndex].cover}
+      className={styles.imgBlur}
+      onError={onImgError}
+      placeholder="blur"
+      blurDataURL={bannerList[swiperIndex].cover || '/images/defaultBook.png'}
+      priority
+      width={1300}
+      height={400}
+      alt={bannerList[swiperIndex].bookName}
     />
   </div>
 }

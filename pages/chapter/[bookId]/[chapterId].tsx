@@ -3,11 +3,11 @@ import type { NextPage } from 'next'
 import { GetServerSideProps, GetServerSidePropsResult } from "next";
 import { netDetailChapter } from "@/server/home";
 import { INetChapterDetailRes } from "@/typings/book.interface";
-import Reader from "@/components/Reader";
 import PcReader from "@/components/PcReader";
 import { ownOs } from "@/utils/ownOs";
 import { IBookItem } from "@/typings/home.interface";
 import Breadcrumb from "@/components/common/breadcrumb";
+import Reader from "@/components/reader";
 
 interface IProps {
   isPc: boolean;

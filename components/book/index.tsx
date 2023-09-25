@@ -123,12 +123,16 @@ const MBook: FC<IProps> = ({ bookInfo }) => {
     <nav className={styles.navMenu}>
       <Link
         className={classNames(styles.navItem, router.pathname === '/book/[bookId]' && styles.active)}
-        href={`/book/${bookInfo.bookId}`}>
+        href={`/book/${bookInfo.bookId}`}
+        scroll={false}
+      >
         书籍信息
       </Link>
       <Link
         className={classNames(styles.navItem, router.pathname === '/catalog/[bookId]' && styles.active)}
-        href={`/catalog/${bookInfo.bookId}`}>
+        href={`/catalog/${bookInfo.bookId}`}
+        scroll={false}
+      >
         目录
       </Link>
     </nav>
@@ -148,7 +152,6 @@ const MBook: FC<IProps> = ({ bookInfo }) => {
           />
         </button>
       </div>
-
 
       <BrowseList list={recommendData}/>
     </div>

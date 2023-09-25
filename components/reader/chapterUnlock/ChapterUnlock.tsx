@@ -1,6 +1,5 @@
 import React, { FC, useMemo } from "react";
-import styles from '@/components/Reader/chapterUnlock/ChapterUnlock.module.scss'
-import { EnumTabs } from "typings/reader.interface";
+import styles from '@/components/reader/chapterUnlock/ChapterUnlock.module.scss'
 import Link from "next/link";
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { INetChapterDetailRes } from "typings/book.interface";
@@ -15,12 +14,11 @@ import Image from "next/image";
 const androidLink = ClientConfig.android.link;
 
 interface IProps {
-  theme?: EnumTabs;
   chapterInfo: INetChapterDetailRes;
   bookInfo: IBookItem;
 }
 
-const ChapterUnlock: FC<IProps> = ({ theme, bookInfo, chapterInfo }) => {
+const ChapterUnlock: FC<IProps> = ({ bookInfo, chapterInfo }) => {
   const [appState] = useAppContext();
   const copyText = useAppSelector(state => state.hive.copyText);
   const clipboard = useAppSelector(state => state.hive.clipboard);
@@ -37,11 +35,7 @@ const ChapterUnlock: FC<IProps> = ({ theme, bookInfo, chapterInfo }) => {
   return <div
     style={{ background: `linear-gradient(180deg, transparent 0%, ${appState.background} 20%, ${appState.background})` }}
     className={styles.unlockWrap}>
-    <div
-      style={{
-        color: theme && theme === EnumTabs.夜間 ? 'rgba(255, 255, 255, 0.4)' : '#2F3031'
-      }}
-      className={styles.logoBox}>
+    <div className={styles.logoBox}>
       <Image
         className={styles.logoIcon}
         width={144}
@@ -54,12 +48,12 @@ const ChapterUnlock: FC<IProps> = ({ theme, bookInfo, chapterInfo }) => {
     </div>
     <Link rel={'nofollow'} href={isIos(clipboard.ua) ? iosLink : androidLink}>
       <CopyToClipboard text={copyText} onCopy={() => {
-        HiveLog.trackDownload('BookReaderDownloadButton_Click', {
-          bookId: bookInfo.bookId,
-          bookName: bookInfo.bookName,
-          chapterId: chapterInfo.id,
-          chapterName: chapterInfo.chapterName,
-        })
+        // HiveLog.trackDownload('BookReaderDownloadButton_Click', {
+        //   bookId: bookInfo.bookId,
+        //   bookName: bookInfo.bookName,
+        //   chapterId: chapterInfo.id,
+        //   chapterName: chapterInfo.chapterName,
+        // })
         // netIpUa(copyText)
       }}>
         <div className={styles.iconBox}>立即下載</div>

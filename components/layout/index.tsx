@@ -7,9 +7,7 @@ import useLogParams from "@/hooks/useLogParams";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { setDevice } from "@/store/modules/app.module";
 import { EDevice } from "@/store/store.interfaces";
-import MHeader from "@/components/home/mHeader/MHeader";
-import styles from "@/components/layout/index.module.scss"
-import { EnumBackGround, EnumFontSize, EnumTabs } from "typings/reader.interface";
+import { EnumFontSize, EThemeType } from "typings/reader.interface";
 import { Router } from "next/dist/client/router";
 
 interface IProps {
@@ -19,9 +17,8 @@ interface IProps {
 }
 
 interface IAppState {
-  theme: EnumTabs;
   fontSize: EnumFontSize;
-  background: EnumBackGround;
+  background: EThemeType;
 }
 
 const Context = createContext([{}, {}] as [IAppState, React.Dispatch<React.SetStateAction<IAppState>>]);
@@ -29,9 +26,9 @@ const Context = createContext([{}, {}] as [IAppState, React.Dispatch<React.SetSt
 
 const DLayout: FC<IProps> = ({ children, pageProps, router }) => {
   const [appState, setAppState] = useState<IAppState>({
-    theme: EnumTabs.日間,
+
     fontSize: EnumFontSize.normal,
-    background: EnumBackGround.default1,
+    background: EThemeType.default1,
   });
   const device = useAppSelector(state => state.app.device);
   const dispatch = useAppDispatch();
@@ -79,9 +76,7 @@ const DLayout: FC<IProps> = ({ children, pageProps, router }) => {
         { router.pathname !== '/chapter/[bookId]/[chapterId]' ?
           <>
             <PcHeader />
-            <main className={styles.pcWrap}>
-              {children}
-            </main>
+            {children}
             <PcFooter />
           </> : children
         }
@@ -98,7 +93,7 @@ const DLayout: FC<IProps> = ({ children, pageProps, router }) => {
   );
 }
 
-export default DLayout
+export default DLayout;
 
 export const useAppContext = () => {
   return useContext(Context);

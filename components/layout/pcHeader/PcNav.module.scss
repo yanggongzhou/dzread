@@ -1,6 +1,7 @@
 .navLeft {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
 
   .logoTxtBox {
     width: 1.6rem;
@@ -8,6 +9,7 @@
   }
 
   .navBox {
+    margin-left: 1rem;
     height: 100%;
     display: flex;
     justify-content: center;
@@ -39,11 +41,11 @@
         -webkit-transform: translateX(-50%);
         transform: translateX(-50%);
         background-color: $theme_color;
-        border-radius: 0.06rem;
-        height: 0.08rem;
+        border-radius: 0.03rem;
+        height: 0.06rem;
         position: absolute;
         left: 50%;
-        bottom: -0.08rem;
+        bottom: 0;
         width: 30%;
       }
     }

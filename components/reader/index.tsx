@@ -1,19 +1,16 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
 import { INetChapterDetailRes } from "typings/book.interface";
-import HeaderBack from "@/components/Reader/headerBack/HeaderBack";
-import Control from "@/components/Reader/control/Control";
-import { EnumBackGround, EnumTabs } from "typings/reader.interface";
-import ChapterUnlock from "@/components/Reader/chapterUnlock/ChapterUnlock";
+import HeaderBack from "@/components/reader/headerBack/HeaderBack";
+import Control from "@/components/reader/control/Control";
+import ChapterUnlock from "@/components/reader/chapterUnlock/ChapterUnlock";
 import { DotLoading, PullToRefresh, Toast } from "antd-mobile";
 import { useRouter } from "next/router";
 import { useAppSelector } from "@/store";
 import { EDevice } from "@/store/store.interfaces";
 import { IBookItem } from "@/typings/home.interface";
-import { useAppContext } from "@/components/layout";
 import { PullStatus } from "antd-mobile/es/components/pull-to-refresh";
 import { debounce } from "throttle-debounce";
-import styles from '@/components/Reader/index.module.scss';
-// import { useLockFn } from "ahooks";
+import styles from '@/components/reader/index.module.scss';
 
 interface IProps {
   bookId: string;
@@ -24,8 +21,8 @@ interface IProps {
 }
 
 const Reader: FC<IProps> = ({ bookId, chapterContent, chapterInfo, bookInfo, contentList}) => {
-  const [appState, setAppState] = useAppContext();
-  const [tabIndex, setTabIndex] = useState<EnumTabs>();
+  const theme = useAppSelector(state => state.read.theme);
+  const fontSize = useAppSelector(state => state.read.fontSize);
   const [controlVisible, setControlVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -33,19 +30,6 @@ const Reader: FC<IProps> = ({ bookId, chapterContent, chapterInfo, bookInfo, con
     setControlVisible(false);
   }, [chapterInfo]) // eslint-disable-line
 
-  const changeTab = (id: EnumTabs) => {
-    setTabIndex(id);
-    if (id === EnumTabs.日間) {
-      setAppState(pre => ({ ...pre, theme: id,  background: EnumBackGround.default1 }));
-    }
-    if (id === EnumTabs.夜間) {
-      setAppState(pre => ({ ...pre, theme: id,  background: EnumBackGround.night }));
-    }
-
-    if (id === EnumTabs.目錄) {
-      setControlVisible(false);
-    }
-  }
   const contentRef = useRef<HTMLDivElement | null>(null);
   const router = useRouter()
   const device = useAppSelector(state => state.app.device)
@@ -77,7 +61,7 @@ const Reader: FC<IProps> = ({ bookId, chapterContent, chapterInfo, bookInfo, con
 
   const preChapter = async () => {
     if (!chapterInfo.preChapter) {
-      Toast.show('已經是第壹章')
+      Toast.show('已经是第一章')
       return
     }
     setIsLoading(true)
@@ -94,13 +78,9 @@ const Reader: FC<IProps> = ({ bookId, chapterContent, chapterInfo, bookInfo, con
 
   return <div
     className={styles.bookWrap}
-    style={{
-      // overflowY: unlockVisible ? 'hidden' : 'auto',
-      backgroundColor: appState.background,
-      color: appState.theme === EnumTabs.夜間 ? '#FFFFFF66' : '#2F3031',
-    }}>
+    style={{ backgroundColor: theme }}>
 
-    <HeaderBack visible={controlVisible} bookId={bookId || ''} bookName={bookInfo?.bookName || ''}/>
+    <HeaderBack theme={theme} visible={controlVisible} bookId={bookId || ''} bookName={bookInfo?.bookName || ''}/>
 
     <div
       onTouchMove={handleScrollMove}
@@ -112,15 +92,11 @@ const Reader: FC<IProps> = ({ bookId, chapterContent, chapterInfo, bookInfo, con
 
       <PullToRefresh
         renderText={(status) => <div>{statusRecord[status]}</div>}
-        // renderText={() => null}
         onRefresh={async () => {
-          if(!chapterInfo.preChapter && !chapterInfo?.nextChapter){
-            return;
-          }
+          if(!chapterInfo.preChapter && !chapterInfo?.nextChapter) return;
           await preChapter();
-        }}
-      >
-        <div style={{ fontSize: 20 }}>
+        }}>
+        <div style={{ fontSize }}>
           <h1 className={styles.title}>{chapterInfo.chapterName}</h1>
           <div
             onClick={() => setControlVisible(!controlVisible)}
@@ -133,18 +109,18 @@ const Reader: FC<IProps> = ({ bookId, chapterContent, chapterInfo, bookInfo, con
         </div>
       </PullToRefresh>
 
-
       <Control
         bookId={bookId}
+        theme={theme}
+        fontSize={fontSize}
         chapterInfo={chapterInfo}
-        tabIndex={tabIndex}
-        visible={controlVisible}
-        changeTab={(id) => changeTab(id)}/>
+        visible={controlVisible}/>
+
       { chapterInfo?.isCharge ?
         <ChapterUnlock
           bookInfo={bookInfo}
           chapterInfo={chapterInfo}
-          theme={appState.theme}/> : null
+        /> : null
       }
     </div>
   </div>

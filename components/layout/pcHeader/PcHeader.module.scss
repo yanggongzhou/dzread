@@ -14,11 +14,29 @@
   z-index: 999;
 
   .navContent {
-    width: 14.4rem;
+    width: 12rem;
     height: 100%;
     margin: 0 auto;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+
+    .rightBox {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .downloadBtn {
+        margin-left: 0.3rem;
+        width: 1.1rem;
+        background: linear-gradient(90deg, #FF6600 0%, #FA3123 100%);
+        border-radius: 0.17rem;
+        height: 0.34rem;
+        font-size: 0.15rem;
+        font-weight: 500;
+        color: #FFFFFF;
+      }
+    }
   }
 
   .qrCode {

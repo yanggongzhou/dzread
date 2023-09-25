@@ -111,7 +111,7 @@ const CatalogBox: FC<IProps> = ({ bookInfo }) => {
           className={styles.itemIcon}
           width={44}
           height={44}
-          src={'/images/home/arrow-left.png'}
+          src={'/images/book/lock.png'}
           alt={'>'}
         /> : null }
       </Link>

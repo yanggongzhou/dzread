@@ -52,17 +52,19 @@ const PcHeader: FC<IProps> = () => {
       <div className={styles.navContent}>
         <PcNav />
 
-        <HeaderSearch />
+        <div className={styles.rightBox}>
+          <HeaderSearch />
 
-        <Popover
-          content={<QRCode
-            value={'https://gitcode.gitcode.host/docs-cn/video.js-docs-cn/docs/guides/components.html#resize-manager'}
-            className={styles.qrCode}/>
-          }
-          trigger='click'
-          placement='bottom'>
-          <div>下载</div>
-        </Popover>
+          <Popover
+            content={<QRCode
+              value={'https://gitcode.gitcode.host/docs-cn/video.js-docs-cn/docs/guides/components.html#resize-manager'}
+              className={styles.qrCode}/>
+            }
+            trigger='click'
+            placement='bottom'>
+            <button className={styles.downloadBtn}>下载</button>
+          </Popover>
+        </div>
       </div>
     </div>
     <div className={styles.navOccupy}/>
