@@ -26,6 +26,20 @@ export interface INetChapterDetailRes extends IChapterListItem {
   position: EnumPosition;
 }
 
+export interface INetListChapterReq {
+  bookId: string;
+  pageNo: number;
+  pageSize?: number;
+}
+
+export interface INetListChapterRes {
+  data: IChapterListItem[];
+  pageNo: number;
+  limit: string;
+  totalNum: number;
+  totalPage: number;
+}
+
 
 export enum EnumPosition {
   顶部banner = 0,

@@ -1,0 +1,75 @@
+.pcReaderWrap {
+  background-color: rgb(224, 224, 224);
+
+  .readerBox {
+    min-height: 100vh;
+    padding: 0.6rem 0.78rem 1rem;
+    width: 1000px;
+    margin: 0 auto;
+    position: relative;
+    color: #2F3031;
+    background-color: hsla(0,0%,100%,.5);
+
+    .title {
+      font-size: 0.28rem;
+      font-weight: 600;
+      color: #333333;
+      text-align: center;
+    }
+
+    .authorBox {
+      position: relative;
+      padding: 0.32rem 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 0.5px dashed #b2b2b2;
+      margin-bottom: 0.3rem;
+      color: #b2b2b2;
+
+      font-size: 0.12rem;
+      white-space: nowrap;
+
+      .bookName {
+        color: #333333;
+      }
+
+      .author {
+        color: #333333;
+      }
+
+      .updateTime {
+        color: #333333;
+      }
+    }
+
+    .content {
+      margin-top: 0.17rem;
+      margin-bottom: 0.56rem;
+      font-weight: 400;
+      color: #333333;
+      line-height: 0.32rem;
+      white-space: pre-wrap;
+
+      p {
+        font-size: 1em;
+        line-height: 2;
+        white-space: pre-wrap;
+        text-align: justify;
+        text-indent: 2em;
+        margin-bottom: 0.8em;
+      }
+    }
+  }
+}
+
+.readerWrap :global .adm-center-popup-wrap {
+  left: 12.18rem;
+  top: 4.65rem;
+}
+.readerWrap :global .adm-mask  {
+  background-color: transparent !important;
+}
+.readerWrap :global .adm-modal-content {
+  padding: 0;
+}

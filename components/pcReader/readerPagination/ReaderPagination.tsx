@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import styles from './ReaderPagination.module.css'
+import styles from './ReaderPagination.module.scss'
 import Link from "next/link";
 
 interface IProps {
@@ -26,9 +26,8 @@ const ReaderPagination: FC<IProps> = (
 
     <Link className={styles.linkItem} href={`/catalog/${bookId}/${Math.ceil(chapterIndex / 18)}`}>
       {/*<a className={styles.linkItem}>{chapterIndex}/{chapterCount}</a>*/}
-      目錄
+      目录
     </Link>
-
     {nextChapterId ? <Link className={styles.linkItem} href={`/chapter/${bookId}/${nextChapterId}`} replace>
       下一章
     </Link> : <div className={styles.pageItem}>下一章</div>}

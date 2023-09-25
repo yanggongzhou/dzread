@@ -4,7 +4,6 @@ import { ownOs } from "@/utils/ownOs";
 import { netKeywords } from "@/server/home";
 import PcKeywords from "@/components/PcKeywords/PcKeywords";
 import MKeywords from "@/components/Keywords/MKeywords";
-import { ESearchType } from "typings/sitemap.interface";
 import { IKeywordItem } from "@/typings/tag.interface";
 
 interface IProps {
@@ -32,7 +31,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, query }): Pr
   const res = await netKeywords({
     pageNum: Number(page),
     pageSize: 300,
-    type: ESearchType.ALL
+    type: 0
   })
 
   if (res === 'BadRequest_500') {

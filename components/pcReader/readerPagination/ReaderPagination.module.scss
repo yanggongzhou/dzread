@@ -1,28 +1,32 @@
 .paginationWrap {
   width: 100%;
   padding: 0 1.57rem;
-  height: 0.32rem;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-column-gap: 0.16rem;
   position: absolute;
   bottom: 0.48rem;
   left: 0;
+  z-index: 1;
 }
 
 .linkItem, .pageItem {
   width: 100%;
-  height: 100%;
+  height: 0.6rem;
   background-color: #F6F6F6;
-  border-radius: 0.04rem;
+  border-radius: 0.3rem;
   border: 0.01rem solid #EBEBEB;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.12rem;
+  font-size: 0.22rem;
   font-weight: 400;
   color: #2F3031;
   cursor: pointer;
+
+  &:hover {
+    opacity: 0.9;
+  }
 }
 
 .pageItem {

@@ -1,14 +1,14 @@
-export enum EnumFontSize {
-  small = 'Small',
-  normal = 'Normal',
-  big = 'Big',
+export enum EOperateType {
+  normal = 0,
+  catalog = 1,
+  setting = 2,
+  qrcode = 3,
 }
 
-
 export enum EThemeType {
-  default1 = '#F7F7F7',
-  default2 = '#EFECE2',
-  default3 = '#F2F7F1',
-  default4 = "#E8ECF1",
-  default5 = "#FAF7F7",
+  default1 = 'rgb(224, 224, 224)',
+  default2 = 'rgb(222, 217, 198)',
+  default3 = 'rgb(230, 239, 228)',
+  default4 = "rgb(246, 239, 239)",
+  default5 = "rgb(217, 224, 232)",
 }

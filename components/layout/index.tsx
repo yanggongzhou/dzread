@@ -7,7 +7,7 @@ import useLogParams from "@/hooks/useLogParams";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { setDevice } from "@/store/modules/app.module";
 import { EDevice } from "@/store/store.interfaces";
-import { EnumFontSize, EThemeType } from "typings/reader.interface";
+import { EThemeType } from "typings/reader.interface";
 import { Router } from "next/dist/client/router";
 
 interface IProps {
@@ -17,7 +17,6 @@ interface IProps {
 }
 
 interface IAppState {
-  fontSize: EnumFontSize;
   background: EThemeType;
 }
 
@@ -26,8 +25,6 @@ const Context = createContext([{}, {}] as [IAppState, React.Dispatch<React.SetSt
 
 const DLayout: FC<IProps> = ({ children, pageProps, router }) => {
   const [appState, setAppState] = useState<IAppState>({
-
-    fontSize: EnumFontSize.normal,
     background: EThemeType.default1,
   });
   const device = useAppSelector(state => state.app.device);

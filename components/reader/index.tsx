@@ -12,18 +12,16 @@ import { PullStatus } from "antd-mobile/es/components/pull-to-refresh";
 import { debounce } from "throttle-debounce";
 import styles from '@/components/reader/index.module.scss';
 import Link from "next/link";
-import { onImgError } from "@/components/common/image/ImageCover";
-import Image from "next/image";
+import ImageCover from "@/components/common/image/ImageCover";
 
 interface IProps {
   bookId: string;
-  chapterContent: string;
   chapterInfo: INetChapterDetailRes;
   bookInfo: IBookItem;
   contentList: string[];
 }
 
-const Reader: FC<IProps> = ({ bookId, chapterContent, chapterInfo, bookInfo, contentList}) => {
+const Reader: FC<IProps> = ({ bookId, chapterInfo, bookInfo, contentList}) => {
   const theme = useAppSelector(state => state.read.theme);
   const fontSize = useAppSelector(state => state.read.fontSize);
   const [controlVisible, setControlVisible] = useState(false);
@@ -41,7 +39,7 @@ const Reader: FC<IProps> = ({ bookId, chapterContent, chapterInfo, bookInfo, con
     if(device === EDevice.mobile && contentRef.current && Reflect.has(contentRef.current, "scrollIntoView")) {
       (contentRef.current as HTMLDivElement)?.scrollIntoView()
     }
-  }, [chapterContent]); // eslint-disable-line
+  }, [contentList]); // eslint-disable-line
 
   // 拖拽竖屏阅读 Add lock to an async function to prevent parallel executions.
   const handleScrollMove = debounce(500, async () => {
@@ -96,14 +94,12 @@ const Reader: FC<IProps> = ({ bookId, chapterContent, chapterInfo, bookInfo, con
       </div>}
 
       <div className={styles.topGuide}>
-        <Image
-          onError={onImgError}
+        <ImageCover
+          href={`/book/${bookInfo.bookId}`}
           className={styles.topGuideImg}
+          src={bookInfo.cover}
           width={128}
           height={170}
-          src={bookInfo.cover}
-          placeholder="blur"
-          blurDataURL={bookInfo.cover || '/images/defaultBook.png'}
           alt={bookInfo.bookName}
         />
         <div className={styles.topGuideInfo}>

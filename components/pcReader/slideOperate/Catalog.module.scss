@@ -1,0 +1,51 @@
+.catalogBox {
+  position: absolute;
+  left: -1000px;
+  top: calc(-50vh + 38px);
+  z-index: 99;
+  background-color: #fff;
+  height: 100vh;
+  padding: 40px;
+  width: 1000px;
+
+  h4 {
+    color: #333;
+    font-size: 0.3rem;
+    font-weight: 700;
+    line-height: 0.32rem;
+  }
+
+  .linkBox {
+    height: calc(100vh - 100px);
+    overflow-y: auto;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 0.4rem;
+
+    li {
+      font-size: 0.18rem;
+      font-weight: 400;
+      border-bottom: 0.5px dashed #f2f2f2;
+
+      a {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.15rem 0;
+        color: #333333;
+        transition: color 0.3s;
+
+        &:hover {
+          color: $theme_color;
+        }
+
+        .itemIcon {
+          width: 0.24rem;
+          height: 0.24rem;
+        }
+      }
+    }
+  }
+
+}

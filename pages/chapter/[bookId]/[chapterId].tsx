@@ -1,12 +1,11 @@
 import React from "react";
 import type { NextPage } from 'next'
 import { GetServerSideProps, GetServerSidePropsResult } from "next";
-import { netDetailChapter } from "@/server/home";
-import { INetChapterDetailRes } from "@/typings/book.interface";
-import PcReader from "@/components/PcReader";
+import { netDetailChapter, netListChapter } from "@/server/home";
+import { IChapterListItem, INetChapterDetailRes } from "@/typings/book.interface";
+import PcReader from "@/components/pcReader";
 import { ownOs } from "@/utils/ownOs";
 import { IBookItem } from "@/typings/home.interface";
-import Breadcrumb from "@/components/common/breadcrumb";
 import Reader from "@/components/reader";
 
 interface IProps {
@@ -16,6 +15,7 @@ interface IProps {
   chapterInfo: INetChapterDetailRes;
   chapterContent: string;
   contentList: string[];
+  chapterList: IChapterListItem[];
 }
 
 const delDomTag = (str: string = '', replaceTxt: string) => {
@@ -26,24 +26,20 @@ const delDomTag = (str: string = '', replaceTxt: string) => {
     .replace(/style=/g, "s=");
 }
 
-const Chapter: NextPage<IProps> = ({ isPc, bookId, chapterContent, bookInfo, chapterInfo, contentList }) => {
-  const data = [
-    { title: '首页', link: "/home" },
-    { title: '??', link: "/rankings" },
-    { title: bookInfo.bookName, link: `/book/${bookId}` },
-    { title: chapterInfo.chapterName },
-  ]
+const Chapter: NextPage<IProps> = (
+  { isPc, bookId, chapterContent, bookInfo, chapterInfo, contentList, chapterList }
+) => {
+
   return <>
-    <Breadcrumb data={data} style={{ width: 0, height: 0, display: "none" }} />
     {isPc ?
       <PcReader
-        chapterContent={chapterContent}
+        chapterList={chapterList}
+        contentList={contentList}
         bookId={bookId}
         bookInfo={bookInfo}
         chapterInfo={chapterInfo}/> :
       <Reader
         contentList={contentList}
-        chapterContent={chapterContent}
         bookId={bookId}
         bookInfo={bookInfo}
         chapterInfo={chapterInfo}/>
@@ -66,6 +62,19 @@ export const getServerSideProps: GetServerSideProps = async ({ req, query }): Pr
     return { redirect: { destination: '/500', permanent: false } }
   }
 
+  const responseList = await netListChapter({
+    bookId,
+    pageNo: 1,
+    pageSize: 2000,
+  });
+  if (responseList === 'BadRequest_404') {
+    return { notFound: true }
+  }
+  if (responseList === 'BadRequest_500') {
+    return { redirect: { destination: '/500', permanent: false } }
+  }
+  const { data = [], totalPage = 0 } = responseList;
+
   const chapterContent = chapterInfo && chapterInfo.content ? delDomTag(chapterInfo.content, chapterInfo.chapterName || '') : '';
 
   const contentList = chapterContent.split('\n')
@@ -77,6 +86,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, query }): Pr
       contentList,
       bookId,
       isPc: ownOs(ua).isPc,
+      chapterList: data,
     },
   }
 }

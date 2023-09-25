@@ -1,69 +1,70 @@
 import React, { FC } from 'react'
-import styles from '@/components/PcReader/slideOperate/Setting.module.scss'
+import styles from '@/components/pcReader/slideOperate/Setting.module.scss'
 import { EThemeType } from "typings/reader.interface";
 import Image from "next/image";
-import { useAppContext } from "@/components/layout";
+import { useAppDispatch, useAppSelector } from "@/store";
+import { setFontSize, setTheme } from "@/store/modules/read.module";
 
 interface IProps {
 }
 
 const PcSetting: FC<IProps> = () => {
-  const [appState, setAppState] = useAppContext();
+  const theme = useAppSelector(state => state.read.theme);
+  const fontSize = useAppSelector(state => state.read.fontSize);
+
+  const dispatch = useAppDispatch();
+
   const addSize = () => {
-    if (appState.fontSize < 48){
-      const fontSize = appState.fontSize + 1;
-      setAppState(pre => ({...pre,  fontSize}))
+    if (fontSize < 30){
+      dispatch(setFontSize(fontSize + 2))
     }
   }
   const cutSize = () => {
-    if (appState.fontSize > 12){
-      const fontSize = appState.fontSize - 1;
-      setAppState(pre => ({...pre,  fontSize}))
+    if (fontSize > 16){
+      dispatch(setFontSize(fontSize - 2))
     }
   }
 
-
-  const changeBg = (pBackground: EThemeType) => {
-    setAppState(pre => ({...pre,  pBackground}));
-
+  const changeBg = (bg: EThemeType) => {
+    dispatch(setTheme(bg))
   }
 
-  const backgroundColorTab = [
-    { backgroundColor: EThemeType.default1 },
-    { backgroundColor: EThemeType.default2 },
-    { backgroundColor: EThemeType.default3 },
-    { backgroundColor: EThemeType.default4 },
-    { backgroundColor: EThemeType.default5 },
+  const backgroundList = [
+    EThemeType.default1,
+    EThemeType.default2,
+    EThemeType.default3,
+    EThemeType.default4,
+    EThemeType.default5,
   ]
 
   return <div className={styles.settingBox}>
-    <div className={styles.settingTitle}>设置</div>
     <div className={styles.controlBg}>
       <div className={styles.sizeTitle}>背景</div>
       <div className={styles.bgBox}>
-        { backgroundColorTab.map(({ backgroundColor }) => {
+        { backgroundList.map(backgroundColor => {
           return <div
             key={backgroundColor}
             className={styles.bg}
             style={{ backgroundColor } }
             onClick={() => changeBg(backgroundColor)}>
-            { appState.pBackground === backgroundColor ?
+            { theme === backgroundColor ?
               <Image
                 className={styles.bgChecked}
                 width={48}
                 height={48}
-                src={'/images/reader/pcSizeChecked.png'}
+                src={'/images/reader/bg-checked.png'}
                 alt={''}
               /> : null}
           </div>
         }) }
       </div>
     </div>
+
     <div className={styles.controlSize}>
       <div className={styles.sizeTitle}>字体</div>
       <div className={styles.sizeBox}>
         <div className={styles.size} onClick={() => addSize()}>A+</div>
-        <div> { appState.fontSize } </div>
+        <div>{ fontSize }</div>
         <div className={styles.size} onClick={() => cutSize()}>A-</div>
       </div>
     </div>

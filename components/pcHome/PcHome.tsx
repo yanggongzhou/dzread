@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import SecondList from "@/components/pcHome/secondList/SecondList";
-import { ColumnNameRoute, IBookItem, INetHomeItem } from "@/typings/home.interface";
+import { IBookItem, INetHomeItem } from "@/typings/home.interface";
 import SwiperArea from "@/components/pcHome/swiperArea/SwiperArea";
 import PcHomeTitle from "@/components/pcHome/homeTitle/HomeTitle";
 import { PcEmpty } from "@/components/common/empty";
@@ -19,7 +19,7 @@ const PcHome: FC<IProps> = ({ bannerList, smallData }) => {
         smallData.length > 0 && smallData.map((item, index) => {
           if (item?.bookList && item.bookList.length > 0) {
             return <div key={item.position}>
-              <PcHomeTitle title={item.position} href={`/more/${ColumnNameRoute[item.position]}`}/>
+              <PcHomeTitle title={item.position} href={`/more/${item.position}`}/>
               <SecondList dataSource={(item.bookList || [])} priority={index <= 1}/>
             </div>
           }

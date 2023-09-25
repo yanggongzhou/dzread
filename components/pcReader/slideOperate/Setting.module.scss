@@ -1,0 +1,84 @@
+.settingBox {
+  left: -400px;
+  position: absolute;
+  top: -80px;
+  z-index: -1;
+  background-color: #fff;
+  border-radius: 6px;
+  box-shadow: 0 1px 16px 0 rgba(0, 0, 0, .12);
+  height: 250px;
+  padding: 20px;
+  width: 400px;
+}
+
+.controlBg {
+  padding: 0.22rem 0.24rem;
+
+  .bgBox {
+    display: flex;
+    align-items: center;
+    column-gap: 0.1rem;
+
+    .bg {
+      width: 0.46rem;
+      height: 0.46rem;
+      border-radius: 50%;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .bgChecked {
+      width: 0.18rem;
+      height: 0.18rem;
+      position: absolute !important;
+      right: 0;
+      bottom: -0.06rem;
+    }
+  }
+}
+
+.sizeTitle {
+  font-size: 0.2rem;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 0.2rem;
+}
+
+
+.controlSize {
+  padding: 0.22rem 0.24rem;
+
+  .sizeBox {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    column-gap: 0.2rem;
+    color: #333;
+    font-size: 0.2rem;
+
+    .size {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.2rem;
+      height: 0.4rem;
+      border-radius: 0.2rem;
+      color: #333;
+      border: 1px solid #333;
+      cursor: pointer;
+      opacity: 0.5;
+      transition: all 0.3s;
+
+      &:hover {
+        border: 1px solid $theme_color;
+        opacity: 1;
+        color: $theme_color;
+      }
+    }
+  }
+}
+
+
+
+
+

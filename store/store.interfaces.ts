@@ -1,6 +1,6 @@
 import { ELanguage } from "@/typings/home.interface";
 import { IClipboard } from "@/typings/hive.interfaces";
-import { EnumFontSize, EThemeType } from "@/typings/reader.interface";
+import { EOperateType, EThemeType } from "@/typings/reader.interface";
 
 export interface IHiveStore {
   clipboard: IClipboard;
@@ -21,4 +21,5 @@ export interface IAppStore {
 export interface IReadStore {
   theme: EThemeType;
   fontSize: number;
+  operateType: EOperateType;
 }

@@ -1,8 +1,7 @@
 import { IBookItem } from "@/typings/home.interface";
-import { ESearchType } from "@/typings/sitemap.interface";
 
 export interface INetKeywordsReq {
-  type?: ESearchType;
+  type?: 0;
   pageNum: number;
   pageSize?: number;
 }

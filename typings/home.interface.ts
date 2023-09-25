@@ -47,18 +47,3 @@ export enum ELanguage {
   Zh = 'zh', // 繁體中文
   Korean = 'ko', // 韩语
 }
-
-
-export enum EHomeName {
-  TopHits = '热门好剧',
-  MustSees = '必看好剧',
-  Trending = '当前热播',
-  HiddenGems = '精彩剧集',
-}
-
-export const ColumnNameRoute = {
-  [EHomeName.TopHits]: 'top-hits',
-  [EHomeName.MustSees]: 'must-sees',
-  [EHomeName.Trending]: 'trending',
-  [EHomeName.HiddenGems]: 'hidden-gems',
-}
