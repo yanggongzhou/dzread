@@ -16,11 +16,7 @@ const PcStore: FC<IProps> = () => {
 
   const copyUrl = useAppSelector(state => {
     const bookId = state.hive.clipboard.bid;
-    const locale = state.hive.language;
-    if (locale === ELanguage.ZhHans) {
-      return `${process.env.WebDomain}/download?bookId=${bookId}&path=${process.env.WebDomain + router.asPath}`
-    }
-    return `${process.env.WebDomain}/${router.locale}/download?bookId=${bookId}&path=${process.env.WebDomain + '/' + locale + router.asPath}`
+    return `${process.env.WebDomain}/download?bookId=${bookId}&path=${process.env.WebDomain + router.asPath}`
   })
 
   return <div className={styles.storeBox}>

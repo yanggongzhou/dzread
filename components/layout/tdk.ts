@@ -1,4 +1,4 @@
-import { ELanguage, IBookItem } from "@/typings/home.interface";
+import { IBookItem } from "@/typings/home.interface";
 
 export const TDK = {
   chapter: {
@@ -61,15 +61,5 @@ export const TDK = {
     title: '500-DramaBox',
     keywords: '',
     description: '',
-  },
-  agreementPrivacy: {
-    title: '隐私政策-DramaBox',
-    keywords: 'DramaBox隐私政策',
-    description: 'DramaBox隐私政策'
-  },
-  agreementUser: {
-    title: '用户协议-DramaBox',
-    keywords: 'DramaBox用户协议',
-    description: 'DramaBox用户协议'
   }
 }

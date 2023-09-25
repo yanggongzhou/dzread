@@ -1,7 +1,6 @@
 import { randomString } from '@/utils/other'
 import ClientConfig from '@/client.config';
 import { isIos, ownOs } from "@/utils/ownOs";
-import { ELanguage } from "@/typings/home.interface";
 import { AnyObject, IClipboard, ILogParams } from "@/typings/hive.interfaces";
 
 export const getUserLandId = () => {
@@ -20,7 +19,6 @@ export const getUserLandId = () => {
 interface IGetLogParams {
   event: string;
   clipboard: IClipboard;
-  language: ELanguage;
   bookId?: string;
   chapterId?: string | 0;
   data?: AnyObject;

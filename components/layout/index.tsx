@@ -1,13 +1,12 @@
-import React, { createContext, FC, useContext, useEffect, useState } from "react";
+import React, { FC, useEffect } from "react";
 import { addListen, removeListen } from "@/utils/rem";
 import { ownOs } from "@/utils/ownOs";
 import PcHeader from "@/components/layout/pcHeader/PcHeader";
 import PcFooter from "@/components/layout/pcFooter/PcFooter";
 import useLogParams from "@/hooks/useLogParams";
-import { useAppDispatch, useAppSelector } from "@/store";
+import { useAppDispatch } from "@/store";
 import { setDevice } from "@/store/modules/app.module";
 import { EDevice } from "@/store/store.interfaces";
-import { EThemeType } from "typings/reader.interface";
 import { Router } from "next/dist/client/router";
 
 interface IProps {
@@ -16,32 +15,20 @@ interface IProps {
   router: Router
 }
 
-interface IAppState {
-  background: EThemeType;
-}
-
-const Context = createContext([{}, {}] as [IAppState, React.Dispatch<React.SetStateAction<IAppState>>]);
-
-
 const DLayout: FC<IProps> = ({ children, pageProps, router }) => {
-  const [appState, setAppState] = useState<IAppState>({
-    background: EThemeType.default1,
-  });
-  const device = useAppSelector(state => state.app.device);
+
   const dispatch = useAppDispatch();
-  const [domVisible, setDomVisible] = useState(false);
 
   // 页面曝光 打点参数初始化
   useLogParams(pageProps);
 
   useEffect(() => {
-    setDomVisible(true)
     setRemScript();
     addListen(setRemScriptListen);
     return () => {
       removeListen(setRemScriptListen)
     }
-  },[]) // eslint-disable-line
+  }, []) // eslint-disable-line
 
   // 设置rem字体大小并判断设备 初始化
   const setRemScript = () => {
@@ -67,31 +54,16 @@ const DLayout: FC<IProps> = ({ children, pageProps, router }) => {
       document.documentElement.style.fontSize = 100 * (clientWidth / 750) + 'px';
     }
   }
-  if ((Reflect.has(pageProps, 'isPc') && Reflect.get(pageProps, 'isPc')) || (device === EDevice.pc && domVisible)) {
+  if ((Reflect.has(pageProps, 'isPc') && Reflect.get(pageProps, 'isPc')) && router.pathname !== '/chapter/[bookId]/[chapterId]') {
     return (
-      <Context.Provider value={[appState, setAppState]}>
-        { router.pathname !== '/chapter/[bookId]/[chapterId]' ?
-          <>
-            <PcHeader />
-            {children}
-            <PcFooter />
-          </> : children
-        }
-      </Context.Provider>
+      <>
+        <PcHeader/>
+        {children}
+        <PcFooter/>
+      </>
     )
   }
-
-  return (
-    <>
-      <Context.Provider value={[appState, setAppState]}>
-        {children}
-      </Context.Provider>
-    </>
-  );
+  return children;
 }
 
 export default DLayout;
-
-export const useAppContext = () => {
-  return useContext(Context);
-}

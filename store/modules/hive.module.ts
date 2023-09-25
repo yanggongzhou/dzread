@@ -59,7 +59,6 @@ export const hiveSlice = createSlice<IHiveStore, SliceCaseReducers<IHiveStore>>(
         h5fingerPrint: "",
       },
       copyText: '',
-      language: ELanguage.ZhHans
     }
   },
   reducers: {

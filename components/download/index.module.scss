@@ -1,57 +1,58 @@
 .downloadWrap {
-  padding: 0.32rem;
+  padding: 4rem 0.32rem 0;
+  height: 100vh;
+  background-color: #FFFFFF;
   display: flex;
   align-items: center;
   flex-direction: column;
-
-  .downloadHead {
-    font-size: 0.38rem;
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.9);
-    line-height: 0.53rem;
-    text-align: center;
-    height: 1.7rem;
-    padding-bottom: 0.64rem;
-  }
+  position: relative;
 
   .downloadCover {
-    width: 4.4rem;
-    height: 4.4rem;
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+  h1 {
+    margin: 0.24rem 0 0.12rem;
   }
 
-  .downloadBtn {
-    width: 4.58rem;
-    height: 0.88rem;
-    margin: 0.64rem auto;
-    border-radius: 0.08rem;
-    background: linear-gradient(90deg, #F40065 0%, #FF871F 100%);
+  .footerContainer {
+    position: absolute;
+    bottom: 1.2rem;
+    left: 0;
+    z-index: 1;
+    padding: 0.32rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: row;
+    flex-direction: column;
+    row-gap: 0.24rem;
+    width: 100%;
 
-    .downloadBtnIcon {
-      width: 0.48rem;
-      height: 0.48rem;
-      margin-right: 0.08rem;
+    .downloadBtn {
+      width: 100%;
+      margin-top: 0.4rem;
+      background: linear-gradient(90deg, #FF6600 0%, #FA3123 100%);
+      border-radius: 0.42rem;
+      height: 0.84rem;
+      font-size: 0.30rem;
+      font-weight: 400;
+      color: #FFFFFF;
     }
 
-    span {
-      font-size: 0.34rem;
-      font-weight: 500;
-      color: rgba(255, 255, 255, 0.9);
-    }
-  }
+    .downloadContent {
+      position: relative;
+      font-size: 0.28rem;
+      font-weight: 400;
+      line-height: 0.40rem;
+      white-space: pre-wrap;
+      color: #333;
 
-  .downloadContent {
-    position: relative;
-    z-index: 9;
-    font-size: 0.28rem;
-    font-weight: 400;
-    line-height: 0.40rem;
-    margin-bottom: 0.24rem;
-    white-space: pre-wrap;
-    color: rgba(255, 255, 255, 0.4);
+      .icon {
+        margin-left: 0.12rem;
+        width: 0.24rem;
+        height: 0.24rem;
+      }
+    }
   }
 }
 

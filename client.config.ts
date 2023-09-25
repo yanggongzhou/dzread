@@ -1,7 +1,7 @@
 import { ELanguage } from "@/typings/home.interface";
 
 const ClientConfig = {
-  name: "DramaBox",
+  name: "点众阅读",
   companyName: "北京点众科技股份有限公司",
   productName: "db",
   googleCode: "G-BXDJ8KNG7N",
