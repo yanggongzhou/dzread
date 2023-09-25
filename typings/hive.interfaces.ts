@@ -1,4 +1,3 @@
-import { ELanguage } from "@/typings/home.interface";
 
 export interface AnyObject<T = any> { [key: string]: T }
 // action
@@ -48,5 +47,4 @@ interface ILogParamsData {
   isPc: 1 | 0;
   platform: string;
   System_language: string;
-  User_language: ELanguage;
 }

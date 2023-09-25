@@ -5,7 +5,6 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Toast } from "antd-mobile";
 import { useRouter } from "next/router";
 import { useAppSelector } from "@/store";
-import { ELanguage } from "@/typings/home.interface";
 
 interface IProps {
 }

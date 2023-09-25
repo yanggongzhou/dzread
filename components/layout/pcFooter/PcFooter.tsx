@@ -13,9 +13,7 @@ const PcFooter: FC<IProps> = () => {
 
       <div className={styles.footerText}>
         <p className={styles.fText}>© {ClientConfig.name}, 版权所有&nbsp;&nbsp;{ClientConfig.companyName}</p>
-        <Link className={styles.fmail} href={`mailto:${ClientConfig.email}`}>
-          邮箱:&nbsp;{ ClientConfig.email }
-        </Link>
+
       </div>
 
       <div className={styles.footerLink}>

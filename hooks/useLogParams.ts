@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
-import { LanguageDefaultBookId } from "@/client.config";
 import { useRouter } from "next/router";
-import { ELanguage } from "@/typings/home.interface";
 import { clipboardAsync, setClipboard, setLanguage } from "@/store/modules/hive.module";
 import { useAppDispatch, useAppSelector } from "@/store";
 import useHiveLog from "@/hooks/useHiveLog";
 import { netIpUa } from "@/server/clientLog";
 import { debounce } from "throttle-debounce";
+import ClientConfig from "@/client.config";
 
 const pathData = {
   index: '/',
@@ -45,7 +44,6 @@ const useLogParams = (pageProps: any): void => {
   }, { atBegin: true })
 
   useEffect(() => {
-    dispatch(setLanguage((router.locale ?? ELanguage.ZhHans) as ELanguage))
     const { bid, cid } = getIds();
     dispatch(setClipboard({ bid, cid }));
     if (isReady) {
@@ -76,7 +74,7 @@ const useLogParams = (pageProps: any): void => {
 
   const getIds = (): { bid: string; cid: string | number } => {
     let clipboardBookId, clipboardChapterId;
-    const localeBookId = LanguageDefaultBookId?.[(router.locale ?? ELanguage.ZhHans) as ELanguage] || LanguageDefaultBookId[ELanguage.ZhHans]
+    const localeBookId = ClientConfig.bookId;
     if (router.pathname === pathData.book) {
       clipboardBookId = pageProps?.bookInfo?.bookId;
     } else if (router.pathname === pathData.download) {

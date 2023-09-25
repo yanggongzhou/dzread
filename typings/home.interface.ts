@@ -40,10 +40,3 @@ export interface IBookItem {
   typeTwoName: string;
   typeTwoIds: string[];
 }
-
-export enum ELanguage {
-  English = 'en',
-  ZhHans = 'zhHans', // 简体中文
-  Zh = 'zh', // 繁體中文
-  Korean = 'ko', // 韩语
-}
