@@ -37,6 +37,7 @@ console.log('\x1B[34m%s\x1B[39m', 'IPUA:', IpUaUrl)
 console.log('\x1B[44m%s\x1B[49m', '-------------------------- ✨ ✨ ✨ ✨ ✨ ✨ --------------------------')
 
 const nextConfig = {
+  runtime: 'edge', // for Edge API Routes only
   reactStrictMode: true,
   // Configuring the Build ID
   generateBuildId: async () => {
@@ -47,8 +48,6 @@ const nextConfig = {
     includePaths: [path.join(__dirname, 'styles')],
     prependData: `@import "common.module.scss";`
   },
-  // https://www.nextjs.cn/docs/upgrading
-  swcMinify: true,
   images: { // 远程图片资源域名
     domains: [
       "bookimg.klynf.com",
@@ -68,6 +67,8 @@ const nextConfig = {
     WebDomain,
     IpUaUrl,
   },
+  // https://www.nextjs.cn/docs/upgrading
+  swcMinify: true,
   // 参考 https://nextjs.org/docs/messages/swc-disabled
   experimental: {
     forceSwcTransforms: true,

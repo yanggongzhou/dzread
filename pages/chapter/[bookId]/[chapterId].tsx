@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import type { NextPage } from 'next'
 import { GetServerSideProps, GetServerSidePropsResult } from "next";
 import { netDetailChapter, netListChapter } from "@/server/home";
@@ -15,7 +15,6 @@ interface IProps {
   chapterInfo: INetChapterDetailRes;
   chapterContent: string;
   contentList: string[];
-  chapterList: IChapterListItem[];
 }
 
 const delDomTag = (str: string = '', replaceTxt: string) => {
@@ -27,8 +26,25 @@ const delDomTag = (str: string = '', replaceTxt: string) => {
 }
 
 const Chapter: NextPage<IProps> = (
-  { isPc, bookId, chapterContent, bookInfo, chapterInfo, contentList, chapterList }
+  { isPc, bookId, chapterContent, bookInfo, chapterInfo, contentList }
 ) => {
+  const [chapterList, setChapterList] = useState<IChapterListItem[]>([]);
+
+  useEffect(() => {
+    getChapterList();
+  }, [])
+
+  const getChapterList = async () => {
+    const responseList = await netListChapter({
+      bookId,
+      pageNo: 1,
+      pageSize: 2000,
+    });
+    if (responseList !== 'BadRequest_404' || responseList !== 'BadRequest_500') {
+      const { data = [], totalPage = 0 } = responseList;
+      setChapterList(data)
+    }
+  }
 
   return <>
     {isPc ?
@@ -51,7 +67,9 @@ const Chapter: NextPage<IProps> = (
 export default Chapter;
 
 // ssr
-export const getServerSideProps: GetServerSideProps = async ({ req, query }): Promise<GetServerSidePropsResult<IProps>> => {
+export const getServerSideProps: GetServerSideProps = async (
+  { req, query }
+): Promise<GetServerSidePropsResult<IProps>> => {
   const ua = req?.headers['user-agent'] || ''
   const { bookId, chapterId = '' } = query as { bookId: string, chapterId: string };
   const _chapterId = chapterId === '0' ? undefined : chapterId;
@@ -74,7 +92,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, query }): Pr
   if (responseList === 'BadRequest_500') {
     return { redirect: { destination: '/500', permanent: false } }
   }
-  const { data = [], totalPage = 0 } = responseList;
+
 
   const chapterContent = chapterInfo && chapterInfo.content ? delDomTag(chapterInfo.content, chapterInfo.chapterName || '') : '';
 
@@ -86,8 +104,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, query }): Pr
       chapterContent,
       contentList,
       bookId,
-      isPc: ownOs(ua).isPc,
-      chapterList: data,
+      isPc: ownOs(ua).isPc
     },
   }
 }

@@ -5,14 +5,13 @@ import '@/styles/globals.scss'
 import '@/styles/transition.css'
 import type { AppProps } from 'next/app'
 import { Provider } from 'react-redux'
-import { debounce } from "throttle-debounce";
 import { useEffect } from "react";
 import HeadNormal from "@/components/layout/HeadNormal";
 import store from '@/store'
 import DLayout from "@/components/layout";
 
 function App({ Component, pageProps, router }: AppProps) {
-  const nprogressEve = debounce(300, () => {
+  const nprogressEve = () => {
     router.events.on("routeChangeStart", () => {
       NProgress.start();
     });
@@ -22,7 +21,7 @@ function App({ Component, pageProps, router }: AppProps) {
     router.events.on("routeChangeError", () => {
       NProgress.done();
     });
-  }, { atBegin: true })
+  };
   useEffect(() => {
     nprogressEve();
   }, []); // eslint-disable-line

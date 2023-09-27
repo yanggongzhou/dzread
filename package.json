@@ -29,13 +29,11 @@
     "react-transition-group": "^4.4.5",
     "redux": "^4.2.1",
     "sass": "^1.63.6",
-    "throttle-debounce": "^5.0.0",
     "typescript": "5.2.2"
   },
   "devDependencies": {
     "@types/nprogress": "^0.2.0",
     "@types/react-copy-to-clipboard": "^5.0.4",
-    "@types/react-transition-group": "^4.4.6",
-    "@types/throttle-debounce": "^5.0.0"
+    "@types/react-transition-group": "^4.4.6"
   }
 }

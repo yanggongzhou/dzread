@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { clipboardAsync, setClipboard, setLanguage } from "@/store/modules/hive.module";
+import { clipboardAsync, setClipboard } from "@/store/modules/hive.module";
 import { useAppDispatch, useAppSelector } from "@/store";
 import useHiveLog from "@/hooks/useHiveLog";
 import { netIpUa } from "@/server/clientLog";
-import { debounce } from "throttle-debounce";
 import ClientConfig from "@/client.config";
 
 const pathData = {
@@ -36,12 +35,8 @@ const useLogParams = (pageProps: any): void => {
   }, [clipboard]); // eslint-disable-line
 
   useEffect(() => {
-    initClipboard()
-  }, []) // eslint-disable-line
-
-  const initClipboard = debounce(300,() => {
     dispatch(clipboardAsync())
-  }, { atBegin: true })
+  }, []) // eslint-disable-line
 
   useEffect(() => {
     const { bid, cid } = getIds();

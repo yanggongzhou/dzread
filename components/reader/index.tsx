@@ -1,19 +1,17 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
-import { IChapterListItem, INetChapterDetailRes } from "typings/book.interface";
+import { IChapterInfo, IChapterListItem, INetChapterDetailRes } from "typings/book.interface";
 import { DotLoading, PullToRefresh, Toast } from "antd-mobile";
-import { useRouter } from "next/router";
-import { useAppDispatch, useAppSelector } from "@/store";
-import { EDevice } from "@/store/store.interfaces";
+import { useAppSelector } from "@/store";
 import { IBookItem } from "@/typings/home.interface";
 import { PullStatus } from "antd-mobile/es/components/pull-to-refresh";
-import { debounce } from "throttle-debounce";
-import { IResChapter } from "@/pages/api/chapter";
-import { setControlVisible } from "@/store/modules/read.module";
 import ModalCatalog from "@/components/reader/modalCatalog/ModalCatalog";
 import ModalControl from "@/components/reader/modalControl/ModalControl";
 import ModalHeader from "@/components/reader/modalHeader/ModalHeader";
 import TopGuide from "@/components/reader/topGuide/TopGuide";
 import styles from '@/components/reader/index.module.scss';
+import { useRouter } from "next/router";
+import ContentList from "@/components/reader/contentList/ContentList";
+import { throttle } from "@/utils/tools";
 
 interface IProps {
   bookId: string;
@@ -25,69 +23,92 @@ interface IProps {
 
 const Reader: FC<IProps> = ({ bookId, chapterInfo, bookInfo, contentList, chapterList}) => {
   const theme = useAppSelector(state => state.read.theme);
-  const fontSize = useAppSelector(state => state.read.fontSize);
   const controlVisible = useAppSelector(state => state.read.controlVisible);
   const [isLoading, setIsLoading] = useState(false);
-  const [contentArr, setContentArr] = useState<IResChapter[]>([{
-    nextId: chapterInfo.nextChapter?.id,
+  const [contentArr, setContentArr] = useState<IChapterInfo[]>([{
+    id: chapterInfo.id,
     chapterName: chapterInfo.chapterName,
-    content: chapterInfo.content
-  }] as IResChapter[]);
-  const dispatch = useAppDispatch();
+    content: chapterInfo.content,
+    nextId: chapterInfo.nextChapter?.id,
+    prevId: chapterInfo.preChapter?.id,
+    isCharge: chapterInfo.isCharge,
+  }]);
+  const mainRef = useRef<HTMLDivElement | null>(null);
   const contentRef = useRef<HTMLDivElement | null>(null);
-  const router = useRouter()
-  const device = useAppSelector(state => state.app.device)
+  const router = useRouter();
 
-  // useEffect(() => {
-  //   const observer = new IntersectionObserver((e) => {
-  //     e.forEach((dom) => {
-  //       // isIntersecting为true则dom出现在页面上
-  //       if (dom.isIntersecting) {
-  //         console.log('dom.target', dom.target);
-  //       }
-  //     });
-  //   }, {});
-  //   if (contentArr.length > 0) {
-  //     observer.observe(intersectionRef.current as Element)
-  //   }
-  //   return () => {
-  //     if (intersectionRef.current) {
-  //       observer.unobserve(intersectionRef.current as Element)
-  //     }
-  //   };
-  // }, [contentArr]);
+  useEffect(() => {
+    if (contentArr.length > 0) {
+      const nextId = contentArr[contentArr.length - 1].nextId;
+      const prevId = contentArr[contentArr.length - 1].prevId;
+      if (nextId === chapterInfo.id || prevId === chapterInfo.id) {
+        const index = contentArr.findIndex(val => val.id === chapterInfo.id);
+        if (index !== -1) {
+          return;
+        }
+        const pushData = {
+          id: chapterInfo.id,
+          chapterName: chapterInfo.chapterName,
+          content: chapterInfo.content,
+          nextId: chapterInfo.nextChapter?.id,
+          prevId: chapterInfo.preChapter?.id,
+          isCharge: chapterInfo.isCharge,
+        };
+        setContentArr(prevState => nextId === chapterInfo.id ? [...prevState, pushData] : [pushData, ...prevState]);
+      }
+    }
+  }, [chapterInfo]);
 
-  // useEffect(() => {
-  //   if(device === EDevice.mobile && contentRef.current && Reflect.has(contentRef.current, "scrollIntoView")) {
-  //     (contentRef.current as HTMLDivElement)?.scrollIntoView()
-  //   }
-  // }, [contentList]); // eslint-disable-line
+  useEffect(() => {
+    if(mainRef.current) {
+      (mainRef.current as HTMLDivElement)?.addEventListener('scroll', handleScrollMove)
+    }
+    return () => {
+      if(mainRef.current) {
+        (mainRef.current as HTMLDivElement)?.removeEventListener('scroll', handleScrollMove)
+      }
+    }
+  }, [contentList]); // eslint-disable-line
 
+
+  const loadingRef = useRef<boolean>(false);
   // 拖拽竖屏阅读 Add lock to an async function to prevent parallel executions.
-  const handleScrollMove = debounce(500, async () => {
+  const handleScrollMove = async () => {
     // ?设置屏幕卷曲值scrollTop
     const winHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-    let top = (contentRef.current as HTMLDivElement)?.getBoundingClientRect().top || 0;
-    let height = contentRef.current?.clientHeight || 0;
+    let bottom = (contentRef.current as HTMLDivElement)?.getBoundingClientRect().bottom || 0;
 
-    if (height + top - winHeight < 200) {
+    if (bottom - winHeight <= 150) {
       if (!chapterInfo?.nextChapter) {
         Toast.show('已经是最后一章')
         return
       }
-      if (chapterInfo?.isCharge) return;
-      setIsLoading(true)
-      const nextChapterId = contentArr[contentArr.length - 1]?.nextId ?? chapterInfo.nextChapter.id;
-      await getChapterContent(nextChapterId);
-      setIsLoading(false)
+      console.log('more chapter')
+      if (loadingRef.current) return;
+      loadingRef.current = true;
+      await router.replace(`/chapter/${bookId}/${chapterInfo.nextChapter?.id}`);
+      loadingRef.current = false;
+    } else {
+      const domList = document.querySelectorAll('div[cid]');
+      const domArr = Array.from(domList);
+      const dom = domArr.find(val => val.getBoundingClientRect().top > 0 && val.getBoundingClientRect().top <= 200)
+      const chapterId = dom?.attributes?.cid?.value;
+      console.log('replace exit chapter', dom, chapterId)
+      if (!chapterId) return;
+      if (router.query.chapterId !== chapterId) {
+        if (loadingRef.current) return;
+        loadingRef.current = true;
+        await router.replace(`/chapter/${bookId}/${chapterId}`);
+        loadingRef.current = false;
+      }
     }
-  });
+  };
 
-  const getChapterContent = async (chapterId: string) => {
-    const response = await fetch(`/api/chapter?bookId=${bookId}&chapterId=${chapterId}`);
-    const res = await response.json();
-    setContentArr(prevState => [...prevState, res]);
-  }
+  // const getChapterContent = async (chapterId: string) => {
+  //   const response = await fetch(`/api/chapter?bookId=${bookId}&chapterId=${chapterId}`);
+  //   const res = await response.json();
+  //   setContentArr(prevState => [...prevState, res]);
+  // }
 
   const preChapter = async () => {
     if (!chapterInfo.preChapter) {
@@ -107,13 +128,14 @@ const Reader: FC<IProps> = ({ bookId, chapterInfo, bookInfo, contentList, chapte
   }
 
   return <main
+    ref={mainRef}
     className={styles.readerWrap}
     style={{ backgroundColor: theme }}>
 
     <ModalHeader visible={controlVisible} bookId={bookId || ''} bookName={bookInfo?.bookName || ''}/>
 
     <div
-      onTouchMove={handleScrollMove}
+      onScroll={handleScrollMove}
       className={styles.readerBox}
       ref={contentRef}>
 
@@ -129,27 +151,7 @@ const Reader: FC<IProps> = ({ bookId, chapterInfo, bookInfo, contentList, chapte
           if(!chapterInfo.preChapter && !chapterInfo?.nextChapter) return;
           await preChapter();
         }}>
-
-        {contentArr.map((item) => {
-          return <div cid={item.nextId} key={item.nextId} style={{ fontSize }}>
-            <h1 className={styles.title}>{item.chapterName}</h1>
-            <div
-              onClick={() => dispatch(setControlVisible(!controlVisible))}
-              className={styles.content}>
-              { item.content.split('\n').map((val, index) => {
-                return val ? <p key={index}>{val}</p> : null;
-              }) }
-            </div>
-            <div className={styles.downloadBox}>
-              { chapterInfo?.isCharge ?
-                <div
-                  style={{background: `linear-gradient(180deg, transparent 0%, ${theme} 100%)`}}
-                  className={styles.unlockMark}
-                /> : null }
-              <button className={styles.contentBtn}>打开点众阅读APP阅读本书</button>
-            </div>
-          </div>
-        })}
+        <ContentList list={contentArr}/>
       </PullToRefresh>
 
       <ModalControl bookId={bookId} chapterInfo={chapterInfo}/>

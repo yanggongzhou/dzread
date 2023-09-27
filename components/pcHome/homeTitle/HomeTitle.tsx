@@ -22,7 +22,7 @@ const PcHomeTitle: FC<IProps> = ({ title, href }) => {
         className={styles.moreIcon}
         width={16}
         height={16}
-        src={'/images/home/pc-more.png'}
+        src={'/images/common/more.png'}
         alt={''}
       />
       <Image
