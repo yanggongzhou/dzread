@@ -10,13 +10,18 @@ import styles from "@/components/book/index.module.scss";
 import FirstChapter from "@/components/book/firstChapter/FirstChapter";
 import CatalogBox from "@/components/book/catalogBox";
 import Image from "next/image";
+import { IChapterListItem } from "@/typings/book.interface";
+import { setCatalogVisible } from "@/store/modules/read.module";
+import { useAppDispatch } from "@/store";
 
 interface IProps {
+  chapterList: IChapterListItem[];
   bookInfo: IBookItem;
 }
 
-const MBook: FC<IProps> = ({ bookInfo }) => {
-  const router = useRouter()
+const MBook: FC<IProps> = ({ bookInfo, chapterList }) => {
+  const router = useRouter();
+  const dispatch = useAppDispatch();
   const recommendData = [
     {
       "author": "葉缺",
@@ -109,6 +114,7 @@ const MBook: FC<IProps> = ({ bookInfo }) => {
   }
 
   useEffect(() => {
+    dispatch(setCatalogVisible(false))
     window.addEventListener('scroll', onScroll)
     return () => {
       window.removeEventListener('scroll', onScroll)
@@ -136,7 +142,7 @@ const MBook: FC<IProps> = ({ bookInfo }) => {
         目录
       </Link>
     </nav>
-    { router.pathname === '/book/[bookId]' ? <FirstChapter bookInfo={bookInfo}/> : <CatalogBox bookInfo={bookInfo}/> }
+    { router.pathname === '/book/[bookId]' ? <FirstChapter bookInfo={bookInfo}/> : <CatalogBox chapterList={chapterList} bookInfo={bookInfo}/> }
 
     <div className={styles.recommendBox}>
       <div className={styles.columnHead}>

@@ -20,4 +20,6 @@ export interface IReadStore {
   theme: EThemeType;
   fontSize: number;
   operateType: EOperateType;
+  catalogVisible: boolean;
+  controlVisible: boolean;
 }

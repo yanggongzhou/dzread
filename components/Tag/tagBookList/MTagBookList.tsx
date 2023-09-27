@@ -14,12 +14,11 @@ const MTagBookList: FC<IProps> = ({dataSource, keyword}) => {
 
   return <div className={styles.bookListWrap}>
     {dataSource && dataSource.length > 0 ? dataSource.map((book, bookInd) => {
-      const { bookId, bookName, introduction, cover, author, tag, typeTwoName = 'all', replacedBookName, typeTwoNames = [], typeTwoIds = [], isHot} = book;
+      const { bookId, bookName, introduction, cover, author, tag, typeTwoName = 'all', replacedBookName, writeStatus } = book;
       const bookNameDom = printKeyword(bookName, keyword)
       const introDom = printKeyword(introduction, keyword)
       const linkUrl = `/book_info/${bookId}/${typeTwoName || 'all'}/${replacedBookName || 'null'}`;
-      const authorDom = printKeyword(author + (tag ? `/${tag}` : ''), keyword)
-      const browseLink = `/browse/${typeTwoIds[0] || 0}/${typeTwoName || 'all'}`;
+      const authorDom = printKeyword(author + (writeStatus ? ` · ${writeStatus}` : ''), keyword)
 
       return <div key={bookId + bookInd} className={styles.imageItem1Wrap}>
         <Link
@@ -41,24 +40,16 @@ const MTagBookList: FC<IProps> = ({dataSource, keyword}) => {
             dangerouslySetInnerHTML={{__html: bookNameDom}}
             href={linkUrl}
           />
-          <div className={styles.bookLine2}>
-            <Link
-              href={linkUrl}
-              className={styles.author}
-              dangerouslySetInnerHTML={{ __html: authorDom }}
-            />
-            {typeTwoNames[0] ? <>
-              <div className={styles.authorLine} />
-              <Link href={browseLink} className={styles.bookTypeTwoName}>
-                {typeTwoNames[0]}
-              </Link>
-            </> : null}
-          </div>
-
           <Link
             className={styles.intro}
             dangerouslySetInnerHTML={{__html: introDom}}
             href={linkUrl}/>
+
+          <Link
+            href={linkUrl}
+            className={styles.author}
+            dangerouslySetInnerHTML={{ __html: authorDom }}
+          />
         </div>
       </div>
     }) : null}

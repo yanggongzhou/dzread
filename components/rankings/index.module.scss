@@ -1,12 +1,14 @@
 .rankWrap {
   padding-top: 0.96rem;
   max-height: 100vh;
+  height: 100%;
   display: flex;
   overflow: hidden;
 
   .slideBox {
     width: 1.42rem;
     flex: none;
+    max-height: calc(100vh - 5rem);
 
     :global {
       .adm-side-bar-item {
@@ -71,7 +73,7 @@
     .rankContent {
       padding: 0 0.32rem 1.2rem;
       width: 6.08rem;
-      max-height: calc(100vh - 1.42rem);
+      max-height: calc(100vh - 3rem);
       overflow-y: auto;
     }
   }

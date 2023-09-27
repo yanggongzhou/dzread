@@ -35,7 +35,7 @@ const TagBookList: FC<IProps> = ({dataSource, keyword}) => {
       const bookNameDom = printKeyword(bookName, keyword)
       const introDom = printKeyword(introduction, keyword)
       const linkUrl = `/book_info/${bookId}/${typeTwoName || 'all'}/${replacedBookName || 'null'}`;
-      const authorDom = printKeyword(`By: ${author} ${tag ? `/${tag}` : ''}`, keyword)
+      const authorDom = printKeyword(`By: ${author} ${book.writeStatus ? ` · ${book.writeStatus}` : ''}`, keyword)
       const browseLink = `/browse/${typeTwoIds[0] || 0}/${typeTwoName || 'all'}`
 
       return <div key={bookId + bookInd} className={styles.imageItemMoreWrap}>

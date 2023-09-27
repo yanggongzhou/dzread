@@ -39,6 +39,7 @@ const Chapter: NextPage<IProps> = (
         bookInfo={bookInfo}
         chapterInfo={chapterInfo}/> :
       <Reader
+        chapterList={chapterList}
         contentList={contentList}
         bookId={bookId}
         bookInfo={bookInfo}

@@ -8,7 +8,9 @@ export const readSlice = createSlice<IReadStore, SliceCaseReducers<IReadStore>>(
   initialState: (): IReadStore => ({
     theme: EThemeType.default1,
     fontSize: 18,
-    operateType: EOperateType.normal,
+    operateType: EOperateType.normal, // pc侧边栏选中状态
+    catalogVisible: false, // wap 目录
+    controlVisible: false, // wap 操作
   }),
 
   reducers: {
@@ -27,9 +29,15 @@ export const readSlice = createSlice<IReadStore, SliceCaseReducers<IReadStore>>(
         state.operateType = action.payload;
       }
     },
+    setCatalogVisible: (state, action: PayloadAction<boolean>) => {
+      state.catalogVisible = action.payload;
+    },
+    setControlVisible: (state, action: PayloadAction<boolean>) => {
+      state.controlVisible = action.payload;
+    },
   }
 });
 
-export const { setTheme, setFontSize, setOperateType } = readSlice.actions;
+export const { setTheme, setFontSize, setOperateType, setCatalogVisible, setControlVisible } = readSlice.actions;
 
 export const readReducer = readSlice.reducer;

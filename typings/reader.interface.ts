@@ -6,9 +6,9 @@ export enum EOperateType {
 }
 
 export enum EThemeType {
-  default1 = 'rgb(224, 224, 224)',
-  default2 = 'rgb(222, 217, 198)',
-  default3 = 'rgb(230, 239, 228)',
-  default4 = "rgb(246, 239, 239)",
-  default5 = "rgb(217, 224, 232)",
+  default1 = '#F3F3F3',
+  default2 = '#E7F0E0',
+  default3 = '#DBE0E7',
+  default4 = "#EFD8D0",
+  default5 = "#D9E0E8",
 }

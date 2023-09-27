@@ -68,8 +68,8 @@ const SwiperArea: FC<IProps> = ({ bannerList = [] }) => {
               placeholder="blur"
               blurDataURL={ban.cover || '/images/defaultBook.png'}
               priority
-              width={1300}
-              height={400}
+              width={1200}
+              height={300}
               alt={ban.bookName}
             />
           </Link>

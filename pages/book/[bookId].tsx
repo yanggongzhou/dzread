@@ -1,6 +1,6 @@
 import React from "react";
 import { GetServerSideProps, GetServerSidePropsResult, NextPage } from "next";
-import { netBook } from "@/server/home";
+import { netBook, netListChapter } from "@/server/home";
 import PcBook from "@/components/pcBook";
 import { ownOs } from "@/utils/ownOs";
 import { EnumPosition, IBookItem } from "@/typings/home.interface";
@@ -15,10 +15,11 @@ interface IProps {
   recommendList: IBookItem[];
   lastChapter: IChapterListItem;
   position: EnumPosition | null;
+  chapterList: IChapterListItem[];
 }
 
 const Book: NextPage<IProps> = (
-  { isPc, bookId, bookInfo, recommendList, lastChapter, position }
+  { isPc, bookId, bookInfo, recommendList, chapterList, position }
 ) => {
 
   const data = [
@@ -34,6 +35,7 @@ const Book: NextPage<IProps> = (
         recommends={recommendList}
       /> :
       <MBook
+        chapterList={chapterList}
         bookInfo={bookInfo}
       />
     }
@@ -55,9 +57,22 @@ export const getServerSideProps: GetServerSideProps = async ({ req, query, local
     return { redirect: { destination: '/500', permanent: false } }
   }
   const { bookInfo = {} as IBookItem, alsoLook = [], lastChapter = {} as IChapterListItem, position = null } = response;
+  const responseList = await netListChapter({
+    bookId,
+    pageNo: 1,
+    pageSize: 2000,
+  });
+  if (responseList === 'BadRequest_404') {
+    return { notFound: true }
+  }
+  if (responseList === 'BadRequest_500') {
+    return { redirect: { destination: '/500', permanent: false } }
+  }
+  const { data = [] } = responseList;
 
   return {
     props: {
+      chapterList: data,
       bookId,
       bookInfo,
       lastChapter,

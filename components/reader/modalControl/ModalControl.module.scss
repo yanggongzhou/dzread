@@ -1,0 +1,152 @@
+.controlWrap {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  /*height: 100%;*/
+  bottom: -5rem;
+  z-index: 9999;
+  background-color: #FFFFFF;
+  transition: bottom 0.3s;
+  color: #2F3031;
+  padding: 0 0.32rem;
+}
+
+.controlSize {
+  height: 1.2rem;
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  .sizeTitle {
+    margin-right: 0.24rem;
+    font-size: 0.24rem;
+    font-weight: 400;
+    color: rgba(3,3,3,0.6);
+  }
+
+  .sizeBox {
+    height: 1.2rem;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .size {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.7rem;
+      height: 0.72rem;
+      background-color: #F3F3F3;
+      border-radius: 0.36rem;
+      font-weight: 400;
+      font-size: .3rem;
+    }
+
+    .sizeDisabled {
+      opacity: 0.5;
+    }
+
+    .sizeDefault {
+      font-size: 0.34rem;
+      color: #FE9107;
+    }
+  }
+}
+
+.controlBg {
+  height: 1.12rem;
+  display: flex;
+  align-items: center;
+
+  .bgTitle {
+    margin-right: 0.24rem;
+    font-size: 0.24rem;
+    font-weight: 400;
+    color: rgba(3,3,3,0.6);
+  }
+
+  .bgBox {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    column-gap: 0.13rem;
+
+    .bg {
+      width: 100%;
+      height: 0.64rem;
+      border-radius: 0.32rem;
+      border-width: 0.03rem;
+      border-style: solid;
+      border-color: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .bgIcon {
+        width: 0.48rem;
+        height: 0.48rem;
+      }
+    }
+
+    .bgActive {
+      border-color: #FE9107;
+    }
+  }
+}
+
+.chapterBtnBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 1.12rem;
+  background-color: #FFFFFF;
+
+  .chapterBtn, .pageItem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    padding: 0.2rem 0.32rem;
+    font-size: 0.3rem;
+    font-weight: 400;
+    color: #222222;
+    column-gap: 0.04rem;
+
+    .backIcon {
+      width: 0.36rem;
+      height: 0.36rem;
+    }
+
+    .nextIcon {
+      transform: rotateY(180deg);
+      width: 0.36rem;
+      height: 0.36rem;
+    }
+  }
+
+  .pageItem {
+    opacity: 0.5;
+  }
+
+  .catalogItem {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    padding: 0.2rem 0.32rem;
+    font-size: 0.3rem;
+    font-weight: 400;
+    color: #222222;
+    column-gap: 0.08rem;
+
+    .tabIcon {
+      width: 0.36rem;
+      height: 0.36rem;
+    }
+  }
+}
+
+
+

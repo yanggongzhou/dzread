@@ -1,0 +1,41 @@
+.topGuide {
+  background-color: #fff;
+  border-radius: 0.24rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.32rem;
+  padding: 0.24rem;
+  position: relative;
+  width: 100%;
+
+  .topGuideImg {
+    border-radius: 0.08rem;
+    height: 1.18rem;
+    margin-right: 0.24rem;
+    width: 0.9rem;
+    flex-shrink: 0;
+  }
+
+  .topGuideInfo {
+    flex: 1;
+    p {
+      text-align: left;
+      font-size: .32rem;
+      font-weight: 500;
+      color: #222222;
+      &:first-child {
+        margin-bottom: 0.1rem;
+      }
+    }
+  }
+
+  .downloadBtn {
+    border-radius: 0.31rem;
+    height: 0.62rem;
+    font-size: 0.18rem;
+    font-weight: 500;
+    color: #FFFFFF;
+    width: 1.92rem;
+    background: linear-gradient(90deg, #FF6600 0%, #FA3123 100%);
+  }
+}

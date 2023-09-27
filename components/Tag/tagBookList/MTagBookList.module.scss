@@ -30,7 +30,7 @@
   width: 4.6rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .bookName {
@@ -43,38 +43,16 @@
   margin-bottom: 0.08rem;
 }
 
-.bookLine2 {
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-
-  .author {
-    color: rgba(47, 48, 49, 0.5);
-    font-size: 0.24rem;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
-
-  .authorLine {
-    width: 0.02rem;
-    height: 0.24rem;
-    background-color: #6D768F;
-    opacity: 0.3;
-    margin: 0 0.1rem;
-  }
-
-  .bookTypeTwoName {
-    font-size: 0.24rem;
-    font-weight: 400;
-    color: $theme_color;
-    line-height: 32px;
-  }
+.author {
+  color: rgba(47, 48, 49, 0.5);
+  font-size: 0.24rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .intro {
   color: rgba(47, 48, 49, 0.5);
-  margin-top: 0.16rem;
   font-size: 0.24rem;
   overflow: hidden;
   text-overflow: ellipsis;

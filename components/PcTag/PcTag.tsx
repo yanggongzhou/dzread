@@ -33,8 +33,8 @@ const PcTag: FC<IProps> = (
         {relationKeywords.length > 0 ? <>
           <p className={styles.keywordConnectTitle}>相关热门搜索词：</p>
           {relationKeywords.map(val => {
-            return <Link key={val.id} href={`/tag/${val.id}`} replace>
-              <a className={styles.keywordConnectItem}>{val.name}</a>
+            return <Link key={val.id} href={`/tag/${val.id}`} className={styles.keywordConnectItem} replace>
+              {val.keyword}
             </Link>
           })}
         </> : null}
