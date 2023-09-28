@@ -4,18 +4,31 @@ import { setControlVisible } from "@/store/modules/read.module";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { IChapterInfo } from "@/typings/book.interface";
 import styles from "@/components/reader/contentList/ContentList.module.scss";
+import { PullToRefresh } from "antd-mobile";
+import { PullStatus } from "antd-mobile/es/components/pull-to-refresh";
 
 interface IProps {
+  onRefresh: () => void;
   list: IChapterInfo[];
 }
-const ContentList: FC<IProps> = ({ list }) => {
+
+const statusRecord: Record<PullStatus, string> = {
+  pulling: '释放阅读上一章',
+  canRelease: '释放阅读上一章',
+  refreshing: '加载中...',
+  complete: '',
+}
+
+const ContentList: FC<IProps> = ({ onRefresh, list }) => {
   const fontSize = useAppSelector(state => state.read.fontSize);
   const theme = useAppSelector(state => state.read.theme);
   const controlVisible = useAppSelector(state => state.read.controlVisible);
   const dispatch = useAppDispatch();
 
   return (
-    <>
+    <PullToRefresh
+      renderText={(status) => <div>{statusRecord[status]}</div>}
+      onRefresh={onRefresh}>
       { list.map(item => {
         return <div cid={item.id} key={item.id} style={{ fontSize }}>
           <h1 className={styles.title}>{item.chapterName}</h1>
@@ -36,8 +49,7 @@ const ContentList: FC<IProps> = ({ list }) => {
           </div>
         </div>
       })}
-
-    </>
+    </PullToRefresh>
   )
 }
 

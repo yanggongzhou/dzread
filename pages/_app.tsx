@@ -13,6 +13,9 @@ import DLayout from "@/components/layout";
 function App({ Component, pageProps, router }: AppProps) {
   const nprogressEve = () => {
     router.events.on("routeChangeStart", () => {
+      // if (router.pathname !== '/chapter/[bookId]/[chapterId]') {
+      //   NProgress.start();
+      // }
       NProgress.start();
     });
     router.events.on("routeChangeComplete", () => {

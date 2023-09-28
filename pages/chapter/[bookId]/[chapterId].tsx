@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import type { NextPage } from 'next'
 import { GetServerSideProps, GetServerSidePropsResult } from "next";
 import { netDetailChapter, netListChapter } from "@/server/home";
@@ -13,8 +13,8 @@ interface IProps {
   bookId: string;
   bookInfo: IBookItem;
   chapterInfo: INetChapterDetailRes;
-  chapterContent: string;
   contentList: string[];
+  chapterList: IChapterListItem[];
 }
 
 const delDomTag = (str: string = '', replaceTxt: string) => {
@@ -26,26 +26,8 @@ const delDomTag = (str: string = '', replaceTxt: string) => {
 }
 
 const Chapter: NextPage<IProps> = (
-  { isPc, bookId, chapterContent, bookInfo, chapterInfo, contentList }
+  { isPc, bookId, bookInfo, chapterInfo, contentList, chapterList }
 ) => {
-  const [chapterList, setChapterList] = useState<IChapterListItem[]>([]);
-
-  useEffect(() => {
-    getChapterList();
-  }, [])
-
-  const getChapterList = async () => {
-    const responseList = await netListChapter({
-      bookId,
-      pageNo: 1,
-      pageSize: 2000,
-    });
-    if (responseList !== 'BadRequest_404' || responseList !== 'BadRequest_500') {
-      const { data = [], totalPage = 0 } = responseList;
-      setChapterList(data)
-    }
-  }
-
   return <>
     {isPc ?
       <PcReader
@@ -56,7 +38,6 @@ const Chapter: NextPage<IProps> = (
         chapterInfo={chapterInfo}/> :
       <Reader
         chapterList={chapterList}
-        contentList={contentList}
         bookId={bookId}
         bookInfo={bookInfo}
         chapterInfo={chapterInfo}/>
@@ -68,7 +49,7 @@ export default Chapter;
 
 // ssr
 export const getServerSideProps: GetServerSideProps = async (
-  { req, query }
+  { req, query, res }
 ): Promise<GetServerSidePropsResult<IProps>> => {
   const ua = req?.headers['user-agent'] || ''
   const { bookId, chapterId = '' } = query as { bookId: string, chapterId: string };
@@ -93,15 +74,14 @@ export const getServerSideProps: GetServerSideProps = async (
     return { redirect: { destination: '/500', permanent: false } }
   }
 
-
   const chapterContent = chapterInfo && chapterInfo.content ? delDomTag(chapterInfo.content, chapterInfo.chapterName || '') : '';
 
   const contentList = chapterContent.split('\n')
   return {
     props: {
+      chapterList: responseList.data || [] as IChapterListItem[],
       bookInfo: chapterInfo.bookInfo || {} as IBookItem,
       chapterInfo,
-      chapterContent,
       contentList,
       bookId,
       isPc: ownOs(ua).isPc

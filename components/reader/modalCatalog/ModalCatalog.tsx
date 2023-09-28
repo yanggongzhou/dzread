@@ -18,9 +18,7 @@ interface IProps {
 
 const ModalCatalog: FC<IProps> = ({ bookInfo, chapterList, chapterId }) => {
   const catalogVisible = useAppSelector(state => state.read.catalogVisible);
-
   const dispatch = useAppDispatch();
-
   const bookHref = `/book/${bookInfo.bookId}`;
   return <>
     <Mask
@@ -57,7 +55,12 @@ const ModalCatalog: FC<IProps> = ({ bookInfo, chapterList, chapterId }) => {
 
       <div className={styles.list}>
         { chapterList.map(item => {
-          return <Link href={`/chapter/${bookInfo.bookId}/${item.id}`} key={item.id} className={styles.catalogItem}>
+          return <Link
+            replace
+            onClick={() => dispatch(setCatalogVisible(false))}
+            href={`/chapter/${bookInfo.bookId}/${item.id}`}
+            key={item.id}
+            className={styles.catalogItem}>
             <span className={classNames(styles.itemTxt, item.isCharge && styles.lockTxt, item.id === chapterId && styles.active)}>{ item.chapterName }</span>
             {item.isCharge ? <Image
               className={styles.itemIcon}
