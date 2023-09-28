@@ -27,7 +27,7 @@ const PcSearch: FC<IProps> = (
 
     {pages && pages > 1 ?
       <PaginationCom
-        path={`/so/`}
+        path={`/search/`}
         query={`?searchValue=${sValue}`}
         pageNo={current}
         totalPage={pages}

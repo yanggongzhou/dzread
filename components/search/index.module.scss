@@ -1,0 +1,33 @@
+.searchWrap {
+  background-color: #FFFFFF;
+  min-height: 100vh;
+  padding: 0.96rem 0.32rem 1.12rem;
+
+  .searchList {
+    padding: 0.25rem 0;
+
+    .noSearchTxt {
+      padding: 0.15rem 0 0.41rem;
+      font-size: 0.32rem;
+      font-weight: 400;
+      color: #222222;
+      line-height: 0.45rem;
+    }
+
+    .footerBox {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      z-index: 9;
+      height: 1.12rem;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #FFFFFF;
+      padding: 0 0.32rem;
+      box-shadow: 0 0 0.06rem 0 #ededed;
+    }
+  }
+
+}

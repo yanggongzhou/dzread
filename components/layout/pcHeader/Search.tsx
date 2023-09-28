@@ -17,7 +17,7 @@ const HeaderSearch: FC<IProps> = () => {
   }, [router.locale, router]) // eslint-disable-line
   const onSearch = () => {
     if (searchValue) {
-      router.push({ pathname: '/so', query: { searchValue } })
+      router.push({ pathname: '/search', query: { searchValue } })
     } else {
       Toast.show('请输入搜索内容')
     }

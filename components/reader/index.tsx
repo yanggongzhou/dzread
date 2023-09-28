@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
-import { IChapterInfo, IChapterListItem, INetChapterDetailRes } from "typings/book.interface";
+import { IChapterListItem, INetChapterDetailRes } from "typings/book.interface";
 import { DotLoading, Toast } from "antd-mobile";
 import { useAppSelector } from "@/store";
 import { IBookItem } from "@/typings/home.interface";
@@ -25,28 +25,14 @@ const Reader: FC<IProps> = (
   const theme = useAppSelector(state => state.read.theme);
   const controlVisible = useAppSelector(state => state.read.controlVisible);
   const [isLoading, setIsLoading] = useState(false);
-  const [contentArr, setContentArr] = useState<IChapterInfo[]>([{
-    id: chapterInfo.id,
-    chapterName: chapterInfo.chapterName,
-    content: chapterInfo.content,
-    nextId: chapterInfo.nextChapter?.id,
-    prevId: chapterInfo.preChapter?.id,
-    isCharge: chapterInfo.isCharge,
-  }]);
+  const [contentArr, setContentArr] = useState<INetChapterDetailRes[]>([chapterInfo]);
   const mainRef = useRef<HTMLDivElement | null>(null);
   const contentRef = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
 
   useEffect(() => {
     if (chapterInfo.id) {
-      setContentArr([{
-        id: chapterInfo.id,
-        chapterName: chapterInfo.chapterName,
-        content: chapterInfo.content,
-        nextId: chapterInfo.nextChapter?.id,
-        prevId: chapterInfo.preChapter?.id,
-        isCharge: chapterInfo.isCharge,
-      }]);
+      setContentArr([chapterInfo]);
       if (contentRef.current && Reflect.has(contentRef.current, "scrollIntoView")) {
         // @ts-ignore
         contentRef.current.scrollIntoView()
@@ -84,10 +70,14 @@ const Reader: FC<IProps> = (
   const handleScrollMove = async () => {
     // ?设置屏幕卷曲值scrollTop
     const winHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-    if (bottom - winHeight <= 200) {
+    if (bottom - winHeight <= 100) {
       // console.log('more chapter')
       // await router.replace(`/chapter/${bookId}/${nextId}`);
       await getChapterDetail("next")
+    }
+    // 付费章节每章单独占一页
+    if (chapterInfo.isCharge) {
+      return;
     }
     const domList = document.querySelectorAll('div[cid]');
     const domArr = Array.from(domList);
@@ -105,24 +95,24 @@ const Reader: FC<IProps> = (
   const loadingRef = useRef<boolean>(false);
   const getChapterDetail = async (type: "next" | "prev") => {
     if (loadingRef.current) return;
-    const cid = type === "prev" ? contentArr?.[0]?.prevId : contentArr?.[contentArr.length - 1]?.nextId;
-    if (!cid) {
+
+    const chapter = type === "prev" ? contentArr?.[0]?.preChapter : contentArr?.[contentArr.length - 1]?.nextChapter;
+    // 付费章节每章单独占一页
+    if (chapter?.isCharge) {
+      loadingRef.current = true;
+      await router.replace(`/chapter/${bookId}/${chapter.id}`);
+      loadingRef.current = false;
+      return;
+    }
+    if (!chapter?.id) {
       Toast.show(type === "prev" ? '已经是第一章' : '已经是最后一章')
       return
     }
     loadingRef.current = true;
     setIsLoading(true);
-    const chapterData = await netDetailChapter(bookId, cid);
+    const chapterData = await netDetailChapter(bookId, chapter?.id);
     if (chapterData !== 'BadRequest_404' && chapterData !== 'BadRequest_500' && chapterData) {
-      const pushData = {
-        id: chapterData.id,
-        chapterName: chapterData.chapterName,
-        content: chapterData.content,
-        nextId: chapterData.nextChapter?.id,
-        prevId: chapterData.preChapter?.id,
-        isCharge: chapterData.isCharge,
-      };
-      setContentArr(prevState => type === "prev" ? [pushData, ...prevState] : [...prevState, pushData]);
+      setContentArr(prevState => type === "prev" ? [chapterData, ...prevState] : [...prevState, chapterData]);
     }
     loadingRef.current = false;
     setIsLoading(false);
@@ -142,6 +132,7 @@ const Reader: FC<IProps> = (
       <TopGuide bookInfo={bookInfo}/>
 
       <ContentList onRefresh={() => getChapterDetail("prev")} list={contentArr}/>
+
       { isLoading ? <div className={styles.readerLoading}>
         <DotLoading />
         <span>加载中</span>

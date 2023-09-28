@@ -25,14 +25,14 @@ export const MEmpty: FC = () => {
     <Image
       className={styles.emptyIcon}
       width={320}
-      height={240}
+      height={320}
       src={'/images/common/empty.png'}
       placeholder="blur"
       blurDataURL={'/images/common/empty.png'}
       alt={'没找到内容'}
     />
     <div className={styles.emptyIntro}>
-      没找到内容
+      暂时没有数据，去看看其他内容吧
     </div>
   </div>
 }

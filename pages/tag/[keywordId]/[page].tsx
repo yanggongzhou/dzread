@@ -3,10 +3,9 @@ import { GetServerSideProps, GetServerSidePropsResult, NextPage } from "next";
 import { ownOs } from "@/utils/ownOs";
 import { netKeywordTag } from "@/server/home";
 import PcTag from "@/components/PcTag/PcTag";
-import MTag from "@/components/Tag/MTag";
+import WapTag from "@/components/tag";
 import { IKeywordItem, ITagBookItem } from "@/typings/tag.interface";
 import Breadcrumb from "@/components/common/breadcrumb";
-
 
 interface IProps {
   bookList: ITagBookItem[];
@@ -26,7 +25,7 @@ const ConvergencePage: NextPage<IProps> = (
     { title: keyword },
   ]
   return <>
-    <Breadcrumb data={data}/>
+    <Breadcrumb data={data} style={isPc ? {} : { width: 0, height: 0, display: "none" }}/>
     {isPc ?
       <PcTag
         relationKeywords={keywordList}
@@ -35,7 +34,7 @@ const ConvergencePage: NextPage<IProps> = (
         keywordId={keywordId}
         keyword={keyword}
         bookList={bookList}/> :
-      <MTag
+      <WapTag
         relationKeywords={keywordList}
         pageNo={currentPage}
         totalPage={pages}

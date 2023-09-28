@@ -4,7 +4,7 @@ import { netSearch } from "@/server/home";
 import { IBookItem } from "typings/home.interface";
 import PcSearch from "@/components/PcSearch/PcSearch";
 import { ownOs } from "@/utils/ownOs";
-import MSearch from "@/components/Search";
+import WapSearch from "@/components/search";
 
 interface IProps {
   total: number;
@@ -20,7 +20,7 @@ const SoPage: NextPage<IProps> = ({ isPc, sValue, bookList = [], isEmpty, curren
   return <>
     { isPc ?
       <PcSearch sValue={sValue} bookList={bookList} isEmpty={isEmpty} pages={pages} current={current} total={total}/> :
-      <MSearch sValue={sValue} bookList={bookList} isEmpty={isEmpty} pages={pages} current={current} />}
+      <WapSearch sValue={sValue} bookList={bookList} isEmpty={isEmpty} pages={pages} current={current} />}
   </>
 }
 
@@ -29,7 +29,7 @@ export default SoPage;
 // ssr
 export const getServerSideProps: GetServerSideProps = async ({ req, query }): Promise<GetServerSidePropsResult<IProps>> => {
   const ua = req?.headers['user-agent'] || '';
-  const { searchValue = '', page = '1'} = query as { searchValue: string; page: string; };
+  const { searchValue = '', page = '1' } = query as { searchValue: string; page: string; };
   const { isPc } = ownOs(ua);
   if (searchValue) {
     const data = await netSearch(searchValue);

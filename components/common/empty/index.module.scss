@@ -16,7 +16,7 @@
     font-weight: 400;
     color: #FFFFFF;
     text-align: center;
-    margin: 0.08rem auto 0.48rem;
+    margin: 0.08rem auto 0;
     line-height: 0.34rem;
     opacity: 0.4;
   }
@@ -24,7 +24,7 @@
 
 .mEmptyBox {
   position: relative;
-  padding-top: 2.98rem;
+  padding-top: 2.8rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -32,16 +32,15 @@
 
   .emptyIcon {
     width: 3.2rem;
-    height: 2.4rem;
+    height: 3.2rem;
   }
 
   .emptyIntro {
     font-size: 0.28rem;
     font-weight: 400;
-    color: #FFFFFF;
+    color: #A0A9BA;
     text-align: center;
-    margin: 0.24rem auto 0.48rem;
+    margin: 0.4rem auto;
     line-height: 0.34rem;
-    opacity: 0.4;
   }
 }

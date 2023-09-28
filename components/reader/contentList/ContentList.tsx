@@ -2,14 +2,14 @@ import { FC } from "react";
 import React  from 'react'
 import { setControlVisible } from "@/store/modules/read.module";
 import { useAppDispatch, useAppSelector } from "@/store";
-import { IChapterInfo } from "@/typings/book.interface";
+import { INetChapterDetailRes } from "@/typings/book.interface";
 import styles from "@/components/reader/contentList/ContentList.module.scss";
 import { PullToRefresh } from "antd-mobile";
 import { PullStatus } from "antd-mobile/es/components/pull-to-refresh";
 
 interface IProps {
   onRefresh: () => void;
-  list: IChapterInfo[];
+  list: INetChapterDetailRes[];
 }
 
 const statusRecord: Record<PullStatus, string> = {
@@ -30,7 +30,7 @@ const ContentList: FC<IProps> = ({ onRefresh, list }) => {
       renderText={(status) => <div>{statusRecord[status]}</div>}
       onRefresh={onRefresh}>
       { list.map(item => {
-        return <div cid={item.id} key={item.id} style={{ fontSize }}>
+        return <div cid={item.id} key={item.id} style={item.isCharge ? { fontSize, minHeight: "100vh" } : { fontSize }}>
           <h1 className={styles.title}>{item.chapterName}</h1>
           <div
             onClick={() => dispatch(setControlVisible(!controlVisible))}

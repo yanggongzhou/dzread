@@ -1,0 +1,71 @@
+.tagWrap {
+  padding: 1.2rem 0.32rem 1.12rem;
+  background-color: #FFFFFF;
+  min-height: 100vh;
+
+  .title {
+    font-size: 0.34rem;
+    color: $theme_color;
+    line-height: 0.48rem;
+    margin-bottom: 0.16rem;
+    font-weight: 500;
+  }
+
+  .sub {
+    font-size: 0.28rem;
+    line-height: 0.4rem;
+    color: #555555;
+    white-space: pre-wrap;
+  }
+
+  .keywordConnect {
+    padding: 0.48rem 0;
+
+    .connectTitle {
+      font-size: 0.3rem;
+      color: #333333;
+      line-height: 0.36rem;
+      font-weight: 500;
+      margin-bottom: 0.24rem;
+    }
+
+    .connectBox {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.16rem;
+
+      .connectItem {
+        flex-shrink: 0;
+        padding: 0.19rem 0.24rem;
+        height: 0.72rem;
+        background-color: #F3F3F3;
+        border-radius: 0.36rem;
+
+        p {
+          font-size: 0.28rem;
+          line-height: 0.34rem;
+          color: #555555;
+          max-width: 3.56rem;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+
+  .footerBox {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 9;
+    height: 1.12rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFFFFF;
+    padding: 0 0.32rem;
+    box-shadow: 0 0 0.06rem 0 #ededed;
+  }
+}

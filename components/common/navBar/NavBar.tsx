@@ -6,9 +6,10 @@ import styles from '@/components/common/navBar/NavBar.module.scss';
 interface IProps {
   backHref: string;
   title?: string;
+  icon?: string;
 }
 
-const NavBar: FC<IProps> = ({ title = '', backHref }) => {
+const NavBar: FC<IProps> = ({ title = '', backHref, icon }) => {
 
   return <header className={styles.navBarBox}>
     <Link href={backHref} className={styles.backBox}>
@@ -16,7 +17,7 @@ const NavBar: FC<IProps> = ({ title = '', backHref }) => {
         className={styles.backIcon}
         width={48}
         height={48}
-        src={'/images/common/back.png'}
+        src={icon ?? '/images/common/back.png'}
         alt={'<'}
       />
     </Link>

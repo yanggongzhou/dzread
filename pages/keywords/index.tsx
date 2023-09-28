@@ -3,7 +3,7 @@ import { GetServerSideProps, GetServerSidePropsResult, NextPage } from "next";
 import { ownOs } from "@/utils/ownOs";
 import { netKeywords } from "@/server/home";
 import PcKeywords from "@/components/PcKeywords/PcKeywords";
-import MKeywords from "@/components/Keywords/MKeywords";
+import WapKeywords from "@/components/keywords";
 import { IKeywordItem } from "@/typings/tag.interface";
 
 interface IProps {
@@ -18,7 +18,7 @@ const KeywordsPage: NextPage<IProps> = ({ isPc, currentPage, totalPage = 0, keyw
   return <>
     {isPc ?
       <PcKeywords keywordList={keywordList} pageNo={currentPage} totalPage={totalPage}/>
-      : <MKeywords keywordList={keywordList} pageNo={currentPage} totalPage={totalPage}/>}
+      : <WapKeywords keywordList={keywordList} pageNo={currentPage} totalPage={totalPage}/>}
   </>
 }
 

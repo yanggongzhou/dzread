@@ -36,15 +36,3 @@ export interface INetListChapterRes {
   totalNum: number;
   totalPage: number;
 }
-
-
-
-
-export interface IChapterInfo {
-  id: string;
-  chapterName: string;
-  content: string;
-  nextId?: string;
-  prevId?: string;
-  isCharge: boolean;
-}
