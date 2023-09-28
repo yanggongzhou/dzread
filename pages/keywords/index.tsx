@@ -2,7 +2,7 @@ import React from "react";
 import { GetServerSideProps, GetServerSidePropsResult, NextPage } from "next";
 import { ownOs } from "@/utils/ownOs";
 import { netKeywords } from "@/server/home";
-import PcKeywords from "@/components/PcKeywords/PcKeywords";
+import PcKeywords from "@/components/pcKeywords";
 import WapKeywords from "@/components/keywords";
 import { IKeywordItem } from "@/typings/tag.interface";
 

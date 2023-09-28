@@ -1,16 +1,12 @@
 import React, { FC } from 'react'
 import PcHomeTitle from "@/components/pcHome/homeTitle/HomeTitle";
 import PaginationCom from "@/components/common/paginationCom";
-import Link from "next/link";
 import { PcEmpty } from "@/components/common/empty";
-import Image from "next/image";
 import FirstList from "@/components/common/firstList/FirstList";
-import { useRouter } from "next/router";
 import RankingTab from "@/components/pcRanking/tabs/RankingTab";
-import styles from '@/components/pcRanking/index.module.scss'
-import { IBookItem, INetHomeItem } from "@/typings/home.interface";
+import { IBookItem } from "@/typings/home.interface";
 import { IBrowseTypes } from "@/typings/browse.interface";
-import PcCapsuleTabs from "@/components/pcBrowse/PcCapsuleTabs";
+import styles from '@/components/pcRanking/index.module.scss'
 
 interface IProps {
   bookList: IBookItem[];
@@ -22,15 +18,13 @@ interface IProps {
 
 const PcRanking: FC<IProps> = ({ bookList = [], pageNo, pages, typeTwoId, types }) => {
 
-  const router = useRouter();
-
-  return <div className={styles.browseWrap}>
+  return <main className={styles.rankWrap}>
 
     <RankingTab />
 
-    <div className={styles.browseContent}>
+    <div className={styles.rankContent}>
 
-      <div className={styles.browseTitle}>
+      <div className={styles.rankTitle}>
         都市小说
       </div>
 
@@ -44,7 +38,7 @@ const PcRanking: FC<IProps> = ({ bookList = [], pageNo, pages, typeTwoId, types 
           totalPage={pages}
           isScroll={true}/> : null}
     </div>
-  </div>
+  </main>
 }
 
 export default PcRanking

@@ -1,0 +1,21 @@
+.keywordsWrap {
+  padding-bottom: 0.5rem;
+  min-height: calc(100vh - 2rem);
+  background-color: #F5F6FA;
+
+
+  .keywordBox {
+    width: 10rem;
+    margin: 0 auto;
+    padding: 0.5rem 0;
+    height: 100%;
+
+    .keywordItem {
+      font-size: 0.16rem;
+      padding: 0.08rem 0.2rem;
+      color: $theme_color;
+      display: inline-block;
+      text-decoration: underline !important;
+    }
+  }
+}

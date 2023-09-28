@@ -14,7 +14,7 @@ interface IProps {
 const PcBook: FC<IProps> = ({ bookInfo, recommends = []  }) => {
   const routerToBook = `/download?${bookInfo.bookId}`;
 
-  return <>
+  return <main className={styles.bookWrap}>
     <div className={styles.detailBox}>
       <Image
         onError={onImgError}
@@ -47,15 +47,8 @@ const PcBook: FC<IProps> = ({ bookInfo, recommends = []  }) => {
           </div>
         </div>
 
-        <Link href={`/download?${bookInfo.bookId}`} className={styles.playBtn}>
-          <Image
-            className={styles.playIcon}
-            width={16}
-            height={16}
-            src={'/images/book/play-icon.png'}
-            alt={''}
-          />
-          <span>play</span>
+        <Link href={`/chapter/${bookInfo.bookId}/${bookInfo.firstChapterId}`} className={styles.playBtn}>
+          开始阅读
         </Link>
       </div>
     </div>
@@ -63,7 +56,7 @@ const PcBook: FC<IProps> = ({ bookInfo, recommends = []  }) => {
       <h2 className={styles.titleText}>你也许也喜欢</h2>
       <SecondList dataSource={recommends}/>
     </div> : null }
-  </>
+  </main>
 }
 
 export default PcBook;

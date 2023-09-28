@@ -1,8 +1,8 @@
 import React, { FC } from 'react'
-import styles from '@/components/PcTag/tagBookList/TagBookList.module.scss'
 import Link from "next/link";
 import Image from "next/image";
 import { ITagBookItem } from "@/typings/tag.interface";
+import styles from '@/components/pcTag/tagBookList/TagBookList.module.scss'
 
 interface IProps {
   dataSource: ITagBookItem[];

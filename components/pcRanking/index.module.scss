@@ -1,34 +1,19 @@
-.rankingWrap {
-  padding-top: 0.3rem;
-
-  .rankingContent {
-    position: relative;
-    z-index: 1;
-    margin-left: 180px;
-
-    .moreBookList {
-      padding-bottom: 0.5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-  }
-}
-
-.browseWrap {
+.rankWrap {
   padding: 0.4rem 0 0.6rem;
   display: grid;
   grid-template-columns: 260px auto;
   grid-column-gap: 20px;
+  width: 10rem;
+  margin: 0 auto;
 
 
-  .browseContent {
+  .rankContent {
     min-height: 7rem;
     position: relative;
     z-index: 9;
-    width: 100%;
+    margin-left: 180px;
 
-    .browseTitle {
+    .rankTitle {
       font-size: 0.16rem;
       font-weight: 400;
     }

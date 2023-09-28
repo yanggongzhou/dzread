@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import Link from "next/link";
-import { printKeyword } from "@/components/PcTag/tagBookList/TagBookList";
+import { printKeyword } from "@/components/pcTag/tagBookList/TagBookList";
 import { ITagBookItem } from "@/typings/tag.interface";
 import ImageCover from "@/components/common/image/ImageCover";
 import styles from '@/components/tag/tagBookList/MTagBookList.module.scss'

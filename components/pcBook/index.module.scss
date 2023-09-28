@@ -1,3 +1,8 @@
+.bookWrap {
+  width: 10rem;
+  margin: 0 auto;
+}
+
 
 .detailBox {
   padding: 1.2rem 0 0.4rem;
@@ -30,7 +35,7 @@
         width: 9rem;
         font-size: 0.24rem;
         font-weight: 500;
-        color: rgba(255, 255, 255, 0.9);
+        color: #333333;
         line-height: 0.32rem;
         overflow: hidden;
         white-space: nowrap;
@@ -43,7 +48,7 @@
         width: 9rem;
         font-size: 0.13rem;
         font-weight: 400;
-        color: rgba(255, 255, 255, 0.9);
+        color: #333333;
         line-height: 0.18rem;
         margin-bottom: 0.2rem;
       }
@@ -53,7 +58,7 @@
         margin-bottom: 0.3rem;
         font-size: 0.14rem;
         font-weight: 400;
-        color: rgba(255, 255, 255, 0.4);
+        color: #333333;
         line-height: 0.20rem;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -72,7 +77,7 @@
         .tagItem {
           border-radius: 0.03rem;
           padding: 0.04rem 0.1rem;
-          color: rgba(255, 255, 255, 0.4);
+          color: #333333;
           background-color: rgba(255, 255, 255, 0.08);
         }
       }

@@ -1,10 +1,9 @@
 import React, { FC } from "react";
-import styles from '@/components/PcKeywords/PcKeywords.module.scss'
 import Link from "next/link";
 import PaginationCom from "@/components/common/paginationCom";
 import { IKeywordItem } from "@/typings/tag.interface";
-import { useRouter } from "next/router";
 import { PcEmpty } from "@/components/common/empty";
+import styles from '@/components/pcKeywords/index.module.scss'
 
 interface IProps {
   keywordList: IKeywordItem[]
@@ -12,16 +11,10 @@ interface IProps {
   totalPage: number;
 }
 
-const PcKeywords: FC<IProps> = ({ pageNo, totalPage, keywordList }) => {
-  const router = useRouter();
-  const data = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','#']
+const pcKeywords: FC<IProps> = ({ pageNo, totalPage, keywordList }) => {
 
-  return <div className={styles.keywordsWrap}>
-    <nav className={styles.tagLetter}>
-      {data.map(item => {
-        return <Link className={styles.letter} key={item} href={`/keywords/${item}`}>{item}</Link>
-      })}
-    </nav>
+  return <main className={styles.keywordsWrap}>
+
     { keywordList.length === 0 ? <PcEmpty />:
       <div className={styles.keywordBox}>
       {keywordList.map(val => {
@@ -36,7 +29,7 @@ const PcKeywords: FC<IProps> = ({ pageNo, totalPage, keywordList }) => {
       totalPage={totalPage}
       isScroll={true}
     /> : null}
-  </div>
+  </main>
 }
 
-export default PcKeywords;
+export default pcKeywords;

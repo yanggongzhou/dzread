@@ -1,10 +1,9 @@
 import React, { FC } from "react";
-import styles from "@/components/PcTag/PcTag.module.scss";
 import PaginationCom from "@/components/common/paginationCom";
 import Link from "next/link";
-import TagBookList from "@/components/PcTag/tagBookList/TagBookList";
+import TagBookList from "@/components/pcTag/tagBookList/TagBookList";
 import { IKeywordItem, ITagBookItem } from "@/typings/tag.interface";
-import { useRouter } from "next/router";
+import styles from "@/components/pcTag/index.module.scss";
 
 interface IProps {
   bookList: ITagBookItem[];
@@ -18,7 +17,6 @@ interface IProps {
 const PcTag: FC<IProps> = (
   { pageNo, totalPage, keywordId, bookList, keyword, relationKeywords}) => {
 
-  const router = useRouter()
 
   return <div className={styles.tagWrap}>
     {keyword ? <div className={styles.keywordBox}>

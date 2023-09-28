@@ -1,8 +1,8 @@
 import React from "react";
 import { GetServerSideProps, GetServerSidePropsResult, NextPage } from "next";
 import { netSearch } from "@/server/home";
-import { IBookItem } from "typings/home.interface";
-import PcSearch from "@/components/PcSearch/PcSearch";
+import { IBookItem } from "@/typings/home.interface";
+import PcSearch from "@/components/pcSearch";
 import { ownOs } from "@/utils/ownOs";
 import WapSearch from "@/components/search";
 
@@ -16,7 +16,7 @@ interface IProps {
   isEmpty: boolean;
 }
 
-const SoPage: NextPage<IProps> = ({ isPc, sValue, bookList = [], isEmpty, current, pages, total}) => {
+const Search: NextPage<IProps> = ({ isPc, sValue, bookList = [], isEmpty, current, pages, total}) => {
   return <>
     { isPc ?
       <PcSearch sValue={sValue} bookList={bookList} isEmpty={isEmpty} pages={pages} current={current} total={total}/> :
@@ -24,7 +24,7 @@ const SoPage: NextPage<IProps> = ({ isPc, sValue, bookList = [], isEmpty, curren
   </>
 }
 
-export default SoPage;
+export default Search;
 
 // ssr
 export const getServerSideProps: GetServerSideProps = async ({ req, query }): Promise<GetServerSidePropsResult<IProps>> => {

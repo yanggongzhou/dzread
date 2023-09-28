@@ -2,7 +2,7 @@ import React from "react";
 import { GetServerSideProps, GetServerSidePropsResult, NextPage } from "next";
 import { ownOs } from "@/utils/ownOs";
 import { netKeywordTag } from "@/server/home";
-import PcTag from "@/components/PcTag/PcTag";
+import PcTag from "@/components/PcTag";
 import WapTag from "@/components/tag";
 import { IKeywordItem, ITagBookItem } from "@/typings/tag.interface";
 import Breadcrumb from "@/components/common/breadcrumb";
