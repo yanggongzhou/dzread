@@ -12,6 +12,7 @@ import { useAppDispatch } from "@/store";
 import BookTabs from "@/components/book/bookTabs/BookTabs";
 import { getSessionBook, removeSessionBook, setSessionBook } from "@/utils/sessionStorages";
 import styles from "@/components/book/index.module.scss";
+import classNames from "classnames";
 
 interface IProps {
   pathCid: string;
@@ -21,6 +22,7 @@ interface IProps {
 
 const MBook: FC<IProps> = ({ bookInfo, chapterList, pathCid }) => {
   const dispatch = useAppDispatch();
+  const [loading, setLoading] = useState(false);
   const recommendData = [
     {
       "author": "葉缺",
@@ -123,16 +125,23 @@ const MBook: FC<IProps> = ({ bookInfo, chapterList, pathCid }) => {
     }
   }, []);
 
+  const onSwap = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false)
+    }, 1500)
+  }
+
   const tabList = [
     { value: 'book_info', label: '书籍信息', child: <>
         <FirstChapter bookInfo={bookInfo}/>
         <div className={styles.recommendBox}>
           <div className={styles.columnHead}>
             <h3 className={styles.columnTitle}>{'男生精选'}</h3>
-            <button className={styles.columnLink}>
+            <button className={styles.columnLink} onClick={() => onSwap()}>
               <span>换一换</span>
               <Image
-                className={styles.linkIcon}
+                className={classNames(styles.linkIcon, loading && styles.linkIconAni)}
                 width={24}
                 height={24}
                 src={'/images/book/refresh.png'}

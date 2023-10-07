@@ -1,26 +1,24 @@
-import Service from "@/server/request";
-import { IBookItem, INetHomeItem } from "@/typings/home.interface";
+import { IBookItem, INetHomeItem, INetHome } from "@/typings/home.interface";
 import { INetMoreReq, INetMoreResult } from "@/typings/more.interface";
 import {
   INetBookRes, INetChapterDetailRes, INetListChapterReq, INetListChapterRes,
 } from "@/typings/book.interface";
 import { INetBrowseReq, INetBrowseRes } from "@/typings/browse.interface";
 import { INetKeywordsReq, INetKeywordsRes, INetKeywordTagReq, INetKeywordTagRes } from "@/typings/tag.interface";
-import ownFetch from "@/server/fetch";
+import { ownFetch, poFetch } from "@/server/fetch";
 
 // 获取首页index
+export const netHome = (): Promise<INetHome | 'BadRequest_404' | 'BadRequest_500'> => {
+  return poFetch('/api/5000');
+}
+
 export const netHomeData = (): Promise<INetHomeItem[] | 'BadRequest_404' | 'BadRequest_500'> => {
   return ownFetch('/index.do');
 }
+
 // 浏览
-export const netBrowse = async (params: INetBrowseReq): Promise<INetBrowseRes | 'BadRequest_404' | 'BadRequest_500'> => {
-  return await Service.post('/webfic/home/browse', { pageSize: 60, ...params }, {
-    baseURL: "https://yfbwww.webfic.com",
-    headers: {
-      language: 'zhHans',
-      pline: "DRAMABOX"
-    }  as any
-  })
+export const netBrowse = async (body: INetBrowseReq): Promise<INetBrowseRes | 'BadRequest_404' | 'BadRequest_500'> => {
+  return poFetch('/api/browse', body);
 }
 
 // 查看更多

@@ -37,12 +37,28 @@
         .linkIcon {
           width: 0.24rem;
           height: 0.24rem;
+          transform: rotateZ(0deg);
+        }
+
+        .linkIconAni {
+          animation: anirotate 1s infinite linear;
         }
       }
     }
   }
 }
 
+@keyframes anirotate {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  50% {
+    transform: rotateZ(180deg);
+  }
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
 
 
 
