@@ -1,16 +1,19 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 import { IChapterListItem, INetChapterDetailRes } from "typings/book.interface";
 import PcChapterUnlock from "@/components/pcReader/chapterUnlock/ChapterUnlock";
 import ReaderPagination from "@/components/pcReader/readerPagination/ReaderPagination";
 import Link from "next/link";
 import { IBookItem } from "@/typings/home.interface";
 import SlideOperate from "@/components/pcReader/slideOperate/SlideOperate";
-import styles from '@/components/pcReader/index.module.scss';
-import { useAppDispatch, useAppSelector } from "@/store";
-import { EOperateType } from "@/typings/reader.interface";
+import { useAppDispatch } from "@/store";
+import { EOperateType, EThemeType } from "@/typings/reader.interface";
 import { setOperateType } from "@/store/modules/read.module";
+import { setBookInfo } from "@/utils/localstorages";
+import styles from '@/components/pcReader/index.module.scss';
 
 interface IProps {
+  fontSize: number;
+  theme: EThemeType;
   bookId: string;
   contentList: string[];
   chapterInfo: INetChapterDetailRes;
@@ -19,12 +22,13 @@ interface IProps {
 }
 
 const PcReader: FC<IProps> = (
-  { bookId, contentList, chapterInfo, bookInfo, chapterList }
+  { bookId, contentList, chapterInfo, bookInfo, chapterList, fontSize, theme }
 ) => {
-
-  const theme = useAppSelector(state => state.read.theme);
-  const fontSize = useAppSelector(state => state.read.fontSize);
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    setBookInfo({ bid: bookId, cid: chapterInfo.id });
+  }, [chapterInfo]);
 
   return <main
     onClick={() => dispatch(setOperateType(EOperateType.normal))}

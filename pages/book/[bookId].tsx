@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { GetServerSideProps, GetServerSidePropsResult, NextPage } from "next";
 import { netBook, netListChapter } from "@/server/home";
 import PcBook from "@/components/pcBook";
@@ -7,6 +7,7 @@ import { EnumPosition, IBookItem } from "@/typings/home.interface";
 import { IChapterListItem } from "@/typings/book.interface";
 import Breadcrumb from "@/components/common/breadcrumb";
 import MBook from "@/components/book";
+import { getBookInfo } from "@/utils/localstorages";
 
 interface IProps {
   isPc: boolean;
@@ -22,6 +23,15 @@ const Book: NextPage<IProps> = (
   { isPc, bookId, bookInfo, recommendList, chapterList, position }
 ) => {
 
+  const pathCid = useMemo(() => {
+    const list = getBookInfo();
+    const book = list.find(val => val.bid === bookInfo.bookId);
+    if (book) {
+      return book.cid ?? bookInfo.firstChapterId;
+    }
+    return bookInfo.firstChapterId;
+  }, [bookInfo]);
+
   const data = [
     { title: '首页', link: "/home" },
     { title: '??', link: "/rankings" },
@@ -35,6 +45,7 @@ const Book: NextPage<IProps> = (
         recommends={recommendList}
       /> :
       <MBook
+        pathCid={pathCid}
         chapterList={chapterList}
         bookInfo={bookInfo}
       />

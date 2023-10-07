@@ -1,8 +1,8 @@
 import React, { FC } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import styles from "@/components/book/firstChapter/FirstChapter.module.scss";
 import { IBookItem } from "@/typings/home.interface";
+import styles from "@/components/book/firstChapter/FirstChapter.module.scss";
 
 interface IProps {
   bookInfo: IBookItem;
@@ -30,7 +30,7 @@ const FirstChapter: FC<IProps> = ({ bookInfo }) => {
       <p> 结婚三年，他们从来没见过面，不用费手机响了一下，苏溪打开微信，是苏俄正荣：【西西，谢谢你肯帮爸爸，我这里吃有点堵车，你先进去。】</p>
       <div className={styles.mark}/>
     </div>
-    <Link href={'/'} className={styles.chapterLink}>
+    <Link href={`/chapter/${bookInfo.bookId}/${'next chapterid xxxx'}`} className={styles.chapterLink}>
       剩余未加载内容，点击继续阅读
       <Image
         className={styles.icon}

@@ -6,20 +6,21 @@ import BookDetail from "@/components/book/bookDetail";
 import { useRouter } from "next/router";
 import classNames from "classnames";
 import BrowseList from "@/components/home/browseList";
-import styles from "@/components/book/index.module.scss";
 import FirstChapter from "@/components/book/firstChapter/FirstChapter";
 import CatalogBox from "@/components/book/catalogBox";
 import Image from "next/image";
 import { IChapterListItem } from "@/typings/book.interface";
 import { setCatalogVisible } from "@/store/modules/read.module";
 import { useAppDispatch } from "@/store";
+import styles from "@/components/book/index.module.scss";
 
 interface IProps {
+  pathCid: string;
   chapterList: IChapterListItem[];
   bookInfo: IBookItem;
 }
 
-const MBook: FC<IProps> = ({ bookInfo, chapterList }) => {
+const MBook: FC<IProps> = ({ bookInfo, chapterList, pathCid }) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const recommendData = [
@@ -124,7 +125,7 @@ const MBook: FC<IProps> = ({ bookInfo, chapterList }) => {
   return <main className={styles.bookWrap}>
     <NavBar backHref={'/'} title={isShowTitle ? bookInfo.bookName : ''}/>
 
-    <BookDetail bookInfo={bookInfo}/>
+    <BookDetail pathCid={pathCid} bookInfo={bookInfo}/>
 
     <nav className={styles.navMenu}>
       <Link

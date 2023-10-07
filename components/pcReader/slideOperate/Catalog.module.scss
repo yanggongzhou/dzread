@@ -8,6 +8,16 @@
   padding: 40px;
   width: 1000px;
 
+  .cancelIcon {
+    position: absolute;
+    top: 0.3rem;
+    right: 0.3rem;
+    z-index: 9;
+    height: 0.4rem;
+    width: 0.4rem;
+    cursor: pointer;
+  }
+
   h4 {
     color: #333;
     font-size: 0.3rem;

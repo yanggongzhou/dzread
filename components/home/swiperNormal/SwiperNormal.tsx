@@ -21,19 +21,21 @@ const SwiperNormal: FC<IProps> = ({ bannerList }) => {
       />
     </Swiper.Item>
   ))
-  return <Swiper
-    autoplayInterval={2000}
-    style={{
-      '--height': '2.94rem',
-    }}
-    indicatorProps={{
-      style: {
-        '--dot-spacing': '0.1rem',
-      }
-    }}
-    className={styles.swiperBox}
-    autoplay
-    loop>{items}</Swiper>
+  return <div className={styles.swiperWrap}>
+    <Swiper
+      autoplayInterval={2000}
+      style={{
+        '--height': '2.94rem',
+      }}
+      indicatorProps={{
+        style: {
+          '--dot-spacing': '0.1rem',
+        }
+      }}
+      className={styles.swiperBox}
+      autoplay
+      loop>{items}</Swiper>
+  </div>
 }
 
 export default SwiperNormal;

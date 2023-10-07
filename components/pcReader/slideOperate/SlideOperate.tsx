@@ -28,40 +28,38 @@ const SlideOperate: FC<IProps> = ({ chapterList, bookId, chapterId }) => {
     e.stopPropagation();
   }
 
-  return <>
-    <div className={styles.operateBox}>
-      <div className={styles.operate}>
-        <Link className={styles.itemBox} href={'/'} target={'_blank'}>首页</Link>
-      </div>
-      <div className={styles.operate}>
-        <Link className={styles.itemBox} href={'/'} target={'_blank'}>书籍详情</Link>
-      </div>
-      <div className={classNames(styles.operate, operateType === EOperateType.catalog && styles.active)}>
-        <div
-          className={styles.itemBox}
-          onClick={(e) => setType(e, EOperateType.catalog)}>
-          目录
-        </div>
-        {operateType === EOperateType.catalog ? <OperateCatalog bookId={bookId} chapterList={chapterList}/> : null}
-      </div>
-      <div className={classNames(styles.operate, operateType === EOperateType.setting && styles.active)}>
-        <div
-          className={styles.itemBox}
-          onClick={(e) => setType(e, EOperateType.setting)}>
-          设置
-        </div>
-        {operateType === EOperateType.setting ? <PcSetting/> : null}
-      </div>
-      <div className={classNames(styles.operate, operateType === EOperateType.qrcode && styles.active)}>
-        <div
-          className={styles.itemBox}
-          onClick={(e) => setType(e, EOperateType.qrcode)}>
-          客户端
-        </div>
-        {operateType === EOperateType.qrcode ? <Qrcode url={copyLinkUrl} /> : null}
-      </div>
+  return <div className={styles.operateBox} onClick={(e) => {e.stopPropagation()}}>
+    <div className={styles.operate}>
+      <Link className={styles.itemBox} href={'/'} target={'_blank'}>首页</Link>
     </div>
-  </>
+    <div className={styles.operate}>
+      <Link className={styles.itemBox} href={'/'} target={'_blank'}>书籍详情</Link>
+    </div>
+    <div className={classNames(styles.operate, operateType === EOperateType.catalog && styles.active)}>
+      <div
+        className={styles.itemBox}
+        onClick={(e) => setType(e, EOperateType.catalog)}>
+        目录
+      </div>
+      {operateType === EOperateType.catalog ? <OperateCatalog bookId={bookId} chapterList={chapterList}/> : null}
+    </div>
+    <div className={classNames(styles.operate, operateType === EOperateType.setting && styles.active)}>
+      <div
+        className={styles.itemBox}
+        onClick={(e) => setType(e, EOperateType.setting)}>
+        设置
+      </div>
+      {operateType === EOperateType.setting ? <PcSetting/> : null}
+    </div>
+    <div className={classNames(styles.operate, operateType === EOperateType.qrcode && styles.active)}>
+      <div
+        className={styles.itemBox}
+        onClick={(e) => setType(e, EOperateType.qrcode)}>
+        客户端
+      </div>
+      {operateType === EOperateType.qrcode ? <Qrcode url={copyLinkUrl} /> : null}
+    </div>
+  </div>
 }
 
 export default SlideOperate;

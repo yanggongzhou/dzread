@@ -61,6 +61,8 @@ const HeadNormal: FC<any> = ({ pageProps = {} }) => {
       <meta key="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"/>
       {/*防止xss攻击*/}
       <meta key="httpEquiv2" httpEquiv="Content-Security-Policy"/>
+      {/*iOS 尝试检测文本内容中的电话号码、电子邮件地址和其他数据并将其转换为链接，从而导致水合不匹配。*/}
+      <meta name="format-detection" content="telephone=no, date=no, email=no, address=no"/>
       <link rel="icon" href={'/favicon.ico'}/>
       <link rel="canonical" href={process.env.WebDomain + (router.asPath === '/' ? '' : router.asPath)}/>
     </Head>

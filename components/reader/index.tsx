@@ -7,12 +7,16 @@ import ModalCatalog from "@/components/reader/modalCatalog/ModalCatalog";
 import ModalControl from "@/components/reader/modalControl/ModalControl";
 import ModalHeader from "@/components/reader/modalHeader/ModalHeader";
 import TopGuide from "@/components/reader/topGuide/TopGuide";
-import styles from '@/components/reader/index.module.scss';
 import { useRouter } from "next/router";
 import ContentList from "@/components/reader/contentList/ContentList";
 import { netDetailChapter } from "@/server/home";
+import { EThemeType } from "@/typings/reader.interface";
+import styles from '@/components/reader/index.module.scss';
+import { setBookInfo } from "@/utils/localstorages";
 
 interface IProps {
+  fontSize: number;
+  theme: EThemeType;
   bookId: string;
   chapterInfo: INetChapterDetailRes;
   bookInfo: IBookItem;
@@ -20,9 +24,8 @@ interface IProps {
 }
 
 const Reader: FC<IProps> = (
-  { bookId, chapterInfo, bookInfo,  chapterList}
+  { bookId, chapterInfo, bookInfo,  chapterList, fontSize, theme}
 ) => {
-  const theme = useAppSelector(state => state.read.theme);
   const controlVisible = useAppSelector(state => state.read.controlVisible);
   const [isLoading, setIsLoading] = useState(false);
   const [contentArr, setContentArr] = useState<INetChapterDetailRes[]>([chapterInfo]);
@@ -32,6 +35,7 @@ const Reader: FC<IProps> = (
 
   useEffect(() => {
     if (chapterInfo.id) {
+      setBookInfo({ bid: bookId, cid: chapterInfo.id });
       setContentArr([chapterInfo]);
       if (contentRef.current && Reflect.has(contentRef.current, "scrollIntoView")) {
         // @ts-ignore
@@ -76,9 +80,7 @@ const Reader: FC<IProps> = (
       await getChapterDetail("next")
     }
     // 付费章节每章单独占一页
-    if (chapterInfo.isCharge) {
-      return;
-    }
+    if (chapterInfo.isCharge) return;
     const domList = document.querySelectorAll('div[cid]');
     const domArr = Array.from(domList);
     const dom = domArr.find(val => {
@@ -89,6 +91,7 @@ const Reader: FC<IProps> = (
     if (!chapterId) return;
     if (router.query.chapterId !== chapterId) {
       await router.replace(`/chapter/${bookId}/${chapterId}`,  undefined, { shallow: true });
+      setBookInfo({ bid: bookId, cid: chapterId });
     }
   };
 
@@ -97,6 +100,11 @@ const Reader: FC<IProps> = (
     if (loadingRef.current) return;
 
     const chapter = type === "prev" ? contentArr?.[0]?.preChapter : contentArr?.[contentArr.length - 1]?.nextChapter;
+    if (!chapter?.id) {
+      Toast.show(type === "prev" ? '已经是第一章' : '已经是最后一章')
+      return
+    }
+
     // 付费章节每章单独占一页
     if (chapter?.isCharge) {
       loadingRef.current = true;
@@ -104,10 +112,7 @@ const Reader: FC<IProps> = (
       loadingRef.current = false;
       return;
     }
-    if (!chapter?.id) {
-      Toast.show(type === "prev" ? '已经是第一章' : '已经是最后一章')
-      return
-    }
+
     loadingRef.current = true;
     setIsLoading(true);
     const chapterData = await netDetailChapter(bookId, chapter?.id);
@@ -131,7 +136,11 @@ const Reader: FC<IProps> = (
 
       <TopGuide bookInfo={bookInfo}/>
 
-      <ContentList onRefresh={() => getChapterDetail("prev")} list={contentArr}/>
+      <ContentList
+        fontSize={fontSize}
+        theme={theme}
+        onRefresh={() => getChapterDetail("prev")}
+        list={contentArr}/>
 
       { isLoading ? <div className={styles.readerLoading}>
         <DotLoading />

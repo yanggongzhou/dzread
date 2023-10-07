@@ -6,15 +6,16 @@ import { Ellipsis } from "antd-mobile";
 import styles from "@/components/book/bookDetail/index.module.scss";
 
 interface IProps {
+  pathCid: string;
   bookInfo: IBookItem;
 }
 
-const BookDetail: FC<IProps> = ({ bookInfo }) => {
+const BookDetail: FC<IProps> = ({ bookInfo, pathCid }) => {
 
   return <>
     <div className={styles.detailBox}>
       <ImageCover
-        href={`/chapter/${bookInfo.bookId}/${bookInfo.firstChapterId}`}
+        href={`/chapter/${bookInfo.bookId}/${pathCid}`}
         className={styles.bookCover}
         src={bookInfo.cover}
         width={172}

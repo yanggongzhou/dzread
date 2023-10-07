@@ -7,7 +7,6 @@ import { Toast } from "antd-mobile";
 
 interface IProps {
   url: string;
-  chapterList: IChapterListItem[];
 }
 
 const Qrcode: FC<IProps> = ({ url}) => {

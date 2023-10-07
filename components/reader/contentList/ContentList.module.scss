@@ -1,34 +1,41 @@
-.title {
-  font-size: 1.3em;
-  font-weight: 500;
-  color: #222222;
-}
-
-.content {
-  margin-top: 1em;
-  color: #222222;
-
-  p {
-    font-size: 1em;
-    line-height: 2;
-    white-space: pre-wrap;
-    text-align: justify;
-    text-indent: 2em;
-    margin-bottom: 1em;
-  }
-}
-
-.downloadBox {
+.contentBox {
   position: relative;
-  padding: 0.8rem 0 1.8rem;
 
-  .unlockMark {
-    position: absolute;
-    top: -1.4rem;
-    left: 0;
-    height: 1.4rem;
+  .title {
+    font-size: 1.3em;
+    font-weight: 500;
+    color: #222222;
+  }
+
+  .content {
+    margin-top: 1em;
+    color: #222222;
+
+    p {
+      font-size: 1em;
+      line-height: 2;
+      white-space: pre-wrap;
+      text-align: justify;
+      text-indent: 2em;
+      margin-bottom: 1em;
+    }
+  }
+
+  .downloadBox {
+    position: relative;
+    padding: 0.8rem 0 1.8rem;
+  }
+
+  .unlockBox {
+    position: fixed;
+    height: 4.2rem;
     width: 100%;
-    background: linear-gradient(180deg, transparent 0%, #F3F3F3 100%);
+    bottom: 0;
+    left: 0;
+    z-index: 9;
+    display: flex;
+    flex-direction: column;
+    padding: 2.2rem 0.32rem 0;
   }
 
   .contentBtn {
@@ -41,3 +48,9 @@
     width: 100%;
   }
 }
+
+.contentChargeBox {
+  min-height: 100vh;
+}
+
+

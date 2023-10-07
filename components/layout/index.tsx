@@ -8,6 +8,7 @@ import { useAppDispatch } from "@/store";
 import { setDevice } from "@/store/modules/app.module";
 import { EDevice } from "@/store/store.interfaces";
 import { Router } from "next/dist/client/router";
+import NProgress from "nprogress";
 
 interface IProps {
   children: React.ReactNode;
@@ -18,17 +19,29 @@ interface IProps {
 const DLayout: FC<IProps> = ({ children, pageProps, router }) => {
 
   const dispatch = useAppDispatch();
-
   // 页面曝光 打点参数初始化
   useLogParams(pageProps);
 
   useEffect(() => {
     setRemScript();
+    nprogressEve();
     addListen(setRemScriptListen);
     return () => {
       removeListen(setRemScriptListen)
     }
   }, []) // eslint-disable-line
+
+  const nprogressEve = () => {
+    router.events.on("routeChangeStart", () => {
+      NProgress.start();
+    });
+    router.events.on("routeChangeComplete", () => {
+      NProgress.done();
+    });
+    router.events.on("routeChangeError", () => {
+      NProgress.done();
+    });
+  };
 
   // 设置rem字体大小并判断设备 初始化
   const setRemScript = () => {

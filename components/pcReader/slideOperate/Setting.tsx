@@ -1,9 +1,9 @@
 import React, { FC } from 'react'
-import styles from '@/components/pcReader/slideOperate/Setting.module.scss'
 import { EThemeType } from "typings/reader.interface";
 import Image from "next/image";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { setFontSize, setTheme } from "@/store/modules/read.module";
+import styles from '@/components/pcReader/slideOperate/Setting.module.scss';
 
 interface IProps {
 }
