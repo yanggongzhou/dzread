@@ -39,6 +39,7 @@ console.log('\x1B[44m%s\x1B[49m', '-------------------------- ✨ ✨ ✨ ✨ �
 const nextConfig = {
   runtime: 'edge', // for Edge API Routes only
   reactStrictMode: true,
+  trailingSlash: true,
   // Configuring the Build ID
   generateBuildId: async () => {
     return buildId;

@@ -16,7 +16,6 @@ const Custom404: NextPage<IProps> = () => {
     setIsShow(true)
   }, []);
   return <>
-
     {device === EDevice.pc ? <div className={styles.pc404Wrap}>
       <Image
         className={styles.pcEmptyImg}
@@ -27,9 +26,8 @@ const Custom404: NextPage<IProps> = () => {
         blurDataURL={'/images/404/404.png'}
         alt={'404'}
       />
-      <Link href="/" className={styles.pcIntro}>
-        <p>404 抱歉，页面出现错误。</p>
-      </Link>
+      <p className={styles.pcIntro}>页面不存在，请检查页面链接</p>
+      <Link href="/" className={styles.pcBack}>返回首页</Link>
     </div> : null}
 
     {device === EDevice.mobile && isShow ? <div className={styles.m404Wrap}>
@@ -42,10 +40,8 @@ const Custom404: NextPage<IProps> = () => {
         blurDataURL={'/images/404/404.png'}
         alt={'404'}
       />
-
-      <Link href="/" className={styles.mIntro}>
-        <p>404 抱歉，页面出现错误。</p>
-      </Link>
+      <p className={styles.mIntro}>页面不存在，请检查页面链接</p>
+      <Link href="/" className={styles.mBack}>返回首页</Link>
     </div> : null}
   </>
 }

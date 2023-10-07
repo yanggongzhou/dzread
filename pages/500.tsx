@@ -27,9 +27,8 @@ const Custom500: NextPage<IProps> = () => {
         blurDataURL={'/images/404/500.png'}
         alt={'500'}
       />
-      <Link href="/" className={styles.pcIntro}>
-        <p>404 抱歉，页面出现错误。</p>
-      </Link>
+      <p className={styles.pcIntro}>抱歉，页面出现错误</p>
+      <Link href="/" className={styles.pcBack}>返回首页</Link>
     </div> : null}
 
     {device === EDevice.mobile && isShow ? <div className={styles.m404Wrap}>
@@ -42,10 +41,8 @@ const Custom500: NextPage<IProps> = () => {
         blurDataURL={'/images/404/500.png'}
         alt={'500'}
       />
-
-      <Link href="/" className={styles.mIntro}>
-        <p>404 抱歉，页面出现错误。</p>
-      </Link>
+      <p className={styles.mIntro}>抱歉，页面出现错误</p>
+      <Link href="/" className={styles.mBack}>返回首页</Link>
     </div> : null}
   </>
 }

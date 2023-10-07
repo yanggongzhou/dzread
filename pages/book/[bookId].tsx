@@ -6,7 +6,7 @@ import { ownOs } from "@/utils/ownOs";
 import { EnumPosition, IBookItem } from "@/typings/home.interface";
 import { IChapterListItem } from "@/typings/book.interface";
 import Breadcrumb from "@/components/common/breadcrumb";
-import MBook from "@/components/book";
+import WapBook from "@/components/book";
 import { getBookInfo } from "@/utils/localstorages";
 
 interface IProps {
@@ -34,7 +34,7 @@ const Book: NextPage<IProps> = (
 
   const data = [
     { title: '首页', link: "/home" },
-    { title: '??', link: "/rankings" },
+    { title: '??', link: "/ranking" },
     { title: bookInfo.bookName }
   ]
   return <>
@@ -44,7 +44,7 @@ const Book: NextPage<IProps> = (
         bookInfo={bookInfo}
         recommends={recommendList}
       /> :
-      <MBook
+      <WapBook
         pathCid={pathCid}
         chapterList={chapterList}
         bookInfo={bookInfo}

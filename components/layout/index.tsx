@@ -49,7 +49,7 @@ const DLayout: FC<IProps> = ({ children, pageProps, router }) => {
     const { isPc } = ownOs(window.navigator.userAgent);
     dispatch(setDevice(isPc ? EDevice.pc : EDevice.mobile));
     if (isPc) {
-      document.documentElement.style.fontSize = '100px';
+      document.documentElement.style.fontSize = '90px';
     } else {
       document.documentElement.style.fontSize = 100 * (clientWidth / 750) + 'px';
     }
@@ -62,7 +62,7 @@ const DLayout: FC<IProps> = ({ children, pageProps, router }) => {
       // if (clientWidth >= 1366 && clientWidth <= 1800) {
       //   document.documentElement.style.fontSize = 100 * (clientWidth / 1700) + 'px';
       // }
-      document.documentElement.style.fontSize = '100px';
+      // document.documentElement.style.fontSize = '90px';
     } else {
       document.documentElement.style.fontSize = 100 * (clientWidth / 750) + 'px';
     }

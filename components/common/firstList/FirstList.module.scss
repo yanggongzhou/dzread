@@ -1,12 +1,11 @@
 .moreBookWrap {
-  width: 13rem;
+  //width: 13rem;
   margin: 0 auto;
 }
 
-
 .imageItemMoreWrap {
   display: grid;
-  grid-template-columns: 1.7rem auto 1.2rem;
+  grid-template-columns: 1.7rem auto;
   align-items: center;
   width: 100%;
   height: 2rem;
@@ -30,7 +29,6 @@
 .bookInfo {
   height: 100%;
   width: 100%;
-  padding-right: 0.4rem;
 }
 
 .bookName {

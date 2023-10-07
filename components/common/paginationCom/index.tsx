@@ -69,7 +69,7 @@ const PaginationCom: FC<IProps> = (
             className={styles.prevNextIcon}
             width={14}
             height={14}
-            src={'/images/layout/link.png'}
+            src={'/images/common/back.png'}
             alt={'prev'}
           />
         </div> :
@@ -78,7 +78,7 @@ const PaginationCom: FC<IProps> = (
             className={styles.prevNextIcon}
             width={14}
             height={14}
-            src={'/images/layout/link.png'}
+            src={'/images/common/back.png'}
             alt={'prev'}
           />
         </Link>
@@ -100,7 +100,7 @@ const PaginationCom: FC<IProps> = (
             className={styles.prevNextIcon}
             width={14}
             height={14}
-            src={'/images/layout/link.png'}
+            src={'/images/common/back.png'}
             alt={'next'}
           />
         </div> :
@@ -109,7 +109,7 @@ const PaginationCom: FC<IProps> = (
             className={styles.prevNextIcon}
             width={14}
             height={14}
-            src={'/images/layout/link.png'}
+            src={'/images/common/back.png'}
             alt={'next'}
           />
         </Link>

@@ -38,7 +38,7 @@
     height: 0.14rem;
   }
 
-  .prevBtn, .prevNoMore {
+  .nextBtn, .nextNoMore {
     .prevNextIcon {
       width: 0.14rem;
       height: 0.14rem;
@@ -56,6 +56,7 @@
 
   .prevNoMore, .nextNoMore {
     cursor: not-allowed;
+    opacity: 0.9;
     //background-color: rgba(255,255,255,0.08) !important;
     background-color: rgba(245, 245, 247, 0.9) !important;
   }

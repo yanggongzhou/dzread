@@ -1,9 +1,12 @@
 .m404Wrap {
-  padding: 2.98rem 0.8rem 0;
   width: 100%;
+  //height: 100vh;
+  min-height: 7rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
 
   .emptyImg {
     width: 3.2rem;
@@ -15,7 +18,18 @@
     display: block;
     font-size: 0.28rem;
     font-weight: 400;
-    color: rgba(255, 255, 255, 0.4);
+    color: #333333;
+    line-height: 0.34rem;
+    text-align: center;
+    white-space: pre-wrap;
+  }
+
+  .mBack {
+    margin-top: 0.24rem;
+    display: block;
+    font-size: 0.28rem;
+    font-weight: 400;
+    color: #059fff;
     line-height: 0.34rem;
     text-align: center;
     white-space: pre-wrap;
@@ -23,13 +37,14 @@
 }
 
 .pc404Wrap {
-  padding: 2rem 0;
   width: 100%;
-  min-height: calc(100vh - 2.6rem);
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  min-height: 4rem;
+  padding-bottom: 1rem;
 
   .pcEmptyImg {
     width: 3.2rem;
@@ -39,7 +54,14 @@
   .pcIntro {
     margin-top: 0.08rem;
     font-size: 0.16rem;
-    color: rgba(255, 255, 255, 0.4);
+    color: #333333;
+    font-weight: 400;
+  }
+
+  .pcBack {
+    margin-top: 0.08rem;
+    font-size: 0.16rem;
+    color: #059fff;
     font-weight: 400;
   }
 }

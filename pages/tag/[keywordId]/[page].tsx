@@ -17,7 +17,7 @@ interface IProps {
   keyword: string;
 }
 
-const ConvergencePage: NextPage<IProps> = (
+const TagPage: NextPage<IProps> = (
   { isPc, currentPage, pages = 0, keywordId, keyword, bookList, keywordList = [] }) => {
   const data = [
     { title: '首页', link: "/home" },
@@ -44,7 +44,7 @@ const ConvergencePage: NextPage<IProps> = (
   </>
 }
 
-export default ConvergencePage;
+export default TagPage;
 
 export const getServerSideProps: GetServerSideProps = async ({ req, query, locale }): Promise<GetServerSidePropsResult<IProps>> => {
   const ua = req?.headers['user-agent'] || ''

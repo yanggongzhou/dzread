@@ -1,10 +1,7 @@
 import React, { FC, useState } from "react";
-import { SideBar, Tabs } from "antd-mobile";
-import Link from "next/link";
-import Image from "next/image";
+import { SideBar } from "antd-mobile";
 import { IBrowseTypes } from "@/typings/browse.interface";
-import styles from "@/components/rankings/rankType/RankType.module.scss";
-import classNames from 'classnames'
+import styles from "@/components/ranking/rankType/RankType.module.scss";
 
 interface IProps {
   types: IBrowseTypes[];

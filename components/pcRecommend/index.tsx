@@ -19,7 +19,6 @@ const PcRecommend: FC<IProps> = ({ bookList, totalPage, pageNo }) => {
     {bookList.length > 0 ?
       <div className={styles.recommendList}>
         <RecommendList list={bookList}/>
-        {/*<FirstList dataSource={moreData.items} />*/}
         {totalPage && totalPage > 1 ? <PaginationCom
           path={`/more/xxx-`}
           pageNo={pageNo}

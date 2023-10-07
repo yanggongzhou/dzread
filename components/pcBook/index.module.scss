@@ -1,5 +1,5 @@
 .bookWrap {
-  width: 10rem;
+  width: 12rem;
   margin: 0 auto;
 }
 
@@ -13,6 +13,7 @@
   column-gap: 0.4rem;
 
   .detailBookCover {
+    flex-shrink: 0;
     width: 2.72rem;
     height: 3.63rem;
     border-radius: 0.04rem;
@@ -32,7 +33,7 @@
     .detailBoxRightTop {
       .bookName {
         display: block;
-        width: 9rem;
+        width: 6rem;
         font-size: 0.24rem;
         font-weight: 500;
         color: #333333;
@@ -45,7 +46,7 @@
 
       .chapterCount {
         display: block;
-        width: 9rem;
+        width: 6rem;
         font-size: 0.13rem;
         font-weight: 400;
         color: #333333;

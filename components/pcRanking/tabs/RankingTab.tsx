@@ -1,6 +1,6 @@
 import React, { FC } from "react";
-import styles from "@/components/pcRanking/tabs/RankingTab.module.scss";
 import Link from "next/link";
+import styles from "@/components/pcRanking/tabs/RankingTab.module.scss";
 
 const RankingTab: FC = () => {
   const rankingTypeList = [

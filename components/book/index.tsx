@@ -20,7 +20,7 @@ interface IProps {
   bookInfo: IBookItem;
 }
 
-const MBook: FC<IProps> = ({ bookInfo, chapterList, pathCid }) => {
+const WapBook: FC<IProps> = ({ bookInfo, chapterList, pathCid }) => {
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(false);
   const recommendData = [
@@ -171,4 +171,4 @@ const MBook: FC<IProps> = ({ bookInfo, chapterList, pathCid }) => {
   </main>
 }
 
-export default MBook;
+export default WapBook;

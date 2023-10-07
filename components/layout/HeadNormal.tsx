@@ -14,8 +14,6 @@ export const pathnameData = {
   download: '/download',
   error404: '/404',
   error500: '/500',
-  agreementPrivacy: '/privacy',
-  agreementUser: '/terms',
   chapter: "/chapter/[bookId]/[chapterId]"
 }
 

@@ -1,17 +1,14 @@
 .rankWrap {
   padding: 0.4rem 0 0.6rem;
-  display: grid;
-  grid-template-columns: 260px auto;
-  grid-column-gap: 20px;
-  width: 10rem;
+  width: 12rem;
   margin: 0 auto;
-
 
   .rankContent {
     min-height: 7rem;
     position: relative;
     z-index: 9;
-    margin-left: 180px;
+    padding-left: 180px;
+    width: 100%;
 
     .rankTitle {
       font-size: 0.16rem;

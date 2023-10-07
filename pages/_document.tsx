@@ -11,7 +11,7 @@ interface IProp extends DocumentInitialProps {
 const MyDocument: NextPage<IProp> = ({ isPc }) => {
 
   return (
-    <Html lang='en' style={{ fontSize: isPc ? '80px' : '52px' }}>
+    <Html lang='en' style={{ fontSize: isPc ? '90px' : '52px' }}>
       <Head />
       <body>
       <Main />

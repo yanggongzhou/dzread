@@ -6,7 +6,7 @@ import Breadcrumb from "@/components/common/breadcrumb";
 import { IBookItem } from "@/typings/home.interface";
 import { IBrowseTypes } from "@/typings/browse.interface";
 import PcRanking from "@/components/pcRanking";
-import MRankings from "@/components/rankings";
+import WapRanking from "@/components/ranking";
 
 interface IProps {
   isPc: boolean;
@@ -18,7 +18,7 @@ interface IProps {
   typeTwoName: string;
 }
 
-const Rankings: NextPage<IProps> = (
+const RankingPage: NextPage<IProps> = (
   { isPc, types, bookList, pageNo, pages, typeTwoId }) => {
   const data = [
     { title: '首页', link: "/home" },
@@ -35,7 +35,7 @@ const Rankings: NextPage<IProps> = (
         pages={pages}
         typeTwoId={typeTwoId}
       /> :
-      <MRankings
+      <WapRanking
         pageNo={pageNo}
         types={types}
         bookList={bookList}
@@ -80,4 +80,4 @@ export const getServerSideProps: GetServerSideProps = async ({ req, query }): Pr
   }
 }
 
-export default Rankings;
+export default RankingPage;

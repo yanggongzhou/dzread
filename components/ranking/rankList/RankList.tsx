@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { IBookItem } from "@/typings/home.interface";
 import Link from "next/link";
 import ImageCover from "@/components/common/image/ImageCover";
-import styles from '@/components/rankings/rankList/RankList.module.scss'
+import styles from '@/components/ranking/rankList/RankList.module.scss'
 
 interface IProps {
   dataSource: IBookItem[];

@@ -1,5 +1,4 @@
 import React, { FC } from 'react'
-import PcHomeTitle from "@/components/pcHome/homeTitle/HomeTitle";
 import PaginationCom from "@/components/common/paginationCom";
 import { PcEmpty } from "@/components/common/empty";
 import FirstList from "@/components/common/firstList/FirstList";

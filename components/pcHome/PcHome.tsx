@@ -27,7 +27,7 @@ const PcHome: FC<IProps> = ({ bannerList, smallData }) => {
             return null;
           })
         }
-        <PcHomeTitle title={'排行榜'} href={`/more/rankings`}/>
+        <PcHomeTitle title={'排行榜'} href={`/more/ranking`}/>
         <VerticalList list={smallData[0]?.bookList}/>
         {bannerList.length === 0 && smallData.length === 0 ? <PcEmpty/> : null}
       </main>

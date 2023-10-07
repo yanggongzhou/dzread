@@ -3,7 +3,8 @@
   display: grid;
   grid-template-columns: 260px auto;
   grid-column-gap: 20px;
-
+  width: 12rem;
+  margin: 0 auto;
 
   .browseContent {
     min-height: 7rem;

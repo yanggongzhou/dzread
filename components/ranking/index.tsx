@@ -5,12 +5,12 @@ import { useRouter } from "next/router";
 import { MEmpty } from "@/components/common/empty";
 import MorePagination from "@/components/recommend/pagination/MorePagination";
 import NavBar from "@/components/common/navBar/NavBar";
-import styles from "@/components/rankings/index.module.scss";
 import { SideBar } from "antd-mobile";
 import Link from "next/link";
 import classNames from "classnames";
-import RankList from "@/components/rankings/rankList/RankList";
-import RankDownloadBanner from "@/components/rankings/rankBanner/DownloadBanner";
+import RankList from "@/components/ranking/rankList/RankList";
+import RankDownloadBanner from "@/components/ranking/rankBanner/DownloadBanner";
+import styles from "@/components/ranking/index.module.scss";
 
 interface IProps {
   bookList: IBookItem[];
@@ -20,7 +20,7 @@ interface IProps {
   typeTwoId: number;
 }
 
-const MRankings: FC<IProps> = ({ bookList = [], pageNo, pages, typeTwoId, types }) => {
+const WapRanking: FC<IProps> = ({ bookList = [], pageNo, pages, typeTwoId, types }) => {
   const rankRef = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
   useEffect(() => {
@@ -92,4 +92,4 @@ const MRankings: FC<IProps> = ({ bookList = [], pageNo, pages, typeTwoId, types 
   </main>)
 }
 
-export default MRankings;
+export default WapRanking;

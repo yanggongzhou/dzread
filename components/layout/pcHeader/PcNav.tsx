@@ -16,7 +16,7 @@ const PcNav: FC<IProps> = () => {
   const MenuData = [
     { id: 'index', label: "首页", link: '/' },
     { id: 'browse', label: "分类", link: '/browse/0' },
-    { id: 'App', label: "排行榜", link: '/rankings' },
+    { id: 'App', label: "排行榜", link: '/ranking' },
   ]
 
   const rankingTypeList = [

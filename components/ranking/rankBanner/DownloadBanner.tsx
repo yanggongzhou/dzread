@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import Image from "next/image";
-import styles from "@/components/rankings/rankBanner/DownloadBanner.module.scss";
+import styles from "@/components/ranking/rankBanner/DownloadBanner.module.scss";
 
 interface IProps {
   isFooter: boolean;
