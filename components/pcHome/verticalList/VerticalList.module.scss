@@ -40,7 +40,7 @@
       align-items: center;
       justify-content: center;
       font-size: 0.24rem;
-      font-weight: 600;
+      font-weight: bold;
       color: $theme_color;
     }
 
@@ -55,7 +55,7 @@
         display: block;
         color: #333333;
         font-size: 0.16rem;
-        font-weight: 600;
+        font-weight: bold;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
@@ -70,7 +70,7 @@
 
         span {
           color: $theme_color;
-          font-weight: 600;
+          font-weight: bold;
         }
       }
 

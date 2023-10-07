@@ -26,7 +26,7 @@
     }
 
     .active {
-      font-weight: 600;
+      font-weight: bold;
       color: #FFFFFF;
       background: linear-gradient(90deg, #FF6600 0%, #FA3123 100%);
     }
@@ -102,7 +102,7 @@
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 2;
       display: -webkit-box;
-      font-weight: 600;
+      font-weight: bold;
       line-height: .36rem;
       margin-bottom: 0.08rem;
       color: #222222;

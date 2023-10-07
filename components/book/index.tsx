@@ -1,10 +1,7 @@
 import React, { FC, useEffect, useState } from 'react'
-import Link from "next/link";
 import { IBookItem } from "@/typings/home.interface";
 import NavBar from "@/components/common/navBar/NavBar";
 import BookDetail from "@/components/book/bookDetail";
-import { useRouter } from "next/router";
-import classNames from "classnames";
 import BrowseList from "@/components/home/browseList";
 import FirstChapter from "@/components/book/firstChapter/FirstChapter";
 import CatalogBox from "@/components/book/catalogBox";
@@ -12,6 +9,8 @@ import Image from "next/image";
 import { IChapterListItem } from "@/typings/book.interface";
 import { setCatalogVisible } from "@/store/modules/read.module";
 import { useAppDispatch } from "@/store";
+import BookTabs from "@/components/book/bookTabs/BookTabs";
+import { getSessionBook, removeSessionBook, setSessionBook } from "@/utils/sessionStorages";
 import styles from "@/components/book/index.module.scss";
 
 interface IProps {
@@ -21,7 +20,6 @@ interface IProps {
 }
 
 const MBook: FC<IProps> = ({ bookInfo, chapterList, pathCid }) => {
-  const router = useRouter();
   const dispatch = useAppDispatch();
   const recommendData = [
     {
@@ -113,55 +111,54 @@ const MBook: FC<IProps> = ({ bookInfo, chapterList, pathCid }) => {
       setIsShowTitle(false);
     }
   }
+  const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
+    setActiveIndex(getSessionBook());
     dispatch(setCatalogVisible(false))
     window.addEventListener('scroll', onScroll)
     return () => {
       window.removeEventListener('scroll', onScroll)
+      removeSessionBook();
     }
   }, []);
 
+  const tabList = [
+    { value: 'book_info', label: '书籍信息', child: <>
+        <FirstChapter bookInfo={bookInfo}/>
+        <div className={styles.recommendBox}>
+          <div className={styles.columnHead}>
+            <h3 className={styles.columnTitle}>{'男生精选'}</h3>
+            <button className={styles.columnLink}>
+              <span>换一换</span>
+              <Image
+                className={styles.linkIcon}
+                width={24}
+                height={24}
+                src={'/images/book/refresh.png'}
+                alt={''}
+              />
+            </button>
+          </div>
+
+          <BrowseList list={recommendData}/>
+        </div>
+      </>
+    },
+    { value: 'catalog_info', label: '目录', child: <CatalogBox chapterList={chapterList} bookInfo={bookInfo}/>},
+  ]
+
   return <main className={styles.bookWrap}>
     <NavBar backHref={'/'} title={isShowTitle ? bookInfo.bookName : ''}/>
-
     <BookDetail pathCid={pathCid} bookInfo={bookInfo}/>
-
-    <nav className={styles.navMenu}>
-      <Link
-        className={classNames(styles.navItem, router.pathname === '/book/[bookId]' && styles.active)}
-        href={`/book/${bookInfo.bookId}`}
-        scroll={false}
-      >
-        书籍信息
-      </Link>
-      <Link
-        className={classNames(styles.navItem, router.pathname === '/catalog/[bookId]' && styles.active)}
-        href={`/catalog/${bookInfo.bookId}`}
-        scroll={false}
-      >
-        目录
-      </Link>
-    </nav>
-    { router.pathname === '/book/[bookId]' ? <FirstChapter bookInfo={bookInfo}/> : <CatalogBox chapterList={chapterList} bookInfo={bookInfo}/> }
-
-    <div className={styles.recommendBox}>
-      <div className={styles.columnHead}>
-        <h3 className={styles.columnTitle}>{'男生精选'}</h3>
-        <button className={styles.columnLink}>
-          <span>换一换</span>
-          <Image
-            className={styles.linkIcon}
-            width={24}
-            height={24}
-            src={'/images/book/refresh.png'}
-            alt={''}
-          />
-        </button>
-      </div>
-
-      <BrowseList list={recommendData}/>
-    </div>
+    <BookTabs
+      activeIndex={activeIndex}
+      tabList={tabList}
+      onChange={(ind) => {
+        setSessionBook(String(ind));
+        setActiveIndex(ind)
+      }}
+    />
   </main>
 }
 

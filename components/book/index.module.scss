@@ -3,45 +3,6 @@
   min-height: 100vh;
   background-color: #F3F3F3;
 
-  .navMenu {
-    background-color: #FFFFFF;
-    padding: 0.24rem 0.32rem 0;
-    height: 0.84rem;
-    display: flex;
-    justify-content: center;
-    position: relative;
-
-    .navItem {
-      padding: 0 0.26rem;
-      display: flex;
-      align-items: center;
-      color: #666666;
-      font-size: 0.3rem;
-      font-weight: 600;
-      line-height: 0.36rem;
-    }
-
-    .active {
-      font-size: 0.34rem;
-      line-height: 0.42rem;
-      position: relative;
-      color: #222222;
-
-      &:after {
-        content: "";
-        -webkit-transform: translateX(-50%);
-        transform: translateX(-50%);
-        background-color: $theme_color;
-        border-radius: 0.06rem;
-        height: 0.08rem;
-        position: absolute;
-        left: 50%;
-        bottom: -0.08rem;
-        width: 30%;
-      }
-    }
-  }
-
   .recommendBox {
     margin-top: 0.2rem;
     padding: 0.4rem 0.32rem 0.32rem;
