@@ -1,4 +1,4 @@
-import { IBookItem, INetHomeItem, INetHome } from "@/typings/home.interface";
+import { IBookItem, INetHomeItem, INetHome, INetHomeRes } from "@/typings/home.interface";
 import { INetMoreReq, INetMoreResult } from "@/typings/more.interface";
 import {
   INetBookRes, INetChapterDetailRes, INetListChapterReq, INetListChapterRes,
@@ -7,9 +7,10 @@ import { INetBrowseReq, INetBrowseRes } from "@/typings/browse.interface";
 import { INetKeywordsReq, INetKeywordsRes, INetKeywordTagReq, INetKeywordTagRes } from "@/typings/tag.interface";
 import { ownFetch, poFetch } from "@/server/fetch";
 import { INetRankingRes, INetRankingReq } from "@/typings/ranking.interface";
+import { EDevice } from "@/store/store.interfaces";
 
 // 获取首页index
-export const netHome = (): Promise<INetHome | 'BadRequest_404' | 'BadRequest_500'> => {
+export const netHome = (type: EDevice): Promise<INetHomeRes | 'BadRequest_404' | 'BadRequest_500'> => {
   return poFetch('/api/5000');
 }
 

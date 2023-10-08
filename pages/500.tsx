@@ -31,7 +31,7 @@ const Custom500: NextPage<IProps> = () => {
       <Link href="/" className={styles.pcBack}>返回首页</Link>
     </div> : null}
 
-    {device === EDevice.mobile && isShow ? <div className={styles.m404Wrap}>
+    {device === EDevice.wap && isShow ? <div className={styles.m404Wrap}>
       <Image
         className={styles.emptyImg}
         width={320}

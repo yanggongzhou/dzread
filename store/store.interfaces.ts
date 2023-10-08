@@ -6,7 +6,7 @@ export interface IHiveStore {
 }
 
 export enum EDevice {
-  mobile = 1,
+  wap = 1,
   pc = 2,
 }
 

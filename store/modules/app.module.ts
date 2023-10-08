@@ -5,7 +5,7 @@ import { SliceCaseReducers } from "@reduxjs/toolkit/src/createSlice";
 export const appSlice = createSlice<IAppStore, SliceCaseReducers<IAppStore>>({
   name: 'app',
   initialState: (): IAppStore => ({
-    device: EDevice.mobile,
+    device: EDevice.wap,
     isShowBrowse: true, // m端语言弹框展开默认关闭分类弹框
   }),
 

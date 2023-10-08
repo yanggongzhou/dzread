@@ -47,7 +47,7 @@ const DLayout: FC<IProps> = ({ children, pageProps, router }) => {
   const setRemScript = () => {
     const clientWidth = window.innerWidth || document.documentElement.clientWidth;
     const { isPc } = ownOs(window.navigator.userAgent);
-    dispatch(setDevice(isPc ? EDevice.pc : EDevice.mobile));
+    dispatch(setDevice(isPc ? EDevice.pc : EDevice.wap));
     if (isPc) {
       document.documentElement.style.fontSize = '90px';
     } else {

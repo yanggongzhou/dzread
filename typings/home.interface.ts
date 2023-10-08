@@ -1,58 +1,99 @@
+/**
+ * 首页下行参数
+ */
+import { EDevice } from "@/store/store.interfaces";
+import { ERankType, IRankBookDataVo } from "@/typings/ranking.interface";
+import { IBookSearchVo } from "@/typings/browse.interface";
 
-export interface INetHome {
-  channels?: ISectionItem;
-  section: ISectionItem[];
-  channelId: string;
+export interface INetHomeRes {
+  seoBannerManageVos: ISeoBannerManageVo[];
+  seoChannelListVos: ISeoChannelListVo[];
+  seoColumnVos: ISeoColumnVo[];
 }
-
-export interface ISectionItem {
-  id: string;
-  title: string;
-  template: string;
+/**
+ * Banner
+ */
+export interface ISeoBannerManageVo {
+  id: number;
+  name: string;
+  bookId: string;
   counter: number;
-  action?: ISectionAction; // 点击动作的数据
-  items?: IItems;
-  type: ESectionType;
+  pcUrl: string;
+  wapUrl: string;
+  comment?: string; // 备注
+}
+/**
+ * 频道列表
+ */
+export interface ISeoChannelListVo {
+  id: number;
+  channelId: number;
+  name: string;
+  type: EDevice;
+  code: EChannelCode;
+  sort: number;
+}
+/**
+ * 编码
+ */
+export enum EChannelCode {
+  首页 = 1,
+  分类,
+  排行榜,
+  男生,
+  女生,
+  出版,
+}
+/**
+ * 栏目信息
+ */
+export interface ISeoColumnVo {
+  code: EChannelCode; // 1-首页  4-男生  5-女生  6-出版
+  seoColumnManageVos: ISeoColumnManage[];
 }
 
-export enum ESectionType {
-  频道栏目 = 'pd',
-  banner = 'bn',
-  分类 = 'fl',
-  书籍 = 'sj'
+export interface ISeoColumnManage {
+  id: number;
+  channelId: number;
+  name: string;
+  sex: ERankType;
+  type: EColumnType;
+  sort: number;
+  bookInfos?: IBookInfo[];// type=1时下发-书籍类型
+  rankVos?: IRankVo[]; // type=2时下发
+  bookTypeVos?: IBookTypeVo[]; // type=3时下发
 }
 
-export interface IItems {
-  itemMark?: string; // 单个item对应的id
-  id: string;
-  type: string;
-
-
-
-
-
+export enum EColumnType {
+  书籍类型 = 1,
+  排行榜,
+  分类推荐,
 }
 
-interface ISectionAction {
-  title?: string;
-  pType?: string;
-  dataId?: string;
-  url?: string;
-  sucName?: string;
-  type: EActionType;
+export interface IBookInfo {
+  bookId: string;
+  bookName: string;
+  coverWap: string;
+  introduction: string;
+  protagonist: string; // 主角
 }
 
-export enum EActionType {
-  不可点击,
-  url,
-  请求二级接口,
-  书籍,
-  进阅读器,
-  领书,
-  加载分页
+export interface IRankVo {
+  rankId: number; // 排行榜ID
+  rankName: string;
+  bookInfos: IRankBookDataVo[];
+}
+
+export interface IBookTypeVo {
+  classifyCode: number; // 分类ID
+  classifyName: string;
+  books: IBookSearchVo[]
 }
 
 
+
+
+// ---------------------------------
 export enum EnumPosition {
   顶部banner = 0,
   熱銷好文 = 1,
