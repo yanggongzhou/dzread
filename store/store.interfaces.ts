@@ -3,7 +3,6 @@ import { EOperateType, EThemeType } from "@/typings/reader.interface";
 
 export interface IHiveStore {
   clipboard: IClipboard;
-  copyText: string;
 }
 
 export enum EDevice {

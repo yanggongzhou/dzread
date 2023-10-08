@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { GetServerSideProps, GetServerSidePropsResult, NextPage } from "next";
 import { netMoreBook } from "@/server/home";
 import { EnumPosition, IBookItem } from "@/typings/home.interface";
-import { ownOs } from "@/utils/ownOs";
+import { ownOs } from "@/utils/tools";
 import PcRecommend from "@/components/pcRecommend";
 import Breadcrumb from "@/components/common/breadcrumb";
 import MRecommend from "@/components/recommend";

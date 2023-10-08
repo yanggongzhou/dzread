@@ -1,6 +1,6 @@
 import React from "react";
 import { GetServerSideProps, GetServerSidePropsResult, NextPage } from "next";
-import { ownOs } from "@/utils/ownOs";
+import { ownOs } from "@/utils/tools";
 import { netKeywords } from "@/server/home";
 import PcKeywords from "@/components/pcKeywords";
 import WapKeywords from "@/components/keywords";

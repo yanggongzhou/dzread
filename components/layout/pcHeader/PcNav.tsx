@@ -10,7 +10,6 @@ interface IProps {
 
 }
 
-
 const PcNav: FC<IProps> = () => {
   const router = useRouter();
   const MenuData = [
@@ -61,6 +60,7 @@ const PcNav: FC<IProps> = () => {
   return <div className={styles.navLeft}>
     <Link href={'/'} title={'点众阅读'}>
       <Image
+        priority
         className={styles.logoTxtBox}
         width={200}
         height={40}

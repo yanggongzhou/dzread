@@ -2,30 +2,46 @@
   padding-top: 0.96rem;
   max-height: 100vh;
   height: 100%;
-  display: flex;
   overflow: hidden;
   background-color: #F3F3F3;
+  display: flex;
+  flex-direction: row;
+
 
   .slideBox {
     width: 1.42rem;
     flex: none;
-    max-height: calc(100vh - 5rem);
+    max-height: 100%;
+    background-color: #F3F3F3;
+    display: flex;
+    flex-direction: column;
 
-    :global {
-      .adm-side-bar-item {
-        padding: 0 0 0 0.32rem;
-        height: 1.2rem;
-        position: relative;
-      }
-      .adm-badge-wrapper {
-        position: static;
-      }
-      .adm-side-bar-item-highlight {
+    .slideItem {
+      height: 1.2rem;
+      position: relative;
+      font-size: 0.26rem;
+      font-weight: 400;
+      color: #8D8D8D;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .active {
+      background-color: #FFFFFF;
+      font-weight: 500;
+      color: #222222;
+      font-size: 0.28rem;
+
+      &:before {
+        content: "";
         height: 1.2rem;
         width: 0.08rem;
+        background-color: #F67C00;
+        position: absolute;
         left: 0;
-        border-radius: 0.02rem;
-        background: #F67C00;
+        top: 0;
+        z-index: 1;
       }
     }
   }

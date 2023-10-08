@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IReadStore } from "@/store/store.interfaces";
 import { SliceCaseReducers } from "@reduxjs/toolkit/src/createSlice";
 import { EOperateType, EThemeType } from "@/typings/reader.interface";
-import { setReadSetting } from "@/utils/cookies";
+import { setReadSetting } from "@/utils/storage/cookies";
 
 export const readSlice = createSlice<IReadStore, SliceCaseReducers<IReadStore>>({
   name: 'read',

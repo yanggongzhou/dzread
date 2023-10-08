@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from "react";
-import { addListen, removeListen } from "@/utils/rem";
-import { ownOs } from "@/utils/ownOs";
+import { addListen, removeListen } from "@/utils/listens";
+import { ownOs } from "@/utils/tools";
 import PcHeader from "@/components/layout/pcHeader/PcHeader";
 import PcFooter from "@/components/layout/pcFooter/PcFooter";
 import useLogParams from "@/hooks/useLogParams";

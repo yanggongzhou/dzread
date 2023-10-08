@@ -37,7 +37,6 @@ console.log('\x1B[34m%s\x1B[39m', 'IPUA:', IpUaUrl)
 console.log('\x1B[44m%s\x1B[49m', '-------------------------- ✨ ✨ ✨ ✨ ✨ ✨ --------------------------')
 
 const nextConfig = {
-  runtime: 'edge', // for Edge API Routes only
   reactStrictMode: true,
   trailingSlash: true,
   // Configuring the Build ID
@@ -69,11 +68,7 @@ const nextConfig = {
     IpUaUrl,
   },
   // https://www.nextjs.cn/docs/upgrading
-  swcMinify: true,
-  // 参考 https://nextjs.org/docs/messages/swc-disabled
-  experimental: {
-    forceSwcTransforms: true,
-  },
+  swcMinify: true
 }
 
 module.exports = nextConfig;

@@ -1,6 +1,6 @@
 import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/document'
 import React from "react";
-import { ownOs } from "@/utils/ownOs";
+import { ownOs } from "@/utils/tools";
 import { DocumentInitialProps } from "next/dist/shared/lib/utils";
 import { NextPage } from "next";
 

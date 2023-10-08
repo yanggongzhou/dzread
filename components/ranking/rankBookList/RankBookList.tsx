@@ -1,22 +1,22 @@
 import React, { FC } from 'react'
-import { IBookItem } from "@/typings/home.interface";
 import Link from "next/link";
+import { IRankBookDataVo } from "@/typings/ranking.interface";
 import ImageCover from "@/components/common/image/ImageCover";
-import styles from '@/components/ranking/rankList/RankList.module.scss'
+import styles from '@/components/ranking/rankBookList/RankBookList.module.scss';
 
 interface IProps {
-  dataSource: IBookItem[];
+  rankBook: IRankBookDataVo[];
 }
 
-const RankList: FC<IProps> = ({ dataSource }) => {
+const RankBookList: FC<IProps> = ({ rankBook = [] }) => {
   return <div className={styles.rankListBox}>
-    {dataSource.map((item, itemInd) => {
+    {rankBook.map((item, itemInd) => {
       return <div key={item.bookId} className={styles.rankItem}>
         <Link className={styles.rankIndex} href={`/book/${item.bookId}`}>{itemInd + 1}</Link>
         <ImageCover
           href={`/book/${item.bookId}`}
           className={styles.itemImg}
-          src={item.cover}
+          src={item.coverWap}
           width={218}
           height={294}
           alt={item.bookName}
@@ -24,13 +24,15 @@ const RankList: FC<IProps> = ({ dataSource }) => {
         <div className={styles.itemContent}>
           <div>
             <h4><Link className={styles.bookName} href={`/book/${item.bookId}`}>{item.bookName}</Link></h4>
-            {item.author ? <Link href={`/book/${item.bookId}`} className={styles.bookAuthor}>{item.author}{' · ' + item.typeTwoNames.join(' · ')}</Link> : null}
+            {item.threeTypeTag.length > 0 ?
+              <Link href={`/book/${item.bookId}`} className={styles.bookAuthor}>{item.threeTypeTag.join(' · ')}</Link>
+              : null}
           </div>
-          <Link href={`/book/${item.bookId}`} className={styles.bookType}>{`164万热度值`}</Link>
+          <Link href={`/book/${item.bookId}`} className={styles.bookType}>{item.num}</Link>
         </div>
       </div>
     })}
   </div>
 }
 
-export default RankList;
+export default RankBookList;

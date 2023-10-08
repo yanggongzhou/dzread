@@ -3,7 +3,7 @@ import { GetServerSideProps, GetServerSidePropsResult } from "next";
 import React from "react";
 import { netBrowse } from "@/server/home";
 import { IBookItem } from "@/typings/home.interface";
-import { ownOs } from "@/utils/ownOs";
+import { ownOs } from "@/utils/tools";
 import MBrowse from "@/components/browse";
 import PcBrowse from "@/components/pcBrowse";
 import { IBrowseTypes } from "@/typings/browse.interface";

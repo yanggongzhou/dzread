@@ -9,7 +9,6 @@ export interface INetKeywordsReq {
 export interface IKeywordItem {
   id: string;
   keyword: string;
-  utime: string;
 }
 
 export interface INetKeywordsRes {

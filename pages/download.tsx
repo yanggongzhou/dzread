@@ -1,6 +1,6 @@
 import React from "react";
 import { GetServerSideProps, NextPage } from "next";
-import { ownOs } from "@/utils/ownOs";
+import { ownOs } from "@/utils/tools";
 import NavBar from "@/components/common/navBar/NavBar";
 import ClientConfig from "@/client.config";
 import Image from "next/image";

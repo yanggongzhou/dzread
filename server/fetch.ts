@@ -69,7 +69,7 @@ export const poFetch = async (url: string, data?: AnyObject, params?: AnyObject)
 
     if (response.status === 200 && response.ok) {
       const res = await response.json();
-      return res.data;
+      return res;
       // if (res.status === 0) {
       //   return res.data;
       // }

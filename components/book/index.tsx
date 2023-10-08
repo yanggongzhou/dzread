@@ -10,7 +10,7 @@ import { IChapterListItem } from "@/typings/book.interface";
 import { setCatalogVisible } from "@/store/modules/read.module";
 import { useAppDispatch } from "@/store";
 import BookTabs from "@/components/book/bookTabs/BookTabs";
-import { getSessionBook, removeSessionBook, setSessionBook } from "@/utils/sessionStorages";
+import { getSessionBook, removeSessionBook, setSessionBook } from "@/utils/storage/sessionStorages";
 import styles from "@/components/book/index.module.scss";
 import classNames from "classnames";
 

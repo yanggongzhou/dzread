@@ -1,55 +1,27 @@
 import React, { FC } from "react";
 import Link from "next/link";
+import { IRankDataVo } from "@/typings/ranking.interface";
 import styles from "@/components/pcRanking/tabs/RankingTab.module.scss";
 
-const RankingTab: FC = () => {
-  const rankingTypeList = [
-    {
-      id: 'male',
-      label: '男生排行榜',
-      children: [
-        { id: 'hot', label: '热门榜' },
-        { id: 'god', label: '畅销榜' },
-        { id: 'finish', label: '完本榜' },
-        { id: 'good', label: '好评榜' },
-        { id: 'new', label: '新书榜' },
-        { id: 'old', label: '经典榜' },
-      ]
-    },
-    {
-      id: 'female',
-      label: '女生排行榜',
-      children: [
-        { id: 'hot', label: '热门榜' },
-        { id: 'god', label: '畅销榜' },
-        { id: 'finish', label: '完本榜' },
-        { id: 'good', label: '好评榜' },
-        { id: 'new', label: '新书榜' },
-        { id: 'old', label: '经典榜' },
-      ]
-    },
-    {
-      id: 'publish',
-      label: '出版排行榜',
-      children: [
-        { id: 'hot', label: '热门榜' },
-        { id: 'god', label: '畅销榜' },
-        { id: 'finish', label: '完本榜' },
-        { id: 'good', label: '好评榜' },
-        { id: 'new', label: '新书榜' },
-        { id: 'old', label: '经典榜' },
-      ]
-    },
-  ]
+interface IProps {
+  rankId: number;
+  rankData: IRankDataVo[]; // 排行榜名称列表
+}
+const RankingTab: FC<IProps> = ({ rankId, rankData }) => {
 
   return <div className={styles.slideTabBox}>
-    {rankingTypeList.map(item => {
-      return <div key={item.id} className={styles.tabOneItem}>
-        <h2>{ item.label }</h2>
+    {rankData.map(item => {
+      return <div key={item.rankType} className={styles.tabOneItem}>
+        <h2>{ item.rankTypeName }</h2>
         <div className={styles.oneItemBox}>
-          {item.children.map(child => {
+          {item.subList.map(child => {
+            if (rankId === child.id) {
+              return <div key={child.id} className={styles.tabChild}>
+                { child.name }
+              </div>
+            }
             return <Link key={child.id} href={`/ranking/${child.id}`} className={styles.tabChild}>
-              { child.label }
+              { child.name }
             </Link>
           })}
         </div>

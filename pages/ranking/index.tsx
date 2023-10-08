@@ -1,81 +1,110 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { GetServerSideProps, GetServerSidePropsResult, NextPage } from "next";
-import { netBrowse } from "@/server/home";
-import { ownOs } from "@/utils/ownOs";
+import { netRanking } from "@/server/home";
+import { ownOs } from "@/utils/tools";
 import Breadcrumb from "@/components/common/breadcrumb";
-import { IBookItem } from "@/typings/home.interface";
-import { IBrowseTypes } from "@/typings/browse.interface";
 import PcRanking from "@/components/pcRanking";
 import WapRanking from "@/components/ranking";
+import { ERankStyle, ERankType, IRankBookDataVo, IRankDataVo } from "@/typings/ranking.interface";
 
 interface IProps {
   isPc: boolean;
-  bookList: IBookItem[];
-  types: IBrowseTypes[];
-  pageNo: number;
-  pages: number;
-  typeTwoId: number;
-  typeTwoName: string;
+  page: number;
+  pages: number; // 总页
+  rankStyle: ERankStyle;
+  rankType: ERankType;
+  rankData: IRankDataVo[]; // 排行榜名称列表
+  rankBook: IRankBookDataVo[]; // 某个排行榜对应的书籍信息data
+  rankId?: number;
 }
 
 const RankingPage: NextPage<IProps> = (
-  { isPc, types, bookList, pageNo, pages, typeTwoId }) => {
+  { isPc, rankData, rankBook, page, pages, rankStyle, rankType, rankId }) => {
   const data = [
     { title: '首页', link: "/home" },
     { title: '小说分类', link: "/browse/0" },
     { title: '都市小说' },
   ]
+  const wapRankData = useMemo(() => {
+    const data = rankData.find(val => val.rankType === rankType);
+    if (data) {
+      return data.subList;
+    }
+    return [];
+  }, [rankData]);
   return <>
     <Breadcrumb data={data} style={isPc ? {} : { width: 0, height: 0, display: "none" }}/>
     {isPc ?
       <PcRanking
-        pageNo={pageNo}
-        types={types}
-        bookList={bookList}
+        page={page}
+        rankData={rankData}
+        rankBook={rankBook}
         pages={pages}
-        typeTwoId={typeTwoId}
+        rankStyle={rankStyle}
+        rankType={rankType}
+        rankId={rankId}
       /> :
       <WapRanking
-        pageNo={pageNo}
-        types={types}
-        bookList={bookList}
+        page={page}
+        subList={wapRankData}
+        rankBook={rankBook}
         pages={pages}
-        typeTwoId={typeTwoId}
+        rankStyle={rankStyle}
+        rankType={rankType}
+        rankId={rankId}
       />}
   </>
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ req, query }): Promise<GetServerSidePropsResult<IProps>> => {
   const ua = req?.headers['user-agent'] || ''
-  const { page = '1', typeTwoId = 0 } = query;
-
-  const response = await netBrowse({
-    typeTwoId: Number(typeTwoId) || 0,
-    pageNo: Number(page),
-    pageSize: 15
-  })
+  const { page = '1', types } = query as { page?: string, types?: string };
+  let rankType = ERankType.Male;
+  let rankStyle = ERankStyle.Daily;
+  let _rankId = undefined;
+  if (types) {
+    const typeArr = types.split('-');
+    if (typeArr[0] && Number(typeArr[0]) && [ERankType.Female, ERankType.Male].includes(Number(typeArr[0]))) {
+      rankType = Number(typeArr[0]) as ERankType;
+    }
+    if (typeArr[1] && !isNaN(Number(typeArr[1]))) {
+      _rankId = Number(typeArr[1])
+    }
+    if (typeArr[2] && Number(typeArr[2]) && [ERankStyle.Daily, ERankStyle.Monthly].includes(Number(typeArr[2]))) {
+      rankStyle = Number(typeArr[2]);
+    }
+  }
+  const _page = Number(page) || 1;
+  const size = 10;
+  const response = await netRanking({
+    index: _page,
+    size,
+    style: rankStyle,
+    rankId: _rankId,
+  });
   if (response === 'BadRequest_404') {
     return { notFound: true }
   }
   if (response === 'BadRequest_500') {
     return { redirect: { destination: '/500', permanent: false } }
   }
-  const { currentPage = 1, pages = 0, bookList = [], types = [] } = response;
-  if (bookList.length !== 0 || types.length !== 0) {
-    types.unshift({ id: 0, name: 'all', replaceName: 'all', checked: false });
-  }
-  const typeItem = types.find(val => val.id === Number(typeTwoId));
-  const typeTwoName = typeItem && typeItem.name ? typeItem.name : "all";
 
+  const { rankData = [], rankBook = [], totalSize = 0 } = response;
+  if (_rankId === undefined) {
+    if (rankData.length > 0 && rankData[0].subList && rankData[0].subList.length > 0 && rankData[0].subList[0].id) {
+      _rankId = rankData[0].subList[0].id;
+    }
+  }
   return {
     props: {
-      types,
-      bookList,
-      pageNo: currentPage,
-      pages,
+      rankData,
+      rankBook,
+      page: _page,
+      pages: Math.ceil(totalSize / size),
+      rankId: _rankId,
+      rankType,
+      rankStyle,
       isPc: ownOs(ua).isPc,
-      typeTwoName,
-      typeTwoId: Number(typeTwoId),
     }
   }
 }

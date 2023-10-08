@@ -1,6 +1,6 @@
 import React from "react";
 import { GetServerSideProps, GetServerSidePropsResult, NextPage } from "next";
-import { ownOs } from "@/utils/ownOs";
+import { ownOs } from "@/utils/tools";
 import { netKeywordTag } from "@/server/home";
 import PcTag from "@/components/PcTag";
 import WapTag from "@/components/tag";

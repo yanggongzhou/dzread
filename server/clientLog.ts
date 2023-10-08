@@ -3,10 +3,11 @@ import { IClipboard, ILogParams } from "@/typings/hive.interfaces";
 
 // 大数据打点
 export const netHiveLog = (logData: ILogParams) => {
-  fetch(ClientConfig.netHiveLink + `?json=${encodeURIComponent(JSON.stringify(logData))}`, {
-    method: "GET",
-    keepalive: true
-  }).catch(error => console.warn('Error Log:', error))
+  console.log('logData=========>', logData.event);
+  // fetch(ClientConfig.netHiveLink + `?json=${encodeURIComponent(JSON.stringify(logData))}`, {
+  //   method: "GET",
+  //   keepalive: true
+  // }).catch(error => console.warn('Error Log:', error))
 }
 
 // IPUA
@@ -17,7 +18,7 @@ export async function netIpUa(clipboard: IClipboard) {
     h5Uid: clipboard.h5uid,
   }
   return new Promise((resolve) => {
-    fetch(process.env.IpUaUrl || 'https://api.dramaboxdb.com/drama-box/ad/cache/ua', {
+    fetch(process.env.IpUaUrl, {
       method: "post",
       body: JSON.stringify(params),
       headers: new Headers({

@@ -2,12 +2,12 @@ import React, { useMemo } from "react";
 import { GetServerSideProps, GetServerSidePropsResult, NextPage } from "next";
 import { netBook, netListChapter } from "@/server/home";
 import PcBook from "@/components/pcBook";
-import { ownOs } from "@/utils/ownOs";
+import { ownOs } from "@/utils/tools";
 import { EnumPosition, IBookItem } from "@/typings/home.interface";
 import { IChapterListItem } from "@/typings/book.interface";
 import Breadcrumb from "@/components/common/breadcrumb";
 import WapBook from "@/components/book";
-import { getBookInfo } from "@/utils/localstorages";
+import { getBookInfo } from "@/utils/storage/localstorages";
 
 interface IProps {
   isPc: boolean;

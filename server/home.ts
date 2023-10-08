@@ -6,11 +6,18 @@ import {
 import { INetBrowseReq, INetBrowseRes } from "@/typings/browse.interface";
 import { INetKeywordsReq, INetKeywordsRes, INetKeywordTagReq, INetKeywordTagRes } from "@/typings/tag.interface";
 import { ownFetch, poFetch } from "@/server/fetch";
+import { INetRankingRes, INetRankingReq } from "@/typings/ranking.interface";
 
 // 获取首页index
 export const netHome = (): Promise<INetHome | 'BadRequest_404' | 'BadRequest_500'> => {
   return poFetch('/api/5000');
 }
+
+// 5001 排行榜页面
+export const netRanking = (body: INetRankingReq): Promise<INetRankingRes | 'BadRequest_404' | 'BadRequest_500'> => {
+  return poFetch('/api/5001', body);
+}
+
 
 export const netHomeData = (): Promise<INetHomeItem[] | 'BadRequest_404' | 'BadRequest_500'> => {
   return ownFetch('/index.do');

@@ -1,25 +1,26 @@
 import React, { FC } from 'react'
 import PaginationCom from "@/components/common/paginationCom";
-import { PcEmpty } from "@/components/common/empty";
-import FirstList from "@/components/common/firstList/FirstList";
 import RankingTab from "@/components/pcRanking/tabs/RankingTab";
-import { IBookItem } from "@/typings/home.interface";
-import { IBrowseTypes } from "@/typings/browse.interface";
-import styles from '@/components/pcRanking/index.module.scss'
+import { ERankStyle, ERankType, IRankBookDataVo, IRankDataVo } from "@/typings/ranking.interface";
+import styles from '@/components/pcRanking/index.module.scss';
 
 interface IProps {
-  bookList: IBookItem[];
-  types: IBrowseTypes[];
-  pageNo: number;
-  pages: number;
-  typeTwoId: number;
+  page: number;
+  pages: number; // 总页
+  rankStyle: ERankStyle;
+  rankType: ERankType;
+  rankData: IRankDataVo[]; // 排行榜名称列表
+  rankBook: IRankBookDataVo[]; // 某个排行榜对应的书籍信息data
+  rankId?: number;
 }
 
-const PcRanking: FC<IProps> = ({ bookList = [], pageNo, pages, typeTwoId, types }) => {
+const PcRanking: FC<IProps> = (
+  { rankData, rankBook, page, pages, rankStyle, rankId }
+) => {
 
   return <main className={styles.rankWrap}>
 
-    <RankingTab />
+    <RankingTab rankData={rankData} rankId={rankId}/>
 
     <div className={styles.rankContent}>
 
@@ -27,13 +28,13 @@ const PcRanking: FC<IProps> = ({ bookList = [], pageNo, pages, typeTwoId, types 
         都市小说
       </div>
 
-      {bookList.length === 0 ? <PcEmpty/> :
-        <FirstList dataSource={bookList}/>}
+      {/*{rankData.length === 0 ? <PcEmpty/> :*/}
+      {/*  <FirstList dataSource={rankData}/>}*/}
 
       {pages && pages > 1 ?
         <PaginationCom
-          path={`/browse/${typeTwoId}/`}
-          pageNo={pageNo}
+          path={`/ranking/${rankId}/`}
+          pageNo={page}
           totalPage={pages}
           isScroll={true}/> : null}
     </div>

@@ -12,7 +12,7 @@ import ContentList from "@/components/reader/contentList/ContentList";
 import { netDetailChapter } from "@/server/home";
 import { EThemeType } from "@/typings/reader.interface";
 import styles from '@/components/reader/index.module.scss';
-import { setBookInfo } from "@/utils/localstorages";
+import { setBookInfo } from "@/utils/storage/localstorages";
 
 interface IProps {
   fontSize: number;

@@ -1,17 +1,6 @@
-import { randomString } from '@/utils/other'
 import ClientConfig from '@/client.config';
-import { isIos, ownOs } from "@/utils/ownOs";
+import { isIos, ownOs, randomString } from "@/utils/tools";
 import { AnyObject, IClipboard, ILogParams } from "@/typings/hive.interfaces";
-
-export const getUserLandId = () => {
-  const userlandId = window.localStorage.getItem('USER_LANDPID');
-  if (!userlandId) {
-    const _id = randomString();
-    window.localStorage.setItem('USER_LANDPID', _id);
-    return _id
-  }
-  return userlandId;
-}
 
 /**
  * 获取大数据打点参数
@@ -43,7 +32,7 @@ export const getLogParams = ({ event, clipboard, language, data = {} }: IGetLogP
     event, // 事件名称
     data: {
       date: date.toLocaleDateString().replace(/\//g, '-'),
-      product: ClientConfig.logDataType,
+      product: ClientConfig.name,
       action: 3, // 1 pv | 2 按钮点击下载
       clipboard: {
         ...clipboard,

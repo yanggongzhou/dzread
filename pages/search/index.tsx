@@ -3,7 +3,7 @@ import { GetServerSideProps, GetServerSidePropsResult, NextPage } from "next";
 import { netSearch } from "@/server/home";
 import { IBookItem } from "@/typings/home.interface";
 import PcSearch from "@/components/pcSearch";
-import { ownOs } from "@/utils/ownOs";
+import { ownOs } from "@/utils/tools";
 import WapSearch from "@/components/search";
 
 interface IProps {

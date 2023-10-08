@@ -4,7 +4,7 @@ import React, { useMemo } from "react";
 import { netHomeData } from "@/server/home";
 import { EnumPosition, IBookItem, INetHomeItem } from "@/typings/home.interface";
 import PcHome from "@/components/pcHome/PcHome";
-import { ownOs } from "@/utils/ownOs";
+import { ownOs } from "@/utils/tools";
 import WapHome from "@/components/home";
 
 interface IProps {

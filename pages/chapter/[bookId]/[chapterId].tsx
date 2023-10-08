@@ -4,7 +4,7 @@ import { GetServerSideProps, GetServerSidePropsResult } from "next";
 import { netDetailChapter, netListChapter } from "@/server/home";
 import { IChapterListItem, INetChapterDetailRes } from "@/typings/book.interface";
 import PcReader from "@/components/pcReader";
-import { ownOs } from "@/utils/ownOs";
+import { ownOs } from "@/utils/tools";
 import { IBookItem } from "@/typings/home.interface";
 import Reader from "@/components/reader";
 import { EThemeType } from "@/typings/reader.interface";

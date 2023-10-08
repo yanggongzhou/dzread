@@ -20,6 +20,7 @@ const MHeader: FC<IProps> = () => {
   return <div className={styles.headerBox}>
     <header className={styles.headerContent}>
       <Image
+        priority
         className={styles.logoBox}
         width={200}
         height={68}

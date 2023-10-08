@@ -1,4 +1,8 @@
 // readSetting
+import { randomString } from "@/utils/tools";
+/**
+ * 阅读记录
+ */
 const bookInfoKey = "Dz_book_info";
 
 interface ILocalBookInfo {
@@ -27,3 +31,19 @@ export const setBookInfo = (obj: ILocalBookInfo) => {
   }
   window.localStorage.setItem(bookInfoKey, JSON.stringify(list))
 };
+
+
+/**
+ * 用户ID浏览器本地缓存
+ */
+const browserUserIdKey = 'Dz_browser_user_id';
+
+export const getUserLandId = (): string => {
+  const userlandId = window.localStorage.getItem(browserUserIdKey);
+  if (!userlandId) {
+    const _id = randomString();
+    window.localStorage.setItem(browserUserIdKey, _id);
+    return _id
+  }
+  return userlandId;
+}

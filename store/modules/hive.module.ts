@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IHiveStore } from "@/store/store.interfaces";
 import ClientConfig from "@/client.config";
-import { isIos } from "@/utils/ownOs";
-import { getUserLandId } from "@/utils/logParams";
+import { isIos } from "@/utils/tools";
 import { SliceCaseReducers } from "@reduxjs/toolkit/src/createSlice";
 import { IClipboard } from "@/typings/hive.interfaces";
 import { netIpUa } from "@/server/clientLog";
+import { getUserLandId } from "@/utils/storage/localstorages";
 
 export const clipboardAsync = createAsyncThunk<IClipboard>(
   'hive/getClipboard',
@@ -34,12 +34,6 @@ export const clipboardAsync = createAsyncThunk<IClipboard>(
   }
 )
 
-const getCopyText = (clipboard: IClipboard) => {
-  const { bid = "", channelCode = "", cid = 0, h5uid = "", ua = '' } = clipboard;
-  const queryStr = !cid ? `${h5uid}_${bid}_${channelCode}_gg` : `${h5uid}_${bid}_${channelCode}_gg_${cid}`;
-  return `[dramaBox]https://app.dramaboxdb.com/${ isIos(ua) ? 'ios' : 'android' }/open?c=${ queryStr } UA8322`
-}
-
 export const hiveSlice = createSlice<IHiveStore, SliceCaseReducers<IHiveStore>>({
   name: 'hive',
   initialState: () => {
@@ -55,7 +49,6 @@ export const hiveSlice = createSlice<IHiveStore, SliceCaseReducers<IHiveStore>>(
         ua: '',
         h5fingerPrint: "",
       },
-      copyText: '',
     }
   },
   reducers: {
@@ -66,7 +59,6 @@ export const hiveSlice = createSlice<IHiveStore, SliceCaseReducers<IHiveStore>>(
       if (!!action.payload.cid) {
         state.clipboard.cid = action.payload.cid
       }
-      state.copyText = getCopyText(state.clipboard)
     }
   },
   // 在extraReducers中可以对请求结果的成功失败，做不同的处理
@@ -75,7 +67,6 @@ export const hiveSlice = createSlice<IHiveStore, SliceCaseReducers<IHiveStore>>(
       .addCase(clipboardAsync.fulfilled, (state, action) => {
         // const clipboardObj = Object.assign(state.clipboard, action.payload);
         state.clipboard = { ...state.clipboard, ...action.payload };
-        state.copyText = getCopyText(state.clipboard)
       })
     ;
   }

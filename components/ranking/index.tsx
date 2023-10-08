@@ -1,26 +1,36 @@
 import React, { FC, useEffect, useRef, useState } from "react";
-import { IBookItem } from "@/typings/home.interface";
-import { IBrowseTypes } from "@/typings/browse.interface";
 import { useRouter } from "next/router";
 import { MEmpty } from "@/components/common/empty";
 import MorePagination from "@/components/recommend/pagination/MorePagination";
 import NavBar from "@/components/common/navBar/NavBar";
-import { SideBar } from "antd-mobile";
 import Link from "next/link";
 import classNames from "classnames";
-import RankList from "@/components/ranking/rankList/RankList";
+import RankBookList from "@/components/ranking/rankBookList/RankBookList";
 import RankDownloadBanner from "@/components/ranking/rankBanner/DownloadBanner";
+import { ERankStyle, ERankType, IRankBookDataVo, ISeoRankVo } from "@/typings/ranking.interface";
 import styles from "@/components/ranking/index.module.scss";
 
 interface IProps {
-  bookList: IBookItem[];
-  types: IBrowseTypes[];
-  pageNo: number;
-  pages: number;
-  typeTwoId: number;
+  page: number;
+  pages: number; // 总页
+  rankStyle: ERankStyle;
+  rankType: ERankType;
+  subList: ISeoRankVo[]; // 排行榜名称列表
+  rankBook: IRankBookDataVo[]; // 某个排行榜对应的书籍信息data
+  rankId?: number;
 }
 
-const WapRanking: FC<IProps> = ({ bookList = [], pageNo, pages, typeTwoId, types }) => {
+const WapRanking: FC<IProps> = (
+  {
+    subList,
+    rankBook,
+    page,
+    pages,
+    rankStyle,
+    rankId,
+    rankType
+  }
+) => {
   const rankRef = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
   useEffect(() => {
@@ -28,11 +38,6 @@ const WapRanking: FC<IProps> = ({ bookList = [], pageNo, pages, typeTwoId, types
       Reflect.set(rankRef.current, "scrollTop", 0)
     }
   }, [router]);
-
-  const [isMouth, setIsMouth] = useState(false);
-
-  const [activeKey, setActiveKey] = useState('key1')
-
   const [isFooter, setIsFooter] = useState(false);
   const intersectionRef = useRef<Element | null>(null);
   useEffect(() => {
@@ -52,44 +57,51 @@ const WapRanking: FC<IProps> = ({ bookList = [], pageNo, pages, typeTwoId, types
     };
   }, []);
 
-  return (<main className={styles.rankWrap}>
-    <NavBar backHref={'/'} title={"男生小说排行榜"}/>
-
-    <div className={styles.slideBox}>
-      <SideBar style={{
-        '--width': '1.42rem',
-        '--item-border-radius': '0.02rem',
-        '--background-color': '#F3F3F3'
-      }} activeKey={activeKey} onChange={setActiveKey}>
-        {types.map(item => (
-          <SideBar.Item key={item.id} title={item.name} />
+  return (<>
+    <NavBar backHref={'/'} title={rankType === ERankType.Male ? "男生小说排行榜" : "女生小说排行榜"}/>
+    <main className={styles.rankWrap}>
+      <nav className={styles.slideBox}>
+        {subList.map(item => (
+          <Link
+            key={item.id}
+            href={`/ranking/${rankType}-${item.id}-${rankStyle}`}
+            title={item.name}
+            className={classNames(styles.slideItem, rankId === item.id && styles.active)}>
+            {item.name}
+          </Link>
         ))}
-      </SideBar>
-    </div>
-
-    <div className={styles.mainBox}>
-      <div className={styles.rankDateBox}>
-        <div className={styles.rankDate}>
-          <Link className={classNames(styles.rankDateItem, !isMouth && styles.active)} href={'/'}>日榜</Link>
-          <Link className={classNames(styles.rankDateItem, isMouth && styles.active)} href={'/'}>月榜</Link>
+      </nav>
+      <div className={styles.mainBox}>
+        <div className={styles.rankDateBox}>
+          <div className={styles.rankDate}>
+            <Link
+              className={classNames(styles.rankDateItem, rankStyle === ERankStyle.Daily && styles.active)}
+              href={`/ranking/${rankType}-${rankId || 'null'}-${ERankStyle.Daily}`}>
+              日榜
+            </Link>
+            <Link
+              className={classNames(styles.rankDateItem, rankStyle === ERankStyle.Monthly && styles.active)}
+              href={`/ranking/${rankType}-${rankId || 'null'}-${ERankStyle.Monthly}`}>
+              月榜
+            </Link>
+          </div>
         </div>
+        {rankBook.length > 0 ?
+          <div className={styles.rankContent} ref={rankRef}>
+            <RankBookList rankBook={rankBook}/>
+            {pages && pages > 1 ? <MorePagination
+              prevPath={`/ranking/${rankType}-${rankId || 'null'}-${rankStyle}/`}
+              page={page}
+              totalPage={pages}
+            /> : null}
+            <div style={{ width: 1, height: 10 }} ref={intersectionRef}/>
+          </div>
+          : <MEmpty/>}
+
+        <RankDownloadBanner isFooter={isFooter}/>
       </div>
-      {bookList.length > 0 ?
-        <div className={styles.rankContent} ref={rankRef}>
-          <RankList dataSource={bookList} />
-          {pages && pages > 1 ? <MorePagination
-            prevPath={`/browse/${typeTwoId}/`}
-            page={pageNo}
-            totalPage={pages}
-          /> : null}
-          <div style={{ width: 1, height: 10 }} ref={intersectionRef} />
-        </div>
-        : <MEmpty />}
-
-      <RankDownloadBanner isFooter={isFooter} />
-
-    </div>
-  </main>)
+    </main>
+  </>)
 }
 
 export default WapRanking;

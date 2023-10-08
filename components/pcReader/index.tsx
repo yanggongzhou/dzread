@@ -8,7 +8,7 @@ import SlideOperate from "@/components/pcReader/slideOperate/SlideOperate";
 import { useAppDispatch } from "@/store";
 import { EOperateType, EThemeType } from "@/typings/reader.interface";
 import { setOperateType } from "@/store/modules/read.module";
-import { setBookInfo } from "@/utils/localstorages";
+import { setBookInfo } from "@/utils/storage/localstorages";
 import styles from '@/components/pcReader/index.module.scss';
 
 interface IProps {
