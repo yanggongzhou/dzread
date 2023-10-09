@@ -58,7 +58,8 @@ const nextConfig = {
       "nas2osstest.wpzkj.cn",
       "nchapter.dramaboxdb.com",
       "nbookimg.klynf.com",
-      "nres.webfic.com"
+      "nres.webfic.com",
+      "hws3.klynf.com"
     ],
   },
   // 环境配置

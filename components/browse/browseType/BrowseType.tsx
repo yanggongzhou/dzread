@@ -1,20 +1,28 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useState } from "react";
 import { Tabs } from "antd-mobile";
 import Link from "next/link";
 import Image from "next/image";
-import { IBrowseTypes } from "@/typings/browse.interface";
+import { ITypeOneVo } from "@/typings/browse.interface";
 import styles from "@/components/browse/browseType/BrowseType.module.scss";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { setIsShowBrowse } from "@/store/modules/app.module";
 import classNames from "classnames";
 
 interface IProps {
-  types: IBrowseTypes[];
-  typeTwoId: number;
+  typeOneVoList: ITypeOneVo[];
+  statusMark: {title: string; markId: string}[]; // 书籍状态栏(四级)
+  wordType: {name: string; type: string}[];// 分类书籍字数筛选
   isShowBox: boolean;
 }
 
-const BrowseType: FC<IProps> = ({ typeTwoId, types, isShowBox }) => {
+const BrowseType: FC<IProps> = (
+  {
+    typeOneVoList,
+    statusMark,
+    wordType,
+    isShowBox
+  }
+) => {
 
   const isShowBrowse = useAppSelector(state => state.app.isShowBrowse);
   const dispatch = useAppDispatch()
@@ -31,15 +39,14 @@ const BrowseType: FC<IProps> = ({ typeTwoId, types, isShowBox }) => {
         <Tabs
           className={isShowMore ? styles.tabContentMore : styles.tabContent}
           activeLineMode={'fixed'}
-          activeKey={String(typeTwoId)}
+          activeKey={String('xsxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')}
         >
-          {types.map((item) => {
-            const typeName = item.id === 0 ? '全部' : item.name;
+          {typeOneVoList[0].typeTwoVos.map((item) => {
             return <Tabs.Tab
-              key={item.id}
+              key={item.cid}
               title={
-                <Link href={`/browse/${item.id}`}>
-                  {typeName}
+                <Link href={`/browse/${item.cid}`}>
+                  {item.title}
                 </Link>
               }/>
           })}
@@ -54,23 +61,30 @@ const BrowseType: FC<IProps> = ({ typeTwoId, types, isShowBox }) => {
         />
       </div>
       <div className={styles.statusBox}>
-        <Link
-          style={{ color: "#FF375F", borderColor: 'inherit' }}
-          className={styles.item} href={'/'}>全部</Link>
-        <Link className={styles.item} href={'/browse/0/1'}>完结</Link>
-        <Link className={styles.item} href={'/'}>连载</Link>
+        { statusMark.map(val => {
+          return (
+            <Link
+              key={val.markId}
+              href={'/browse/0/1'}
+              className={classNames(styles.item, styles.active)}>
+              {val.title}
+            </Link>
+          )
+        }) }
       </div>
       <div className={styles.statusBox}>
-        <Link
-          style={{ color: "#FF375F", borderColor: 'inherit' }}
-          className={styles.item} href={'/'}>全部</Link>
-        <Link className={styles.item} href={'/'}>50万字以下</Link>
-        <Link className={styles.item} href={'/'}>50-100万字</Link>
-        <Link className={styles.item} href={'/'}>100-300万字</Link>
-        <Link className={styles.item} href={'/'}>300万字以上</Link>
+        { wordType.map(val => {
+          return (
+            <Link
+              key={val.type}
+              href={'/browse/0/1'}
+              className={classNames(styles.item, styles.active)}>
+              {val.name}
+            </Link>
+          )
+        }) }
       </div>
     </div>
-
 
     <div className={styles.dropdownTitle} onClick={() => {
       dispatch(setIsShowBrowse(true));

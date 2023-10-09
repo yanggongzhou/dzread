@@ -1,4 +1,4 @@
-import { IBookItem, INetHomeItem, INetHome, INetHomeRes } from "@/typings/home.interface";
+import { IBookItem, INetHomeItem, INetHomeRes } from "@/typings/home.interface";
 import { INetMoreReq, INetMoreResult } from "@/typings/more.interface";
 import {
   INetBookRes, INetChapterDetailRes, INetListChapterReq, INetListChapterRes,
@@ -19,14 +19,14 @@ export const netRanking = (body: INetRankingReq): Promise<INetRankingRes | 'BadR
   return poFetch('/api/5001', body);
 }
 
+// 5002 【分类】分类接口二级页面
+export const netBrowse = (body: INetBrowseReq): Promise<INetBrowseRes | 'BadRequest_404' | 'BadRequest_500'> => {
+  return poFetch('/api/5002', body);
+}
+
 
 export const netHomeData = (): Promise<INetHomeItem[] | 'BadRequest_404' | 'BadRequest_500'> => {
   return ownFetch('/index.do');
-}
-
-// 浏览
-export const netBrowse = async (body: INetBrowseReq): Promise<INetBrowseRes | 'BadRequest_404' | 'BadRequest_500'> => {
-  return poFetch('/api/browse', body);
 }
 
 // 查看更多

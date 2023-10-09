@@ -1,26 +1,15 @@
 import React, { FC } from 'react';
 import { Swiper } from 'antd-mobile';
-import { IBookItem } from "@/typings/home.interface";
+import { ISeoBannerManageVo } from "@/typings/home.interface";
 import ImageCover from "@/components/common/image/ImageCover";
 import styles from '@/components/home/swiperNormal/SwiperNormal.module.scss';
 
 interface IProps {
-  bannerList: IBookItem[];
+  bannerList: ISeoBannerManageVo[];
 }
 
 const SwiperNormal: FC<IProps> = ({ bannerList }) => {
-  const items = bannerList.map((item) => (
-    <Swiper.Item key={item.bookId} className={styles.content}>
-      <ImageCover
-        href={`/book/${item.bookId}`}
-        className={styles.contentImgBox}
-        src={item.cover}
-        width={218}
-        height={294}
-        alt={item.bookName}
-      />
-    </Swiper.Item>
-  ))
+
   return <div className={styles.swiperWrap}>
     <Swiper
       autoplayInterval={2000}
@@ -34,7 +23,20 @@ const SwiperNormal: FC<IProps> = ({ bannerList }) => {
       }}
       className={styles.swiperBox}
       autoplay
-      loop>{items}</Swiper>
+      loop>
+      {bannerList.map((item) => (
+        <Swiper.Item key={item.bookId} className={styles.content}>
+          <ImageCover
+            href={`/book/${item.bookId}`}
+            className={styles.contentImgBox}
+            src={item.wapUrl}
+            width={218}
+            height={294}
+            alt={item.name}
+          />
+        </Swiper.Item>
+      ))}
+    </Swiper>
   </div>
 }
 

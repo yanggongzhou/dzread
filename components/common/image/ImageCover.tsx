@@ -28,13 +28,15 @@ export const onImgError = (e: any) => {
 const ImageCover: FC<IProps> = (props) => {
 
   const imageProps = { ...props };
+
   if (Reflect.has(imageProps, 'onClick')) {
     Reflect.deleteProperty(imageProps, 'onClick')
   }
   if (Reflect.has(imageProps, 'className')) {
     Reflect.deleteProperty(imageProps, 'className')
   }
-  const { scale = false, href, className = '', onClick } = props;
+
+  const { scale = false, href, className = '', alt = '', onClick } = props;
 
   return <Link href={href} className={`${scale ? styles.imageScaleBox : styles.imageBox} ${className}`}
                onClick={() => onClick && onClick()}>
@@ -45,6 +47,7 @@ const ImageCover: FC<IProps> = (props) => {
       placeholder="blur"
       blurDataURL={imageProps.src as string || '/images/defaultBook.png'}
       {...imageProps}
+      alt={alt}
     />
   </Link>
 }

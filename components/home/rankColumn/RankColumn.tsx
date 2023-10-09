@@ -1,16 +1,17 @@
 import React, { FC, useRef, useState } from "react";
-import styles from "@/components/home/rankColumn/RankColumn.module.scss";
 import { Swiper, SwiperRef } from "antd-mobile";
-import { IBookItem, INetHomeItem } from "@/typings/home.interface";
+import { IRankVo } from "@/typings/home.interface";
 import ImageCover from "@/components/common/image/ImageCover";
 import Link from "next/link";
 import classNames from "classnames";
+import { IRankBookDataVo } from "@/typings/ranking.interface";
+import styles from "@/components/home/rankColumn/RankColumn.module.scss";
 
 interface IProps {
-  smallData: INetHomeItem[];
+  rankVos: IRankVo[];
 }
 
-const RankList: FC<{ list: IBookItem[] }> = ({ list = [] }) => {
+const RankList: FC<{ list: IRankBookDataVo[] }> = ({ list = [] }) => {
 
   return <div className={styles.rankList}>
     {list.map((item, itemInd) => {
@@ -19,7 +20,7 @@ const RankList: FC<{ list: IBookItem[] }> = ({ list = [] }) => {
         <ImageCover
           href={`/book/${item.bookId}`}
           className={styles.itemImg}
-          src={item.cover}
+          src={item.coverWap}
           width={218}
           height={294}
           alt={item.bookName}
@@ -31,7 +32,7 @@ const RankList: FC<{ list: IBookItem[] }> = ({ list = [] }) => {
 }
 
 
-const RankColumn: FC<IProps> = ({ smallData }) => {
+const RankColumn: FC<IProps> = ({ rankVos = [] }) => {
 
   const swiperRef = useRef<SwiperRef | null>(null);
   const [activeKey, setActiveKey] = useState(0);
@@ -45,22 +46,16 @@ const RankColumn: FC<IProps> = ({ smallData }) => {
     setActiveKey(index);
   }
 
-  const menuData = [
-    { id: 1, title: "畅销榜" },
-    { id: 2, title: "完结榜" },
-    { id: 3, title: "新书榜" },
-    { id: 4, title: "免费榜" }
-  ]
 
   return <div className={styles.rankColumnWrap}>
 
     <div className={styles.tabBox}>
-      {menuData.map((val, index) => {
+      {rankVos.map((val, index) => {
         return <div
-          key={val.id}
+          key={val.rankId}
           className={classNames(styles.tabItem, activeKey === index && styles.active)}
           onClick={() => onIndicator(index)}>
-          {val.title}
+          {val.rankName}
         </div>
       })}
     </div>
@@ -70,9 +65,9 @@ const RankColumn: FC<IProps> = ({ smallData }) => {
       indicator={() => null}
       onIndexChange={onIndexChange}
     >
-      {smallData.map((item) => (
-        <Swiper.Item key={item.position} className={styles.content}>
-          <RankList list={item.bookList}/>
+      {rankVos.map((item) => (
+        <Swiper.Item key={'swiper_' + item.rankId} className={styles.content}>
+          <RankList list={item.bookInfos}/>
         </Swiper.Item>
       ))}
     </Swiper>

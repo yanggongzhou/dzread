@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { ownFetch } from "@/server/fetch";
-import { ERankType, INetRankingRes } from "@/typings/ranking.interface";
+import { ESexType, INetRankingRes } from "@/typings/ranking.interface";
 
 // 5001 排行榜页面
 export default async function handler(
@@ -13,27 +13,27 @@ export default async function handler(
   const result: INetRankingRes = {
     rankData: [
       {
-        rankType: ERankType.Male,
+        rankType: ESexType.Male,
         rankTypeName: '男生',
         subList: [
-          { id: 1, name: '热门榜', sex: ERankType.Male},
-          { id: 2, name: '畅销榜', sex: ERankType.Male},
-          { id: 3, name: '完本榜', sex: ERankType.Male},
-          { id: 4, name: '好评榜', sex: ERankType.Male},
-          { id: 5, name: '新书榜', sex: ERankType.Male},
-          { id: 6, name: '经典榜', sex: ERankType.Male},
+          { id: 1, name: '热门榜', sex: ESexType.Male},
+          { id: 2, name: '畅销榜', sex: ESexType.Male},
+          { id: 3, name: '完本榜', sex: ESexType.Male},
+          { id: 4, name: '好评榜', sex: ESexType.Male},
+          { id: 5, name: '新书榜', sex: ESexType.Male},
+          { id: 6, name: '经典榜', sex: ESexType.Male},
         ]
       },
       {
-        rankType: ERankType.Female,
+        rankType: ESexType.Female,
         rankTypeName: '女生',
         subList: [
-          { id: 1, name: '热门榜', sex: ERankType.Female},
-          { id: 2, name: '畅销榜', sex: ERankType.Female},
-          { id: 3, name: '完本榜', sex: ERankType.Female},
-          { id: 4, name: '好评榜', sex: ERankType.Female},
-          { id: 5, name: '新书榜', sex: ERankType.Female},
-          { id: 6, name: '经典榜', sex: ERankType.Female},
+          { id: 1, name: '热门榜', sex: ESexType.Female},
+          { id: 2, name: '畅销榜', sex: ESexType.Female},
+          { id: 3, name: '完本榜', sex: ESexType.Female},
+          { id: 4, name: '好评榜', sex: ESexType.Female},
+          { id: 5, name: '新书榜', sex: ESexType.Female},
+          { id: 6, name: '经典榜', sex: ESexType.Female},
         ]
       }
     ],

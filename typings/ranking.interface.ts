@@ -24,14 +24,14 @@ export interface INetRankingRes {
 }
 
 export interface IRankDataVo {
-  rankType: ERankType;
+  rankType: ESexType;
   rankTypeName: string; // 排行榜类型名称 男生/女生
   subList: ISeoRankVo[]; // 排行榜名称列表
 }
 /**
  * 1：男生 2：女生
  */
-export enum ERankType {
+export enum ESexType {
   Male = 1,
   Female = 2,
 }
@@ -39,7 +39,7 @@ export enum ERankType {
 export interface ISeoRankVo {
   id: number;
   name: string;
-  sex: ERankType;
+  sex: ESexType;
 }
 
 export interface IRankBookDataVo {

@@ -141,6 +141,12 @@
       line-height: 0.32rem;
       border: 0.01rem solid transparent;
     }
+
+    .active {
+      border-color: $theme_color;
+      color: $theme_color;
+      font-weight: 500;
+    }
   }
 }
 

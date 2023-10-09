@@ -1,19 +1,28 @@
 import type { NextPage } from 'next'
 import { GetServerSideProps, GetServerSidePropsResult } from "next";
 import React, { useMemo } from "react";
-import { netHomeData } from "@/server/home";
-import { EnumPosition, IBookItem, INetHomeItem } from "@/typings/home.interface";
+import { netHome, netHomeData } from "@/server/home";
+import {
+  EnumPosition,
+  IBookItem,
+  INetHomeItem,
+  ISeoBannerManageVo,
+  ISeoColumnVo
+} from "@/typings/home.interface";
 import PcHome from "@/components/pcHome/PcHome";
 import { ownOs } from "@/utils/tools";
 import WapHome from "@/components/home";
+import { EDevice } from "@/store/store.interfaces";
 
 interface IProps {
   isPc: boolean;
   homeData: INetHomeItem[];
+  bannerList: ISeoBannerManageVo[];
+  seoColumnVos: ISeoColumnVo[]
 }
 
-const Home: NextPage<IProps> = ({ isPc, homeData = [] }) => {
-  const bannerList = useMemo<IBookItem[]>(() => {
+const Home: NextPage<IProps> = ({ isPc, homeData = [], bannerList, seoColumnVos }) => {
+  const bannerdata = useMemo<IBookItem[]>(() => {
     const bannerData = homeData.find(item => item.position === EnumPosition.顶部banner);
     if (bannerData) {
       return bannerData?.bookList ?? [] as IBookItem[];
@@ -23,7 +32,14 @@ const Home: NextPage<IProps> = ({ isPc, homeData = [] }) => {
 
 
   return <>
-    {isPc ? <PcHome smallData={homeData} bannerList={bannerList}/> : <WapHome smallData={homeData} bannerList={bannerList}/>}
+    {isPc ?
+      <PcHome smallData={homeData} bannerList={bannerdata}/> :
+      <WapHome
+        smallData={homeData}
+        bannerList={bannerList}
+        seoColumnVos={seoColumnVos}
+      />
+    }
   </>
 }
 
@@ -37,10 +53,20 @@ export const getServerSideProps: GetServerSideProps = async ({ req}): Promise<Ge
   if (homeData === 'BadRequest_500') {
     return { redirect: { destination: '/500', permanent: false } }
   }
-  // 返回的参数将会按照 key 值赋值到 Home 组件的同名入参中
+
+  const response = await netHome(ownOs(ua).isPc ? EDevice.pc : EDevice.wap);
+  if (response === 'BadRequest_404') {
+    return { notFound: true }
+  }
+  if (response === 'BadRequest_500') {
+    return { redirect: { destination: '/500', permanent: false } }
+  }
+  const { seoBannerManageVos, seoColumnVos, seoChannelListVos, } = response;
   return {
     props: {
       homeData,
+      bannerList: seoBannerManageVos,
+      seoColumnVos,
       isPc: ownOs(ua).isPc,
     }
   }

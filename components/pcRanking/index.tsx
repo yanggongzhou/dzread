@@ -1,14 +1,14 @@
 import React, { FC } from 'react'
 import PaginationCom from "@/components/common/paginationCom";
 import RankingTab from "@/components/pcRanking/tabs/RankingTab";
-import { ERankStyle, ERankType, IRankBookDataVo, IRankDataVo } from "@/typings/ranking.interface";
+import { ERankStyle, ESexType, IRankBookDataVo, IRankDataVo } from "@/typings/ranking.interface";
 import styles from '@/components/pcRanking/index.module.scss';
 
 interface IProps {
   page: number;
   pages: number; // 总页
   rankStyle: ERankStyle;
-  rankType: ERankType;
+  rankType: ESexType;
   rankData: IRankDataVo[]; // 排行榜名称列表
   rankBook: IRankBookDataVo[]; // 某个排行榜对应的书籍信息data
   rankId?: number;
