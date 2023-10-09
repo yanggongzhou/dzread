@@ -1,4 +1,4 @@
-import React, { FC, useRef, useState } from 'react';
+import React, { FC, useRef } from 'react';
 import { ISeoBannerManageVo } from "@/typings/home.interface";
 import Link from "next/link";
 import { onImgError } from "@/components/common/image/ImageCover";
@@ -7,87 +7,76 @@ import { Swiper, SwiperRef } from "antd-mobile";
 import { useRouter } from "next/router";
 import QRCode from "qrcode.react";
 import styles from '@/components/pcHome/swiperArea/SwiperArea.module.scss';
+import classNames from "classnames";
 
 interface IProps {
   bannerList: ISeoBannerManageVo[];
 }
 
 const SwiperArea: FC<IProps> = ({ bannerList = [] }) => {
-  const { bookId, tags = [] } = bannerList?.[0]
-  const routerToBookInfo = `/book/${bookId}`
+
   const router = useRouter();
   const swiperRef = useRef<SwiperRef | null>(null);
   const onIndicator = (index: number) => {
     swiperRef.current?.swipeTo(index);
   }
-  const [swiperIndex, setSwiperIndex] = useState(0);
 
   return <div className={styles.swiperWrap}>
-    <Swiper
-      ref={swiperRef}
-      className={styles.swiperBox}
-      autoplayInterval={2000}
-      autoplay
-      loop
-      style={{
-        '--height': '2.2rem',
-        '--track-padding': '0 0 0',
-      }}
-      indicator={(total, current) => {
-        setSwiperIndex(current);
-        return <div className={styles.indicatorBox}>
-          { Array.from({ length: total }, (v,i) =>{
-            if (current === i ) {
+    <div className={styles.container}>
+      <Swiper
+        ref={swiperRef}
+        className={styles.swiperBox}
+        autoplayInterval={2000}
+        autoplay
+        loop
+        style={{
+          '--track-padding': '0 0 0',
+        }}
+        indicator={(total, current) => {
+          return <div className={styles.indicatorBox}>
+            { Array.from({ length: total }, (v,i) =>{
               return <div
                 key={i}
-                className={styles.indicatorIcon}
+                className={styles.indicatorItemBox}
+                onClick={() => onIndicator(i)}>
+                <div className={classNames(styles.indicatorItem, current === i && styles.indicatorActive)}/>
+              </div>
+            })}
+          </div>}}
+      >
+        {bannerList.map(ban => (
+          <Swiper.Item key={ban.bookId} className={styles.content}>
+            <div className={styles.contentMark} onClick={() => {
+              router.push({ pathname: `/book/${ban.bookId}` })
+            }}>
+            </div>
+            <Link href={`/book/${ban.bookId}`}>
+              <Image
+                src={ban.pcUrl}
+                className={styles.contentImg}
+                onError={onImgError}
+                placeholder="blur"
+                blurDataURL={ban.pcUrl || '/images/defaultBook.png'}
+                priority
+                width={1200}
+                height={310}
+                alt={ban.name}
               />
-            }
-            return <div
-              key={i}
-              className={styles.indicatorItem}
-              onClick={() => onIndicator(i)}/>
-          })}
-        </div>}}>
+            </Link>
+          </Swiper.Item>
+        ))}
+      </Swiper>
 
-      {bannerList.map(ban => (
-        <Swiper.Item key={ban.bookId} className={styles.content}>
-          <div className={styles.contentMark} onClick={() => {
-            router.push({ pathname: routerToBookInfo })
-          }}>
-          </div>
-          <Link href={routerToBookInfo}>
-            <Image
-              src={ban.pcUrl}
-              className={styles.contentImg}
-              onError={onImgError}
-              placeholder="blur"
-              blurDataURL={ban.pcUrl || '/images/defaultBook.png'}
-              priority
-              width={1200}
-              height={300}
-              alt={ban.name}
-            />
-          </Link>
-        </Swiper.Item>
-      ))}
-    </Swiper>
-    <QRCode
-      renderAs={"canvas"}
-      className={styles.markQrCode}
-      value="'https://gitcode.gitcode.host/docs-cn/video.js-docs-cn/docs/guides/components.html#resize-manager'"
-    />
-    <Image
-      src={bannerList[swiperIndex].pcUrl}
-      className={styles.imgBlur}
-      onError={onImgError}
-      placeholder="blur"
-      blurDataURL={bannerList[swiperIndex].pcUrl || '/images/defaultBook.png'}
-      priority
-      width={1300}
-      height={400}
-      alt={bannerList[swiperIndex].name}
-    />
+      <div className={styles.markQrCodeBox}>
+        <QRCode
+          renderAs={"canvas"}
+          className={styles.markQrCode}
+          value="'https://gitcode.gitcode.host/docs-cn/video.js-docs-cn/docs/guides/components.html#resize-manager'"
+        />
+        <p>扫码下载</p>
+      </div>
+
+    </div>
   </div>
 }
 
