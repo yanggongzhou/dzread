@@ -1,14 +1,15 @@
 import React, { FC } from "react";
-import { IBookItem } from "@/typings/home.interface";
+import { IRankVo } from "@/typings/home.interface";
 import styles from "@/components/pcHome/verticalList/VerticalList.module.scss";
 import Link from "next/link";
 import Image from "next/image";
 import { onImgError } from "@/components/common/image/ImageCover";
+import { IRankBookDataVo } from "@/typings/ranking.interface";
 
 interface IProps {
-  list: IBookItem[];
+  rankVos: IRankVo[];
 }
-const VerticalItem: FC<IProps> = ({ list }) => {
+const VerticalItem: FC<{ list: IRankBookDataVo[] }> = ({ list }) => {
 
   return <div className={styles.verticalItemBox}>
     {list.map((book, bookInd) => {
@@ -20,10 +21,10 @@ const VerticalItem: FC<IProps> = ({ list }) => {
             className={styles.bookImage}
             onError={onImgError}
             placeholder="blur"
-            blurDataURL={book.cover || '/images/defaultBook.png'}
+            blurDataURL={book.coverWap || '/images/defaultBook.png'}
             width={60}
             height={80}
-            src={book.cover}
+            src={book.coverWap}
             alt={book.bookName}
           />
         </Link>
@@ -36,10 +37,10 @@ const VerticalItem: FC<IProps> = ({ list }) => {
             <Link href={routerToBookInfo}>{book.bookName}</Link>
           </h3>
           <Link href={routerToBookInfo} className={styles.viewCountDisplay}>
-              <span>{book.viewCount} </span> 影响力值
+              <span>{book.num} </span> 影响力值
           </Link>
           <div className={styles.tagBox}>
-            {(book?.tags || []).map(val => {
+            {(book?.threeTypeTag || []).map(val => {
               return <div key={val} className={styles.tagItem}>{val}</div>
             })}
           </div>
@@ -49,12 +50,12 @@ const VerticalItem: FC<IProps> = ({ list }) => {
   </div>
 }
 
-const VerticalList: FC<IProps> = ({ list = [] }) => {
+const VerticalList: FC<IProps> = ({ rankVos = [] }) => {
 
   return <div className={styles.verticalListBox}>
-    <VerticalItem key={1} list={list}/>
-    <VerticalItem key={2} list={list}/>
-    <VerticalItem key={3} list={list}/>
+    { rankVos.map(rank => {
+      return <VerticalItem key={1} list={rank.bookInfos.slice(0, 3)}/>
+    }) }
   </div>
 }
 

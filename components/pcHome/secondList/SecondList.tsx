@@ -1,60 +1,49 @@
 import React, { FC } from 'react'
 import styles from '@/components/pcHome/secondList/SecondList.module.scss'
-import { IBookItem } from "@/typings/home.interface";
+import { IBookInfo } from "@/typings/home.interface";
 import Link from "next/link";
 import { onImgError } from "@/components/common/image/ImageCover";
 import Image from "next/image";
 
 interface IProps {
-  dataSource: IBookItem[];
+  bookInfos: IBookInfo[];
   priority?: boolean;
 }
 
-const SecondList: FC<IProps> = ({ dataSource = [], priority = false }) => {
+const SecondList: FC<IProps> = ({ bookInfos = [], priority = false }) => {
 
-  if (dataSource.length === 0) {
+  if (bookInfos.length === 0) {
     return null
   }
 
   return <div className={styles.secondListWrap}>
-    {dataSource.map((book) => {
-      const {
-        bookId,
-        bookName,
-        introduction,
-        author
-      } = book;
-      const routerToBookInfo = `/book/${bookId}`
-      return <div key={bookId} className={styles.secondListBox}>
+    {bookInfos.map((book) => {
+      const routerToBookInfo = `/book/${book.bookId}`;
 
+      return <div key={book.bookId} className={styles.secondListBox}>
         <Link href={routerToBookInfo} className={styles.bookImage}>
           <Image
             priority={priority}
             className={styles.imageItem}
             onError={onImgError}
             placeholder="blur"
-            blurDataURL={book.cover || '/images/defaultBook.png'}
-            width={272}
-            height={363}
-            src={book.cover}
+            blurDataURL={book.coverWap || '/images/defaultBook.png'}
+            width={130}
+            height={172}
+            src={book.coverWap}
             alt={book.bookName}
           />
         </Link>
 
         <Link href={routerToBookInfo} className={styles.bookName}>
-          {bookName}
+          {book.bookName}
         </Link>
         <Link href={routerToBookInfo} className={styles.bookIntro}>
-          {introduction}
+          {book.introduction}
         </Link>
         <Link href={routerToBookInfo} className={styles.bookAuthor}>
-          {author}
+          {[book.author, book.threeTypeTag[0]].filter(val => val).join(' · ')}
         </Link>
-        <div className={styles.tagBox}>
-          {(book?.tags || []).map(val => {
-            return <div key={val} className={styles.tagItem}>{val}</div>
-          })}
-        </div>
       </div>
     })}
   </div>

@@ -1,7 +1,7 @@
-import React, { FC } from 'react'
-import styles from '@/components/pcHome/homeTitle/HomeTitle.module.scss'
+import React, { FC } from 'react';
 import Link from "next/link";
 import Image from "next/image";
+import styles from '@/components/pcHome/homeTitle/HomeTitle.module.scss';
 
 interface IProps {
   title: string;
@@ -11,29 +11,16 @@ interface IProps {
 
 const PcHomeTitle: FC<IProps> = ({ title, href }) => {
 
-  return <div className={styles.titleWrap}>
-    <div className={styles.titleBox}>
-      <h2 className={styles.titleText}>{title}</h2>
-    </div>
-
-    {href ? <Link className={styles.moreBox} href={href}>
-      More
-      <Image
-        className={styles.moreIcon}
-        width={16}
-        height={16}
-        src={'/images/common/more.png'}
-        alt={''}
-      />
-      <Image
-        className={styles.moreActiveIcon}
-        width={16}
-        height={16}
-        src={'/images/home/pc-more-active.png'}
-        alt={''}
-      />
-    </Link> : null}
-  </div>
+  return <Link className={styles.moreBox} href={href}>
+    <h2 className={styles.titleText}>{title}</h2>
+    <Image
+      className={styles.moreIcon}
+      width={18}
+      height={18}
+      src={'/images/home/more.png'}
+      alt={''}
+    />
+  </Link>
 }
 
 export default PcHomeTitle

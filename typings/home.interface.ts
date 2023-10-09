@@ -75,7 +75,6 @@ export interface IBookInfo {
   coverWap: string;
   introduction: string;
   protagonist: string; // 主角
-
   author: string;
   threeTypeTag: string[]
 }

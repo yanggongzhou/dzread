@@ -1,4 +1,30 @@
 .homeWrap {
   width: 12rem;
   margin: 0 auto;
+
+  .listBox {
+    padding: 0.36rem 0.3rem 0;
+    position: relative;
+    height: 3.92rem;
+
+    .listBg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      width: 12rem;
+      height: 1.88rem;
+      border-radius: 0.16rem 16rem 0 0;
+    }
+  }
+
+  .rankContent {
+    .titleText {
+      font-size: 0.22rem;
+      font-weight: bold;
+      line-height: 0.3rem;
+      color: #222222;
+      margin-right: 0.02rem;
+    }
+  }
 }
