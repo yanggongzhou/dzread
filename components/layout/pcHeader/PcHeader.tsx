@@ -2,7 +2,6 @@ import React, { FC } from 'react'
 import styles from '@/components/layout/pcHeader/PcHeader.module.scss'
 import Image from "next/image";
 import ClientConfig from "@/client.config";
-import { Popover } from "antd-mobile";
 import QRCode from "qrcode.react";
 import PcNav from "@/components/layout/pcHeader/PcNav";
 import HeaderSearch from "@/components/layout/pcHeader/Search";
@@ -21,25 +20,26 @@ const PcSlide: FC = () => {
       src={'/images/logo.png'}
       alt={ClientConfig.name}
     />
-    <Popover
-      trigger={"hover"}
-      content={<QRCode
-        renderAs={"canvas"}
-        className={styles.slideQrCode}
-        value="'https://gitcode.gitcode.host/docs-cn/video.js-docs-cn/docs/guides/components.html#resize-manager'"
-      />}
-      placement='left'>
-      <div className={styles.qrCodeBox}>
-        <Image
-          className={styles.qrCodeIcon}
-          width={40}
-          height={40}
-          src={'/images/home/qrcode.png'}
-          alt={ClientConfig.name}
+
+    <div className={styles.qrCodeBox}>
+      <Image
+        className={styles.qrCodeIcon}
+        width={40}
+        height={40}
+        src={'/images/home/qrcode.png'}
+        alt={ClientConfig.name}
+      />
+      <span>手机版</span>
+
+      <div className={styles.slideBox}>
+        <p className={styles.slideTitle}>{ClientConfig.name}手机版</p>
+        <QRCode
+          renderAs={"canvas"}
+          className={styles.slideQrCode}
+          value="'https://gitcode.gitcode.host/docs-cn/video.js-docs-cn/docs/guides/components.html#resize-manager'"
         />
-        <span>手机版</span>
       </div>
-    </Popover>
+    </div>
   </div>
 }
 
@@ -51,23 +51,24 @@ const PcHeader: FC<IProps> = () => {
     <div className={styles.navWrap}>
       <div className={styles.navContent}>
         <PcNav />
-
         <div className={styles.rightBox}>
           <HeaderSearch />
-
-          <Popover
-            content={<QRCode
-              value={'https://gitcode.gitcode.host/docs-cn/video.js-docs-cn/docs/guides/components.html#resize-manager'}
-              className={styles.qrCode}/>
-            }
-            trigger='click'
-            placement='bottom'>
-            <button className={styles.downloadBtn}>下载</button>
-          </Popover>
+          <div className={styles.downloadBtn}>
+            <span>下载</span>
+            <div className={styles.downloadPop}>
+              <div className={styles.popContent}>
+                <div className={styles.popTitle}>手机版</div>
+                <p>扫码下载手机APP</p>
+                <QRCode
+                  renderAs={"canvas"}
+                  value={'https://gitcode.gitcode.host/docs-cn/video.js-docs-cn/docs/guides/components.html#resize-manager'}
+                  className={styles.qrCode}/>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <div className={styles.navOccupy}/>
     {router.pathname !== '/chapter/[bookId]/[chapterId]' ? <PcSlide/> : null}
   </>
 }

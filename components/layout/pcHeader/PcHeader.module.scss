@@ -1,12 +1,7 @@
-.navOccupy {
-  width: 100%;
-  height: 0.8rem;
-}
-
 .navWrap {
   width: 100%;
-  height: 0.8rem;
-  background-color: rgba(245,245,247,.8);
+  height: 0.64rem;
+  background-color: rgba(255, 255, 255, 0.55);
   backdrop-filter: blur(10px);
   position: fixed;
   top: 0;
@@ -25,26 +20,77 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      flex-direction: row;
+      column-gap: 0.2rem;
 
       .downloadBtn {
-        margin-left: 0.3rem;
-        width: 1.1rem;
-        background: linear-gradient(90deg, #FF6600 0%, #FA3123 100%);
-        border-radius: 0.17rem;
-        height: 0.34rem;
-        font-size: 0.15rem;
-        font-weight: 500;
-        color: #FFFFFF;
+        padding: 0.2rem 0 0.2rem 0.2rem;
+        font-size: 0.16rem;
+        font-weight: bold;
+        color: #222222;
+        position: relative;
+
+        .downloadPop {
+          display: none;
+          position: absolute;
+          left: 50%;
+          transform: translateX(-44%);
+          top: 0.5rem;
+          width: 1.90rem;
+          height: 2.70rem;
+          padding-top: 0.16rem;
+
+          &:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 0;
+            border-right: 0.12rem solid transparent;
+            border-bottom: 0.17rem solid #FFFFFF;
+            border-left: 0.12rem solid transparent;
+            transform: translateX(-50%);
+          }
+
+          .popContent {
+            background-color: #FFFFFF;
+            padding: 0.3rem;
+            border-radius: 0.10rem;
+
+            .popTitle {
+              text-align: center;
+              font-size: 0.16rem;
+              font-weight: bold;
+              color: #222222;
+              line-height: 0.20rem;
+            }
+
+            p {
+              text-align: center;
+              font-size: 0.12rem;
+              font-weight: 400;
+              color: #666666;
+              margin: 0.1rem 0 0.2rem;
+            }
+
+            .qrCode {
+              width: 1.3rem !important;
+              height: 1.3rem !important;
+              background-color: #E6E6E6;
+            }
+
+          }
+        }
+
+        &:hover {
+          .downloadPop {
+            display: block;
+          }
+        }
       }
     }
   }
-
-  .qrCode {
-    width: 1.2rem;
-    height: 1.2rem;
-  }
 }
-
 
 .slideLeft {
   position: fixed;
@@ -64,33 +110,55 @@
   }
 
   .qrCodeBox {
+    width: 0.76rem;
+    height: 0.88rem;
+    background-color: #FFFFFF;
+    box-shadow: 0 0.02rem 0.16rem 0 rgba(0, 0, 0, 0.09);
+    border-radius: 0.06rem;
     position: relative;
     top: 0.7rem;
     z-index: 9;
-    background: #fff;
-    border-radius: 8px;
-    -webkit-box-shadow: 0 4px 8px rgba(51,51,51,.05);
-    box-shadow: 0 4px 8px rgba(51,51,51,.05);
-    height: 78px;
     text-align: center;
-    width: 90px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    row-gap: 0.1rem;
+    row-gap: 0.08rem;
 
     .qrCodeIcon {
-      width: 0.3rem;
-      height: 0.3rem;
+      width: 0.32rem;
+      height: 0.32rem;
     }
   }
 
-  .slideQrCode {
-    background-color: #FFFFFF;
-    border-radius: 0.06rem;
-    padding: 0.1rem;
-    width: 1.2rem;
-    height: 1.2rem;
+  .slideBox {
+    display: none;
+    position: absolute;
+    left: -2.13rem;
+    bottom: 0;
+    padding: 0.2rem;
+    background: #FFFFFF;
+    box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.09);
+    border-radius: 0.10rem;
+
+    .slideTitle {
+      text-align: center;
+      font-size: 0.14rem;
+      font-weight: 400;
+      color: #666666;
+      margin-bottom: 0.11rem;
+    }
+
+    .slideQrCode {
+      background-color: #FFFFFF;
+      width: 1.3rem !important;
+      height: 1.3rem !important;
+    }
+  }
+
+  &:hover {
+    .slideBox {
+      display: block;
+    }
   }
 }

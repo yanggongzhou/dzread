@@ -1,8 +1,8 @@
-import React, { FC, useEffect, useState } from 'react'
-import styles from '@/components/layout/pcHeader/Search.module.scss'
+import React, { FC, useEffect, useState } from 'react';
 import { useRouter } from "next/router";
 import Image from "next/image";
 import { Toast } from "antd-mobile";
+import styles from '@/components/layout/pcHeader/Search.module.scss';
 
 interface IProps {
 
@@ -24,14 +24,6 @@ const HeaderSearch: FC<IProps> = () => {
   }
 
   return <div className={styles.navRight}>
-    <Image
-      onClick={() => onSearch()}
-      className={styles.navRightIcon}
-      width={16}
-      height={16}
-      src={'/images/home/search.png'}
-      alt={""}
-    />
     <input
       className={styles.navRightInput}
       type="search"
@@ -46,6 +38,14 @@ const HeaderSearch: FC<IProps> = () => {
         setSearchValue(e.target.value)
       }}
       placeholder={"请输入书籍名或作者名"}
+    />
+    <Image
+      onClick={() => onSearch()}
+      className={styles.navRightIcon}
+      width={16}
+      height={16}
+      src={'/images/home/search.png'}
+      alt={""}
     />
   </div>
 }

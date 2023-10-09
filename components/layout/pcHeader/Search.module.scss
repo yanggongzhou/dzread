@@ -1,8 +1,8 @@
 .navRight {
-  width: 2.20rem;
-  height: .34rem;
-  border-radius: 0.17rem;
-  border: 0.01rem solid #C5C5C5;
+  width: 2.7rem;
+  height: .36rem;
+  border-radius: 0.18rem;
+  border: 0.01rem solid #EBE9E9;
   background-color: #FFFFFF;
   position: relative;
   display: flex;
@@ -10,23 +10,24 @@
 }
 
 .navRightIcon {
-  width: 0.2rem;
-  height: 0.2rem;
-  margin-left: 0.12rem;
+  width: 0.24rem;
+  height: 0.24rem;
+  margin-right: 0.12rem;
 }
 
 .navRightInput {
   flex: 1;
   background-color: transparent;
-  margin-left: 0.08rem;
+  margin-left: 0.2rem;
   height: 100%;
   word-wrap: break-word;
-  font-size: 0.14rem;
+  font-size: 0.16rem;
   font-weight: 400;
-  color: #000000;
+  color: #333333;
+  padding: 0;
 }
 
 .navRightInput::-webkit-input-placeholder {
-  color: #CBCBCB;
+  color: #BBBBBB;
   font-weight: 400;
 }

@@ -4,8 +4,8 @@
   flex-direction: row;
 
   .logoTxtBox {
-    width: 1.6rem;
-    height: 0.5rem;
+    width: 1.18rem;
+    height: 0.4rem;
   }
 
   .navBox {
@@ -17,32 +17,32 @@
 
     .navItem {
       height: 100%;
-      padding: 0.2rem 0.25rem;
+      padding: 0.22rem 0.3rem;
       display: flex;
       align-items: center;
       font-weight: 400;
-      font-size: 0.18rem;
+      font-size: 0.16rem;
       position: relative;
       color: #222222;
 
       &:hover {
-        color: $theme_color;
-        font-weight: 500;
+        color: #FF4614;
+        font-weight: bold;
       }
 
     }
 
     .active {
-      color: $theme_color;
+      color: #FF4614;
       font-weight: 500;
 
       &:after {
         content: "";
         -webkit-transform: translateX(-50%);
         transform: translateX(-50%);
-        background-color: $theme_color;
+        background-color: #FF4614;
         border-radius: 0.03rem;
-        height: 0.06rem;
+        height: 0.04rem;
         position: absolute;
         left: 50%;
         bottom: 0;
@@ -51,55 +51,6 @@
     }
   }
 }
-
-
-.browseBox {
-  position: relative;
-
-  .browsePop {
-    transition-delay: 0.2s;
-    transition: height 0.3s;
-    height: 0;
-    width: 300px;
-    position: absolute;
-    top: 80px;
-    z-index: 1;
-    background-color: #FFFFFF;
-
-    overflow: hidden;
-
-    .tabOneItem {
-      margin-bottom: 20px;
-
-      .oneItemBox {
-        display: flex;
-        flex-wrap: wrap;
-
-        .tabChild {
-          padding: 6px 10px;
-          color: #b2b2b2;
-          display: block;
-          border: 1px solid transparent;
-
-          &:hover {
-            color: #0bafff;
-            border: 1px solid #0bafff;
-          }
-        }
-
-      }
-    }
-
-  }
-
-  &:hover {
-    .browsePop {
-      display: block;
-      height: 400px;
-    }
-  }
-}
-
 
 
 

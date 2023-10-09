@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import SwiperNormal from "@/components/home/swiperNormal/SwiperNormal";
-import { EColumnType, INetHomeItem, ISeoBannerManageVo, ISeoColumnVo } from "@/typings/home.interface";
+import { EColumnType, ISeoBannerManageVo, ISeoColumnVo } from "@/typings/home.interface";
 import MHeader from "@/components/home/mHeader/MHeader";
 import FeaturedList from "@/components/home/featuredList/FeaturedList";
 import ColumnBox from "@/components/home/columnBox/ColumnBox";
@@ -14,11 +14,10 @@ import styles from '@/components/home/index.module.scss';
 
 interface IProps {
   bannerList: ISeoBannerManageVo[];
-  smallData: INetHomeItem[];
   seoColumnVos: ISeoColumnVo[]
 }
 
-const WapHome: FC<IProps> = ({ bannerList, smallData, seoColumnVos }) => {
+const WapHome: FC<IProps> = ({ bannerList, seoColumnVos }) => {
 
   return (
     <main className={styles.homeWrap}>
@@ -65,7 +64,7 @@ const WapHome: FC<IProps> = ({ bannerList, smallData, seoColumnVos }) => {
           </ColumnBox>
         })}
 
-        {bannerList.length === 0 && smallData.length === 0 ? <MEmpty /> : null}
+        {bannerList.length === 0 && seoColumnVos.length === 0 ? <MEmpty /> : null}
       </div>
 
       <MFooter/>

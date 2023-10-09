@@ -1,15 +1,15 @@
-import React, { FC, useRef, useState } from 'react'
-import styles from '@/components/pcHome/swiperArea/SwiperArea.module.scss'
-import { IBookItem } from "@/typings/home.interface";
+import React, { FC, useRef, useState } from 'react';
+import { ISeoBannerManageVo } from "@/typings/home.interface";
 import Link from "next/link";
 import { onImgError } from "@/components/common/image/ImageCover";
 import Image from "next/image";
 import { Swiper, SwiperRef } from "antd-mobile";
 import { useRouter } from "next/router";
 import QRCode from "qrcode.react";
+import styles from '@/components/pcHome/swiperArea/SwiperArea.module.scss';
 
 interface IProps {
-  bannerList: IBookItem[];
+  bannerList: ISeoBannerManageVo[];
 }
 
 const SwiperArea: FC<IProps> = ({ bannerList = [] }) => {
@@ -38,13 +38,9 @@ const SwiperArea: FC<IProps> = ({ bannerList = [] }) => {
         return <div className={styles.indicatorBox}>
           { Array.from({ length: total }, (v,i) =>{
             if (current === i ) {
-              return <Image
+              return <div
                 key={i}
-                src={'/images/home/swiper-in.svg'}
                 className={styles.indicatorIcon}
-                width={48}
-                height={48}
-                alt={""}
               />
             }
             return <div
@@ -62,15 +58,15 @@ const SwiperArea: FC<IProps> = ({ bannerList = [] }) => {
           </div>
           <Link href={routerToBookInfo}>
             <Image
-              src={ban.cover}
+              src={ban.pcUrl}
               className={styles.contentImg}
               onError={onImgError}
               placeholder="blur"
-              blurDataURL={ban.cover || '/images/defaultBook.png'}
+              blurDataURL={ban.pcUrl || '/images/defaultBook.png'}
               priority
               width={1200}
               height={300}
-              alt={ban.bookName}
+              alt={ban.name}
             />
           </Link>
         </Swiper.Item>
@@ -82,15 +78,15 @@ const SwiperArea: FC<IProps> = ({ bannerList = [] }) => {
       value="'https://gitcode.gitcode.host/docs-cn/video.js-docs-cn/docs/guides/components.html#resize-manager'"
     />
     <Image
-      src={bannerList[swiperIndex].cover}
+      src={bannerList[swiperIndex].pcUrl}
       className={styles.imgBlur}
       onError={onImgError}
       placeholder="blur"
-      blurDataURL={bannerList[swiperIndex].cover || '/images/defaultBook.png'}
+      blurDataURL={bannerList[swiperIndex].pcUrl || '/images/defaultBook.png'}
       priority
       width={1300}
       height={400}
-      alt={bannerList[swiperIndex].bookName}
+      alt={bannerList[swiperIndex].name}
     />
   </div>
 }
