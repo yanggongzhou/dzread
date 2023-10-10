@@ -1,16 +1,16 @@
 import React, { FC } from "react";
-import { IBookItem } from "@/typings/home.interface";
 import PaginationCom from "@/components/common/paginationCom";
 import FirstList from "@/components/common/firstList/FirstList";
 import { PcEmpty } from "@/components/common/empty";
 import styles from '@/components/pcSearch/index.module.scss'
+import { IBookSearchVo } from "@/typings/browse.interface";
 
 interface IProps {
   total: number;
   current: number;
   pages: number;
   sValue: string;
-  bookList?: IBookItem[];
+  bookList?: IBookSearchVo[];
   isEmpty: boolean;
 }
 

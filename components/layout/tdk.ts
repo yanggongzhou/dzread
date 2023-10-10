@@ -1,4 +1,4 @@
-import { IBookItem } from "@/typings/home.interface";
+import { IBookSearchVo } from "@/typings/browse.interface";
 
 export const TDK = {
   chapter: {
@@ -39,7 +39,7 @@ export const TDK = {
       description: `${positionName}全部短剧`
     }
   },
-  book: ({ bookInfo = {} as IBookItem }: { bookInfo: IBookItem}) => {
+  book: ({ bookInfo = {} as IBookSearchVo }: { bookInfo: IBookSearchVo}) => {
     const { bookName = '', introduction = '' } = bookInfo
     return {
       title: `${bookName}短剧-DramaBox`,

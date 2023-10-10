@@ -3,13 +3,13 @@ import { IChapterListItem, INetChapterDetailRes } from "typings/book.interface";
 import PcChapterUnlock from "@/components/pcReader/chapterUnlock/ChapterUnlock";
 import ReaderPagination from "@/components/pcReader/readerPagination/ReaderPagination";
 import Link from "next/link";
-import { IBookItem } from "@/typings/home.interface";
 import SlideOperate from "@/components/pcReader/slideOperate/SlideOperate";
 import { useAppDispatch } from "@/store";
 import { EOperateType, EThemeType } from "@/typings/reader.interface";
 import { setOperateType } from "@/store/modules/read.module";
 import { setBookInfo } from "@/utils/storage/localstorages";
 import styles from '@/components/pcReader/index.module.scss';
+import { IBookSearchVo } from "@/typings/browse.interface";
 
 interface IProps {
   fontSize: number;
@@ -17,7 +17,7 @@ interface IProps {
   bookId: string;
   contentList: string[];
   chapterInfo: INetChapterDetailRes;
-  bookInfo: IBookItem;
+  bookInfo: IBookSearchVo;
   chapterList: IChapterListItem[];
 }
 

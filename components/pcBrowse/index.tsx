@@ -1,11 +1,9 @@
 import React, { FC } from "react";
 import styles from "@/components/pcBrowse/index.module.scss";
-import { IBookItem } from "@/typings/home.interface";
 import PaginationCom from "@/components/common/paginationCom";
-import { IBookSearchVo, IBrowseTypes, ITypeOneVo } from "@/typings/browse.interface";
+import { IBookSearchVo, ITypeOneVo } from "@/typings/browse.interface";
 import { PcEmpty } from "@/components/common/empty";
 import PcCapsuleTabs from "@/components/pcBrowse/PcCapsuleTabs";
-import FirstList from "@/components/common/firstList/FirstList";
 import { useRouter } from "next/router";
 import BrowseList from "@/components/pcBrowse/browseList/BrowseList";
 import Breadcrumb from "@/components/common/breadcrumb";

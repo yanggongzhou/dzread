@@ -1,7 +1,7 @@
+import { IBookSearchVo } from "@/typings/browse.interface";
 /**
  * 书籍下行参数
  */
-import { IBookSearchVo } from "@/typings/browse.interface";
 
 export interface INetBookRes {
   chapters: IChapterInfo[]; // 下发 <=50个章章节

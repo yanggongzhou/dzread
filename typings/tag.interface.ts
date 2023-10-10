@@ -1,9 +1,8 @@
+import { ISeoKeyWords } from "@/typings/keywords.interface";
+import { IBookSearchVo } from "@/typings/browse.interface";
 /**
  * 5101 搜索上行
  */
-import { ISeoKeyWords } from "@/typings/keywords.interface";
-import { IBookSearchVo } from "@/typings/browse.interface";
-
 export interface INetTagReq {
   searchType?: ESearchType;
   tagId?: number;

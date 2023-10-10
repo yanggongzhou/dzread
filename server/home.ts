@@ -1,9 +1,9 @@
-import { IBookItem, INetHomeRes } from "@/typings/home.interface";
+import { INetHomeRes } from "@/typings/home.interface";
 import {
   INetBookRes
 } from "@/typings/book.interface";
-import { INetBrowseReq, INetBrowseRes } from "@/typings/browse.interface";
-import { INetKeywordTagReq, INetKeywordTagRes, INetTagReq, INetTagRes } from "@/typings/tag.interface";
+import { IBookSearchVo, INetBrowseReq, INetBrowseRes } from "@/typings/browse.interface";
+import { INetTagReq, INetTagRes } from "@/typings/tag.interface";
 import { ownFetch, poFetch } from "@/server/fetch";
 import { INetRankingRes, INetRankingReq } from "@/typings/ranking.interface";
 import { EDevice } from "@/store/store.interfaces";
@@ -59,6 +59,6 @@ export const netTag = (params: INetTagReq): Promise<INetTagRes | 'BadRequest_404
 }
 
 // 搜索接口
-export const netSearch = (keyWord: string): Promise<IBookItem[] | 'BadRequest_404' | 'BadRequest_500'> => {
+export const netSearch = (keyWord: string): Promise<IBookSearchVo[] | 'BadRequest_404' | 'BadRequest_500'> => {
   return ownFetch('/search.do', { keyWord })
 }

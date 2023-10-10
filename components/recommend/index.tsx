@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { EnumPosition, IBookInfo, IBookItem } from "@/typings/home.interface";
+import { IBookInfo } from "@/typings/home.interface";
 import { MEmpty } from "@/components/common/empty";
 import MorePagination from "@/components/recommend/pagination/MorePagination";
 import MRecommendList from "@/components/recommend/mRecommendList/MRecommendList";

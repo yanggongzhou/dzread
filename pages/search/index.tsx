@@ -1,10 +1,10 @@
 import React from "react";
 import { GetServerSideProps, GetServerSidePropsResult, NextPage } from "next";
 import { netSearch } from "@/server/home";
-import { IBookItem } from "@/typings/home.interface";
 import PcSearch from "@/components/pcSearch";
 import { ownOs } from "@/utils/tools";
 import WapSearch from "@/components/search";
+import { IBookSearchVo } from "@/typings/browse.interface";
 
 interface IProps {
   total: number;
@@ -12,7 +12,7 @@ interface IProps {
   pages: number;
   isPc: boolean;
   sValue: string;
-  bookList: IBookItem[];
+  bookList: IBookSearchVo[];
   isEmpty: boolean;
 }
 

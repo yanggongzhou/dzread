@@ -1,5 +1,4 @@
 import React, { FC, useState } from "react";
-import { IBookItem } from "typings/home.interface";
 import { Toast } from "antd-mobile";
 import { useRouter } from "next/router";
 import { MEmpty } from "@/components/common/empty";
@@ -7,12 +6,13 @@ import MorePagination from "@/components/recommend/pagination/MorePagination";
 import MTagBookList from "@/components/tag/tagBookList/MTagBookList";
 import SearchHeader from "@/components/search/searchHeader/SearchHeader";
 import styles from '@/components/search/index.module.scss';
+import { IBookSearchVo } from "@/typings/browse.interface";
 
 interface IProps {
   current: number;
   pages: number;
   sValue: string;
-  bookList?: IBookItem[];
+  bookList?: IBookSearchVo[];
   isEmpty: boolean;
 }
 

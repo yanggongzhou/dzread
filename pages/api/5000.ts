@@ -5,7 +5,6 @@ import {
   EColumnType,
   ERankSex,
   IBookInfo,
-  INetHomeItem,
   INetHomeRes,
   ISeoBannerManageVo,
   ISeoChannelListVo,
@@ -20,7 +19,7 @@ export default async function handler(
   res: NextApiResponse<INetHomeRes>
 ) {
 
-  const homeData: INetHomeItem[] = await ownFetch('/index.do');
+  const homeData = await ownFetch('/index.do');
   const seoBannerManageVos = (homeData[0]?.bookList ?? []).map(item => {
     return {
       id: item.bookId,
