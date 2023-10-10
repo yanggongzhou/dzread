@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import PaginationCom from "@/components/common/paginationCom";
 import RankingTab from "@/components/pcRanking/tabs/RankingTab";
-import { ERankStyle, ESexType, IRankBookDataVo, IRankDataVo } from "@/typings/ranking.interface";
+import { ESexType, IRankBookDataVo, IRankDataVo } from "@/typings/ranking.interface";
 import Breadcrumb from "@/components/common/breadcrumb";
 import { PcEmpty } from "@/components/common/empty";
 import RankingList from "@/components/pcRanking/list/RankingList";
@@ -10,7 +10,7 @@ import styles from '@/components/pcRanking/index.module.scss';
 interface IProps {
   page: number;
   pages: number; // 总页
-  rankStyle: ERankStyle;
+  rankStyle: number;
   rankType: ESexType;
   rankData: IRankDataVo[]; // 排行榜名称列表
   rankBook: IRankBookDataVo[]; // 某个排行榜对应的书籍信息data

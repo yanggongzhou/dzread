@@ -4,15 +4,8 @@
 export interface INetRankingReq {
   index: number; // 第几页
   size: number; // 页面大小
-  style: ERankStyle;
+  style: number;
   rankId?: number; // 排行榜id
-}
-/**
- * 1、日榜，2月榜；
- */
-export enum ERankStyle {
-  Daily = 1,
-  Monthly = 2,
 }
 /**
  * 下行参数
@@ -39,7 +32,19 @@ export enum ESexType {
 export interface ISeoRankVo {
   id: number;
   name: string;
-  sex: ESexType;
+  sex: ERankVoSex;
+  styleList: IFastRankStyleVo[]; // 日榜月榜集合
+}
+
+export enum ERankVoSex {
+  出版 = 1,
+  男频 = 2,
+  女频 = 3,
+}
+
+export interface IFastRankStyleVo {
+  style: number;
+  styleName: string;
 }
 
 export interface IRankBookDataVo {

@@ -1,42 +1,33 @@
 import React, { FC } from 'react'
 import Link from "next/link";
 import { printKeyword } from "@/components/pcTag/tagBookList/TagBookList";
-import { ITagBookItem } from "@/typings/tag.interface";
 import ImageCover from "@/components/common/image/ImageCover";
-import styles from '@/components/tag/tagBookList/MTagBookList.module.scss'
+import { IBookSearchVo } from "@/typings/browse.interface";
+import styles from '@/components/tag/tagBookList/MTagBookList.module.scss';
 
 interface IProps {
-  dataSource: ITagBookItem[];
+  bookList: IBookSearchVo[];
   keyword: string;
 }
 
-const MTagBookList: FC<IProps> = ({ dataSource, keyword }) => {
+const MTagBookList: FC<IProps> = ({ bookList = [], keyword }) => {
 
   return <div className={styles.tagListBox}>
-    {dataSource && dataSource.length > 0 ? dataSource.map((book, bookInd) => {
-      const {
-        bookId,
-        bookName,
-        introduction,
-        cover,
-        author,
-        typeTwoName = 'all',
-        replacedBookName,
-        writeStatus
-      } = book;
-      const bookNameDom = printKeyword(bookName, keyword)
-      const introDom = printKeyword(introduction, keyword)
-      const linkUrl = `/book_info/${bookId}/${typeTwoName || 'all'}/${replacedBookName || 'null'}`;
-      const authorDom = printKeyword(author + (writeStatus ? ` · ${writeStatus}` : '') + (` · 1.2w人阅读`), keyword)
+    {bookList.length > 0 ? bookList.map((book, bookInd) => {
 
-      return <div key={bookId + bookInd} className={styles.listItem}>
+      const bookNameDom = printKeyword(book.bookName, keyword)
+      const introDom = printKeyword(book.introduction || '', keyword)
+      const linkUrl = `/book/${book.bookId}`;
+      const authorDom = printKeyword(book.author + (book.writeStatus ? ` · ${book.writeStatus}` : '') + (` · 1.2w人阅读`), keyword)
+
+      return <div key={book.bookId + bookInd} className={styles.listItem}>
         <ImageCover
           href={linkUrl}
           className={styles.bookCover}
-          src={cover}
+          src={book.coverWap}
           width={130}
           height={172}
-          alt={bookName}
+          alt={book.bookName}
         />
         <div className={styles.bookInfo}>
           <div>

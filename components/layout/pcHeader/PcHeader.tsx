@@ -15,8 +15,8 @@ const PcSlide: FC = () => {
   return <div className={styles.slideLeft}>
     <Image
       className={styles.slideLogo}
-      width={40}
-      height={40}
+      width={64}
+      height={66}
       src={'/images/logo.png'}
       alt={ClientConfig.name}
     />

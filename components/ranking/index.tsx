@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef, useState } from "react";
+import React, { FC, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import { MEmpty } from "@/components/common/empty";
 import MorePagination from "@/components/recommend/pagination/MorePagination";
@@ -7,13 +7,13 @@ import Link from "next/link";
 import classNames from "classnames";
 import RankBookList from "@/components/ranking/rankBookList/RankBookList";
 import RankDownloadBanner from "@/components/ranking/rankBanner/DownloadBanner";
-import { ERankStyle, ESexType, IRankBookDataVo, ISeoRankVo } from "@/typings/ranking.interface";
+import { ESexType, IFastRankStyleVo, IRankBookDataVo, ISeoRankVo } from "@/typings/ranking.interface";
 import styles from "@/components/ranking/index.module.scss";
 
 interface IProps {
   page: number;
   pages: number; // 总页
-  rankStyle: ERankStyle;
+  rankStyle: number;
   rankType: ESexType;
   subList: ISeoRankVo[]; // 排行榜名称列表
   rankBook: IRankBookDataVo[]; // 某个排行榜对应的书籍信息data
@@ -57,6 +57,14 @@ const WapRanking: FC<IProps> = (
     };
   }, []);
 
+  const styleList: IFastRankStyleVo[] = useMemo(() => {
+    const data = subList.find(item => item.id === rankId)
+    if (data) {
+      return data.styleList || [];
+    }
+    return [];
+  }, [subList, rankId]);
+
   return (<>
     <NavBar backHref={'/'} title={rankType === ESexType.Male ? "男生小说排行榜" : "女生小说排行榜"}/>
     <main className={styles.rankWrap}>
@@ -74,16 +82,14 @@ const WapRanking: FC<IProps> = (
       <div className={styles.mainBox}>
         <div className={styles.rankDateBox}>
           <div className={styles.rankDate}>
-            <Link
-              className={classNames(styles.rankDateItem, rankStyle === ERankStyle.Daily && styles.active)}
-              href={`/ranking/${rankType}-${rankId || 'null'}-${ERankStyle.Daily}`}>
-              日榜
-            </Link>
-            <Link
-              className={classNames(styles.rankDateItem, rankStyle === ERankStyle.Monthly && styles.active)}
-              href={`/ranking/${rankType}-${rankId || 'null'}-${ERankStyle.Monthly}`}>
-              月榜
-            </Link>
+            {styleList.length > 0 ? styleList.map(val => {
+              return <Link
+                key={val.style}
+                className={classNames(styles.rankDateItem, rankStyle === val.style && styles.active)}
+                href={`/ranking/${rankType}-${rankId || 'null'}-${val.style}`}>
+                {val.styleName}
+              </Link>
+            }) : null}
           </div>
         </div>
         {rankBook.length > 0 ?

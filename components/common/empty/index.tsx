@@ -11,7 +11,7 @@ export const PcEmpty: FC = () => {
       height={240}
       src={'/images/common/empty.png'}
       placeholder="blur"
-      blurDataURL={'/images/common/empty.png'}
+      blurDataURL={'/images/common/pc-empty.png'}
       alt={'没找到内容'}
     />
     <div className={styles.emptyIntro}>

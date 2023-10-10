@@ -1,24 +1,24 @@
 import React from "react";
 import { GetServerSideProps, GetServerSidePropsResult, NextPage } from "next";
 import { ownOs } from "@/utils/tools";
-import { netKeywords } from "@/server/home";
+import { netKeys } from "@/server/home";
 import PcKeywords from "@/components/pcKeywords";
 import WapKeywords from "@/components/keywords";
-import { IKeywordItem } from "@/typings/tag.interface";
+import { ISeoKeyWords } from "@/typings/keywords.interface";
 
 interface IProps {
-  keywordList: IKeywordItem[]
   isPc: boolean;
-  currentPage: number;
-  totalPage: number;
+  words: ISeoKeyWords[]
+  page: number;
+  pages: number;
 }
 
-const KeywordsPage: NextPage<IProps> = ({ isPc, currentPage, totalPage = 0, keywordList = [] }) => {
+const KeywordsPage: NextPage<IProps> = ({ isPc, page, pages = 0, words = [] }) => {
 
   return <>
     {isPc ?
-      <PcKeywords keywordList={keywordList} pageNo={currentPage} totalPage={totalPage}/>
-      : <WapKeywords keywordList={keywordList} pageNo={currentPage} totalPage={totalPage}/>}
+      <PcKeywords words={words} page={page} pages={pages}/>
+      : <WapKeywords words={words} page={page} pages={pages}/>}
   </>
 }
 
@@ -28,27 +28,23 @@ export const getServerSideProps: GetServerSideProps = async ({ req, query }): Pr
   const ua = req?.headers['user-agent'] || ''
   const { page = '1' } = query as { page: string; };
 
-  const res = await netKeywords({
-    pageNum: Number(page),
-    pageSize: 300,
-    type: 0
-  })
+  const response = await netKeys(Number(page) || 1)
 
-  if (res === 'BadRequest_500') {
+  if (response === 'BadRequest_500') {
     return { redirect: { destination: '/500', permanent: false } }
   }
-  if (res === 'BadRequest_404' || !res) {
+  if (response === 'BadRequest_404' || !response) {
     return { notFound: true }
   }
 
-  const { data = [], pageNo = 1, totalPage = 1 } = res;
+  const { words = [], totalSize } = response;
 
   return {
     props: {
-      keywordList: data,
       isPc: ownOs(ua).isPc,
-      currentPage: pageNo,
-      totalPage,
+      words,
+      page: Number(page) || 1,
+      pages: Math.ceil(totalSize/page) || 0,
     }
   }
 }

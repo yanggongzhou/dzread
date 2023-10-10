@@ -1,14 +1,14 @@
 import React, { FC } from "react";
-import { IRankVo } from "@/typings/home.interface";
+import { ERankSex, IRankVo } from "@/typings/home.interface";
 import styles from "@/components/pcHome/verticalList/VerticalList.module.scss";
 import Link from "next/link";
 import Image from "next/image";
 import { onImgError } from "@/components/common/image/ImageCover";
-import { ESexType, IRankBookDataVo } from "@/typings/ranking.interface";
+import { IRankBookDataVo } from "@/typings/ranking.interface";
 
 interface IProps {
   rankVos: IRankVo[];
-  sex: ESexType;
+  rankSex: ERankSex;
 }
 
 const rankData = [
@@ -54,7 +54,7 @@ const VerticalItem: FC<{ list: IRankBookDataVo[] }> = ({ list }) => {
   </div>
 }
 
-const VerticalList: FC<IProps> = ({ rankVos = [], sex= ESexType.Male }) => {
+const VerticalList: FC<IProps> = ({ rankVos = [], rankSex = ERankSex.Male }) => {
 
   return <div className={styles.verticalListBox}>
     { rankVos.map((rank, index) => {
@@ -67,7 +67,7 @@ const VerticalList: FC<IProps> = ({ rankVos = [], sex= ESexType.Male }) => {
           alt={''}
         />
 
-        <Link className={styles.rankTitle} href={`/ranking/${sex}-${rank.rankId}`}>
+        <Link className={styles.rankTitle} href={`/ranking/${rankSex}-${rank.rankId}`}>
           <h3 className={styles.titleText} style={{ color: rankData[index].color }}>{rank.rankName}</h3>
           <Image
             className={styles.titleIcon}

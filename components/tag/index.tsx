@@ -1,22 +1,23 @@
 import React, { FC } from "react";
 import Link from "next/link";
 import MTagBookList from "@/components/tag/tagBookList/MTagBookList";
-import { IKeywordItem, ITagBookItem } from "@/typings/tag.interface";
 import MorePagination from "@/components/recommend/pagination/MorePagination";
 import NavBar from "@/components/common/navBar/NavBar";
 import styles from "@/components/tag/index.module.scss";
 import ClientConfig from "@/client.config";
+import { IBookSearchVo } from "@/typings/browse.interface";
+import { ISeoKeyWords } from "@/typings/keywords.interface";
 
 interface IProps {
-  relationKeywords: IKeywordItem[];
-  bookList: ITagBookItem[];
-  pageNo: number;
-  totalPage: number;
+  bookList: IBookSearchVo[];
+  words: ISeoKeyWords[];
+  page: number;
+  pages: number;
   keywordId: string;
   keyword: string;
 }
 
-const WapTag: FC<IProps> = ({ pageNo, totalPage, keywordId, bookList, keyword, relationKeywords }) => {
+const WapTag: FC<IProps> = ({ page, pages, keywordId, bookList, keyword, words }) => {
   return <main className={styles.tagWrap}>
 
     <NavBar backHref={'/'} title={keyword} />
@@ -29,25 +30,25 @@ const WapTag: FC<IProps> = ({ pageNo, totalPage, keywordId, bookList, keyword, r
       相关的内容信息
     </p>
     <div className={styles.keywordConnect}>
-      {relationKeywords.length > 0 ? <>
+      {words.length > 0 ? <>
         <h3 className={styles.connectTitle}>相关热门搜索词：</h3>
         <div className={styles.connectBox}>
-          {relationKeywords.map(val => {
+          {words.map(val => {
             return <Link key={val.id} href={`/tag/${val.id}`} className={styles.connectItem} replace>
-              <p>{val.keyword}</p>
+              <p>{val.name}</p>
             </Link>
           })}
         </div>
       </> : null}
     </div>
 
-    <MTagBookList keyword={keyword} dataSource={bookList}/>
+    <MTagBookList keyword={keyword} bookList={bookList}/>
 
-    {totalPage && totalPage > 1 ? <div className={styles.footerBox}>
+    {pages && pages > 1 ? <div className={styles.footerBox}>
       <MorePagination
         prevPath={`/tag/${keywordId}/`}
-        page={pageNo}
-        totalPage={totalPage}
+        page={page}
+        totalPage={pages}
       />
     </div> : null}
 

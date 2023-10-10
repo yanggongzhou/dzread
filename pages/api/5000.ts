@@ -3,14 +3,16 @@ import { ownFetch } from "@/server/fetch";
 import {
   EChannelCode,
   EColumnType,
+  ERankSex,
   IBookInfo,
   INetHomeItem,
   INetHomeRes,
   ISeoBannerManageVo,
   ISeoChannelListVo,
 } from "@/typings/home.interface";
-import { ESexType, IRankBookDataVo } from "@/typings/ranking.interface";
-import { EBookStatus, IBookSearchVo } from "@/typings/browse.interface";
+import { ERankVoSex, IRankBookDataVo } from "@/typings/ranking.interface";
+import { IBookSearchVo } from "@/typings/browse.interface";
+import { EBookStatus2 } from "@/typings/book.interface";
 
 
 export default async function handler(
@@ -38,6 +40,8 @@ export default async function handler(
       protagonist: item.author || '主角名',
       author: item.author,
       threeTypeTag: [item.author, '标签2', '标签3' ],
+      totalChapterNum: item.chapterCount + '',
+      totalWordSize: item.chapterCount + '1111xx字',
     }
   })
 
@@ -64,7 +68,9 @@ export default async function handler(
       lastChapterId: '最新章节ID', // 最新章节ID
       lastChapterUtime: item.lastUpdateTime, // 章节更新时间
       tagV3: [item.author, '标签2', '标签3' ],
-      status: index % 2 == 1 ? EBookStatus.连载 : EBookStatus.完结,
+      status: index % 2 == 1 ? EBookStatus2.连载 : EBookStatus2.完结,
+      hot: 'xxxx热度',
+      tag: ['']
     }
   })
 
@@ -79,16 +85,19 @@ export default async function handler(
             id: 1,
             channelId: 1,
             name: '男生精选',
-            sex: ESexType.Male,
+            sex: ERankVoSex.男频,
             type: EColumnType.书籍类型,
             sort: 1,
             bookInfos: bookInfoList, // type=1时下发-书籍类型
+            bookPackageId: 1,
           },
           {
+            rankSex: ERankSex.Male,
+            bookPackageId: 2,
             id: 2,
             channelId: 2,
             name: '排行榜',
-            sex: ESexType.Male,
+            sex: ERankVoSex.男频,
             type: EColumnType.排行榜,
             sort: 1,
             rankVos: [
@@ -115,10 +124,11 @@ export default async function handler(
             ], // type=2时下发
           },
           {
+            bookPackageId: 3,
             id: 3,
             channelId: 3,
             name: '分类推荐',
-            sex: ESexType.Male,
+            sex: ERankVoSex.男频,
             type: EColumnType.分类推荐,
             sort: 1,
             bookTypeVos: [
@@ -131,7 +141,7 @@ export default async function handler(
           }
         ],
       }
-    ]
+    ],
   }
 
   res.status(200).json(result)

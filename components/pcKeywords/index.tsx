@@ -1,32 +1,32 @@
 import React, { FC } from "react";
 import Link from "next/link";
 import PaginationCom from "@/components/common/paginationCom";
-import { IKeywordItem } from "@/typings/tag.interface";
 import { PcEmpty } from "@/components/common/empty";
-import styles from '@/components/pcKeywords/index.module.scss'
+import { ISeoKeyWords } from "@/typings/keywords.interface";
+import styles from '@/components/pcKeywords/index.module.scss';
 
 interface IProps {
-  keywordList: IKeywordItem[]
-  pageNo: number;
-  totalPage: number;
+  words: ISeoKeyWords[]
+  page: number;
+  pages: number;
 }
 
-const pcKeywords: FC<IProps> = ({ pageNo, totalPage, keywordList }) => {
+const pcKeywords: FC<IProps> = ({ page, pages, words }) => {
 
   return <main className={styles.keywordsWrap}>
 
-    { keywordList.length === 0 ? <PcEmpty />:
+    { words.length === 0 ? <PcEmpty />:
       <div className={styles.keywordBox}>
-      {keywordList.map(val => {
+      {words.map(val => {
         return <Link key={val.id} href={`/tag/${val.id}`} className={styles.keywordItem}>
-          {val.keyword}
+          {val.name}
         </Link>
       })}
     </div>}
-    {totalPage && totalPage > 1 ? <PaginationCom
+    {pages && pages > 1 ? <PaginationCom
       path={'/keywords/'}
-      pageNo={pageNo}
-      totalPage={totalPage}
+      pageNo={page}
+      totalPage={pages}
       isScroll={true}
     /> : null}
   </main>

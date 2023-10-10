@@ -99,11 +99,11 @@
   z-index: 99;
 
   .slideLogo {
-    width: 0.8rem;
-    height: 0.8rem;
+    width: 0.64rem;
+    height: 0.66rem;
     position: absolute;
     left: 50%;
-    top: 20px;
+    top: -0.42rem;
     -webkit-transform: translateX(-50%);
     transform: translateX(-50%);
     z-index: 1;
@@ -116,7 +116,6 @@
     box-shadow: 0 0.02rem 0.16rem 0 rgba(0, 0, 0, 0.09);
     border-radius: 0.06rem;
     position: relative;
-    top: 0.7rem;
     z-index: 9;
     text-align: center;
     display: flex;

@@ -1,11 +1,11 @@
 import React, { FC } from 'react'
 import Link from "next/link";
 import Image from "next/image";
-import { ITagBookItem } from "@/typings/tag.interface";
-import styles from '@/components/pcTag/tagBookList/TagBookList.module.scss'
+import { IBookSearchVo } from "@/typings/browse.interface";
+import styles from '@/components/pcTag/tagBookList/TagBookList.module.scss';
 
 interface IProps {
-  dataSource: ITagBookItem[];
+  bookList: IBookSearchVo[];
   keyword: string;
 }
 
@@ -27,27 +27,26 @@ export const printKeywordBookName = (content: string, keyword: string) => {
   return contentArr.join(`*${_keyword}*`) || content
 }
 
-const TagBookList: FC<IProps> = ({dataSource, keyword}) => {
+const TagBookList: FC<IProps> = ({bookList, keyword}) => {
 
   return <div className={styles.moreBookWrap}>
-    { dataSource.map((book, bookInd) => {
-      const { bookId, bookName, introduction, cover, author, tag,  replacedBookName, typeTwoName, typeTwoNames = [], typeTwoIds = [], isHot } = book;
+    { bookList.map((book, bookInd) => {
+      const { bookName, introduction = '', author } = book;
       const bookNameDom = printKeyword(bookName, keyword)
       const introDom = printKeyword(introduction, keyword)
-      const linkUrl = `/book_info/${bookId}/${typeTwoName || 'all'}/${replacedBookName || 'null'}`;
+      const linkUrl = `/book/${book.bookId}`;
       const authorDom = printKeyword(`By: ${author} ${book.writeStatus ? ` · ${book.writeStatus}` : ''}`, keyword)
-      const browseLink = `/browse/${typeTwoIds[0] || 0}/${typeTwoName || 'all'}`
 
-      return <div key={bookId + bookInd} className={styles.imageItemMoreWrap}>
+      return <div key={book.bookId + bookInd} className={styles.imageItemMoreWrap}>
         <Link href={linkUrl} className={styles.bookImageBox}>
           <Image
             className={styles.bookImage}
             width={150}
             height={200}
-            src={cover}
+            src={book.coverWap}
             placeholder={"blur"}
-            blurDataURL={cover || '/images/defaultBook.png'}
-            alt={bookName}
+            blurDataURL={book.coverWap || '/images/defaultBook.png'}
+            alt={book.bookName}
           />
         </Link>
 
@@ -64,9 +63,9 @@ const TagBookList: FC<IProps> = ({dataSource, keyword}) => {
             dangerouslySetInnerHTML={{ __html: authorDom }}
           />
 
-          {typeTwoNames[0] ? <Link href={browseLink} className={styles.bookTypeTwoName}>
-            {typeTwoNames[0]}
-          </Link> : null}
+          {/*{typeTwoNames[0] ? <Link href={browseLink} className={styles.bookTypeTwoName}>*/}
+          {/*  {typeTwoNames[0]}*/}
+          {/*</Link> : null}*/}
 
           <Link
             href={linkUrl}

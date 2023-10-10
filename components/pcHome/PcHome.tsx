@@ -24,7 +24,7 @@ const PcHome: FC<IProps> = ({ bannerList, seoColumnVos }) => {
               return <div key={item.id} className={styles.rankColumn}>
                 <div className={styles.rankContent}>
                   <h2 className={styles.titleText}>排行榜</h2>
-                  <VerticalList rankVos={item.rankVos?.slice(0, 3)} sex={item.sex}/>
+                  <VerticalList rankVos={item.rankVos?.slice(0, 3)} rankSex={item.rankSex}/>
                 </div>
               </div>;
             }
@@ -32,7 +32,7 @@ const PcHome: FC<IProps> = ({ bannerList, seoColumnVos }) => {
               return null;
             }
             return <div key={item.id} className={styles.bookColumn}>
-              <PcHomeTitle title={item.name} href={`/recommend/${item.channelId}`}/>
+              <PcHomeTitle title={item.name} href={`/recommend/${item.bookPackageId}`}/>
               <div className={styles.listBox}>
                 <Image
                   className={styles.listBg}
@@ -42,7 +42,6 @@ const PcHome: FC<IProps> = ({ bannerList, seoColumnVos }) => {
                   alt={''}
                 />
                 <SecondList
-                  cao={item.bookInfos}
                   bookInfos={(item.bookInfos || [])}
                   priority={index <= 1}/>
               </div>

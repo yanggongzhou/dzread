@@ -1,8 +1,6 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
-import { IChapterListItem, INetChapterDetailRes } from "typings/book.interface";
 import { DotLoading, Toast } from "antd-mobile";
 import { useAppSelector } from "@/store";
-import { IBookItem } from "@/typings/home.interface";
 import ModalCatalog from "@/components/reader/modalCatalog/ModalCatalog";
 import ModalControl from "@/components/reader/modalControl/ModalControl";
 import ModalHeader from "@/components/reader/modalHeader/ModalHeader";
@@ -13,36 +11,43 @@ import { netDetailChapter } from "@/server/home";
 import { EThemeType } from "@/typings/reader.interface";
 import styles from '@/components/reader/index.module.scss';
 import { setBookInfo } from "@/utils/storage/localstorages";
+import { INetCatalogRes } from "@/typings/catalog.interface";
+import { INetChapterDetailRes, IReadInfo } from "@/typings/chapter.interface";
+import { EIsCharge } from "@/typings/book.interface";
 
 interface IProps {
   fontSize: number;
   theme: EThemeType;
-  bookId: string;
-  chapterInfo: INetChapterDetailRes;
-  bookInfo: IBookItem;
-  chapterList: IChapterListItem[];
+  chapterData: INetChapterDetailRes;
+  catalogData: INetCatalogRes;
+  chapterInfo: IReadInfo
 }
 
 const Reader: FC<IProps> = (
-  { bookId, chapterInfo, bookInfo,  chapterList, fontSize, theme}
+  {
+    chapterData,
+    catalogData,
+    fontSize,
+    theme,
+  }
 ) => {
   const controlVisible = useAppSelector(state => state.read.controlVisible);
   const [isLoading, setIsLoading] = useState(false);
-  const [contentArr, setContentArr] = useState<INetChapterDetailRes[]>([chapterInfo]);
+  const [contentArr, setContentArr] = useState<INetChapterDetailRes[]>([chapterData]);
   const mainRef = useRef<HTMLDivElement | null>(null);
   const contentRef = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
 
   useEffect(() => {
-    if (chapterInfo.id) {
-      setBookInfo({ bid: bookId, cid: chapterInfo.id });
-      setContentArr([chapterInfo]);
+    if (chapterData?.chapterInfo?.chapterId) {
+      setBookInfo({ bid: chapterData.bookId, cid: chapterData.chapterInfo.chapterId });
+      setContentArr([chapterData]);
       if (contentRef.current && Reflect.has(contentRef.current, "scrollIntoView")) {
         // @ts-ignore
         contentRef.current.scrollIntoView()
       }
     }
-  }, [chapterInfo]);
+  }, [chapterData]);
 
   useEffect(() => {
     if(mainRef.current) {
@@ -80,7 +85,7 @@ const Reader: FC<IProps> = (
       await getChapterDetail("next")
     }
     // 付费章节每章单独占一页
-    if (chapterInfo.isCharge) return;
+    if (chapterData?.chapterInfo?.isCharge === EIsCharge.收费章节) return;
     const domList = document.querySelectorAll('div[cid]');
     const domArr = Array.from(domList);
     const dom = domArr.find(val => {
@@ -90,34 +95,37 @@ const Reader: FC<IProps> = (
     const chapterId = dom?.attributes?.cid?.value;
     if (!chapterId) return;
     if (router.query.chapterId !== chapterId) {
-      await router.replace(`/chapter/${bookId}/${chapterId}`,  undefined, { shallow: true });
-      setBookInfo({ bid: bookId, cid: chapterId });
+      await router.replace(`/chapter/${chapterData.bookId}/${chapterId}`,  undefined, { shallow: true });
+      setBookInfo({ bid: chapterData.bookId, cid: chapterId });
     }
   };
 
   const loadingRef = useRef<boolean>(false);
+
   const getChapterDetail = async (type: "next" | "prev") => {
     if (loadingRef.current) return;
 
-    const chapter = type === "prev" ? contentArr?.[0]?.preChapter : contentArr?.[contentArr.length - 1]?.nextChapter;
-    if (!chapter?.id) {
+    const chapterId = type === "prev" ? contentArr?.[0]?.preChapterId : contentArr?.[contentArr.length - 1]?.nextChapterId;
+    if (!chapterId) {
       Toast.show(type === "prev" ? '已经是第一章' : '已经是最后一章')
       return
     }
 
+    const chapterIsCharge = 'sssssssss'; // catalogData.chapterList.find(val => val.chapterId === c)
+
     // 付费章节每章单独占一页
-    if (chapter?.isCharge) {
+    if (chapterIsCharge === EIsCharge.收费章节) {
       loadingRef.current = true;
-      await router.replace(`/chapter/${bookId}/${chapter.id}`);
+      await router.replace(`/chapter/${chapterData.bookId}/${chapterId}`);
       loadingRef.current = false;
       return;
     }
 
     loadingRef.current = true;
     setIsLoading(true);
-    const chapterData = await netDetailChapter(bookId, chapter?.id);
-    if (chapterData !== 'BadRequest_404' && chapterData !== 'BadRequest_500' && chapterData) {
-      setContentArr(prevState => type === "prev" ? [chapterData, ...prevState] : [...prevState, chapterData]);
+    const response = await netDetailChapter(chapterData.bookId, chapterId);
+    if (response !== 'BadRequest_404' && response !== 'BadRequest_500' && response) {
+      setContentArr(prevState => (type === "prev" ? [response as INetChapterDetailRes, ...prevState] : [...prevState, response]));
     }
     loadingRef.current = false;
     setIsLoading(false);
@@ -128,13 +136,21 @@ const Reader: FC<IProps> = (
     className={styles.readerWrap}
     style={{ backgroundColor: theme }}>
 
-    <ModalHeader visible={controlVisible} bookId={bookId || ''} bookName={bookInfo?.bookName || ''}/>
+    <ModalHeader
+      visible={controlVisible}
+      update={chapterData.sysTime}
+      bookId={chapterData.bookId}
+      bookName={catalogData.bookName}/>
 
     <div
       className={styles.readerBox}
       ref={contentRef}>
 
-      <TopGuide bookInfo={bookInfo}/>
+      <TopGuide
+        bookId={chapterData.bookId}
+        bookName={catalogData.bookName}
+        cover={catalogData.coverWap}
+      />
 
       <ContentList
         fontSize={fontSize}
@@ -147,13 +163,12 @@ const Reader: FC<IProps> = (
         <span>加载中</span>
       </div> : null}
 
-      <ModalControl bookId={bookId} chapterInfo={chapterInfo}/>
+      <ModalControl chapterData={chapterData}/>
 
       <ModalCatalog
-        chapterId={chapterInfo.id}
-        chapterList={chapterList}
-        chapterInfo={chapterInfo}
-        bookInfo={bookInfo}
+        bookId={chapterData.bookId}
+        chapterId={chapterData?.chapterInfo?.chapterId}
+        catalogData={catalogData}
       />
     </div>
   </main>

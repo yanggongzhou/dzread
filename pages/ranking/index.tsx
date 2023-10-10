@@ -5,13 +5,13 @@ import { ownOs } from "@/utils/tools";
 import Breadcrumb from "@/components/common/breadcrumb";
 import PcRanking from "@/components/pcRanking";
 import WapRanking from "@/components/ranking";
-import { ERankStyle, ESexType, IRankBookDataVo, IRankDataVo } from "@/typings/ranking.interface";
+import { ESexType, IRankBookDataVo, IRankDataVo } from "@/typings/ranking.interface";
 
 interface IProps {
   isPc: boolean;
   page: number;
   pages: number; // 总页
-  rankStyle: ERankStyle;
+  rankStyle: number;
   rankType: ESexType;
   rankData: IRankDataVo[]; // 排行榜名称列表
   rankBook: IRankBookDataVo[]; // 某个排行榜对应的书籍信息data
@@ -55,7 +55,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, query }): Pr
   const ua = req?.headers['user-agent'] || ''
   const { page = '1', types } = query as { page?: string, types?: string };
   let rankType = ESexType.Male;
-  let rankStyle = ERankStyle.Daily;
+  let rankStyle = 0;
   let _rankId = undefined;
   if (types) {
     const typeArr = types.split('-');
@@ -65,7 +65,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, query }): Pr
     if (typeArr[1] && !isNaN(Number(typeArr[1]))) {
       _rankId = Number(typeArr[1])
     }
-    if (typeArr[2] && Number(typeArr[2]) && [ERankStyle.Daily, ERankStyle.Monthly].includes(Number(typeArr[2]))) {
+    if (typeArr[2] && Number(typeArr[2])) {
       rankStyle = Number(typeArr[2]);
     }
   }

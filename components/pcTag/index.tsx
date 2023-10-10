@@ -2,20 +2,21 @@ import React, { FC } from "react";
 import PaginationCom from "@/components/common/paginationCom";
 import Link from "next/link";
 import TagBookList from "@/components/pcTag/tagBookList/TagBookList";
-import { IKeywordItem, ITagBookItem } from "@/typings/tag.interface";
+import { ISeoKeyWords } from "@/typings/keywords.interface";
+import { IBookSearchVo } from "@/typings/browse.interface";
 import styles from "@/components/pcTag/index.module.scss";
 
 interface IProps {
-  bookList: ITagBookItem[];
-  relationKeywords: IKeywordItem[];
-  pageNo: number;
-  totalPage: number;
+  bookList: IBookSearchVo[];
+  words: ISeoKeyWords[];
+  page: number;
+  pages: number;
   keywordId: string;
   keyword: string;
 }
 
 const PcTag: FC<IProps> = (
-  { pageNo, totalPage, keywordId, bookList, keyword, relationKeywords}) => {
+  { page, pages, keywordId, bookList, keyword, words}) => {
 
 
   return <div className={styles.tagWrap}>
@@ -28,21 +29,21 @@ const PcTag: FC<IProps> = (
         相关的内容信息
       </p>
       <div className={styles.keywordConnect}>
-        {relationKeywords.length > 0 ? <>
+        {words.length > 0 ? <>
           <p className={styles.keywordConnectTitle}>相关热门搜索词：</p>
-          {relationKeywords.map(val => {
+          {words.map(val => {
             return <Link key={val.id} href={`/tag/${val.id}`} className={styles.keywordConnectItem} replace>
-              {val.keyword}
+              {val.name}
             </Link>
           })}
         </> : null}
       </div>
     </div> : null}
-    <TagBookList dataSource={bookList} keyword={keyword}/>
-    {totalPage && totalPage > 1 ? <PaginationCom
+    <TagBookList bookList={bookList} keyword={keyword}/>
+    {pages && pages > 1 ? <PaginationCom
       path={`/tag/${keywordId}/`}
-      pageNo={pageNo}
-      totalPage={totalPage}
+      pageNo={page}
+      totalPage={pages}
       isScroll={true}
       /> : null}
   </div>

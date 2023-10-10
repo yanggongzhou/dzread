@@ -2,7 +2,7 @@
  * 首页下行参数
  */
 import { EDevice } from "@/store/store.interfaces";
-import { ESexType, IRankBookDataVo } from "@/typings/ranking.interface";
+import { ERankVoSex, ESexType, IRankBookDataVo } from "@/typings/ranking.interface";
 import { IBookSearchVo } from "@/typings/browse.interface";
 
 export interface INetHomeRes {
@@ -55,13 +55,21 @@ export interface ISeoColumnManage {
   id: number;
   channelId: number;
   name: string;
-  sex: ESexType;
+  sex: ERankVoSex;
   type: EColumnType;
   sort: number;
   bookInfos?: IBookInfo[];// type=1时下发-书籍类型
   rankVos?: IRankVo[]; // type=2时下发
   bookTypeVos?: IBookTypeVo[]; // type=3时下发
+  bookPackageId: number;
+  rankSex?: ERankSex;
 }
+
+export enum ERankSex {
+  Male = 1,
+  Female = 2,
+}
+
 
 export enum EColumnType {
   书籍类型 = 1,
@@ -75,8 +83,10 @@ export interface IBookInfo {
   coverWap: string;
   introduction: string;
   protagonist: string; // 主角
+  threeTypeTag?: string[]
   author: string;
-  threeTypeTag: string[]
+  totalChapterNum: string; // 总章节数
+  totalWordSize: string; // 总字数
 }
 
 export interface IRankVo {

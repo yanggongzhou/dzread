@@ -3,16 +3,18 @@ import styles from "@/components/pcBook/index.module.scss";
 import Link from "next/link";
 import Image from "next/image";
 import { onImgError } from "@/components/common/image/ImageCover";
-import { IBookItem } from "@/typings/home.interface";
 import SecondList from "@/components/pcHome/secondList/SecondList";
+import { IBookInfoItem, IChapterInfo } from "@/typings/book.interface";
+import { IBookSearchVo } from "@/typings/browse.interface";
 
 interface IProps {
-  bookInfo: IBookItem;
-  recommends: IBookItem[];
+  book: IBookInfoItem;
+  recommendBook: IBookSearchVo[];
+  chapters: IChapterInfo[];
 }
 
-const PcBook: FC<IProps> = ({ bookInfo, recommends = []  }) => {
-  const routerToBook = `/download?${bookInfo.bookId}`;
+const PcBook: FC<IProps> = ({ book, recommendBook = [], chapters = [] }) => {
+  const routerToBook = `/download?${book.bookId}`;
 
   return <main className={styles.bookWrap}>
     <div className={styles.detailBox}>
@@ -21,40 +23,40 @@ const PcBook: FC<IProps> = ({ bookInfo, recommends = []  }) => {
         className={styles.detailBookCover}
         width={272}
         height={363}
-        src={bookInfo.cover}
+        src={book.coverWap}
         placeholder="blur"
-        blurDataURL={bookInfo.cover || '/images/defaultBook.png'}
-        alt={bookInfo.bookName}
+        blurDataURL={book.coverWap || '/images/defaultBook.png'}
+        alt={book.bookName}
       />
 
       <div className={styles.detailBoxRight}>
         <div className={styles.detailBoxRightTop}>
           <Link href={routerToBook}>
-            <h1 className={styles.bookName}>{bookInfo.bookName}</h1>
+            <h1 className={styles.bookName}>{book.bookName}</h1>
           </Link>
           <Link href={routerToBook} className={styles.chapterCount}>
-            {`${bookInfo.chapterCount || 0} episodes`}
+            {`${book.clickNum || 0} episodes`}
           </Link>
 
           <Link href={routerToBook} className={styles.intro}>
-            {bookInfo.introduction}
+            {book.introduction}
           </Link>
 
           <div className={styles.tagsContent}>
-            { (bookInfo?.tags || []).map(val => {
+            { (book?.tags || []).map(val => {
               return <Link key={val} href={routerToBook} className={styles.tagItem}>{val}</Link>
             })}
           </div>
         </div>
 
-        <Link href={`/chapter/${bookInfo.bookId}/${bookInfo.firstChapterId}`} className={styles.playBtn}>
+        <Link href={`/chapter/${book.bookId}/${book.firstChapterId}`} className={styles.playBtn}>
           开始阅读
         </Link>
       </div>
     </div>
-    {recommends.length > 0 ? <div className={styles.recommendBox}>
+    {recommendBook.length > 0 ? <div className={styles.recommendBox}>
       <h2 className={styles.titleText}>你也许也喜欢</h2>
-      <SecondList dataSource={recommends}/>
+      <SecondList bookInfos={recommendBook}/>
     </div> : null }
   </main>
 }

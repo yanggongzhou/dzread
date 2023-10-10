@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { EnumPosition, IBookItem } from "@/typings/home.interface";
+import { EnumPosition, IBookInfo, IBookItem } from "@/typings/home.interface";
 import { MEmpty } from "@/components/common/empty";
 import MorePagination from "@/components/recommend/pagination/MorePagination";
 import MRecommendList from "@/components/recommend/mRecommendList/MRecommendList";
@@ -8,24 +8,24 @@ import DownloadBanner from "@/components/common/downloadBanner/DownloadBanner";
 import styles from '@/components/recommend/index.module.scss';
 
 interface IProps {
-  bookList: IBookItem[];
-  pageNo: number;
-  totalPage: number;
-  position: EnumPosition;
+  bookInfos: IBookInfo[];
+  page: number;
+  pages: number;
+  bookPackageId: number;
 }
 
-const MRecommend: FC<IProps> = ({ bookList = [], totalPage, pageNo, position }) => {
+const MRecommend: FC<IProps> = ({ bookInfos, pages, page, bookPackageId }) => {
 
   return <main className={styles.moreWrap}>
     <NavBar backHref={'/'} title={"男频精选"}/>
     <DownloadBanner height={'0.1rem'}>
-      {bookList.length > 0 ?
+      {bookInfos.length > 0 ?
         <>
-          <MRecommendList list={bookList}/>
-          {totalPage && totalPage > 1 ? <MorePagination
-            prevPath={`/recommend/ssxx-`}
-            page={pageNo}
-            totalPage={totalPage}
+          <MRecommendList bookInfos={bookInfos}/>
+          {pages && pages > 1 ? <MorePagination
+            prevPath={`/recommend/${bookPackageId}/`}
+            page={page}
+            totalPage={pages}
           /> : null}
         </> : <MEmpty/> }
     </DownloadBanner>

@@ -1,30 +1,27 @@
 import React, { FC } from 'react';
-import { EnumPosition, IBookItem } from "@/typings/home.interface";
+import { IBookInfo } from "@/typings/home.interface";
 import PaginationCom from "@/components/common/paginationCom";
 import { PcEmpty } from "@/components/common/empty";
-import { useRouter } from "next/router";
 import RecommendList from "@/components/pcRecommend/recommendList/RecommendList";
 import styles from '@/components/pcRecommend/index.module.scss';
 
 interface IProps {
-  bookList: IBookItem[];
-  pageNo: number;
-  totalPage: number;
-  position: EnumPosition;
+  bookInfos: IBookInfo[];
+  page: number;
+  pages: number;
+  bookPackageId: number;
 }
 
-const PcRecommend: FC<IProps> = ({ bookList, totalPage, pageNo }) => {
-
-  const router = useRouter();
+const PcRecommend: FC<IProps> = ({ bookInfos, pages, page, bookPackageId }) => {
 
   return <main className={styles.recommendWrap}>
-    {bookList.length > 0 ?
+    {bookInfos.length > 0 ?
       <div className={styles.recommendList}>
-        <RecommendList list={bookList}/>
-        {totalPage && totalPage > 1 ? <PaginationCom
-          path={`/more/xxx-`}
-          pageNo={pageNo}
-          totalPage={totalPage}
+        <RecommendList bookInfos={bookInfos}/>
+        {pages && pages > 1 ? <PaginationCom
+          path={`/recommend/${bookPackageId}/`}
+          pageNo={page}
+          totalPage={pages}
           isScroll={true}
         /> : null}
       </div> :

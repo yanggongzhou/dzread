@@ -1,6 +1,4 @@
 import React, { FC } from "react";
-import { IChapterListItem } from "typings/book.interface";
-import { IBookItem } from "@/typings/home.interface";
 import { Mask } from "antd-mobile";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,18 +6,19 @@ import ImageCover from "@/components/common/image/ImageCover";
 import classNames from "classnames";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { setCatalogVisible } from "@/store/modules/read.module";
+import { INetCatalogRes } from "@/typings/catalog.interface";
 import styles from '@/components/reader/modalCatalog/ModalCatalog.module.scss';
 
 interface IProps {
+  bookId: string;
   chapterId: string;
-  chapterList: IChapterListItem[];
-  bookInfo: IBookItem;
+  catalogData: INetCatalogRes;
 }
 
-const ModalCatalog: FC<IProps> = ({ bookInfo, chapterList, chapterId }) => {
+const ModalCatalog: FC<IProps> = ({ bookId, catalogData, chapterId }) => {
   const catalogVisible = useAppSelector(state => state.read.catalogVisible);
   const dispatch = useAppDispatch();
-  const bookHref = `/book/${bookInfo.bookId}`;
+  const bookHref = `/book/${bookId}`;
   return <>
     <Mask
       visible={catalogVisible}
@@ -33,14 +32,14 @@ const ModalCatalog: FC<IProps> = ({ bookInfo, chapterList, chapterId }) => {
         <ImageCover
           href={bookHref}
           className={styles.bookCover}
-          src={bookInfo.cover}
+          src={catalogData.coverWap}
           width={90}
           height={118}
-          alt={bookInfo.bookName}
+          alt={catalogData.bookName}
         />
         <div className={styles.introBox}>
-          <Link href={bookHref} className={styles.bookName}>{bookInfo.bookName}</Link>
-          <Link href={bookHref} className={styles.author}>作者：{bookInfo.author}</Link>
+          <Link href={bookHref} className={styles.bookName}>{catalogData.bookName}</Link>
+          <Link href={bookHref} className={styles.author}>作者：{catalogData.author}</Link>
         </div>
         <Link className={styles.moreIconBox} href={bookHref} replace>
           <Image
@@ -54,14 +53,14 @@ const ModalCatalog: FC<IProps> = ({ bookInfo, chapterList, chapterId }) => {
       </div>
 
       <div className={styles.list}>
-        { chapterList.map(item => {
+        { catalogData.chapterList.map(item => {
           return <Link
+            key={item.chapterId}
             replace
             onClick={() => dispatch(setCatalogVisible(false))}
-            href={`/chapter/${bookInfo.bookId}/${item.id}`}
-            key={item.id}
+            href={`/chapter/${bookId}/${item.chapterId}`}
             className={styles.catalogItem}>
-            <span className={classNames(styles.itemTxt, item.isCharge && styles.lockTxt, item.id === chapterId && styles.active)}>{ item.chapterName }</span>
+            <span className={classNames(styles.itemTxt, item.isCharge && styles.lockTxt, item.chapterId === chapterId && styles.active)}>{ item.chapterName }</span>
             {item.isCharge ? <Image
               className={styles.itemIcon}
               width={36}

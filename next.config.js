@@ -10,9 +10,9 @@ const WebDomainObj = {
 }
 // 网站服务api
 const BaseUrlObj = {
-  test: 'https://241.qcread.cn',
+  test: 'https://99seo.kky.dzods.cn',
   staging: 'https://yfb.klynf.com',
-  prod: 'https://api.klynf.com'
+  prod: ''
 }
 // ipua
 const IpUaUrlObj = {

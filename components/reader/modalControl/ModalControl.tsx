@@ -1,19 +1,18 @@
 import React, { FC } from 'react'
 import Link from "next/link";
-import { INetChapterDetailRes } from "@/typings/book.interface";
 import Image from "next/image";
 import classNames from "classnames";
 import { setCatalogVisible, setControlVisible, setFontSize, setTheme } from "@/store/modules/read.module";
 import { EThemeType } from "@/typings/reader.interface";
 import { useAppDispatch, useAppSelector } from "@/store";
+import { INetChapterDetailRes } from "@/typings/chapter.interface";
 import styles from '@/components/reader/modalControl/ModalControl.module.scss';
 
 interface IProps {
-  bookId: string;
-  chapterInfo: INetChapterDetailRes;
+  chapterData: INetChapterDetailRes;
 }
 
-const ModalControl: FC<IProps> = ({ bookId, chapterInfo }) => {
+const ModalControl: FC<IProps> = ({ chapterData }) => {
 
   const backgroundList = [
     EThemeType.default1,
@@ -81,10 +80,10 @@ const ModalControl: FC<IProps> = ({ bookId, chapterInfo }) => {
     </div>
 
     <div className={styles.chapterBtnBox}>
-      {chapterInfo.preChapter && chapterInfo.preChapter.id ?
+      {chapterData.preChapterId ?
         <Link
           className={styles.chapterBtn}
-          href={`/chapter/${bookId}/${chapterInfo.preChapter?.id}`}
+          href={`/chapter/${chapterData.bookId}/${chapterData.preChapterId}`}
           replace>
           <Image
             className={styles.backIcon}
@@ -118,10 +117,10 @@ const ModalControl: FC<IProps> = ({ bookId, chapterInfo }) => {
         <span>目录</span>
       </div>
 
-      {chapterInfo.nextChapter && chapterInfo.nextChapter.id ?
+      {chapterData.nextChapterId ?
         <Link
           className={styles.chapterBtn}
-          href={`/chapter/${bookId}/${chapterInfo.nextChapter?.id}`} replace>
+          href={`/chapter/${chapterData.bookId}/${chapterData.nextChapterId}`} replace>
           <span>下一章</span>
           <Image
             className={styles.nextIcon}

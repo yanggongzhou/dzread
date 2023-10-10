@@ -1,43 +1,43 @@
 import React, { FC } from "react";
 import Image from "next/image";
-import { IBookItem } from "@/typings/home.interface";
+import { IBookInfoItem } from "@/typings/book.interface";
 import ImageCover from "@/components/common/image/ImageCover";
 import { Ellipsis } from "antd-mobile";
 import styles from "@/components/book/bookDetail/index.module.scss";
 
 interface IProps {
-  pathCid: string;
-  bookInfo: IBookItem;
+  chapterId: string;
+  book: IBookInfoItem;
 }
 
-const BookDetail: FC<IProps> = ({ bookInfo, pathCid }) => {
+const BookDetail: FC<IProps> = ({ book, chapterId }) => {
 
   return <>
     <div className={styles.detailBox}>
       <ImageCover
-        href={`/chapter/${bookInfo.bookId}/${pathCid}`}
+        href={`/chapter/${book.bookId}/${chapterId}`}
         className={styles.bookCover}
-        src={bookInfo.cover}
+        src={book.coverWap}
         width={172}
         height={228}
-        alt={bookInfo.bookName}
+        alt={book.bookName}
       />
       <div className={styles.bookContent}>
         <div>
-          {bookInfo.bookName ? <h1 className={styles.bookName}>{bookInfo.bookName}</h1> : null}
-          <p className={styles.bookStatus}>明日今生 · 青春文学· 连载中</p>
-          <p className={styles.bookChapter}>最新章节：第3457章</p>
+          {book.bookName ? <h1 className={styles.bookName}>{book.bookName}</h1> : null}
+          <p className={styles.bookStatus}>{book.tagList?.join(' · ')}</p>
+          <p className={styles.bookChapter}>最新章节：第{book.totalChapterNum}章</p>
         </div>
-        <p className={styles.updateTime}>更新时间：2023-09-18 19:3</p>
+        <p className={styles.updateTime}>更新时间：{book.lastChapterUtime}</p>
       </div>
     </div>
     <div className={styles.numBox}>
-      <div className={styles.numItem}>{bookInfo.ratings || 0} <span>分</span></div>
-      <div className={styles.numItem}>{bookInfo.viewCountDisplay.replace('萬', '')} <span>万阅读人数</span></div>
-      <div className={styles.numItem}>{'64'} <span>万字数</span></div>
+      <div className={styles.numItem}>{book.scoreNum} <span>{book.scoreNumUnit}</span></div>
+      <div className={styles.numItem}>{book.clickNum } <span>xxxxxxxx</span></div>
+      <div className={styles.numItem}>{book.totalWordSize} <span>xxxxxxx字数</span></div>
     </div>
 
-    {bookInfo.introduction ? <div className={styles.introBox}>
+    {book.introduction ? <div className={styles.introBox}>
       <Ellipsis
         rows={5}
         className={styles.introEllipsis}
@@ -62,7 +62,7 @@ const BookDetail: FC<IProps> = ({ bookInfo, pathCid }) => {
             />
           </div>
         }
-        content={bookInfo.introduction} />
+        content={book.introduction} />
 
       <button className={styles.downloadBtn}>打开点众阅读APP阅读本书</button>
     </div> : null}

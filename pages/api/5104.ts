@@ -1,18 +1,24 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { ownFetch } from "@/server/fetch";
-/**
- * 关键词页
- */
-type ResponseData = {
-  words: string[];
-  totalSize: number;
-}
+import { INetKeyRes } from "@/typings/keywords.interface";
+
+// 5001 排行榜页面
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<string>
+  res: NextApiResponse<INetKeyRes>
 ) {
 
-  const data = await ownFetch('/index.do');
+  const { data = [], pageNo = 1, totalPage = 1 } = await ownFetch('/keywordlist.do', { type: 0, pageNum: 1, pageSize: 10 })
 
-  res.status(200).json(data)
+  const result: INetKeyRes = {
+    totalSize: totalPage * pageNo,
+    words: data.map(val => {
+      return {
+        id: val.id,
+        name: val.keyword
+      }
+    })
+  }
+
+  res.status(200).json(result)
 }

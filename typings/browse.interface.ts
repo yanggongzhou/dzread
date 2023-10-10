@@ -1,3 +1,5 @@
+import { EBookStatus2 } from "@/typings/book.interface";
+
 /**
  * 分类上行参数
  */
@@ -42,7 +44,9 @@ export interface IBookSearchVo {
   lastChapterId: string; // 最新章节ID
   lastChapterUtime: string; // 章节更新时间
   tagV3: string[]; // 标签集合
-  status: EBookStatus; // 书籍状态
+  status: EBookStatus2; // 书籍状态
+  hot: string; // 热度信息
+  tag: string[];
 }
 
 export interface ITypeOneVo {

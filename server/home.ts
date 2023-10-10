@@ -1,17 +1,20 @@
-import { IBookItem, INetHomeItem, INetHomeRes } from "@/typings/home.interface";
-import { INetMoreReq, INetMoreResult } from "@/typings/more.interface";
+import { IBookItem, INetHomeRes } from "@/typings/home.interface";
 import {
-  INetBookRes, INetChapterDetailRes, INetListChapterReq, INetListChapterRes,
+  INetBookRes
 } from "@/typings/book.interface";
 import { INetBrowseReq, INetBrowseRes } from "@/typings/browse.interface";
-import { INetKeywordsReq, INetKeywordsRes, INetKeywordTagReq, INetKeywordTagRes } from "@/typings/tag.interface";
+import { INetKeywordTagReq, INetKeywordTagRes, INetTagReq, INetTagRes } from "@/typings/tag.interface";
 import { ownFetch, poFetch } from "@/server/fetch";
 import { INetRankingRes, INetRankingReq } from "@/typings/ranking.interface";
 import { EDevice } from "@/store/store.interfaces";
+import { INetRecommendReq, INetRecommendRes } from "@/typings/recommend.interface";
+import { INetCatalogReq, INetCatalogRes } from "@/typings/catalog.interface";
+import { INetKeyRes } from "@/typings/keywords.interface";
+import { INetChapterDetailRes } from "@/typings/chapter.interface";
 
-// 获取首页index
+// 5000获取首页
 export const netHome = (type: EDevice): Promise<INetHomeRes | 'BadRequest_404' | 'BadRequest_500'> => {
-  return poFetch('/api/5000');
+  return poFetch('/api/5000', { type });
 }
 
 // 5001 排行榜页面
@@ -24,39 +27,35 @@ export const netBrowse = (body: INetBrowseReq): Promise<INetBrowseRes | 'BadRequ
   return poFetch('/api/5002', body);
 }
 
-
-export const netHomeData = (): Promise<INetHomeItem[] | 'BadRequest_404' | 'BadRequest_500'> => {
-  return ownFetch('/index.do');
+// 5003 书籍类型二级页面
+export const netRecommend = (body: INetRecommendReq): Promise<INetRecommendRes | 'BadRequest_404' | 'BadRequest_500'> => {
+  return poFetch('/api/5003', body);
 }
 
-// 查看更多
-export const netMoreBook = (params: INetMoreReq): Promise<INetMoreResult | 'BadRequest_404' | 'BadRequest_500'> => {
-  return ownFetch('/moreList.do', { pageNo: 1, pageSize: 10, ...params })
-}
 
 // 获取书籍详情
 export const netBook = (bookId: string): Promise<INetBookRes | 'BadRequest_404' | 'BadRequest_500'> => {
-  return ownFetch('/detail.do', { bookId })
+  return poFetch('/api/5051', { bookId });
 }
 
-// 获取章节详情
-export const netDetailChapter = (bookId: string, chapterId?: string): Promise<INetChapterDetailRes | 'BadRequest_404' | 'BadRequest_500'> => {
-  return ownFetch('/chapterInfo.do', { bookId, chapterId })
+// 5052获取章节列表
+export const netCatalog = (data: INetCatalogReq): Promise<INetCatalogRes | 'BadRequest_404' | 'BadRequest_500'> => {
+  return poFetch('/api/5052', data);
 }
 
-// 获取章节列表
-export const netListChapter = (params: INetListChapterReq): Promise<INetListChapterRes | 'BadRequest_404' | 'BadRequest_500'> => {
-  return ownFetch('/chapterList.do', { pageSize: 10, ...params })
+// 5053 单章加载
+export const netDetailChapter = (bookId: string, chapterId: string): Promise<INetChapterDetailRes | 'BadRequest_404' | 'BadRequest_500'> => {
+  return poFetch('/api/5053', { bookId, chapterId })
 }
 
 // 关键词列表
-export const netKeywords = async (params: INetKeywordsReq): Promise<INetKeywordsRes | 'BadRequest_404' | 'BadRequest_500'> => {
-  return ownFetch('/keywordlist.do', { pageSize: 10, ...params })
+export const netKeys = async (page: number): Promise<INetKeyRes | 'BadRequest_404' | 'BadRequest_500'> => {
+  return poFetch('/api/5104', { page })
 }
 
-// 关键词聚合页
-export const netKeywordTag = (params: INetKeywordTagReq): Promise<INetKeywordTagRes | 'BadRequest_404' | 'BadRequest_500'> => {
-  return ownFetch('/keywordinfo.do', { pageSize: 10, ...params })
+// 5101
+export const netTag = (params: INetTagReq): Promise<INetTagRes | 'BadRequest_404' | 'BadRequest_500'> => {
+  return poFetch('/api/5101', { ...params })
 }
 
 // 搜索接口
