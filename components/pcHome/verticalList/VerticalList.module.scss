@@ -1,92 +1,130 @@
 .verticalListBox {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-column-gap: 0.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .rankItemBox {
+    width: 3.64rem;
+    height: 3.96rem;
+    position: relative;
+
+    .rankItemBg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      width: 3.64rem;
+      height: 3.96rem;
+    }
+
+    .rankTitle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 0.2rem 0 0.3rem;
+      height: 0.56rem;
+      position: relative;
+      z-index: 9;
+
+      .titleText {
+        font-size: 0.2rem;
+        font-weight: bold;
+        color: #AB7B00;
+      }
+
+      .titleIcon {
+        width: 0.24rem;
+        height: 0.24rem;
+      }
+    }
+
+    .rankContent {
+      height: 3.4rem;
+      padding-right: 0.2rem;
+      position: relative;
+      z-index: 9;
+    }
+  }
 }
 
 .verticalItemBox {
   width: 100%;
+  height: 100%;
   display: grid;
-  grid-template-rows: repeat(5, 1fr);
-  grid-row-gap: 0.12rem;
-  padding-bottom: 0.4rem;
+  grid-template-rows: repeat(3, 1fr);
+  grid-row-gap: 0.2rem;
+  background-color: #FFFFFF;
+  border-radius: 0 0.10rem 0 0.1rem;
+  padding: 0.3rem;
 
   .itemBox {
-    padding: 0.12rem;
     width: 100%;
-    height: 1.04rem;
+    height: 0.8rem;
     display: flex;
-    align-items: center;
     justify-content: flex-start;
     flex-direction: row;
 
+    .bookIndex {
+      width: 0.3rem;
+      height: 0.36rem;
+      background: linear-gradient(180deg, #F9E953 0%, #F1CE29 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.2rem;
+      font-weight: bold;
+      color: #333333;
+    }
+
     .imageBox {
-      width: 0.6rem;
+      width: 0.62rem;
       height: 0.8rem;
       overflow: hidden;
       border-radius: 0.04rem;
+      margin: 0 0.14rem 0 0.2rem;
 
       .bookImage {
-        width: 0.6rem;
+        width: 0.62rem;
         height: 0.8rem;
-        overflow: hidden;
         transition: all 0.5s;
       }
     }
 
-    .bookRow1, .bookIndex {
-      width: 0.44rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.24rem;
-      font-weight: bold;
-      color: $theme_color;
-    }
-
-    .bookIndex {
-      color: #333333;
-    }
-
     .rightColumn {
-      width: 2.5rem;
-
+      width: 1.58rem;
       .bookName {
         display: block;
-        color: #333333;
+        color: #222222;
         font-size: 0.16rem;
-        font-weight: bold;
+        line-height: 0.2rem;
+        font-weight: 400;
         overflow: hidden;
-        white-space: nowrap;
         text-overflow: ellipsis;
-        margin-bottom: 0.08rem;
-        line-height: 0.22rem;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        word-wrap: break-word;
+        margin-bottom: 0.1rem;
       }
 
       .viewCountDisplay {
-        font-size: 0.14rem;
-        font-weight: 400;
-        color: #7F8493;
-
-        span {
-          color: $theme_color;
-          font-weight: bold;
-        }
-      }
-
-      .tagBox {
         font-size: 0.12rem;
         font-weight: 400;
-        color: #333333;
-        grid-gap: 0.08rem;
-        display: flex;
-
-        .tagItem {
-          border-radius: 0.03rem;
-          padding: 0.04rem 0.1rem;
-          background-color: grey;
-        }
+        color: #F67C00;
+        line-height: 0.16rem;
+        margin-bottom: 0.04rem;
       }
+
+      .bookAuthor {
+        font-size: 0.12rem;
+        font-weight: 400;
+        color: #9C9C9C;
+        line-height: 0.16rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
     }
 
     &:hover {

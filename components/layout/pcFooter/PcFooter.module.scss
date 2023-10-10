@@ -1,26 +1,29 @@
 .footerWrap {
   position: relative;
-  background-color: #F3F3F3;
-  height: 1.8rem;
+  background-color: #333333;
+  height: 2.24rem;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
 
-  .footerText {
+  .footerContent {
+    width: 12rem;
+    margin: 0 auto;
     text-align: center;
+
     .fText {
-      font-size: 0.16rem;
+      font-size: 0.12rem;
       font-weight: 400;
-      color: #222222;
+      margin-bottom: 0.1rem;
+      color: #C2C2C2;
     }
   }
 
   .footerLink {
     padding: 0.2rem;
-    font-size: 0.16rem;
+    font-size: 0.12rem;
     font-weight: 400;
-    color: #222222;
     transition: all 0.3s;
     text-decoration: underline !important;
 
