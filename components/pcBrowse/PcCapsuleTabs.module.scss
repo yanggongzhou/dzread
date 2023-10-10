@@ -1,5 +1,9 @@
 .capsuleTabsBox {
   background-color: #F4F6F8;
+  position: sticky;
+  top: 0.66rem;
+  width: 2.1rem;
+  max-height: calc(100vh - 384px);
 
 
   .tabsBox {

@@ -1,42 +1,51 @@
 .slideTabBox {
-  position: fixed;
-  top: 64px;
-  z-index: 9;
-
   border-right: 0.5px solid hsla(0,0%,85%,.5);
-  font-size: 14px;
-  margin-top: 40px;
   max-height: calc(100vh - 384px);
   overflow-y: scroll;
-  overflow: -moz-scrollbars-none;
   text-align: center;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  width: 160px;
+  width: 1.82rem;
+  position: sticky;
+  top: 0.66rem;
 
   &::-webkit-scrollbar { display: none; }
 
   .tabOneItem {
-    margin-bottom: 20px;
+    margin-bottom: 0.15rem;
+
+    .oneItemTitle {
+      height: 0.5rem;
+      background-color: #F7F7F8;
+      font-size: 0.14rem;
+      font-weight: bold;
+      color: #222222;
+      line-height: 0.5rem;
+      text-align: center;
+    }
 
     .oneItemBox {
+      background-color: #FFFFFF;
 
-
-      .tabChild, .tabChildActive {
-        color: #b2b2b2;
+      .tabChild {
+        height: 0.48rem;
+        font-size: 0.14rem;
+        font-weight: 400;
+        color: #666666;
+        line-height: 0.48rem;
         display: block;
-        line-height: 40px;
-        border-right: 2px solid transparent;
+        border-right: 0.02rem solid transparent;
 
         &:hover {
-          color: #0bafff;
+          font-weight: bold;
+          color: #FF4614;
+          background-color: #FFF5EF;
         }
       }
 
       .tabChildActive {
-        background-color: rgba(11,175,255,.1);
-        border-right: 2px solid #0bafff;
-        color: #0bafff;
+        border-color: #FF4614;
+        background-color: #FFF5EF;
+        color: #FF4614;
+        font-weight: bold;
       }
 
     }

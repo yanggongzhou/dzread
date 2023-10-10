@@ -20,11 +20,7 @@ interface IProps {
 
 const RankingPage: NextPage<IProps> = (
   { isPc, rankData, rankBook, page, pages, rankStyle, rankType, rankId }) => {
-  const data = [
-    { title: '首页', link: "/home" },
-    { title: '小说分类', link: "/browse/0" },
-    { title: '都市小说' },
-  ]
+
   const wapRankData = useMemo(() => {
     const data = rankData.find(val => val.rankType === rankType);
     if (data) {
@@ -33,7 +29,6 @@ const RankingPage: NextPage<IProps> = (
     return [];
   }, [rankData]);
   return <>
-    <Breadcrumb data={data} style={isPc ? {} : { width: 0, height: 0, display: "none" }}/>
     {isPc ?
       <PcRanking
         page={page}

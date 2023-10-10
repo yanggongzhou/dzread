@@ -1,5 +1,4 @@
 import React, { FC, useEffect, useRef, useState } from "react";
-import { IBookItem } from "@/typings/home.interface";
 import { useRouter } from "next/router";
 import { MEmpty } from "@/components/common/empty";
 import MorePagination from "@/components/recommend/pagination/MorePagination";
@@ -9,8 +8,8 @@ import DownloadBanner from "@/components/common/downloadBanner/DownloadBanner";
 import { setIsShowBrowse } from "@/store/modules/app.module";
 import { useAppDispatch } from "@/store";
 import MRecommendList from "@/components/recommend/mRecommendList/MRecommendList";
-import styles from "@/components/browse/index.module.scss";
 import { IBookSearchVo, ITypeOneVo } from "@/typings/browse.interface";
+import styles from "@/components/browse/index.module.scss";
 
 interface IProps {
   page: number;
@@ -19,6 +18,7 @@ interface IProps {
   typeOneVoList: ITypeOneVo[];
   statusMark: {title: string; markId: string}[]; // 书籍状态栏(四级)
   wordType: {name: string; type: string}[];// 分类书籍字数筛选
+  params: any;
 }
 
 const MBrowse: FC<IProps> = (
@@ -29,6 +29,7 @@ const MBrowse: FC<IProps> = (
     typeOneVoList,
     statusMark,
     wordType,
+    params,
   }
 ) => {
   const browseRef = useRef<HTMLDivElement | null>(null);
@@ -74,7 +75,7 @@ const MBrowse: FC<IProps> = (
       {books.length > 0 ? <div className={styles.browseContent} ref={browseRef}>
         <MRecommendList list={books} />
         {pages && pages > 1 ? <MorePagination
-          prevPath={`/browse/${books}/`}
+          prevPath={`/browse/${params.id}-${params.cid}-${params.tid}-${params.status}-${params.wordType}/`}
           page={page}
           totalPage={pages}
         /> : null}

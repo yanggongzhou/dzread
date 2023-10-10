@@ -27,22 +27,19 @@ const Browse: NextPage<IProps> = (
     typeOneVoList,
     statusMark,
     wordType,
-    params
   }) => {
-  const data = [
-    { title: '首页', link: "/home" },
-    { title: '小说分类', link: "/browse/0" },
-    { title: '都市小说' },
-  ]
+
   return <>
-    <Breadcrumb data={data} style={isPc ? {} : { width: 0, height: 0, display: "none" }}/>
+
     {isPc ?
       <PcBrowse
         page={page}
-        types={typeOneVoList}
-        bookList={books}
+        typeOneVoList={typeOneVoList}
+        books={books}
         pages={pages}
-        params={params}
+        statusMark={statusMark}
+        wordType={wordType}
+        // params={params}
       /> :
       <MBrowse
         page={page}
@@ -51,6 +48,7 @@ const Browse: NextPage<IProps> = (
         pages={pages}
         statusMark={statusMark}
         wordType={wordType}
+        // params={params}
       />}
   </>
 }

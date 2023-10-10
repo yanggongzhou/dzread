@@ -1,0 +1,109 @@
+.listBox {
+
+  .itemBox {
+    display: flex;
+    height: 1.2rem;
+    margin-bottom: 0.4rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .bookIndex {
+      width: 0.27rem;
+      height: 0.32rem;
+      background: linear-gradient(180deg, #F9E953 0%, #F1CE29 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.2rem;
+      font-weight: bold;
+      color: #333333;
+    }
+
+    .imageBox {
+      flex-shrink: 0;
+      margin: 0 0.2rem 0 0.1rem;
+      width: 0.9rem;
+      height: 1.2rem;
+      overflow: hidden;
+      border-radius: 0.04rem;
+
+      .bookImage {
+        width: 100%;
+        height: 100%;
+        transition: all 0.5s;
+      }
+    }
+
+    &:hover {
+      .imageBox {
+        .bookImage {
+          transform: scale(1.1);
+        }
+      }
+    }
+
+    .bookInfo {
+      height: 100%;
+      width: 100%;
+
+      .bookName {
+        display: block;
+        font-size: 0.16rem;
+        font-weight: bold;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        color: #222222;
+        line-height: 0.2rem;
+        position: relative;
+        margin-bottom: 0.14rem;
+
+        .bookRate {
+          position: absolute;
+          top: 0;
+          right: 0;
+          z-index: 1;
+          font-size: .14rem;
+          font-weight: bold;
+          color: #F67C00;
+        }
+      }
+
+      .bookIntro {
+        font-weight: 400;
+        color: #666666;
+        font-size: 0.14rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        word-wrap: break-word;
+        line-height: 0.18rem;
+        overflow-wrap: anywhere;
+        margin-bottom: 0.1rem;
+      }
+
+      .tagBox {
+        display: flex;
+        flex-direction: row;
+        column-gap: 0.1rem;
+
+        .tagItem {
+          padding: 0.06rem 0.12rem;
+          background: rgba(0, 0, 0, 0.08);
+          border-radius: 0.04rem;
+          font-size: 0.12rem;
+          font-weight: 400;
+          color: #555555;
+          line-height: 0.16rem;
+        }
+      }
+
+    }
+
+  }
+}
+

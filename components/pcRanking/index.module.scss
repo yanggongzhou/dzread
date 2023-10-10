@@ -1,18 +1,25 @@
 .rankWrap {
-  padding: 0.4rem 0 0.6rem;
+  padding: 0.66rem 0 0.6rem;
   width: 12rem;
   margin: 0 auto;
+
+  .container {
+    display: flex;
+    column-gap: 0.6rem;
+    flex-direction: row;
+  }
 
   .rankContent {
     min-height: 7rem;
     position: relative;
     z-index: 9;
-    padding-left: 180px;
     width: 100%;
 
     .rankTitle {
-      font-size: 0.16rem;
-      font-weight: 400;
+      font-size: 0.2rem;
+      font-weight: bold;
+      color: #222222;
+      line-height: 0.24rem;
     }
   }
 }

@@ -3,30 +3,30 @@ import Link from "next/link";
 import Image from "next/image";
 import { onImgError } from "@/components/common/image/ImageCover";
 import { IRankBookDataVo } from "@/typings/ranking.interface";
-import styles from '@/components/common/firstList/FirstList.module.scss';
+import styles from '@/components/pcRanking/list/RankingList.module.scss';
 
 interface IProps {
-  dataSource: IRankBookDataVo[];
+  rankBook: IRankBookDataVo[];
   priority?: boolean;
 }
 
-const FirstList: FC<IProps> = ({ dataSource = [], priority = false }) => {
+const RankingList: FC<IProps> = ({ rankBook = [], priority = false }) => {
 
-  if (dataSource.length === 0) {
+  if (rankBook.length === 0) {
     return null
   }
 
-  return <div className={styles.moreBookWrap}>
-    {dataSource.map((book, index) => {
+  return <div className={styles.listBox}>
+    {rankBook.map((book, index) => {
 
       const routerToBookInfo = `/book/${book.bookId}`
 
-      return <div key={book.bookId} className={styles.imageItemMoreWrap}>
+      return <div key={book.bookId} className={styles.itemBox}>
         <Link href={routerToBookInfo} className={styles.bookIndex}>
           {index + 1}
         </Link>
 
-        <Link href={routerToBookInfo}>
+        <Link href={routerToBookInfo} className={styles.imageBox}>
           <Image
             priority={priority}
             className={styles.bookImage}
@@ -39,11 +39,14 @@ const FirstList: FC<IProps> = ({ dataSource = [], priority = false }) => {
             alt={book.bookName}
           />
         </Link>
+
         <div className={styles.bookInfo}>
+
           <Link href={routerToBookInfo} className={styles.bookName}>
-            {book.bookName}
+            <span>{book.bookName}</span>
+            <span className={styles.bookRate}>{book.num}</span>
           </Link>
-          <Link href={routerToBookInfo} className={styles.moreIntro}>
+          <Link href={routerToBookInfo} className={styles.bookIntro}>
             {book.introduction}
           </Link>
 
@@ -58,4 +61,4 @@ const FirstList: FC<IProps> = ({ dataSource = [], priority = false }) => {
   </div>
 }
 
-export default FirstList;
+export default RankingList;

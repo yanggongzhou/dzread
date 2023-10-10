@@ -2,31 +2,28 @@ import React, { FC } from 'react'
 import Link from "next/link";
 import Image from "next/image";
 import { onImgError } from "@/components/common/image/ImageCover";
-import { IRankBookDataVo } from "@/typings/ranking.interface";
-import styles from '@/components/common/firstList/FirstList.module.scss';
+import { IBookSearchVo } from "@/typings/browse.interface";
+import styles from '@/components/pcBrowse/browseList/BrowseList.module.scss';
 
 interface IProps {
-  dataSource: IRankBookDataVo[];
+  books: IBookSearchVo[];
   priority?: boolean;
 }
 
-const FirstList: FC<IProps> = ({ dataSource = [], priority = false }) => {
+const BrowseList: FC<IProps> = ({ books = [], priority = false }) => {
 
-  if (dataSource.length === 0) {
+  if (books.length === 0) {
     return null
   }
 
-  return <div className={styles.moreBookWrap}>
-    {dataSource.map((book, index) => {
+  return <div className={styles.listBox}>
+    {books.map(book => {
 
       const routerToBookInfo = `/book/${book.bookId}`
 
-      return <div key={book.bookId} className={styles.imageItemMoreWrap}>
-        <Link href={routerToBookInfo} className={styles.bookIndex}>
-          {index + 1}
-        </Link>
+      return <div key={book.bookId} className={styles.itemBox}>
 
-        <Link href={routerToBookInfo}>
+        <Link href={routerToBookInfo} className={styles.imageBox}>
           <Image
             priority={priority}
             className={styles.bookImage}
@@ -39,16 +36,19 @@ const FirstList: FC<IProps> = ({ dataSource = [], priority = false }) => {
             alt={book.bookName}
           />
         </Link>
+
         <div className={styles.bookInfo}>
+
           <Link href={routerToBookInfo} className={styles.bookName}>
-            {book.bookName}
+            <span>{book.bookName}</span>
+            <span className={styles.bookRate}>{book.scoreNum}</span>
           </Link>
-          <Link href={routerToBookInfo} className={styles.moreIntro}>
+          <Link href={routerToBookInfo} className={styles.bookIntro}>
             {book.introduction}
           </Link>
 
           <Link href={routerToBookInfo} className={styles.tagBox}>
-            {(book.threeTypeTag || []).map(val => {
+            {(book.tagV3 || []).map(val => {
               return <span className={styles.tagItem} key={val}>{val}</span>
             })}
           </Link>
@@ -58,4 +58,4 @@ const FirstList: FC<IProps> = ({ dataSource = [], priority = false }) => {
   </div>
 }
 
-export default FirstList;
+export default BrowseList;

@@ -3,48 +3,34 @@ import React, { CSSProperties, FC } from "react";
 import Image from "next/image";
 import styles from "@/components/pcBrowse/PcCapsuleTabs.module.scss";
 import { CapsuleTabs } from "antd-mobile";
-import { IBrowseTypes } from "@/typings/browse.interface";
+import { ITypeOneVo } from "@/typings/browse.interface";
+import classNames from "classnames";
 
-export interface ICapsuleTab {
-  title: string;
-  id: number;
-  children: IBrowseTypes[];
-}
 
 interface IProps {
-  data: ICapsuleTab[];
-  typeTwoId: number;
+  statusMark: {title: string; markId: string}[]; // 书籍状态栏(四级)
+  wordType: {name: string; type: string}[];// 分类书籍字数筛选
+  typeOneVoList: ITypeOneVo[];
+  params: any;
   style?: CSSProperties | undefined;
 }
 
-const PcCapsuleTabs: FC<IProps> = ({ data, typeTwoId, style }) => {
+const PcCapsuleTabs: FC<IProps> = ({ typeOneVoList, statusMark, wordType, style }) => {
 
-
-  const statusList = [
-    { id:1, name: "全部" },
-    { id:2, name: "完本" },
-    { id:3, name: "连载" }
-  ]
-  const fontList = [
-    { id:1, name: "全部" },
-    { id:2, name: "100万字以下" },
-    { id:3, name: "100万-300万字" },
-    { id:4, name: "300万字以上" }
-  ]
+  var typeTwoId = '';
 
   return <div style={style} className={styles.capsuleTabsBox}>
     <CapsuleTabs defaultActiveKey='1'>
-      {data.map(val => {
-        return <CapsuleTabs.Tab title={val.title} key={val.id}>
+      {typeOneVoList.map(val => {
+        return <CapsuleTabs.Tab title={val.categoryName} key={val.categoryId}>
           分类
           <div className={styles.tabsBox}>
-            {val.children.map((item) => {
-              const typeName = item.id === 0 ? '全部' : item.name;
-              if (item.id === typeTwoId) {
-                return <div key={item.id} className={styles.tabItemActive}>{typeName}</div>
-              }
-              return <Link href={`/browse/${item.id}`} key={item.id} className={styles.tabItem}>
-                {typeName}
+            {val.typeTwoVos.map((item) => {
+              return <Link
+                href={`/browse/${item.cid}`}
+                key={item.cid}
+                className={classNames(styles.tabItem, item.cid === typeTwoId && styles.tabItemActive)}>
+                {item.title}
               </Link>
             })}
           </div>
@@ -54,12 +40,12 @@ const PcCapsuleTabs: FC<IProps> = ({ data, typeTwoId, style }) => {
     <div>
       状态
       <div className={styles.tabsBox}>
-        {statusList.map((item) => {
-          if (item.id === 1) {
-            return <div key={item.id} className={styles.tabItemActive}>{item.name}</div>
-          }
-          return <Link href={`/browse/${item.id}`} key={item.id} className={styles.tabItem}>
-            {item.name}
+        {statusMark.map((item) => {
+          return <Link
+            href={`/browse/${item.markId}`}
+            key={item.markId}
+            className={classNames(styles.tabItem, item.markId === 'xxxx' && styles.tabItemActive)}>
+            {item.title}
           </Link>
         })}
       </div>
@@ -68,11 +54,11 @@ const PcCapsuleTabs: FC<IProps> = ({ data, typeTwoId, style }) => {
     <div>
       字数
       <div className={styles.tabsBox}>
-        {fontList.map((item) => {
-          if (item.id === 1) {
-            return <div key={item.id} className={styles.tabItemActive}>{item.name}</div>
-          }
-          return <Link href={`/browse/${item.id}`} key={item.id} className={styles.tabItem}>
+        {wordType.map((item) => {
+          return <Link
+            href={`/browse/${item.type}`}
+            key={item.type}
+            className={classNames(styles.tabItem, item.type === 'xxxx' && styles.tabItemActive)}>
             {item.name}
           </Link>
         })}

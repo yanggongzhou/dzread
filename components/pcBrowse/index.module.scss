@@ -1,22 +1,27 @@
 .browseWrap {
-  padding: 0.4rem 0 0.6rem;
-  display: grid;
-  grid-template-columns: 260px auto;
-  grid-column-gap: 20px;
+  padding: 0.66rem 0 1rem;
   width: 12rem;
   margin: 0 auto;
 
-  .browseContent {
-    min-height: 7rem;
-    position: relative;
-    z-index: 9;
-    width: 100%;
+  .container {
+    display: flex;
+    flex-direction: row;
+    grid-column-gap: 0.6rem;
 
-    .browseTitle {
-      font-size: 0.16rem;
-      font-weight: 400;
+    .browseContent {
+      min-height: 7rem;
+      position: relative;
+      z-index: 9;
+      width: 100%;
+
+      .browseTitle {
+        font-size: 0.16rem;
+        font-weight: 400;
+      }
     }
   }
+
+
 }
 
 
