@@ -1,10 +1,10 @@
-import React, { FC } from 'react'
+import React, { FC } from 'react';
 import { EnumPosition, IBookItem } from "@/typings/home.interface";
 import PaginationCom from "@/components/common/paginationCom";
 import { PcEmpty } from "@/components/common/empty";
 import { useRouter } from "next/router";
-import styles from '@/components/pcRecommend/index.module.scss';
 import RecommendList from "@/components/pcRecommend/recommendList/RecommendList";
+import styles from '@/components/pcRecommend/index.module.scss';
 
 interface IProps {
   bookList: IBookItem[];
@@ -14,8 +14,10 @@ interface IProps {
 }
 
 const PcRecommend: FC<IProps> = ({ bookList, totalPage, pageNo }) => {
-  const router = useRouter()
-  return <div className={styles.recommendWrap}>
+
+  const router = useRouter();
+
+  return <main className={styles.recommendWrap}>
     {bookList.length > 0 ?
       <div className={styles.recommendList}>
         <RecommendList list={bookList}/>
@@ -27,7 +29,7 @@ const PcRecommend: FC<IProps> = ({ bookList, totalPage, pageNo }) => {
         /> : null}
       </div> :
       <PcEmpty/>}
-  </div>
+  </main>
 }
 
 export default PcRecommend;

@@ -38,14 +38,14 @@ const Recommend: NextPage<IProps> = ({ isPc, bookList = [], pageNo, totalPage, p
 // 导出异步获取数据方法
 export const getServerSideProps: GetServerSideProps = async ({ req, query, locale }): Promise<GetServerSidePropsResult<IProps>> => {
   const ua = req?.headers['user-agent'] || ''
-  const { position = '' } = query;
+  const { position = '', page = "1" } = query;
 
-  const page = Number(position.split('-')[1]) | 1;
+  const _page = Number(page) | 1;
   const _position = position.split('-')[0] || '??';
 
   const response = await netMoreBook({
     position: 1,
-    pageNo: page,
+    pageNo: _page,
   })
   if (response === 'BadRequest_404') {
     return { notFound: true }

@@ -32,7 +32,7 @@ const PcHome: FC<IProps> = ({ bannerList, seoColumnVos }) => {
               return null;
             }
             return <div key={item.id} className={styles.bookColumn}>
-              <PcHomeTitle title={item.name} href={`/recommend/${item.id}`}/>
+              <PcHomeTitle title={item.name} href={`/recommend/${item.channelId}`}/>
               <div className={styles.listBox}>
                 <Image
                   className={styles.listBg}

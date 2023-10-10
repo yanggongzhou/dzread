@@ -1,10 +1,13 @@
 .recommendWrap {
-  padding-top: .3rem;
+  width: 12rem;
+  margin: 0 auto;
+  padding-top: .66rem;
 
   .recommendList {
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.6rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
+
 }
