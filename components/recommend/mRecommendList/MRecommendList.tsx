@@ -31,7 +31,7 @@ const MRecommendList: FC<IProps> = ({ bookInfos }) => {
 
           <div>
             <Link href={`/book/${item.bookId}`} className={styles.bookAuthor}>
-              {[item.author, item.threeTypeTag?.[0], item?.status === EBookStatus.完结 ? '连载' : '完结', item.clickNum].filter(val => val).join(' · ')}
+              {[item.author, item?.bookTypeThreeMap?.[0], item?.status === EBookStatus.完结 ? '连载' : '完结', item.clickNum].filter(val => val).join(' · ')}
             </Link>
             <Link href={`/book/${item.bookId}`} className={styles.bookAuthor}>
               {`最新章节: 第${item.lastChapterId}章   ${item.lastChapterUtime}`}

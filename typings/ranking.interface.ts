@@ -46,6 +46,6 @@ export interface IRankBookDataVo {
   bookId: string; // 书籍ID
   bookName: string; // 书籍名称
   coverWap: string; // 封面
-  threeTypeTag: string[]; // 标签集合
+  bookTypeThreeMap: string[]; // 标签集合
   num: string; // 影响力值
 }

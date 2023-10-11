@@ -51,7 +51,7 @@ const RankingList: FC<IProps> = ({ rankBook = [], priority = false }) => {
           </Link>
 
           <Link href={routerToBookInfo} className={styles.tagBox}>
-            {(book.threeTypeTag || []).map(val => {
+            {(book.bookTypeThreeMap || []).map(val => {
               return <span className={styles.tagItem} key={val}>{val}</span>
             })}
           </Link>

@@ -46,7 +46,7 @@ const VerticalItem: FC<{ list: IRankBookDataVo[] }> = ({ list }) => {
             {item.num}
           </Link>
           <Link href={`/book/${item.bookId}`} className={styles.bookAuthor}>
-            {item.threeTypeTag.join(' · ')}
+            {item?.bookTypeThreeMap.join(' · ')}
           </Link>
         </div>
       </div>

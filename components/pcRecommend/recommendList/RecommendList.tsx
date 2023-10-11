@@ -30,7 +30,7 @@ const RecommendList: FC<IProps> = ({ bookInfos }) => {
           <Link className={styles.bookRate} href={`/book/${item.bookId}`}>{`9.6分`}</Link>
           <Link className={styles.bookIntro} href={`/book/${item.bookId}`}>{item.introduction}</Link>
           <Link href={`/book/${item.bookId}`} className={styles.bookAuthor}>
-            {[item.author, item.threeTypeTag?.[0], item?.status === EBookStatus.完结 ? '连载' : '完结', item.clickNum].filter(val => val).join(' · ')}
+            {[item.author, item?.bookTypeThreeMap?.[0], item?.status === EBookStatus.完结 ? '连载' : '完结', item.clickNum].filter(val => val).join(' · ')}
           </Link>
           <Link href={`/book/${item.bookId}`} className={styles.bookAuthor}>
             {`最新章节: 第${item.lastChapterId}章   ${item.lastChapterUtime}`}

@@ -38,7 +38,6 @@ export interface IBookInfoItem {
   lastChapterId?: string;
   lastChapterName?: string;
   lastChapterUtime?: string;
-  threeTypeTag?: string[]; // 三级分类
   scoreNum?: string; // 评分人数
   scoreNumUnit?: string; // 评分人数单位
 }

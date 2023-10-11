@@ -30,7 +30,7 @@ const FeaturedList: FC<IProps> = ({ bookInfos = [] }) => {
               <Link className={styles.bookIntro} href={`/book/${item.bookId}`}>{item.introduction}</Link>
             </div>
             <Link href={`/book/${item.bookId}`} className={styles.bookAuthor}>
-              {[item.author, item.threeTypeTag[0]].filter(val => val).join(' · ')}
+              {[item.author, item?.bookTypeThreeMap?.[0]].filter(val => val).join(' · ')}
             </Link>
           </div>
         </div>

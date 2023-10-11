@@ -84,7 +84,7 @@ export interface IBookInfo {
   coverWap: string;
   introduction: string;
   protagonist: string; // 主角
-  threeTypeTag?: string[]
+  bookTypeThreeMap?: string[]; // 三级标签
   author: string;
   totalChapterNum: string; // 总章节数
   totalWordSize: string; // 总字数

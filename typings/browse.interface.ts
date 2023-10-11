@@ -43,10 +43,10 @@ export interface IBookSearchVo {
   scoreNum?: string; // 书籍评分
   lastChapterId: string; // 最新章节ID
   lastChapterUtime: string; // 章节更新时间
-  tagV3: string[]; // 标签集合
+  bookTypeThreeMap: string[]; // 标签集合
   status: EBookStatus2; // 书籍状态
-  hot: string; // 热度信息
-  tag: string[];
+  totalChapterNum: string; // 总章节数
+  hot?: string; // 热度信息
 }
 
 export interface ITypeOneVo {
