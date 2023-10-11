@@ -21,13 +21,7 @@ const Book: NextPage<IProps> = (
   { isPc, bookId, book, recommendBook, chapters }
 ) => {
 
-  const data = [
-    { title: '首页', link: "/home" },
-    { title: '??', link: "/ranking" },
-    { title: book.bookName }
-  ]
   return <>
-    <Breadcrumb data={data} style={isPc ? {} : { width: 0, height: 0, display: "none" }} />
     { isPc ?
       <PcBook
         chapters={chapters}

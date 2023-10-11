@@ -1,118 +1,137 @@
 .bookWrap {
-  width: 12rem;
-  margin: 0 auto;
-}
+  padding: 0.66rem 0 1rem;
 
-
-.detailBox {
-  padding: 1.2rem 0 0.4rem;
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  column-gap: 0.4rem;
-
-  .detailBookCover {
-    flex-shrink: 0;
-    width: 2.72rem;
-    height: 3.63rem;
-    border-radius: 0.04rem;
-    overflow: hidden;
+  .bookBox {
+    height: 3.4rem;
+    background: linear-gradient(180deg, #FFF1E9 0%, #FFFFFF 100%);
   }
 
-  .detailBoxRight {
-    padding: 0.4rem;
-    border-radius: 0.04rem;
-    flex: 1;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    background: rgba(255, 255, 255, 0.08);
-    height: 3.63rem;
+  .container {
+    width: 12rem;
+    margin: 0 auto;
 
-    .detailBoxRightTop {
-      .bookName {
-        display: block;
-        width: 6rem;
-        font-size: 0.24rem;
-        font-weight: 500;
-        color: #333333;
-        line-height: 0.32rem;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        margin-bottom: 0.2rem;
+    .btnBox {
+      margin-left: 2.28rem;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      column-gap: 0.2rem;
+
+      .readBtn {
+        height: 0.48rem;
+        background-color: #FF6600;
+        border-radius: 0.24rem;
+        padding: 0.14rem 0.38rem;
+        font-size: 0.16rem;
+        font-weight: bold;
+        color: #FFFFFF;
       }
 
-      .chapterCount {
-        display: block;
-        width: 6rem;
-        font-size: 0.13rem;
-        font-weight: 400;
-        color: #333333;
-        line-height: 0.18rem;
-        margin-bottom: 0.2rem;
-      }
+      .phoneBtn {
+        padding: 0.14rem 0.38rem;
+        height: 0.48rem;
+        background-color: #FFEFDF;
+        border-radius: 0.24rem;
+        font-size: 0.16rem;
+        font-weight: bold;
+        color: #FF4614;
+        position: relative;
 
-      .intro {
-        display: block;
-        margin-bottom: 0.3rem;
-        font-size: 0.14rem;
-        font-weight: 400;
-        color: #333333;
-        line-height: 0.20rem;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 3;
-        word-wrap: break-word;
-      }
+        .slideBox {
+          display: none;
+          position: absolute;
+          right: 0;
+          bottom: 0;
+          transform: translateX(110%);
+          z-index: 99;
+          padding: 0.2rem;
+          background: #FFFFFF;
+          box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.09);
+          border-radius: 0.10rem;
 
-      .tagsContent {
-        font-size: 0.12rem;
-        font-weight: 400;
-        grid-gap: 0.08rem;
-        display: flex;
+          .slideTitle {
+            text-align: center;
+            font-size: 0.14rem;
+            font-weight: 400;
+            color: #666666;
+            margin-bottom: 0.11rem;
+          }
 
-        .tagItem {
-          border-radius: 0.03rem;
-          padding: 0.04rem 0.1rem;
-          color: #333333;
-          background-color: rgba(255, 255, 255, 0.08);
+          .slideQrCode {
+            background-color: #FFFFFF;
+            width: 1.3rem !important;
+            height: 1.3rem !important;
+          }
+        }
+
+        &:hover {
+          .slideBox {
+            display: block;
+          }
         }
       }
     }
 
-    .playBtn {
-      font-size: 0.14rem;
-      font-weight: 500;
-      color: #FFFFFF;
-      background: linear-gradient(270deg, #FF871F 0%, #FF0045 48%, #F40065 100%);
-      border-radius: 0.02rem;
+    .contentBox {
       display: flex;
-      align-items: center;
-      justify-content: center;
       flex-direction: row;
-      width: 1.02rem;
-      height: 0.32rem;
+      column-gap: 0.4rem;
 
-      .playIcon {
-        margin-right: 0.04rem;
-        width: 0.16rem;
-        height: 0.16rem;
+      .recommendBox {
+        width: 3.1rem;
+        padding: 0.2rem;
+        background-color: #F7F7F8;
+        border-radius: 0.08rem;
+
+        .titleBox {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 0.2rem;
+
+          .title {
+            font-size: 0.23rem;
+            font-weight: bold;
+            line-height: 0.29rem;
+            color: #222222;
+          }
+
+          .columnLink {
+            align-items: center;
+            border: 0.01rem solid #CECECE;
+            border-radius: 0.12rem;
+            display: flex;
+            flex-direction: row;
+            column-gap: 0.1rem;
+            font-size: .12rem;
+            padding: 0.04rem 0.11rem;
+            font-weight: 400;
+            color: #727272;
+
+            .linkIcon {
+              width: 0.13rem;
+              height: 0.13rem;
+              transform: rotateZ(0deg);
+            }
+
+            .linkIconAni {
+              animation: anirotate 1s infinite linear;
+            }
+          }
+        }
       }
     }
   }
 }
 
-.recommendBox {
-
-  .titleText {
-    font-size: 0.24rem;
-    font-weight: 900;
-    color: rgba(255,255,255,0.9);
-    line-height: 0.29rem;
-    margin-bottom: 0.28rem;
+@keyframes anirotate {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  50% {
+    transform: rotateZ(180deg);
+  }
+  100% {
+    transform: rotateZ(360deg);
   }
 }

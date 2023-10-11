@@ -1,26 +1,26 @@
 import React from "react";
 import { GetServerSideProps, GetServerSidePropsResult, NextPage } from "next";
-import { netSearch } from "@/server/home";
+import { netSearch, netTag } from "@/server/home";
 import PcSearch from "@/components/pcSearch";
 import { ownOs } from "@/utils/tools";
 import WapSearch from "@/components/search";
 import { IBookSearchVo } from "@/typings/browse.interface";
+import { ESearchType } from "@/typings/tag.interface";
 
 interface IProps {
-  total: number;
-  current: number;
+  page: number;
   pages: number;
-  isPc: boolean;
   sValue: string;
+  isPc: boolean;
   bookList: IBookSearchVo[];
   isEmpty: boolean;
 }
 
-const Search: NextPage<IProps> = ({ isPc, sValue, bookList = [], isEmpty, current, pages, total}) => {
+const Search: NextPage<IProps> = ({ isPc, sValue, bookList = [], isEmpty, page, pages}) => {
   return <>
     { isPc ?
-      <PcSearch sValue={sValue} bookList={bookList} isEmpty={isEmpty} pages={pages} current={current} total={total}/> :
-      <WapSearch sValue={sValue} bookList={bookList} isEmpty={isEmpty} pages={pages} current={current} />}
+      <PcSearch sValue={sValue} bookList={bookList} isEmpty={isEmpty} pages={pages} page={page}/> :
+      <WapSearch sValue={sValue} bookList={bookList} isEmpty={isEmpty} pages={pages} page={page} />}
   </>
 }
 
@@ -31,31 +31,36 @@ export const getServerSideProps: GetServerSideProps = async ({ req, query }): Pr
   const ua = req?.headers['user-agent'] || '';
   const { searchValue = '', page = '1' } = query as { searchValue: string; page: string; };
   const { isPc } = ownOs(ua);
+  const _page = Number(page) || 1;
   if (searchValue) {
-    const data = await netSearch(searchValue);
+    const data = await netTag({
+      searchType: ESearchType.全文,
+      keyword: searchValue,
+      index: _page
+    });
+
     if (data === 'BadRequest_404') {
       return { notFound: true }
     }
     if (data === 'BadRequest_500') {
       return { redirect: { destination: '/500', permanent: false } }
     }
-    const { records = [], current = 1, pages = 1, total = 0 } = data || {};
+    const { bookList = [], searchType, words = [], tagName = "", totalSize, isMore } = data;
+
     return {
       props: {
-        total,
-        current,
-        pages,
+        page: _page,
+        pages: Math.ceil(totalSize/10) || 1,
         sValue: searchValue,
-        bookList: records,
-        isEmpty: !data || (records.length === 0),
+        bookList,
+        isEmpty: !data || (bookList.length === 0),
         isPc,
       },
     }
   }
   return {
     props: {
-      total: 0,
-      current: 1,
+      page: 1,
       pages: 1,
       sValue: '',
       bookList: [],

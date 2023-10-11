@@ -1,11 +1,17 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import styles from "@/components/pcBook/index.module.scss";
 import Link from "next/link";
-import Image from "next/image";
-import { onImgError } from "@/components/common/image/ImageCover";
-import SecondList from "@/components/pcHome/secondList/SecondList";
 import { IBookInfoItem, IChapterInfo } from "@/typings/book.interface";
 import { IBookSearchVo } from "@/typings/browse.interface";
+import PcBookDetail from "@/components/pcBook/bookDetail/BookDetail";
+import ClientConfig from "@/client.config";
+import QRCode from "qrcode.react";
+import PcBookTabs from "@/components/pcBook/tabs/PcBookTabs";
+import { getSessionBook, removeSessionBook, setSessionBook } from "@/utils/storage/sessionStorages";
+import RecommendBox from "@/components/pcBook/recommendBox";
+import Image from "next/image";
+import classNames from "classnames";
+import { netBookRe } from "@/server/home";
 
 interface IProps {
   book: IBookInfoItem;
@@ -14,50 +20,75 @@ interface IProps {
 }
 
 const PcBook: FC<IProps> = ({ book, recommendBook = [], chapters = [] }) => {
-  const routerToBook = `/download?${book.bookId}`;
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [list, setList] = useState(recommendBook);
+  useEffect(() => {
+    setActiveIndex(getSessionBook());
+    return () => {
+      removeSessionBook();
+    }
+  }, []);
+
+  const onSwap = async () => {
+    setLoading(true);
+    const { bookList = [] } = await netBookRe({});
+    if (bookList.length > 0) {
+      setList(bookList);
+    }
+    setLoading(false);
+  }
 
   return <main className={styles.bookWrap}>
-    <div className={styles.detailBox}>
-      <Image
-        onError={onImgError}
-        className={styles.detailBookCover}
-        width={272}
-        height={363}
-        src={book.coverWap}
-        placeholder="blur"
-        blurDataURL={book.coverWap || '/images/defaultBook.png'}
-        alt={book.bookName}
-      />
-
-      <div className={styles.detailBoxRight}>
-        <div className={styles.detailBoxRightTop}>
-          <Link href={routerToBook}>
-            <h1 className={styles.bookName}>{book.bookName}</h1>
-          </Link>
-          <Link href={routerToBook} className={styles.chapterCount}>
-            {`${book.clickNum || 0} episodes`}
-          </Link>
-
-          <Link href={routerToBook} className={styles.intro}>
-            {book.introduction}
-          </Link>
-
-          <div className={styles.tagsContent}>
-            { (book?.tags || []).map(val => {
-              return <Link key={val} href={routerToBook} className={styles.tagItem}>{val}</Link>
-            })}
+    <div className={styles.bookBox}>
+      <PcBookDetail book={book}/>
+    </div>
+    <div className={styles.container}>
+      <div className={styles.btnBox}>
+        <Link href={`/chapter/${book.bookId}/${chapters[0].chapterId}`} className={styles.readBtn}>开始阅读</Link>
+        <div className={styles.phoneBtn}>
+          <span>手机扫码读本书</span>
+          <div className={styles.slideBox}>
+            <p className={styles.slideTitle}>{ClientConfig.name}手机版</p>
+            <QRCode
+              renderAs={"canvas"}
+              className={styles.slideQrCode}
+              value="'https://gitcode.gitcode.host/docs-cn/video.js-docs-cn/docs/guides/components.html#resize-manager'"
+            />
           </div>
         </div>
-
-        <Link href={`/chapter/${book.bookId}/${book.firstChapterId}`} className={styles.playBtn}>
-          开始阅读
-        </Link>
       </div>
+
+      <div className={styles.contentBox}>
+        <PcBookTabs
+          chapters={chapters}
+          bookInfo={book}
+          activeIndex={activeIndex}
+          onChange={(ind) => {
+            setSessionBook(String(ind));
+            setActiveIndex(ind)
+          }}
+        />
+        {recommendBook.length > 0 ? <div className={styles.recommendBox}>
+          <div className={styles.titleBox}>
+            <h3 className={styles.title}>同类热门书</h3>
+            <button className={styles.columnLink} onClick={() => onSwap()}>
+              <span>换一换</span>
+              <Image
+                className={classNames(styles.linkIcon, loading && styles.linkIconAni)}
+                width={13}
+                height={13}
+                src={'/images/book/refresh.png'}
+                alt={''}
+              />
+            </button>
+          </div>
+          <RecommendBox list={recommendBook}/>
+        </div> : null }
+      </div>
+
+
     </div>
-    {recommendBook.length > 0 ? <div className={styles.recommendBox}>
-      <h2 className={styles.titleText}>你也许也喜欢</h2>
-      <SecondList bookInfos={recommendBook}/>
-    </div> : null }
   </main>
 }
 

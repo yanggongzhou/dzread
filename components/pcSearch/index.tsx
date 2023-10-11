@@ -1,39 +1,62 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import PaginationCom from "@/components/common/paginationCom";
-import FirstList from "@/components/common/firstList/FirstList";
 import { PcEmpty } from "@/components/common/empty";
-import styles from '@/components/pcSearch/index.module.scss'
 import { IBookSearchVo } from "@/typings/browse.interface";
+import TagBookList from "@/components/pcTag/tagBookList/TagBookList";
+import SearchInput from "@/components/pcSearch/searchInput/SearchInput";
+import { useRouter } from "next/router";
+import { Toast } from "antd-mobile";
+import styles from '@/components/pcSearch/index.module.scss';
 
 interface IProps {
-  total: number;
-  current: number;
+  page: number;
   pages: number;
   sValue: string;
-  bookList?: IBookSearchVo[];
+  bookList: IBookSearchVo[];
   isEmpty: boolean;
 }
 
 const PcSearch: FC<IProps> = (
-  {sValue, bookList = [], isEmpty, pages, current}) => {
+  {sValue, bookList = [], isEmpty, pages, page }) => {
 
+  const router = useRouter()
+  const [searchValue, setSearchValue] = useState(sValue);
 
-  return <div className={styles.pcSearchWrap}>
-    <div className={styles.pcSearchBox}>
-      <FirstList dataSource={bookList}/>
-    </div>
+  const onSearch = () => {
+    if (!searchValue) {
+      Toast.show('请输入书籍名或作者名');
+      return;
+    }
+    // 失去焦点，移动端用来收起软键盘
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur()
+    }
+    router.replace({ pathname: '/search', query: { searchValue } })
+  }
 
+  return <main className={styles.pcSearchWrap}>
+    <SearchInput
+      searchValue={searchValue}
+      onSearch={onSearch}
+      onInput={(e) => {
+        // @ts-ignore
+        setSearchValue(e.target.value)
+      }}
+      onCancel={() => setSearchValue('')}
+    />
+
+    <TagBookList bookList={bookList} keyword={sValue}/>
     {pages && pages > 1 ?
       <PaginationCom
         path={`/search/`}
         query={`?searchValue=${sValue}`}
-        pageNo={current}
+        pageNo={page}
         totalPage={pages}
         isScroll={true}
       /> : null}
 
     { isEmpty && <PcEmpty/>}
-  </div>
+  </main>
 }
 
 export default PcSearch;

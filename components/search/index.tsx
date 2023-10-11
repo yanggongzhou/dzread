@@ -5,18 +5,18 @@ import { MEmpty } from "@/components/common/empty";
 import MorePagination from "@/components/recommend/pagination/MorePagination";
 import MTagBookList from "@/components/tag/tagBookList/MTagBookList";
 import SearchHeader from "@/components/search/searchHeader/SearchHeader";
-import styles from '@/components/search/index.module.scss';
 import { IBookSearchVo } from "@/typings/browse.interface";
+import styles from '@/components/search/index.module.scss';
 
 interface IProps {
-  current: number;
+  page: number;
   pages: number;
   sValue: string;
   bookList?: IBookSearchVo[];
   isEmpty: boolean;
 }
 
-const WapSearch: FC<IProps> = ({ sValue, bookList = [], isEmpty, current, pages }) => {
+const WapSearch: FC<IProps> = ({ sValue, bookList = [], isEmpty, page, pages }) => {
   const router = useRouter()
   const [searchValue, setSearchValue] = useState(sValue);
 
@@ -49,14 +49,14 @@ const WapSearch: FC<IProps> = ({ sValue, bookList = [], isEmpty, current, pages 
         暂无搜索结果，为您推荐以下热门书籍：
       </div>
 
-      <MTagBookList keyword={sValue} dataSource={bookList}/>
+      <MTagBookList keyword={sValue} bookList={bookList}/>
 
       {pages && pages > 1 ?
         <div className={styles.footerBox}>
           <MorePagination
             prevPath={`/search/`}
             query={`?searchValue=${sValue}`}
-            page={current}
+            page={page}
             totalPage={pages}
           />
         </div> : null}

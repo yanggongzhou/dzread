@@ -1,5 +1,6 @@
 import { INetHomeRes } from "@/typings/home.interface";
 import {
+  INetBookReReq, INetBookReRes,
   INetBookRes
 } from "@/typings/book.interface";
 import { IBookSearchVo, INetBrowseReq, INetBrowseRes } from "@/typings/browse.interface";
@@ -11,6 +12,7 @@ import { INetRecommendReq, INetRecommendRes } from "@/typings/recommend.interfac
 import { INetCatalogReq, INetCatalogRes } from "@/typings/catalog.interface";
 import { INetKeyRes } from "@/typings/keywords.interface";
 import { INetChapterDetailRes } from "@/typings/chapter.interface";
+import { INetThinkRes } from "@/typings/search.interface";
 
 // 5000获取首页
 export const netHome = (type: EDevice): Promise<INetHomeRes | 'BadRequest_404' | 'BadRequest_500'> => {
@@ -56,6 +58,16 @@ export const netKeys = async (page: number): Promise<INetKeyRes | 'BadRequest_40
 // 5101
 export const netTag = (params: INetTagReq): Promise<INetTagRes | 'BadRequest_404' | 'BadRequest_500'> => {
   return poFetch('/api/5101', { ...params })
+}
+
+// 5102 - 搜索联想词
+export const netThink = (keyword: string): Promise<INetThinkRes | 'BadRequest_404' | 'BadRequest_500'> => {
+  return ownFetch('/api/5102', { keyword })
+}
+
+// 5105- 书籍详情页推荐
+export const netBookRe = (params: INetBookReReq): Promise<INetBookReRes | 'BadRequest_404' | 'BadRequest_500'> => {
+  return poFetch('/api/5105', { ...params })
 }
 
 // 搜索接口

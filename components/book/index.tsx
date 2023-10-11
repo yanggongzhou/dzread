@@ -10,9 +10,10 @@ import { setCatalogVisible } from "@/store/modules/read.module";
 import { useAppDispatch } from "@/store";
 import BookTabs from "@/components/book/bookTabs/BookTabs";
 import { getSessionBook, removeSessionBook, setSessionBook } from "@/utils/storage/sessionStorages";
-import styles from "@/components/book/index.module.scss";
 import classNames from "classnames";
 import { IBookSearchVo } from "@/typings/browse.interface";
+import { netBookRe } from "@/server/home";
+import styles from "@/components/book/index.module.scss";
 
 interface IProps {
   book: IBookInfoItem;
@@ -23,6 +24,7 @@ interface IProps {
 const WapBook: FC<IProps> = ({ book, chapters, recommendBook }) => {
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(false);
+  const [list, setList] = useState(recommendBook);
 
   const [isShowTitle, setIsShowTitle] = useState(false);
   const onScroll = (e: Event) => {
@@ -45,11 +47,13 @@ const WapBook: FC<IProps> = ({ book, chapters, recommendBook }) => {
     }
   }, []);
 
-  const onSwap = () => {
+  const onSwap = async () => {
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false)
-    }, 1500)
+    const { bookList = [] } = await netBookRe({});
+    if (bookList.length > 0) {
+      setList(bookList);
+    }
+    setLoading(false);
   }
 
   const tabList = [
@@ -72,7 +76,7 @@ const WapBook: FC<IProps> = ({ book, chapters, recommendBook }) => {
             </button>
           </div>
 
-          <BrowseList list={recommendBook}/>
+          <BrowseList list={list}/>
         </div>
       </>
     },

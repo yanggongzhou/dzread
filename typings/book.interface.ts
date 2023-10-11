@@ -47,3 +47,20 @@ export enum EBookStatus2 {
   连载 = 0,
   完结 = 1,
 }
+
+
+/**
+ * 5105- 书籍详情页推荐上行参数
+ */
+export interface INetBookReReq {
+  index?: number;
+  excludeBookId?: string[];
+  typeThreeList?: [] // 三级分类id
+}
+/**
+ * 5105- 书籍详情页推荐下行参数
+ */
+
+export interface INetBookReRes {
+  bookList: IBookSearchVo[];
+}

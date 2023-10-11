@@ -13,3 +13,18 @@
 //   pages: number;
 //   records: IBookItem[];
 // }
+
+
+
+export interface INetThinkRes {
+  suggestList: ISuggestVo[]
+}
+
+export interface ISuggestVo {
+  type: string;
+  title: string;
+  cover?: string;
+  bookId?:string;
+  authorName?: string;
+  bookAlias?: string;
+}

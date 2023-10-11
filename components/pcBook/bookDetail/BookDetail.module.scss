@@ -1,0 +1,136 @@
+.detailBox {
+  position: relative;
+  width: 12rem;
+  margin: 0 auto;
+  height: 3.4rem;
+  padding: 0.1rem 0 0.22rem;
+
+  .bookInfo {
+    display: flex;
+    flex-direction: row;
+    column-gap: 0.4rem;
+    padding-top: 0.4rem;
+
+    .bookCover {
+      flex-shrink: 0;
+      width: 1.88rem;
+      height: 2.5rem;
+      border-radius: 0.08rem;
+      overflow: hidden;
+    }
+
+
+    .rightBox {
+      flex: 1;
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      height: 100%;
+
+      .bookName {
+        display: block;
+        font-size: 0.26rem;
+        font-weight: bold;
+        color: #222222;
+        line-height: 0.32rem;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        margin-bottom: 0.2rem;
+      }
+
+      .bookAuthor {
+        font-size: .14rem;
+        font-weight: 400;
+        line-height: 0.18rem;
+        color: #555555;
+        margin-bottom: 0.1rem;
+      }
+      .bookUtime {
+        font-size: .14rem;
+        font-weight: 400;
+        line-height: 0.18rem;
+        color: #555555;
+        margin-bottom: 0.2rem;
+      }
+
+      .tagsBox {
+        display: flex;
+        flex-direction: row;
+        column-gap: 0.1rem;
+        margin-bottom: 0.2rem;
+
+        .tagItem {
+          padding: 0.06rem 0.12rem;
+          background: rgba(0, 0, 0, 0.08);
+          border-radius: 0.04rem;
+          font-size: 0.12rem;
+          font-weight: 400;
+          color: #555555;
+          line-height: 0.16rem;
+        }
+      }
+
+      .intro {
+        display: block;
+        font-size: 0.14rem;
+        font-weight: 400;
+        color: #555555;
+        line-height: 0.20rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        word-wrap: break-word;
+        margin-bottom: 0.2rem;
+      }
+
+      .numBox {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        font-size: 0.2rem;
+        font-weight: bold;
+        color: #222222;
+
+        .numItem {
+          flex-shrink: 0;
+          min-width: 0.8rem;
+          text-align: center;
+          position: relative;
+          padding: 0 0.3rem;
+
+          &:after {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 0.05rem;
+            height: 0.18rem;
+            width: 1px;
+            background-color: #E6E6E6;
+          }
+
+          &:nth-child(1) {
+            padding-left: 0;
+          }
+
+          &:nth-child(3) {
+            &:after {
+              display: none;
+            }
+          }
+
+          span {
+            font-size: 0.14rem;
+            font-weight: 400;
+            color: #666666;
+          }
+        }
+
+      }
+
+    }
+
+  }
+}

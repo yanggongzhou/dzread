@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import Link from "next/link";
 import Image from "next/image";
-import { IBookSearchVo } from "@/typings/browse.interface";
+import { EBookStatus, IBookSearchVo } from "@/typings/browse.interface";
 import styles from '@/components/pcTag/tagBookList/TagBookList.module.scss';
 
 interface IProps {
@@ -27,22 +27,22 @@ export const printKeywordBookName = (content: string, keyword: string) => {
   return contentArr.join(`*${_keyword}*`) || content
 }
 
-const TagBookList: FC<IProps> = ({bookList, keyword}) => {
+const TagBookList: FC<IProps> = ({bookList = [], keyword}) => {
 
-  return <div className={styles.moreBookWrap}>
+  return <div className={styles.tagBookBox}>
     { bookList.map((book, bookInd) => {
-      const { bookName, introduction = '', author } = book;
-      const bookNameDom = printKeyword(bookName, keyword)
-      const introDom = printKeyword(introduction, keyword)
+      const bookNameDom = printKeyword(book.bookName, keyword)
+      const introDom = printKeyword(book.introduction || '', keyword)
       const linkUrl = `/book/${book.bookId}`;
-      const authorDom = printKeyword(`By: ${author} ${book.writeStatus ? ` · ${book.writeStatus}` : ''}`, keyword)
+      const _author = [book.author, book.status === EBookStatus.完结 ?  '完结' : '连载', book.totalWordSize].filter(val => val).join(' · ');
+      const authorDom = printKeyword(_author, keyword)
 
-      return <div key={book.bookId + bookInd} className={styles.imageItemMoreWrap}>
+      return <div key={book.bookId + bookInd} className={styles.tagItem}>
         <Link href={linkUrl} className={styles.bookImageBox}>
           <Image
             className={styles.bookImage}
-            width={150}
-            height={200}
+            width={90}
+            height={120}
             src={book.coverWap}
             placeholder={"blur"}
             blurDataURL={book.coverWap || '/images/defaultBook.png'}
@@ -51,26 +51,20 @@ const TagBookList: FC<IProps> = ({bookList, keyword}) => {
         </Link>
 
         <div className={styles.bookInfo}>
-          <div className={styles.bookNameBox}>
-            <Link
-              className={styles.bookName}
-              dangerouslySetInnerHTML={{ __html: bookNameDom }}
-              href={linkUrl}/>
-          </div>
+          <Link
+            className={styles.bookName}
+            dangerouslySetInnerHTML={{ __html: bookNameDom }}
+            href={linkUrl}/>
+          <Link
+            href={linkUrl}
+            className={styles.intro}
+            dangerouslySetInnerHTML={{__html: introDom}} />
           <Link
             href={linkUrl}
             className={styles.bookAuthor}
             dangerouslySetInnerHTML={{ __html: authorDom }}
           />
 
-          {/*{typeTwoNames[0] ? <Link href={browseLink} className={styles.bookTypeTwoName}>*/}
-          {/*  {typeTwoNames[0]}*/}
-          {/*</Link> : null}*/}
-
-          <Link
-            href={linkUrl}
-            className={styles.intro}
-            dangerouslySetInnerHTML={{__html: introDom}} />
         </div>
       </div>
     })}

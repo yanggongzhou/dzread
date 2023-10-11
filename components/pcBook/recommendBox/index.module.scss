@@ -1,0 +1,50 @@
+.reBox {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.2rem;
+
+  .browseItem {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    column-gap: 0.2rem;
+
+    .imgBox {
+      border-radius: 0.04rem;
+      height: 1.2rem;
+      width: 0.9rem;
+      flex-shrink: 0;
+      overflow: hidden;
+
+      .imgItem {
+        height: 1.2rem;
+        width: 0.9rem;
+        transition: all 0.5s;
+      }
+    }
+
+    &:hover {
+      .imgBox {
+        .imgItem {
+          transform: scale(1.1);
+        }
+      }
+    }
+
+    .bookName {
+      display: block;
+      width: 1.6rem;
+      font-size: .16rem;
+      font-weight: bold;
+      line-height: 0.24rem;
+      color: #222222;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      word-wrap: break-word;
+    }
+  }
+}

@@ -1,0 +1,32 @@
+.catalogBox {
+  padding-top: 0.15rem;
+  border-bottom: 0.01rem solid #E8E8E8;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 0.4rem;
+
+
+  .catalogItem {
+    padding: 0.15rem 0;
+    border-bottom: 0.01rem dashed #E8E8E8;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &:last-child {
+      border-bottom: 0.01rem solid transparent;
+    }
+
+    .itemTxt {
+      font-size: 0.16rem;
+      font-weight: 400;
+      line-height: 0.2rem;
+      color: #222222;
+    }
+
+    .itemIcon {
+      width: 0.2rem;
+      height: 0.2rem;
+    }
+  }
+}

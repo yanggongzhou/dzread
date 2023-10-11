@@ -1,0 +1,42 @@
+.tabsBox {
+  padding-top: 0.8rem;
+  flex: 1;
+
+  .navMenu {
+    display: flex;
+    border-bottom: 0.01rem solid #E8E8E8;
+
+    .navItem {
+      padding: 0 0.25rem 0.14rem;
+      display: flex;
+      align-items: center;
+      color: #222222;
+      font-size: 0.23rem;
+      font-weight: bold;
+      line-height: 0.29rem;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .active {
+
+      &:after {
+        content: "";
+        -webkit-transform: translateX(-50%);
+        transform: translateX(-50%);
+        background-color: #FF4614;
+        height: 0.04rem;
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        width: 50%;
+        z-index: 9;
+      }
+    }
+  }
+
+  .tabContent {
+
+  }
+
+}
