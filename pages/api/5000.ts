@@ -30,7 +30,7 @@ export default async function handler(
     }
   }) as ISeoBannerManageVo[];
 
-  const bookInfoList: IBookInfo[] = homeData[1].bookList.map(item => {
+  const bookInfoList: IBookInfo[] = homeData[1]?.bookList?.map(item => {
     return {
       bookId: item.bookId,
       bookName: item.bookName,
@@ -77,6 +77,105 @@ export default async function handler(
     seoBannerManageVos,
     seoChannelListVos: [] as ISeoChannelListVo[],
     seoColumnVos: [
+      {
+        code: EChannelCode.首页, // 1-首页  4-男生  5-女生  6-出版
+        seoColumnManageVos: [
+          {
+            id: 1,
+            channelId: 1,
+            name: '男生精选',
+            sex: ERankVoSex.男频,
+            type: EColumnType.书籍类型,
+            sort: 1,
+            bookInfos: bookInfoList, // type=1时下发-书籍类型
+            bookPackageId: 1,
+          },
+          {
+            rankSex: ERankSex.Male,
+            bookPackageId: 2,
+            id: 2,
+            channelId: 2,
+            name: '排行榜',
+            sex: ERankVoSex.男频,
+            type: EColumnType.排行榜,
+            sort: 1,
+            rankVos: [
+              {
+                rankId: 12,
+                rankName: '新书榜',
+                bookInfos: rankBookInfos,
+              },
+              {
+                rankId: 13,
+                rankName: '畅销榜',
+                bookInfos: rankBookInfos,
+              },
+              {
+                rankId: 14,
+                rankName: '完本榜',
+                bookInfos: rankBookInfos,
+              },
+              {
+                rankId: 15,
+                rankName: '好评榜',
+                bookInfos: rankBookInfos,
+              },
+            ], // type=2时下发
+          },
+          {
+            id: 4,
+            channelId: 1,
+            name: '女生精选',
+            sex: ERankVoSex.女频,
+            type: EColumnType.书籍类型,
+            sort: 1,
+            bookInfos: bookInfoList, // type=1时下发-书籍类型
+            bookPackageId: 1,
+          },
+          {
+            rankSex: ERankSex.Male,
+            bookPackageId: 2,
+            id: 5,
+            channelId: 2,
+            name: '排行榜',
+            sex: ERankVoSex.女频,
+            type: EColumnType.排行榜,
+            sort: 1,
+            rankVos: [
+              {
+                rankId: 12,
+                rankName: '新书榜',
+                bookInfos: rankBookInfos,
+              },
+              {
+                rankId: 13,
+                rankName: '畅销榜',
+                bookInfos: rankBookInfos,
+              },
+              {
+                rankId: 14,
+                rankName: '完本榜',
+                bookInfos: rankBookInfos,
+              },
+              {
+                rankId: 15,
+                rankName: '好评榜',
+                bookInfos: rankBookInfos,
+              },
+            ], // type=2时下发
+          },
+          {
+            id: 7,
+            channelId: 1,
+            name: '出版精选',
+            sex: ERankVoSex.出版,
+            type: EColumnType.书籍类型,
+            sort: 1,
+            bookInfos: bookInfoList, // type=1时下发-书籍类型
+            bookPackageId: 1,
+          }
+        ],
+      },
       {
         code: EChannelCode.男生, // 1-首页  4-男生  5-女生  6-出版
         seoColumnManageVos: [
@@ -137,6 +236,84 @@ export default async function handler(
               { classifyCode: 34, classifyName: '历史', books: browseBookInfos },
               { classifyCode: 35, classifyName: '悬疑', books: browseBookInfos },
             ]
+          }
+        ],
+      },
+      {
+        code: EChannelCode.女生, // 1-首页  4-男生  5-女生  6-出版
+        seoColumnManageVos: [
+          {
+            id: 1,
+            channelId: 1,
+            name: '男生精选',
+            sex: ERankVoSex.女频,
+            type: EColumnType.书籍类型,
+            sort: 1,
+            bookInfos: bookInfoList, // type=1时下发-书籍类型
+            bookPackageId: 1,
+          },
+          {
+            rankSex: ERankSex.Male,
+            bookPackageId: 2,
+            id: 2,
+            channelId: 2,
+            name: '排行榜',
+            sex: ERankVoSex.女频,
+            type: EColumnType.排行榜,
+            sort: 1,
+            rankVos: [
+              {
+                rankId: 12,
+                rankName: '新书榜',
+                bookInfos: rankBookInfos,
+              },
+              {
+                rankId: 13,
+                rankName: '畅销榜',
+                bookInfos: rankBookInfos,
+              },
+              {
+                rankId: 14,
+                rankName: '完本榜',
+                bookInfos: rankBookInfos,
+              },
+              {
+                rankId: 15,
+                rankName: '好评榜',
+                bookInfos: rankBookInfos,
+              },
+            ], // type=2时下发
+          },
+          {
+            bookPackageId: 3,
+            id: 3,
+            channelId: 3,
+            name: '分类推荐',
+            sex: ERankVoSex.女频,
+            type: EColumnType.分类推荐,
+            sort: 1,
+            bookTypeVos: [
+              { classifyCode: 31, classifyName: '都市', books: browseBookInfos },
+              { classifyCode: 32, classifyName: '玄幻', books: browseBookInfos },
+              { classifyCode: 33, classifyName: '仙侠', books: browseBookInfos },
+              { classifyCode: 34, classifyName: '历史', books: browseBookInfos },
+              { classifyCode: 35, classifyName: '悬疑', books: browseBookInfos },
+            ]
+          }
+        ],
+      },
+      {
+        code: EChannelCode.出版, // 1-首页  4-男生  5-女生  6-出版
+        seoColumnManageVos: [
+          {
+            id: 1,
+            channelId: 1,
+            name: '男生精选',
+            sex: ERankVoSex.男频,
+            type: EColumnType.书籍类型,
+            sort: 1,
+            bookInfos: bookInfoList, // type=1时下发-书籍类型
+            bookPackageId: 1,
           }
         ],
       }

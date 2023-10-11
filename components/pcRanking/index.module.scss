@@ -1,9 +1,10 @@
 .rankWrap {
-  padding: 0.66rem 0 0.6rem;
+  padding: 0.76rem 0 0.6rem;
   width: 12rem;
   margin: 0 auto;
 
   .container {
+    padding-top: 0.4rem;
     display: flex;
     column-gap: 0.6rem;
     flex-direction: row;
@@ -20,6 +21,9 @@
       font-weight: bold;
       color: #222222;
       line-height: 0.24rem;
+      padding-bottom: 0.11rem;
+      border-bottom: 0.01rem solid #F1F1F1;
+      margin-bottom: 0.4rem;
     }
   }
 }

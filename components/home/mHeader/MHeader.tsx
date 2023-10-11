@@ -1,21 +1,25 @@
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import ClientConfig from "@/client.config";
 import Image from "next/image";
 import styles from "@/components/home/mHeader/MHeader.module.scss";
 import classNames from "classnames";
 import Link from "next/link";
+import { EChannelCode, ISeoColumnVo } from "@/typings/home.interface";
+import { useAppDispatch, useAppSelector } from "@/store";
+import { setChannelCode } from "@/store/modules/app.module";
 
 interface IProps {
+  seoColumnVos: ISeoColumnVo[];
 }
 
-const MHeader: FC<IProps> = () => {
-  const menuData = [
-    { id: 1, title: "男生" },
-    { id: 2, title: "女生" },
-    { id: 3, title: "出版" }
-  ]
+const MHeader: FC<IProps> = ({ seoColumnVos }) => {
+  const dispatch = useAppDispatch();
 
-  const [menuId, setMenuId] = useState(1);
+  const code = useAppSelector(state => state.app.code);
+
+  const changeTab = (code: EChannelCode) => {
+    dispatch(setChannelCode(code));
+  }
 
   return <div className={styles.headerBox}>
     <header className={styles.headerContent}>
@@ -32,12 +36,16 @@ const MHeader: FC<IProps> = () => {
 
     <div className={styles.navContainer}>
       <div className={styles.navMenu}>
-        {menuData.map((val) => {
+        {seoColumnVos.map((val) => {
+          // @ts-ignore
+          if (!([EChannelCode.男生, EChannelCode.女生, EChannelCode.出版].includes(val.code))) return null;
           return <div
-            key={val.id}
-            className={classNames(styles.navItem, menuId === val.id && styles.active)}
-            onClick={() => setMenuId(val.id)}>
-            {val.title}
+            key={val.code}
+            className={classNames(styles.navItem, code === val.code && styles.active)}
+            onClick={() => changeTab(val.code)}>
+            {val.code === EChannelCode.男生 ? "男生" : null}
+            {val.code === EChannelCode.女生 ? "女生" : null}
+            {val.code === EChannelCode.出版 ? "出版" : null}
           </div>
         })}
       </div>

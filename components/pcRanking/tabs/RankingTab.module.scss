@@ -1,11 +1,14 @@
+.rankingTabBox {
+  width: 1.82rem;
+  flex-shrink: 0;
+}
 .slideTabBox {
-  border-right: 0.5px solid hsla(0,0%,85%,.5);
-  max-height: calc(100vh - 384px);
+  border-right: 0.01rem solid #F1F1F1;
   overflow-y: scroll;
   text-align: center;
-  width: 1.82rem;
   position: sticky;
   top: 0.66rem;
+
 
   &::-webkit-scrollbar { display: none; }
 

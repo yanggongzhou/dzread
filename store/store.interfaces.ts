@@ -1,5 +1,6 @@
 import { IClipboard } from "@/typings/hive.interfaces";
 import { EOperateType, EThemeType } from "@/typings/reader.interface";
+import { EChannelCode } from "@/typings/home.interface";
 
 export interface IHiveStore {
   clipboard: IClipboard;
@@ -13,6 +14,7 @@ export enum EDevice {
 export interface IAppStore {
   device: EDevice;
   isShowBrowse: boolean;
+  code: EChannelCode;
 }
 
 export interface IReadStore {

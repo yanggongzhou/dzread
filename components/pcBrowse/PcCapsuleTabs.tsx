@@ -6,7 +6,6 @@ import { CapsuleTabs } from "antd-mobile";
 import { ITypeOneVo } from "@/typings/browse.interface";
 import classNames from "classnames";
 
-
 interface IProps {
   statusMark: {title: string; markId: string}[]; // 书籍状态栏(四级)
   wordType: {name: string; type: string}[];// 分类书籍字数筛选

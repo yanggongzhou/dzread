@@ -10,22 +10,24 @@ interface IProps {
 }
 const RankingTab: FC<IProps> = ({ rankId, rankData }) => {
 
-  return <div className={styles.slideTabBox}>
-    {rankData.map(item => {
-      return <div key={item.rankType} className={styles.tabOneItem}>
-        <div className={styles.oneItemTitle}>{ item.rankTypeName }</div>
-        <div className={styles.oneItemBox}>
-          {item.subList.map(child => {
-            return <Link
-              key={child.id}
-              href={`/ranking/${child.id}`}
-              className={classNames(styles.tabChild, rankId===child.id && styles.tabChildActive)}>
-              { child.name }
-            </Link>
-          })}
+  return <div className={styles.rankingTabBox}>
+    <div className={styles.slideTabBox}>
+      {rankData.map(item => {
+        return <div key={item.rankType} className={styles.tabOneItem}>
+          <div className={styles.oneItemTitle}>{ item.rankTypeName }</div>
+          <div className={styles.oneItemBox}>
+            {item.subList.map(child => {
+              return <Link
+                key={child.id}
+                href={`/ranking/${child.id}`}
+                className={classNames(styles.tabChild, rankId===child.id && styles.tabChildActive)}>
+                { child.name }
+              </Link>
+            })}
+          </div>
         </div>
-      </div>
-    })}
+      })}
+    </div>
   </div>
 }
 

@@ -1,15 +1,18 @@
 .homeWrap {
 
   .bookColumn {
+    padding-top: 0.3rem;
     width: 12rem;
     margin: 0 auto;
-
+    &:first-child {
+      padding-top: 0;
+    }
     .listBox {
       padding: 0.36rem 0.3rem 0;
       position: relative;
       height: 3.92rem;
 
-      .listBg {
+      .listBg, .listBg2 {
         position: absolute;
         top: 0;
         left: 0;
@@ -17,6 +20,10 @@
         width: 12rem;
         height: 1.88rem;
         border-radius: 0.16rem 0.16rem 0 0;
+      }
+
+      .listBg2 {
+        background: linear-gradient(180deg, #F7F8F8 0%, #FFFFFF 100%);
       }
     }
   }

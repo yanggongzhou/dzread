@@ -23,7 +23,7 @@ const PcRanking: FC<IProps> = (
 ) => {
 
   const data = [
-    { title: '首页', link: "/home" },
+    { title: '首页', link: "/" },
     { title: '排行榜', link: "/ranking" },
     { title: '都市小说' },
   ]
