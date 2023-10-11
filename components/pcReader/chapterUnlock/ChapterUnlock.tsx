@@ -14,7 +14,6 @@ const PcChapterUnlock: FC<IProps> = ({ bookId, chapterId }: IProps) => {
 
   const copyLinkUrl = `${process.env.WebDomain}/download/?bookId=${bookId}&chapterId=${chapterId}`;
   return <div className={styles.unlockBox}>
-    <p className={styles.unlockIntro}>上点众阅读APP，体验流畅阅读</p>
     <button
       className={styles.downloadBtn}
       onClick={() => {
@@ -33,7 +32,7 @@ const PcChapterUnlock: FC<IProps> = ({ bookId, chapterId }: IProps) => {
           showCloseButton: true,
         })
       }}
-    >下载点众阅读看后续精彩内容</button>
+    >下载点众阅读APP，看后续精彩内容</button>
   </div>
 }
 

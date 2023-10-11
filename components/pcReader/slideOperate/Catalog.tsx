@@ -1,15 +1,15 @@
 import React, { FC } from 'react';
 import Link from "next/link";
-import { IChapterListItem } from "@/typings/book.interface";
 import styles from '@/components/pcReader/slideOperate/Catalog.module.scss';
 import Image from "next/image";
 import { setOperateType } from "@/store/modules/read.module";
 import { EOperateType } from "@/typings/reader.interface";
 import { useAppDispatch } from "@/store";
+import { EIsCharge, IChapterInfo } from "@/typings/book.interface";
 
 interface IProps {
   bookId: string;
-  chapterList: IChapterListItem[];
+  chapterList: IChapterInfo[];
 }
 
 const OperateCatalog: FC<IProps> = ({ bookId, chapterList = []}) => {
@@ -21,27 +21,30 @@ const OperateCatalog: FC<IProps> = ({ bookId, chapterList = []}) => {
     <Image
       onClick={() => dispatch(setOperateType(EOperateType.normal))}
       className={styles.cancelIcon}
-      width={40}
-      height={40}
+      width={32}
+      height={32}
       src={'/images/download/cancel.png'}
       alt={'x'}
     />
-    <ul className={styles.linkBox}>
+    <div className={styles.linkBox}>
       { chapterList.map(val => {
-        return <li key={val.id}>
-          <Link href={`/chapter/${bookId}/${val.id}`} replace onClick={() => dispatch(setOperateType(EOperateType.normal))}>
-            { val.chapterName }
-            {val.isCharge ? <Image
-              className={styles.itemIcon}
-              width={24}
-              height={24}
-              src={'/images/book/lock.png'}
-              alt={'>'}
-            /> : null}
-          </Link>
-        </li>
+        return <Link
+          key={val.chapterId}
+          className={styles.linkItem}
+          href={`/chapter/${bookId}/${val.chapterId}`}
+          replace
+          onClick={() => dispatch(setOperateType(EOperateType.normal))}>
+          { val.chapterName }
+          {val.isCharge === EIsCharge.收费章节 ? <Image
+            className={styles.itemIcon}
+            width={24}
+            height={24}
+            src={'/images/book/lock.png'}
+            alt={'>'}
+          /> : null}
+        </Link>
       })}
-    </ul>
+    </div>
   </div>
 }
 export default OperateCatalog;

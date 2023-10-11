@@ -1,6 +1,6 @@
 .unlockBox {
   position: relative;
-  padding: 0.4rem 0;
+  padding: 0.42rem 0;
   left: 0;
   width: 100%;
   z-index: 9;
@@ -8,7 +8,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  border-top: 0.5px dashed #b2b2b2;
+  border-top: 0.01rem dashed rgba(0,0,0,0.2);
 
   .unlockIntro {
     margin-top: 0.06rem;
@@ -19,14 +19,13 @@
   }
 
   .downloadBtn {
-    margin-top: 0.24rem;
-    background: linear-gradient(90deg, #FF6600 0%, #FA3123 100%);
-    border-radius: 0.42rem;
-    height: 0.66rem;
-    font-size: 0.24rem;
-    font-weight: 500;
+    font-size: 0.16rem;
+    font-weight: bold;
     color: #FFFFFF;
-    width: 4rem;
+    width: 3.76rem;
+    height: 0.48rem;
+    background-color: #FF6600;
+    border-radius: 0.24rem;
   }
 }
 

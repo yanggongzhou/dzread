@@ -9,23 +9,22 @@ import { useRouter } from "next/router";
 import ContentList from "@/components/reader/contentList/ContentList";
 import { netDetailChapter } from "@/server/home";
 import { EThemeType } from "@/typings/reader.interface";
-import styles from '@/components/reader/index.module.scss';
 import { setBookInfo } from "@/utils/storage/localstorages";
 import { INetCatalogRes } from "@/typings/catalog.interface";
-import { INetChapterDetailRes, IReadInfo } from "@/typings/chapter.interface";
+import { EChapterStatus, INetChapterDetailRes } from "@/typings/chapter.interface";
 import { EIsCharge } from "@/typings/book.interface";
+import styles from '@/components/reader/index.module.scss';
 
 interface IProps {
   fontSize: number;
   theme: EThemeType;
-  chapterData: INetChapterDetailRes;
+  chapterInfo: INetChapterDetailRes;
   catalogData: INetCatalogRes;
-  chapterInfo: IReadInfo
 }
 
 const Reader: FC<IProps> = (
   {
-    chapterData,
+    chapterInfo,
     catalogData,
     fontSize,
     theme,
@@ -33,21 +32,21 @@ const Reader: FC<IProps> = (
 ) => {
   const controlVisible = useAppSelector(state => state.read.controlVisible);
   const [isLoading, setIsLoading] = useState(false);
-  const [contentArr, setContentArr] = useState<INetChapterDetailRes[]>([chapterData]);
+  const [contentArr, setContentArr] = useState<INetChapterDetailRes[]>([chapterInfo]);
   const mainRef = useRef<HTMLDivElement | null>(null);
   const contentRef = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
 
   useEffect(() => {
-    if (chapterData?.chapterInfo?.chapterId) {
-      setBookInfo({ bid: chapterData.bookId, cid: chapterData.chapterInfo.chapterId });
-      setContentArr([chapterData]);
+    if (chapterInfo?.chapterId) {
+      setBookInfo({ bid: chapterInfo.bookId, cid: chapterInfo.chapterId });
+      setContentArr([chapterInfo]);
       if (contentRef.current && Reflect.has(contentRef.current, "scrollIntoView")) {
         // @ts-ignore
         contentRef.current.scrollIntoView()
       }
     }
-  }, [chapterData]);
+  }, [chapterInfo]);
 
   useEffect(() => {
     if(mainRef.current) {
@@ -85,7 +84,7 @@ const Reader: FC<IProps> = (
       await getChapterDetail("next")
     }
     // 付费章节每章单独占一页
-    if (chapterData?.chapterInfo?.isCharge === EIsCharge.收费章节) return;
+    if (chapterInfo.status === EChapterStatus.不免费) return;
     const domList = document.querySelectorAll('div[cid]');
     const domArr = Array.from(domList);
     const dom = domArr.find(val => {
@@ -95,8 +94,8 @@ const Reader: FC<IProps> = (
     const chapterId = dom?.attributes?.cid?.value;
     if (!chapterId) return;
     if (router.query.chapterId !== chapterId) {
-      await router.replace(`/chapter/${chapterData.bookId}/${chapterId}`,  undefined, { shallow: true });
-      setBookInfo({ bid: chapterData.bookId, cid: chapterId });
+      await router.replace(`/chapter/${chapterInfo.bookId}/${chapterId}`,  undefined, { shallow: true });
+      setBookInfo({ bid: chapterInfo.bookId, cid: chapterId });
     }
   };
 
@@ -111,19 +110,19 @@ const Reader: FC<IProps> = (
       return
     }
 
-    const chapterIsCharge = 'sssssssss'; // catalogData.chapterList.find(val => val.chapterId === c)
+    const chapterIsCharge = catalogData.chapterList.find(val => val.chapterId === chapterId).isCharge
 
     // 付费章节每章单独占一页
     if (chapterIsCharge === EIsCharge.收费章节) {
       loadingRef.current = true;
-      await router.replace(`/chapter/${chapterData.bookId}/${chapterId}`);
+      await router.replace(`/chapter/${chapterInfo.bookId}/${chapterId}`);
       loadingRef.current = false;
       return;
     }
 
     loadingRef.current = true;
     setIsLoading(true);
-    const response = await netDetailChapter(chapterData.bookId, chapterId);
+    const response = await netDetailChapter(chapterInfo.bookId, chapterId);
     if (response !== 'BadRequest_404' && response !== 'BadRequest_500' && response) {
       setContentArr(prevState => (type === "prev" ? [response as INetChapterDetailRes, ...prevState] : [...prevState, response]));
     }
@@ -138,19 +137,13 @@ const Reader: FC<IProps> = (
 
     <ModalHeader
       visible={controlVisible}
-      update={chapterData.sysTime}
-      bookId={chapterData.bookId}
-      bookName={catalogData.bookName}/>
+      chapterInfo={chapterInfo}/>
 
     <div
       className={styles.readerBox}
       ref={contentRef}>
 
-      <TopGuide
-        bookId={chapterData.bookId}
-        bookName={catalogData.bookName}
-        cover={catalogData.coverWap}
-      />
+      <TopGuide chapterInfo={chapterInfo}/>
 
       <ContentList
         fontSize={fontSize}
@@ -163,11 +156,11 @@ const Reader: FC<IProps> = (
         <span>加载中</span>
       </div> : null}
 
-      <ModalControl chapterData={chapterData}/>
+      <ModalControl chapterInfo={chapterInfo}/>
 
       <ModalCatalog
-        bookId={chapterData.bookId}
-        chapterId={chapterData?.chapterInfo?.chapterId}
+        bookId={chapterInfo.bookId}
+        chapterId={chapterInfo.chapterId}
         catalogData={catalogData}
       />
     </div>

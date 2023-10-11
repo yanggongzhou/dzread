@@ -3,51 +3,51 @@
 
   .readerBox {
     min-height: 100vh;
-    padding: 0.6rem 0.78rem 1rem;
-    width: 1000px;
+    padding: 0.4rem 0.7rem 1rem;
     margin: 0 auto;
     position: relative;
     color: #2F3031;
     background-color: hsla(0,0%,100%,.5);
+    width: 10rem;
 
     .title {
       font-size: 0.28rem;
       font-weight: bold;
-      color: #333333;
+      color: #222222;
       text-align: center;
+      margin-bottom: 0.1rem;
     }
 
     .authorBox {
       position: relative;
-      padding: 0.32rem 0;
+      padding: 0.2rem 0;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      border-bottom: 0.5px dashed #b2b2b2;
-      margin-bottom: 0.3rem;
-      color: #b2b2b2;
-
+      justify-content: center;
+      column-gap: 0.4rem;
+      border-bottom: 0.01rem dashed #D0D0D0;
+      margin-bottom: 0.4rem;
+      color: rgba(0,0,0,0.3);
       font-size: 0.12rem;
       white-space: nowrap;
 
       .bookName {
-        color: #333333;
+        color: #000000;
       }
 
       .author {
-        color: #333333;
+        color: #000000;
       }
 
       .updateTime {
-        color: #333333;
+        color: #000000;
       }
     }
 
     .content {
-      margin-top: 0.17rem;
-      margin-bottom: 0.56rem;
+      margin-bottom: 0.6rem;
       font-weight: 400;
-      color: #333333;
+      color: #000000;
       line-height: 0.32rem;
       white-space: pre-wrap;
 

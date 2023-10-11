@@ -9,10 +9,10 @@ import { INetChapterDetailRes } from "@/typings/chapter.interface";
 import styles from '@/components/reader/modalControl/ModalControl.module.scss';
 
 interface IProps {
-  chapterData: INetChapterDetailRes;
+  chapterInfo: INetChapterDetailRes;
 }
 
-const ModalControl: FC<IProps> = ({ chapterData }) => {
+const ModalControl: FC<IProps> = ({ chapterInfo }) => {
 
   const backgroundList = [
     EThemeType.default1,
@@ -80,10 +80,10 @@ const ModalControl: FC<IProps> = ({ chapterData }) => {
     </div>
 
     <div className={styles.chapterBtnBox}>
-      {chapterData.preChapterId ?
+      {chapterInfo.preChapterId ?
         <Link
           className={styles.chapterBtn}
-          href={`/chapter/${chapterData.bookId}/${chapterData.preChapterId}`}
+          href={`/chapter/${chapterInfo.bookId}/${chapterInfo.preChapterId}`}
           replace>
           <Image
             className={styles.backIcon}
@@ -117,10 +117,10 @@ const ModalControl: FC<IProps> = ({ chapterData }) => {
         <span>目录</span>
       </div>
 
-      {chapterData.nextChapterId ?
+      {chapterInfo.nextChapterId ?
         <Link
           className={styles.chapterBtn}
-          href={`/chapter/${chapterData.bookId}/${chapterData.nextChapterId}`} replace>
+          href={`/chapter/${chapterInfo.bookId}/${chapterInfo.nextChapterId}`} replace>
           <span>下一章</span>
           <Image
             className={styles.nextIcon}

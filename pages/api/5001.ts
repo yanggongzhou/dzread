@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { ownFetch } from "@/server/fetch";
-import { ERankVoSex, ESexType, INetRankingRes } from "@/typings/ranking.interface";
+import { ERankVoSex, INetRankingRes } from "@/typings/ranking.interface";
+import { ERankSex } from "@/typings/home.interface";
 
 // 5001 排行榜页面
 export default async function handler(
@@ -21,12 +22,12 @@ export default async function handler(
   const result: INetRankingRes = {
     rankData: [
       {
-        rankType: ESexType.Male,
+        rankType: ERankSex.Male,
         rankTypeName: '男生',
         subList,
       },
       {
-        rankType: ESexType.Female,
+        rankType: ERankSex.Female,
         rankTypeName: '女生',
         subList,
       }

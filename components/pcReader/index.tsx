@@ -1,73 +1,71 @@
 import React, { FC, useEffect } from 'react'
-import { IChapterListItem, INetChapterDetailRes } from "typings/book.interface";
 import PcChapterUnlock from "@/components/pcReader/chapterUnlock/ChapterUnlock";
 import ReaderPagination from "@/components/pcReader/readerPagination/ReaderPagination";
 import Link from "next/link";
 import SlideOperate from "@/components/pcReader/slideOperate/SlideOperate";
 import { useAppDispatch } from "@/store";
-import { EOperateType, EThemeType } from "@/typings/reader.interface";
+import { EOperateType, EThemePcBg, EThemeType } from "@/typings/reader.interface";
 import { setOperateType } from "@/store/modules/read.module";
 import { setBookInfo } from "@/utils/storage/localstorages";
+import { INetCatalogRes } from "@/typings/catalog.interface";
+import { EChapterStatus, INetChapterDetailRes } from "@/typings/chapter.interface";
 import styles from '@/components/pcReader/index.module.scss';
-import { IBookSearchVo } from "@/typings/browse.interface";
 
 interface IProps {
   fontSize: number;
   theme: EThemeType;
-  bookId: string;
-  contentList: string[];
   chapterInfo: INetChapterDetailRes;
-  bookInfo: IBookSearchVo;
-  chapterList: IChapterListItem[];
+  catalogData: INetCatalogRes;
 }
 
 const PcReader: FC<IProps> = (
-  { bookId, contentList, chapterInfo, bookInfo, chapterList, fontSize, theme }
+  { chapterInfo, catalogData, fontSize, theme }
 ) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    setBookInfo({ bid: bookId, cid: chapterInfo.id });
+    setBookInfo({ bid: chapterInfo.bookId, cid: chapterInfo.chapterId });
   }, [chapterInfo]);
 
   return <main
     onClick={() => dispatch(setOperateType(EOperateType.normal))}
-    style={{ backgroundColor: theme }}
+    style={{ backgroundColor: EThemePcBg[theme] }}
     className={styles.pcReaderWrap}>
 
-    <SlideOperate bookId={bookId} chapterId={chapterInfo.id} chapterList={chapterList}/>
+    <SlideOperate
+      theme={theme}
+      bookId={chapterInfo.bookId}
+      chapterId={chapterInfo.chapterId}
+      chapterList={catalogData.chapterList}/>
 
-    <div className={styles.readerBox}>
+    <div className={styles.readerBox} style={{ backgroundColor: theme }}>
       <h1 className={styles.title}>{chapterInfo.chapterName}</h1>
       <div className={styles.authorBox}>
         <div>
-          书名：<Link href={`/book/${bookId}`} className={styles.bookName}>{bookInfo?.bookName}</Link>
+          书名：<Link href={`/book/${chapterInfo.bookId}`} className={styles.bookName}>{chapterInfo.bookName}</Link>
         </div>
         <div>
-          作者名：<span className={styles.author}>{bookInfo?.author}</span>
+          作者名：<span className={styles.author}>{chapterInfo.author}</span>
         </div>
         <div>
-          更新时间：<span className={styles.updateTime}>{'2023-07-17 14:28:56'}</span>
+          更新时间：<span className={styles.updateTime}>{chapterInfo.chapterUtime}</span>
         </div>
       </div>
 
       <div style={{ fontSize }} className={styles.content}>
-        {/*{chapterContent}*/}
-        { contentList.map((val, index) => {
+        { chapterInfo.content.map((val, index) => {
           return val ? <p key={index}>{val}</p> : null;
         }) }
       </div>
 
-      {chapterInfo?.isCharge ?
+      {chapterInfo.status === EChapterStatus.不免费 ?
         <PcChapterUnlock
-          bookId={bookId}
-          chapterId={chapterInfo.id}/> :
+          bookId={chapterInfo.bookId}
+          chapterId={chapterInfo.chapterId}/> :
         <ReaderPagination
-          chapterIndex={chapterInfo.chapterIndex}
-          chapterCount={chapterInfo.bookInfo.chapterCount}
-          bookId={bookId}
-          prevChapterId={chapterInfo.preChapter?.id}
-          nextChapterId={chapterInfo.nextChapter?.id}
+          bookId={chapterInfo.bookId}
+          prevChapterId={chapterInfo.preChapterId}
+          nextChapterId={chapterInfo.nextChapterId}
         />
       }
     </div>

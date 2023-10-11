@@ -2,7 +2,7 @@
  * 首页下行参数
  */
 import { EDevice } from "@/store/store.interfaces";
-import { ERankVoSex, ESexType, IRankBookDataVo } from "@/typings/ranking.interface";
+import { ERankVoSex, IRankBookDataVo } from "@/typings/ranking.interface";
 import { IBookSearchVo } from "@/typings/browse.interface";
 
 export interface INetHomeRes {
@@ -64,7 +64,9 @@ export interface ISeoColumnManage {
   bookPackageId: number;
   rankSex?: ERankSex;
 }
-
+/**
+ * 1：男生 2：女生
+ */
 export enum ERankSex {
   Male = 1,
   Female = 2,

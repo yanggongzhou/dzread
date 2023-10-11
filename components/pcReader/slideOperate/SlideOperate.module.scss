@@ -2,7 +2,7 @@
   left: 50%;
   position: fixed;
   z-index: 999;
-  transform: translate3d(500px, -50%, 0px);
+  transform: translate3d(5rem, -50%, 0);
   top: 50%;
   display: flex;
   align-items: center;
@@ -11,25 +11,40 @@
   row-gap: 0.1rem;
 
   .operate {
-    padding-left: 10px;
+    padding-left: 0.10rem;
     position: relative;
-    border-radius: 0 6px 6px 0;
+    border-radius: 0 0.06rem 0.06rem 0;
 
     .itemBox {
-      background: hsla(0,0%,100%,.5);
-      border-radius: 6px;
-      color: #666;
+      background-color: hsla(0, 0%, 100%, 0.5);
+      border-radius: 0.06rem;
       cursor: pointer;
       display: flex;
       align-items: center;
       flex-direction: column;
       justify-content: center;
-      width: 76px;
-      height: 76px;
+      width: 0.76rem;
+      height: 0.76rem;
+      row-gap: 0.06rem;
+      font-size: 0.14rem;
+      color: rgba(0,0,0,0.7);
+      font-weight: 400;
+
+      .itemIcon {
+        width: 0.24rem;
+        height: 0.24rem;
+      }
+    }
+
+    .itemBoxBack {
+      margin-top: 0.4rem;
     }
   }
 
   .active {
     background-color: #FFFFFF;
+    .itemBox {
+      background-color: #FFFFFF !important;
+    }
   }
 }

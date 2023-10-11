@@ -5,14 +5,15 @@ import { ownOs } from "@/utils/tools";
 import Breadcrumb from "@/components/common/breadcrumb";
 import PcRanking from "@/components/pcRanking";
 import WapRanking from "@/components/ranking";
-import { ESexType, IRankBookDataVo, IRankDataVo } from "@/typings/ranking.interface";
+import { IRankBookDataVo, IRankDataVo } from "@/typings/ranking.interface";
+import { ERankSex } from "@/typings/home.interface";
 
 interface IProps {
   isPc: boolean;
   page: number;
   pages: number; // 总页
   rankStyle: number;
-  rankType: ESexType;
+  rankType: ERankSex;
   rankData: IRankDataVo[]; // 排行榜名称列表
   rankBook: IRankBookDataVo[]; // 某个排行榜对应的书籍信息data
   rankId?: number;
@@ -54,13 +55,13 @@ const RankingPage: NextPage<IProps> = (
 export const getServerSideProps: GetServerSideProps = async ({ req, query }): Promise<GetServerSidePropsResult<IProps>> => {
   const ua = req?.headers['user-agent'] || ''
   const { page = '1', types } = query as { page?: string, types?: string };
-  let rankType = ESexType.Male;
-  let rankStyle = 0;
+  let rankType = ERankSex.Male;
+  let rankStyle = undefined;
   let _rankId = undefined;
   if (types) {
     const typeArr = types.split('-');
-    if (typeArr[0] && Number(typeArr[0]) && [ESexType.Female, ESexType.Male].includes(Number(typeArr[0]))) {
-      rankType = Number(typeArr[0]) as ESexType;
+    if (typeArr[0] && Number(typeArr[0]) && [ERankSex.Female, ERankSex.Male].includes(Number(typeArr[0]))) {
+      rankType = Number(typeArr[0]) as ERankSex;
     }
     if (typeArr[1] && !isNaN(Number(typeArr[1]))) {
       _rankId = Number(typeArr[1])
@@ -84,12 +85,22 @@ export const getServerSideProps: GetServerSideProps = async ({ req, query }): Pr
     return { redirect: { destination: '/500', permanent: false } }
   }
 
-  const { rankData = [], rankBook = [], totalSize = 0 } = response;
+  const { rankData = [] as IRankDataVo[], rankBook = [], totalSize = 0 } = response;
   if (_rankId === undefined) {
     if (rankData.length > 0 && rankData[0].subList && rankData[0].subList.length > 0 && rankData[0].subList[0].id) {
       _rankId = rankData[0].subList[0].id;
+      rankStyle = rankData[0].subList[0].styleList[0].style;
     }
   }
+  if (rankStyle === undefined) {
+    rankData.forEach(val => {
+      const obj = val.subList.find(sub => sub.id === _rankId);
+      if (obj) {
+        rankStyle = obj.styleList[0].style;
+      }
+    })
+  }
+
   return {
     props: {
       rankData,

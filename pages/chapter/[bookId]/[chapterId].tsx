@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import type { NextPage } from 'next'
 import { GetServerSideProps, GetServerSidePropsResult } from "next";
-import { netCatalog, netDetailChapter, netListChapter } from "@/server/home";
+import { netCatalog, netDetailChapter } from "@/server/home";
 import PcReader from "@/components/pcReader";
 import { ownOs } from "@/utils/tools";
 import Reader from "@/components/reader";
@@ -14,12 +14,12 @@ import { INetCatalogRes } from "@/typings/catalog.interface";
 interface IProps {
   setting: { fontSize: number; theme: EThemeType; };
   isPc: boolean;
-  chapterData: INetChapterDetailRes;
+  chapterInfo: INetChapterDetailRes;
   catalogData: INetCatalogRes;
 }
 
 const Chapter: NextPage<IProps> = (
-  { setting, isPc, chapterData, catalogData }
+  { setting, isPc, chapterInfo, catalogData }
 ) => {
   const dispatch = useAppDispatch();
   const [isPrint, setIsPrint] = useState(true);
@@ -37,17 +37,13 @@ const Chapter: NextPage<IProps> = (
       <PcReader
         theme={theme}
         fontSize={fontSize}
-        chapterList={chapterList}
-        contentList={contentList}
-        bookId={bookId}
-        bookInfo={bookInfo}
+        catalogData={catalogData}
         chapterInfo={chapterInfo}/> :
       <Reader
         theme={theme}
         fontSize={fontSize}
-        chapterData={chapterData}
+        chapterInfo={chapterInfo}
         catalogData={catalogData}
-        chapterInfo={chapterData.chapterInfo}
       />
     }
   </>
@@ -108,7 +104,7 @@ export const getServerSideProps: GetServerSideProps = async (
     props: {
       setting,
       catalogData,
-      chapterData: response,
+      chapterInfo: response,
       isPc: ownOs(ua).isPc
     },
   }

@@ -1,23 +1,22 @@
 import React, { FC } from "react";
 import ImageCover from "@/components/common/image/ImageCover";
 import ClientConfig from "@/client.config";
+import { INetChapterDetailRes } from "@/typings/chapter.interface";
 import styles from "@/components/reader/topGuide/TopGuide.module.scss";
 
 interface IProps {
-  bookId: string;
-  cover: string;
-  bookName: string;
+  chapterInfo: INetChapterDetailRes;
 }
 
-const TopGuide: FC<IProps> = ({ bookId, bookName, cover }) => {
+const TopGuide: FC<IProps> = ({ chapterInfo }) => {
   return <div className={styles.topGuide}>
     <ImageCover
-      href={`/book/${bookId}`}
+      href={`/book/${chapterInfo.bookId}`}
       className={styles.topGuideImg}
-      src={cover}
+      src={chapterInfo.coverWap}
       width={128}
       height={170}
-      alt={bookName}
+      alt={chapterInfo.bookName}
     />
     <div className={styles.topGuideInfo}>
       <p>上{ClientConfig.name}APP</p>

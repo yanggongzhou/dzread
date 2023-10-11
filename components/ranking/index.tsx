@@ -7,14 +7,15 @@ import Link from "next/link";
 import classNames from "classnames";
 import RankBookList from "@/components/ranking/rankBookList/RankBookList";
 import RankDownloadBanner from "@/components/ranking/rankBanner/DownloadBanner";
-import { ESexType, IFastRankStyleVo, IRankBookDataVo, ISeoRankVo } from "@/typings/ranking.interface";
+import { IFastRankStyleVo, IRankBookDataVo, ISeoRankVo } from "@/typings/ranking.interface";
 import styles from "@/components/ranking/index.module.scss";
+import { ERankSex } from "@/typings/home.interface";
 
 interface IProps {
   page: number;
   pages: number; // 总页
   rankStyle: number;
-  rankType: ESexType;
+  rankType: ERankSex;
   subList: ISeoRankVo[]; // 排行榜名称列表
   rankBook: IRankBookDataVo[]; // 某个排行榜对应的书籍信息data
   rankId?: number;
@@ -66,7 +67,7 @@ const WapRanking: FC<IProps> = (
   }, [subList, rankId]);
 
   return (<>
-    <NavBar backHref={'/'} title={rankType === ESexType.Male ? "男生小说排行榜" : "女生小说排行榜"}/>
+    <NavBar backHref={'/'} title={rankType === ERankSex.Male ? "男生小说排行榜" : "女生小说排行榜"}/>
     <main className={styles.rankWrap}>
       <nav className={styles.slideBox}>
         {subList.map(item => (

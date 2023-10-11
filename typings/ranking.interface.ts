@@ -1,6 +1,8 @@
 /**
  * 上行参数
  */
+import { ERankSex } from "@/typings/home.interface";
+
 export interface INetRankingReq {
   index: number; // 第几页
   size: number; // 页面大小
@@ -17,16 +19,9 @@ export interface INetRankingRes {
 }
 
 export interface IRankDataVo {
-  rankType: ESexType;
+  rankType: ERankSex;
   rankTypeName: string; // 排行榜类型名称 男生/女生
   subList: ISeoRankVo[]; // 排行榜名称列表
-}
-/**
- * 1：男生 2：女生
- */
-export enum ESexType {
-  Male = 1,
-  Female = 2,
 }
 
 export interface ISeoRankVo {

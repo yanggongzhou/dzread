@@ -1,38 +1,41 @@
 .qrCodeBox {
   position: absolute;
-  width: 280px;
-  height: 280px;
-  left: -280px;
-  top: -100px;
+  width: 2.48rem;
+  height: 3.30rem;
+  left: -2.48rem;
+  top: -1.3rem;
   z-index: -1;
   background-color: #fff;
-  padding: 20px;
-  border-radius: 6px;
-  box-shadow: 0 1px 16px 0 rgba(0, 0, 0, .12);
+  padding: 0.6rem 0.4rem 0.4rem;
+  border-radius: 0.06rem;
+  box-shadow: 0 0.02rem 0.16rem 0  rgba(0,0,0,0.09);
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
 
-  .intro {
-    font-size: 0.18rem;
-    font-weight: 400;
-    color: #b2b2b2;
-    text-align: center;
+  .cancelIcon {
+    position: absolute;
+    top: 0.2rem;
+    right: 0.2rem;
+    z-index: 1;
+    width: 0.32rem;
+    height: 0.32rem;
   }
 
   .qrCode {
-    margin: 0.24rem 0 0.16rem;
-    width: 1.5rem !important;
-    height: 1.5rem !important;
+    width: 1.68rem !important;
+    height: 1.68rem !important;
+    margin-bottom: 0.2rem;
   }
 
-  .qrCodeLink {
-    font-size: 0.2rem;
+  .intro {
+    font-size: 0.16rem;
     font-weight: 400;
-    color: $theme_color;
-    text-decoration: underline;
-    cursor: pointer;
+    color: #222222;
+    text-align: center;
+    line-height: 0.24rem;
   }
+
 }
 

@@ -7,7 +7,7 @@ import { PcEmpty } from "@/components/common/empty";
 import VerticalList from "@/components/pcHome/verticalList/VerticalList";
 import Image from "next/image";
 import styles from "@/components/pcHome/index.module.scss";
-import { ERankVoSex, ESexType } from "@/typings/ranking.interface";
+import { ERankVoSex } from "@/typings/ranking.interface";
 
 interface IProps {
   bannerList: ISeoBannerManageVo[];
