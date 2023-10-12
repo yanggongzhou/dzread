@@ -1,6 +1,6 @@
 import React, { FC, useRef, useState } from "react";
 import { Swiper, SwiperRef } from "antd-mobile";
-import { IBookTypeVo } from "@/typings/home.interface";
+import { EChannelCode, IBookTypeVo } from "@/typings/home.interface";
 import Link from "next/link";
 import BrowseList from "@/components/home/browseList";
 import classNames from "classnames";
@@ -8,10 +8,11 @@ import Image from "next/image";
 import styles from "@/components/home/browseColumn/BrowseColumn.module.scss";
 
 interface IProps {
+  code: EChannelCode;
   bookTypeVos: IBookTypeVo[];
 }
 
-const BrowseColumn: FC<IProps> = ({ bookTypeVos }) => {
+const BrowseColumn: FC<IProps> = ({ bookTypeVos, code }) => {
 
   const swiperRef = useRef<SwiperRef | null>(null);
   const [activeKey, setActiveKey] = useState(0);
@@ -46,7 +47,7 @@ const BrowseColumn: FC<IProps> = ({ bookTypeVos }) => {
       </Swiper.Item>
     ))}</Swiper>
 
-    <Link className={styles.footerLink} href={`/browse/xxxxx`}>
+    <Link className={styles.footerLink} href={`/browse/${code}-${bookTypeVos[activeKey].classifyCode}-0-0-0`}>
       <span>更多{bookTypeVos[activeKey].classifyName}内容</span>
       <Image
         className={styles.linkIcon}

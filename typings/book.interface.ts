@@ -1,4 +1,5 @@
 import { IBookSearchVo } from "@/typings/browse.interface";
+import { AnyObject } from "@/typings/hive.interfaces";
 /**
  * 书籍下行参数
  */
@@ -18,8 +19,8 @@ export interface IChapterInfo {
 }
 
 export enum EIsCharge {
-  免费章节 = 0,
-  收费章节  = 1,
+  免费章节 = '0',
+  收费章节  = '1',
 }
 
 export interface IBookInfoItem {
@@ -34,12 +35,17 @@ export interface IBookInfoItem {
   clickNum?: string; // 点击数
   status: EBookStatus2;
   tagList?: string[]; //标签列表，最多下放6个
-  bookTypeThreeMap?: string[]; // 三级分类
+  bookTypeThreeMap?: AnyObject; // 三级分类
   lastChapterId?: string;
   lastChapterName?: string;
   lastChapterUtime?: string;
   scoreNum?: string; // 评分人数
   scoreNumUnit?: string; // 评分人数单位
+  bookScore: string;
+  totalReadNum: string;
+  totalReadNumUnit: string;
+  wordSize: string;
+  wordSizeUnit: string;
 }
 
 export enum EBookStatus2 {

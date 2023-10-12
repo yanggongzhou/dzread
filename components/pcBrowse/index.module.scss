@@ -1,5 +1,5 @@
 .browseWrap {
-  padding: 0.66rem 0 1rem;
+  padding: 0.76rem 0 1rem;
   width: 12rem;
   margin: 0 auto;
 
@@ -16,8 +16,15 @@
       width: 100%;
 
       .browseTitle {
-        font-size: 0.16rem;
-        font-weight: 400;
+        font-size: 0.14rem;
+        font-weight: bold;
+        color: #222222;
+        height: 0.40rem;
+        line-height: 0.40rem;
+        padding: 0 0.2rem;
+        background-color: #F7F7F8;
+        border-radius: 0.02rem;
+        margin-bottom: 0.23rem;
       }
     }
   }

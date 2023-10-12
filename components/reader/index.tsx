@@ -84,7 +84,7 @@ const Reader: FC<IProps> = (
       await getChapterDetail("next")
     }
     // 付费章节每章单独占一页
-    if (chapterInfo.status === EChapterStatus.不免费) return;
+    if (chapterInfo.status == EChapterStatus.不免费) return;
     const domList = document.querySelectorAll('div[cid]');
     const domArr = Array.from(domList);
     const dom = domArr.find(val => {

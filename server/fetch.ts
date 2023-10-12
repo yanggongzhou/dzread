@@ -49,7 +49,7 @@ export const poFetch = async (url: string, data?: AnyObject, params?: AnyObject)
     // 192.168.11.251:9099/seo/fastapp/5000
     let queryStr = '';
     let input = 'http://localhost:3000' + url;
-    // let input = 'http://192.168.11.251:9099/seo/fastapp' + url.replace('/api', '');
+    // let input = 'http://192.168.9.88:9099/seo/fastapp' + url.replace('/api', '');
     if (params) {
       const _params = params ? {...params} : {};
       const keys = Object.keys(_params);

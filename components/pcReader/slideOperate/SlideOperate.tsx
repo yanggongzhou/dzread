@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import Link from "next/link";
 import PcSetting from "@/components/pcReader/slideOperate/Setting";
 import { useAppDispatch, useAppSelector } from "@/store";
@@ -19,9 +19,19 @@ interface IProps {
 }
 
 const SlideOperate: FC<IProps> = ({ chapterList, bookId, chapterId, theme }) => {
+  const [scrollY, setScrollY] = useState(0);
+
+  const onscroll = () => {
+    setScrollY(window.scrollY);
+  }
+  useEffect(() => {
+    window.addEventListener('scroll', onscroll);
+    return () => {
+      window.removeEventListener('scroll', onscroll);
+    }
+  }, []);
 
   const copyLinkUrl = `${process.env.WebDomain}/download/?bookId=${bookId}&chapterId=${chapterId}`;
-
   const operateType = useAppSelector(state => state.read.operateType);
   const dispatch = useAppDispatch();
 
@@ -44,7 +54,7 @@ const SlideOperate: FC<IProps> = ({ chapterList, bookId, chapterId, theme }) => 
       </Link>
     </div>
     <div className={styles.operate}>
-      <Link className={styles.itemBox} style={{ backgroundColor: theme }} href={'/'} target={'_blank'}>
+      <Link className={styles.itemBox} style={{ backgroundColor: theme }} href={`/book/${bookId}`}>
         <Image
           className={styles.itemIcon}
           width={24}
@@ -103,7 +113,8 @@ const SlideOperate: FC<IProps> = ({ chapterList, bookId, chapterId, theme }) => 
       </div>
       {operateType === EOperateType.qrcode ? <Qrcode url={copyLinkUrl} /> : null}
     </div>
-    <div className={styles.operate} style={{ marginTop: '0.4rem' }}>
+
+    <div className={styles.operate} style={{ marginTop: '0.4rem', visibility: scrollY < 200 ? "hidden" : "inherit" }}>
       <div
         className={styles.itemBox}
         style={{ backgroundColor: theme }}

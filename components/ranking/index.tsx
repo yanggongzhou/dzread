@@ -82,16 +82,16 @@ const WapRanking: FC<IProps> = (
       </nav>
       <div className={styles.mainBox}>
         <div className={styles.rankDateBox}>
-          <div className={styles.rankDate}>
-            {styleList.length > 0 ? styleList.map(val => {
+          {styleList.length > 1 ? <div className={styles.rankDate}>
+            {styleList.map(val => {
               return <Link
                 key={val.style}
                 className={classNames(styles.rankDateItem, rankStyle === val.style && styles.active)}
                 href={`/ranking/${rankType}-${rankId || 'null'}-${val.style}`}>
                 {val.styleName}
               </Link>
-            }) : null}
-          </div>
+            })}
+          </div> : null}
         </div>
         {rankBook.length > 0 ?
           <div className={styles.rankContent} ref={rankRef}>

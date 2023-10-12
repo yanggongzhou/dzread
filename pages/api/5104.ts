@@ -6,7 +6,6 @@ export default async function handler(
   res: NextApiResponse<any>
 ) {
 
-
   const result= {
     "retCode": 0,
     "data": {

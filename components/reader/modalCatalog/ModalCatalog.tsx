@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from "@/store";
 import { setCatalogVisible } from "@/store/modules/read.module";
 import { INetCatalogRes } from "@/typings/catalog.interface";
 import styles from '@/components/reader/modalCatalog/ModalCatalog.module.scss';
+import { EIsCharge } from "@/typings/book.interface";
 
 interface IProps {
   bookId: string;
@@ -60,8 +61,8 @@ const ModalCatalog: FC<IProps> = ({ bookId, catalogData, chapterId }) => {
             onClick={() => dispatch(setCatalogVisible(false))}
             href={`/chapter/${bookId}/${item.chapterId}`}
             className={styles.catalogItem}>
-            <span className={classNames(styles.itemTxt, item.isCharge && styles.lockTxt, item.chapterId === chapterId && styles.active)}>{ item.chapterName }</span>
-            {item.isCharge ? <Image
+            <span className={classNames(styles.itemTxt, item.isCharge == EIsCharge.收费章节 && styles.lockTxt, item.chapterId === chapterId && styles.active)}>{ item.chapterName }</span>
+            {item.isCharge == EIsCharge.收费章节 ? <Image
               className={styles.itemIcon}
               width={36}
               height={36}

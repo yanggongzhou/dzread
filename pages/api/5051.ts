@@ -1,242 +1,462 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { ownFetch } from "@/server/fetch";
-import { EBookStatus2, EIsCharge, IBookInfoItem, INetBookRes } from "@/typings/book.interface";
 
 // 5001 排行榜页面
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<INetBookRes>
+  res: NextApiResponse<any>
 ) {
 
-  const bookInfo = {
-    "author": "小妖本仙",
-    "bookId": "11000162501",
-    "bookName": "我曾愛你，奮不顧身",
-    "introduction": "結婚兩年，素手調羹，最終也比不過他心中的那個白月光。\r\n她受夠了，也煩了單向婚姻，可是卻還是被他圈在他的世界裏。\r\n“如果你不愛我，就放開我好嗎！？”\r\n“放開你？這輩子都不可能！”",
-    "cover": "https://nbookimg.klynf.com/cppartner/1x1/11x0/110x0/11000162501/11000162501.jpg?t=20210728144159",
-    "bannerPic": "",
-    "viewCountDisplay": "10.6萬",
-    "lastChapterUtime": "2018-09-30 20:29:01",
-    "ratings": "9.0",
-    "chapterCount": "46",
-    "firstChapterId": "33338367",
-    "writeStatus": "完本",
-    "viewCount": "106068"
-  }
-  const alsoLook = [
-    {
-      "author": "不言不語",
-      "bookId": "11010130363",
-      "bookName": "獄帝歸來當奶爸",
-      "introduction": "葉七絕被人下套，入獄五年歸來，獲得高人指點！\n本想給未婚妻全世界的他，沒想到卻遭受未婚妻背叛，嫁給了施暴者。\n然而，卻不知美女總裁卻為他偷偷生下了呆萌女兒，並且等了他五年，受盡了苦難。\n從此，葉七絕開啟了寵妻帶娃的悠閑人生，恣意都市！",
-      "cover": "https://nbookimg.klynf.com/cppartner/1x1/11x0/110x1/11010130363/11010130363.jpg?t=20230412094532",
-      "bannerPic": "",
-      "viewCountDisplay": "7.5萬",
-      "lastChapterUtime": "2023-10-11 11:26:17",
-      "ratings": "8.8",
-      "chapterCount": "2258",
-      "writeStatus": "連載",
-      "viewCount": "74584"
-    },
-    {
-      "author": "南風語",
-      "bookId": "11010123970",
-      "bookName": "冷情傅少替身妻",
-      "introduction": "結婚三年，溫冬被丈夫寵上了天，也如願以償懷了孕。\r\n但當她把孕檢單拿到男人麵前，換來的卻是離婚的結局：“我傅景衍，絕不允許其他女人懷上我的孩子！”。\r\n她腦袋嗡鳴，“為什麼？”\r\n男人說的決絕，“因為......我從未愛過你！”\r\n原來，這世界上隻有她一人是傻瓜！\r\n她以為這個男人是那麼深情，但其實，他愛的，隻不過是她和另一個女人相似的臉！\r\n她再不留戀，直接在離婚協議書上簽字，從此山高水遠再不相逢！\r\n可那個口口聲聲讓她滾，口口聲聲說我不愛你的男人卻瘋了。\r\n“溫冬......”\r\n他看著墓地裏的愛妻之墓，終於醒悟，原來，她早已在不知不覺中成了他的心肝，不可分離。",
-      "cover": "https://nbookimg.klynf.com/cppartner/1x1/11x0/110x1/11010123970/11010123970.jpg?t=20221027091645",
-      "bannerPic": "",
-      "viewCountDisplay": "4.6萬",
-      "lastChapterUtime": "2023-04-13 12:44:54",
-      "ratings": "8.1",
-      "chapterCount": "1553",
-      "writeStatus": "完本",
-      "viewCount": "45573"
-    },
-    {
-      "author": "寶允",
-      "bookId": "11010122254",
-      "bookName": "失憶後，偏執總裁寵我成癮",
-      "introduction": "生日當天，深愛的老公和別的女人共進燭光晚餐，卻給她發來了一紙離婚協議。\r\n原來，三年婚姻不過是一場報複。\r\n意外發生車禍，夏初薇失去記憶，再也不是那個深愛霍雲霆，死活都不離婚軟包子了！\r\n霍先生：“夏初薇，別以為裝失憶我就會心軟，這個婚離定了！”\r\n夏初薇：“離婚？好，明天就去，誰不離誰是小狗。”\r\n第二天，夏初薇敲開霍雲霆的門。\r\n“霍先生，該去離婚了。”\r\n霍先生：“汪！”\r\n所有人都知道她愛他至深，但唯有他知道，他愛她——早已病入膏肓。",
-      "cover": "https://nbookimg.klynf.com/cppartner/1x1/11x0/110x1/11010122254/11010122254.jpg?t=20221018091329",
-      "bannerPic": "",
-      "viewCountDisplay": "2.0萬",
-      "lastChapterUtime": "2023-04-04 10:44:49",
-      "ratings": "7.0",
-      "chapterCount": "1753",
-      "writeStatus": "完本",
-      "viewCount": "19829"
-    },
-    {
-      "author": "十三夕",
-      "bookId": "11010060352",
-      "bookName": "重生寵上天：墨少，別來無恙！",
-      "introduction": "上輩子，謝梵音錯信他人，付出所有，卻慘痛一生，一屍兩命！\r\n重活一世，她智商上線，強勢逆襲，打臉複仇虐渣渣\r\n決心抱著某大佬的腿不放，卻不小心被他寵上了天！\r\n“老公，繼妹說我配不上你！”\r\n傳聞冷血殘酷、權勢滔天的墨六爺聲音溫柔，“是她不配活著。”\r\n“渣男剛才還想占我便宜！”\r\n男人摸摸她腦袋，“乖，他進海裏喂鯊魚了。”\r\n眾人惋惜，墨六爺就這麼被不名不經傳的女人拿下了\r\n直到某一天，謝梵音無數大佬身份曝光……",
-      "cover": "https://nbookimg.klynf.com/cppartner/1x1/11x0/110x1/11010060352/11010060352.jpg?t=20220928160227",
-      "bannerPic": "",
-      "viewCountDisplay": "8.6萬",
-      "lastChapterUtime": "2021-06-28 14:40:23",
-      "ratings": "7.5",
-      "chapterCount": "1255",
-      "writeStatus": "完本",
-      "viewCount": "86276"
-    },
-    {
-      "author": "蘇木白",
-      "bookId": "11010068992",
-      "bookName": "神醫棄妃：王爺又被和離了！",
-      "introduction": "她，現代萬人敬仰的女元帥，一睜眼卻成了古代不受寵的安王妃？\r\n不僅浪蕩，還是個廢柴，眼裏隻有那個冷傲俊美的夫君。\r\n可偏偏，那男人卻隻想休了她！\r\n笑話！她穆玥璃，可為國捐軀，斷不會為一個男人尋死覓活。\r\n什麼？傲慢王爺愛的是綠茶表妹？\r\n沒關係，賞你一紙休書！\r\n可偏偏那狗男人卻纏上來，控訴：“穆玥璃，你讓本王念你，想你，死心塌地愛上你後，又瀟灑離身，這世上沒有比你更狠心絕情的女人了！”",
-      "cover": "https://nbookimg.klynf.com/cppartner/1x1/11x0/110x1/11010068992/11010068992.jpg?t=20200731182616",
-      "bannerPic": "",
-      "viewCountDisplay": "2.8萬",
-      "lastChapterUtime": "2021-09-17 11:10:30",
-      "ratings": "9.7",
-      "chapterCount": "2010",
-      "writeStatus": "完本",
-      "viewCount": "28433"
-    }
-  ]
 
-  const data = [
-    {
-      "id": "33338367",
-      "chapterName": "第一章:輸血",
-      "isCharge": false
-    },
-    {
-      "id": "33338370",
-      "chapterName": "第二章：供血自願書",
-      "isCharge": false
-    },
-    {
-      "id": "33338372",
-      "chapterName": "第三章：心甘情願的婚禮",
-      "isCharge": false
-    },
-    {
-      "id": "33338373",
-      "chapterName": "第四章：一廂情願的愛情",
-      "isCharge": false
-    },
-    {
-      "id": "33338376",
-      "chapterName": "第五章：不解釋",
-      "isCharge": false
-    },
-    {
-      "id": "33338378",
-      "chapterName": "第六章：替身",
-      "isCharge": false
-    },
-    {
-      "id": "33338380",
-      "chapterName": "第七章：他回來了",
-      "isCharge": false
-    },
-    {
-      "id": "33338382",
-      "chapterName": "第八章：離婚",
-      "isCharge": false
-    },
-    {
-      "id": "33338383",
-      "chapterName": "第九章：哪裏都不許去",
-      "isCharge": true
-    },
-    {
-      "id": "33338385",
-      "chapterName": "第十章：耍花招沒用",
-      "isCharge": true
-    },
-    {
-      "id": "33338388",
-      "chapterName": "第十一章：兒時夥伴",
-      "isCharge": true
-    },
-    {
-      "id": "33338390",
-      "chapterName": "第十二章：出事",
-      "isCharge": true
-    },
-    {
-      "id": "33338392",
-      "chapterName": "第十三章：借錢",
-      "isCharge": true
-    },
-    {
-      "id": "33338393",
-      "chapterName": "第十四章：病床上的老師",
-      "isCharge": true
-    },
-    {
-      "id": "33338394",
-      "chapterName": "第十五章：懷孕了",
-      "isCharge": true
-    },
-    {
-      "id": "33338397",
-      "chapterName": "第十六章：被軟禁",
-      "isCharge": true
-    },
-    {
-      "id": "33338399",
-      "chapterName": "第十七章：我帶你離開",
-      "isCharge": true
-    },
-    {
-      "id": "33338401",
-      "chapterName": "第十八章：失去孩子",
-      "isCharge": true
+  const result = {
+    "retCode": 0,
+    "data": {
+      "recommendBook": [
+        {
+          "bookId": "11010070666",
+          "bookName": "一胎两宝：帝少的千亿娇妻",
+          "bookAlias": "",
+          "author": "织酒",
+          "introduction": "一场设计，她未婚先孕，妈妈活活被气死，五年后，她华丽蜕变，携子归来，复仇之路却遇上讨债恶鬼。“听说你给我生了两个孩子？”战擎渊找上门来。四目相对。确认过眼神，是惹不起的人。安小诺瞬间把平时吃的最多的小崽子推出去，“我留一只，这只你带走。”某宝眼泪汪汪看着无情老妈，忽然觉得手里的鸡腿不香了。",
+          "coverWap": "http://qnqat.kuaikandushu.cn/cppartner/1x1/11x0/110x1/11010070666/11010070666.jpg?t=1628820709689&imageView2/0/w/200/h/267",
+          "status": "0",
+          "statusCn": "连载",
+          "tag": [
+            "萌宝",
+            "久别重逢",
+            "复仇",
+            "单亲妈咪",
+            "落魄千金"
+          ],
+          "protagonist": "安小诺,战擎渊",
+          "hot": "11万",
+          "clickNum": "106226",
+          "updateTime": 1695715191000,
+          "totalWordSize": "3251598",
+          "scoreNum": "8.1",
+          "lastChapterId": "522419728",
+          "lastChapterUtime": "2022-04-20 13:31:11",
+          "bookTypeThreeMap": {
+            "585": "古色古香",
+            "802": "first_day"
+          }
+        },
+        {
+          "bookId": "11000035335",
+          "bookName": "桃运大宝鉴",
+          "bookAlias": "",
+          "author": "金正太",
+          "introduction": "美女，校花，大宝鉴，应有尽有！财运，霉运，桃花运，一切皆来！在一块块刚开采出来的毛料中切出美玉，靠的是运气，还是眼力的较量！且看一代奇才如何开启他人生的鉴宝之旅。。。。",
+          "coverWap": "http://qnqat.kuaikandushu.cn/cppartner/1x1/11x0/110x0/11000035335/11000035335.jpg?t=202101010000&imageView2/0/w/200/h/267",
+          "status": "0",
+          "statusCn": "连载",
+          "tag": [
+            "桃运大宝鉴",
+            "金正太",
+            "都市"
+          ],
+          "protagonist": "",
+          "hot": "5033",
+          "clickNum": "5033",
+          "updateTime": 1695715569000,
+          "totalWordSize": "1141469",
+          "scoreNum": "8.0",
+          "lastChapterId": "528616854",
+          "lastChapterUtime": "2022-09-20 11:30:36"
+        },
+        {
+          "bookId": "11010076679",
+          "bookName": "重生之夫人是大佬字数长度测试字数长度测试字数长度测试字数长度测试字数长度测试",
+          "bookAlias": "字数长度测试字数长度测试字数长度测试字数长度测试字数长度测试字数长度测试字数长度测试字数长度测试字数长度测试字数长度测试字数长度测试",
+          "author": "水铃铛字数长度测试字数长度测试字数长度测试字数长度测试字数长度测试字数长度测试字数长度测试",
+          "introduction": "前世她被所有亲人爱人玩弄于鼓掌之中，被废了双腿，坐了七年轮椅，最后被抽干一身鲜血而死。　　重生归来，生活开启新的大门，她多了许多身份，还有许多宠爱她的人，尤其是甩不掉的他。　　她要复仇，他递刀。　　她说他这么宠爱她，她会上天的。他笑问：“老婆，要不要去买两个飞船名额？”前世她活的太苦，这辈子他要让她一直甜下去。",
+          "coverWap": "http://qnqat.kuaikandushu.cn/cppartner/1x1/11x0/110x1/11010076679/11010076679.jpg?t=1634024012359&imageView2/0/w/200/h/267",
+          "status": "1",
+          "statusCn": "完本",
+          "tag": [
+            "重生",
+            "大佬",
+            "追妻",
+            "一见钟情",
+            "妻奴"
+          ],
+          "protagonist": "秦芊芊,傅景辰字数长度测试字数长度测试字数长度测试字数长度测试字数长度测试字数长度测试字数长度测试",
+          "hot": "3.74万",
+          "clickNum": "37353",
+          "updateTime": 1695715193000,
+          "totalWordSize": "2192229",
+          "scoreNum": "8.4",
+          "lastChapterId": "541720091",
+          "lastChapterUtime": "2023-07-13 14:28:39",
+          "bookTypeThreeMap": {
+            "579": "重生异能"
+          }
+        }
+      ],
+      "chapters": [
+        {
+          "chapterId": "479452137",
+          "chapterName": "第1章",
+          "isCharge": "0",
+          "chapterIndex": 1
+        },
+        {
+          "chapterId": "479452138",
+          "chapterName": "第2章",
+          "isCharge": "0",
+          "chapterIndex": 2
+        },
+        {
+          "chapterId": "479452139",
+          "chapterName": "第3章",
+          "isCharge": "0",
+          "chapterIndex": 3
+        },
+        {
+          "chapterId": "479452140",
+          "chapterName": "第4章",
+          "isCharge": "0",
+          "chapterIndex": 4
+        },
+        {
+          "chapterId": "479452141",
+          "chapterName": "第5章",
+          "isCharge": "0",
+          "chapterIndex": 5
+        },
+        {
+          "chapterId": "479452142",
+          "chapterName": "第6章",
+          "isCharge": "0",
+          "chapterIndex": 6
+        },
+        {
+          "chapterId": "479452143",
+          "chapterName": "第7章",
+          "isCharge": "0",
+          "chapterIndex": 7
+        },
+        {
+          "chapterId": "479452144",
+          "chapterName": "第8章",
+          "isCharge": "0",
+          "chapterIndex": 8
+        },
+        {
+          "chapterId": "479452145",
+          "chapterName": "第9章",
+          "isCharge": "0",
+          "chapterIndex": 9
+        },
+        {
+          "chapterId": "479452146",
+          "chapterName": "第10章",
+          "isCharge": "0",
+          "chapterIndex": 10
+        },
+        {
+          "chapterId": "479452147",
+          "chapterName": "第11章",
+          "isCharge": "0",
+          "chapterIndex": 11
+        },
+        {
+          "chapterId": "479452148",
+          "chapterName": "第12章",
+          "isCharge": "0",
+          "chapterIndex": 12
+        },
+        {
+          "chapterId": "479452149",
+          "chapterName": "第13章",
+          "isCharge": "0",
+          "chapterIndex": 13
+        },
+        {
+          "chapterId": "479452150",
+          "chapterName": "第14章",
+          "isCharge": "0",
+          "chapterIndex": 14
+        },
+        {
+          "chapterId": "479452151",
+          "chapterName": "第15章",
+          "isCharge": "0",
+          "chapterIndex": 15
+        },
+        {
+          "chapterId": "479452152",
+          "chapterName": "第16章",
+          "isCharge": "1",
+          "chapterIndex": 16
+        },
+        {
+          "chapterId": "479452153",
+          "chapterName": "第17章",
+          "isCharge": "0",
+          "chapterIndex": 17
+        },
+        {
+          "chapterId": "479452154",
+          "chapterName": "第18章",
+          "isCharge": "1",
+          "chapterIndex": 18
+        },
+        {
+          "chapterId": "479452155",
+          "chapterName": "第19章",
+          "isCharge": "1",
+          "chapterIndex": 19
+        },
+        {
+          "chapterId": "479452156",
+          "chapterName": "第20章",
+          "isCharge": "1",
+          "chapterIndex": 20
+        },
+        {
+          "chapterId": "479452157",
+          "chapterName": "第21章",
+          "isCharge": "1",
+          "chapterIndex": 21
+        },
+        {
+          "chapterId": "479452158",
+          "chapterName": "第22章",
+          "isCharge": "1",
+          "chapterIndex": 22
+        },
+        {
+          "chapterId": "479452159",
+          "chapterName": "第23章",
+          "isCharge": "1",
+          "chapterIndex": 23
+        },
+        {
+          "chapterId": "479452160",
+          "chapterName": "第24章",
+          "isCharge": "1",
+          "chapterIndex": 24
+        },
+        {
+          "chapterId": "479452161",
+          "chapterName": "第25章",
+          "isCharge": "1",
+          "chapterIndex": 25
+        },
+        {
+          "chapterId": "479452162",
+          "chapterName": "第26章",
+          "isCharge": "1",
+          "chapterIndex": 26
+        },
+        {
+          "chapterId": "479452163",
+          "chapterName": "第27章",
+          "isCharge": "1",
+          "chapterIndex": 27
+        },
+        {
+          "chapterId": "479452164",
+          "chapterName": "第28章",
+          "isCharge": "1",
+          "chapterIndex": 28
+        },
+        {
+          "chapterId": "479452165",
+          "chapterName": "第29章",
+          "isCharge": "1",
+          "chapterIndex": 29
+        },
+        {
+          "chapterId": "479452166",
+          "chapterName": "第30章",
+          "isCharge": "1",
+          "chapterIndex": 30
+        },
+        {
+          "chapterId": "479452167",
+          "chapterName": "第31章",
+          "isCharge": "1",
+          "chapterIndex": 31
+        },
+        {
+          "chapterId": "479452168",
+          "chapterName": "第32章",
+          "isCharge": "1",
+          "chapterIndex": 32
+        },
+        {
+          "chapterId": "479452169",
+          "chapterName": "第33章",
+          "isCharge": "1",
+          "chapterIndex": 33
+        },
+        {
+          "chapterId": "479452170",
+          "chapterName": "第34章",
+          "isCharge": "1",
+          "chapterIndex": 34
+        },
+        {
+          "chapterId": "479452171",
+          "chapterName": "第35章",
+          "isCharge": "1",
+          "chapterIndex": 35
+        },
+        {
+          "chapterId": "479452172",
+          "chapterName": "第36章",
+          "isCharge": "1",
+          "chapterIndex": 36
+        },
+        {
+          "chapterId": "479452173",
+          "chapterName": "第37章",
+          "isCharge": "1",
+          "chapterIndex": 37
+        },
+        {
+          "chapterId": "479452174",
+          "chapterName": "第38章",
+          "isCharge": "1",
+          "chapterIndex": 38
+        },
+        {
+          "chapterId": "479452175",
+          "chapterName": "第39章",
+          "isCharge": "1",
+          "chapterIndex": 39
+        },
+        {
+          "chapterId": "479452176",
+          "chapterName": "第40章",
+          "isCharge": "1",
+          "chapterIndex": 40
+        },
+        {
+          "chapterId": "479452177",
+          "chapterName": "第41章",
+          "isCharge": "1",
+          "chapterIndex": 41
+        },
+        {
+          "chapterId": "479452178",
+          "chapterName": "第42章",
+          "isCharge": "1",
+          "chapterIndex": 42
+        },
+        {
+          "chapterId": "479452179",
+          "chapterName": "第43章",
+          "isCharge": "1",
+          "chapterIndex": 43
+        },
+        {
+          "chapterId": "479452180",
+          "chapterName": "第44章",
+          "isCharge": "1",
+          "chapterIndex": 44
+        },
+        {
+          "chapterId": "479452181",
+          "chapterName": "第45章",
+          "isCharge": "1",
+          "chapterIndex": 45
+        },
+        {
+          "chapterId": "479452182",
+          "chapterName": "第46章",
+          "isCharge": "1",
+          "chapterIndex": 46
+        },
+        {
+          "chapterId": "479452183",
+          "chapterName": "第47章",
+          "isCharge": "1",
+          "chapterIndex": 47
+        },
+        {
+          "chapterId": "479452184",
+          "chapterName": "第48章",
+          "isCharge": "1",
+          "chapterIndex": 48
+        },
+        {
+          "chapterId": "479452185",
+          "chapterName": "第49章",
+          "isCharge": "1",
+          "chapterIndex": 49
+        },
+        {
+          "chapterId": "479452186",
+          "chapterName": "第50章",
+          "isCharge": "1",
+          "chapterIndex": 50
+        }
+      ],
+      "chapterId": "479452137",
+      "book": {
+        "unit": "0",
+        "coverWap": "http://qnqat.kuaikandushu.cn/cppartner/1x1/11x0/110x1/11010069767/11010069767.jpg?t=1638261703574&imageView2/0/w/200/h/267",
+        "bookName": "至尊神婿",
+        "bookId": "11010069767",
+        "introduction": "入赘三年，活得不如狗。一朝崛起，岳母小姨子给跪了。 岳母：求求你别离开我女儿。小姨子：姐夫我错了......",
+        "introductionList": [
+          "入赘三年，活得不如狗。一朝崛起，岳母小姨子给跪了。",
+          "岳母：求求你别离开我女儿。",
+          "小姨子：姐夫我错了......"
+        ],
+        "author": "狼牙土豆",
+        "totalWordSize": "608万",
+        "totalChapterNum": "5614",
+        "lastChapterId": "542132688",
+        "lastChapterName": "第5617章",
+        "clickNum": "1.7亿",
+        "status": 0,
+        "cp": "",
+        "disclaimer": "本平台经版权方授权使用该作品。如您发现涉黄、涉黑、涉政等内容，或作品内容侵害您的权益，欢迎向本平台客服举报投诉，一经核实，立即删除，本平台不承担任何责任。\r\n本平台由北京点众科技股份有限公司提供支撑服务或运营。",
+        "tagList": [
+          "女婿",
+          "打脸",
+          "战神"
+        ],
+        "twoTypeName": "都市生活1",
+        "bookTypeName": "古玩鉴宝",
+        "bookScore": "6.4",
+        "threeTypeTag": [
+          "学霸",
+          "反派",
+          "女总裁",
+          "皇子",
+          "弃少",
+          "神豪",
+          "神话",
+          "九叔",
+          "大汉",
+          "三国",
+          "复仇",
+          "异能"
+        ],
+        "wordSize": "608",
+        "wordSizeUnit": "万",
+        "totalReadNum": "1.7",
+        "totalReadNumUnit": "亿",
+        "protagonist": "叶昊,郑漫儿",
+        "bookTypeThreeMap": {
+          "540": "古玩鉴宝"
+        }
+      },
+      "chapterName": "第1章",
+      "nextChapterId": "479452138",
+      "content": [
+        "南海市，郑家别墅。",
+        "今天是郑老爷子的七十大寿。",
+        "郑家子孙都分别奉上了寿礼，齐声道：“祝老爷子福如东海，寿比南山。”",
+        "郑老爷子坐在上座，满面红光，道：“好好好，都是好孩子，今天老夫高兴，满足你们每人一个愿望，你们有什么想要的东西，尽管说！”",
+        "“爷爷，我看上了临海的一套公寓，不贵就100多万......”",
+        "“爷爷，我想要香奈儿的限量款包包......”"
+      ]
     }
-  ]
-
-  const result: INetBookRes = {
-    book: {
-      bookId: bookInfo.bookId,
-      bookName: bookInfo.bookName,
-      coverWap: bookInfo.cover,
-      introduction: bookInfo.introduction,
-      author: bookInfo.author,
-      protagonist: bookInfo.author,
-      totalChapterNum: bookInfo.chapterCount + '',
-      totalWordSize: bookInfo.chapterCount + '1111xx字',
-      clickNum: bookInfo.viewCountDisplay,
-      scoreNum: bookInfo.ratings + '', // 书籍评分
-      lastChapterId: '最新章节ID', // 最新章节ID
-      lastChapterUtime: bookInfo.lastChapterUtime, // 章节更新时间
-      bookTypeThreeMap: [bookInfo.author, '标签2', '标签3' ],
-      status: EBookStatus2.完结,
-      hot: 'xxxx热度',
-      tag: ['x11', 'xx2', 'xx4'],
-      ...bookInfo,
-    } as IBookInfoItem,
-    chapters: data.map((item, index) => {
-      return {
-        bookId: "11000162501",
-        chapterId: item.id,
-        isCharge: item.isCharge ? EIsCharge.收费章节: EIsCharge.免费章节,
-        chapterName: item.chapterName,
-        chapterIndex: index + 1,
-      }
-    }),
-    recommendBook: alsoLook.map((item, index) => {
-      return {
-        bookId: item.bookId,
-        bookName: item.bookName,
-        coverWap: item.cover,
-        introduction: item.introduction,
-        author: item.author,
-        totalWordSize: 'xxx万字数', // 书籍总字数
-        clickNum: item.viewCountDisplay,
-        scoreNum: item.ratings + '', // 书籍评分
-        lastChapterId: '最新章节ID', // 最新章节ID
-        lastChapterUtime: item.lastChapterUtime, // 章节更新时间
-        bookTypeThreeMap: [item.author, '标签2', '标签3' ],
-        status: index % 2 == 1 ? EBookStatus2.连载 : EBookStatus2.完结,
-        hot: 'xxxx热度',
-        tag: [''],
-        totalChapterNum: '最新章节'
-      };
-    })
   }
 
   res.status(200).json(result)

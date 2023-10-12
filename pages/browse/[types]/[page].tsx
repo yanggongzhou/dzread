@@ -1,4 +1,4 @@
-import Browse, { getServerSideProps as getServerSideProps2} from '../[types]'
+import Browse, { getServerSideProps as getServerSideProps2} from '../index'
 
 export default Browse;
 

@@ -7,18 +7,17 @@
   flex-direction: column;
 
   .emptyIcon {
-    width: 3.2rem;
-    height: 2.4rem;
+    width: 2rem;
+    height: 2rem;
   }
 
   .emptyIntro {
-    font-size: 0.16rem;
+    font-size: 0.14rem;
     font-weight: 400;
-    color: #FFFFFF;
     text-align: center;
     margin: 0.08rem auto 0;
-    line-height: 0.34rem;
-    opacity: 0.4;
+    line-height: 0.18rem;
+    color: #B2B2B2;
   }
 }
 

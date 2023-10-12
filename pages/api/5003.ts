@@ -1,161 +1,411 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { ownFetch } from "@/server/fetch";
-import { INetRecommendRes } from "@/typings/recommend.interface";
 
 // 5001 排行榜页面
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<INetRecommendRes>
+  res: NextApiResponse<any>
 ) {
 
-  const data = [
-    {
-      "author": "小妖本仙",
-      "bookId": "11000162501",
-      "bookName": "我曾愛你，奮不顧身",
-      "introduction": "結婚兩年，素手調羹，最終也比不過他心中的那個白月光。\r\n她受夠了，也煩了單向婚姻，可是卻還是被他圈在他的世界裏。\r\n“如果你不愛我，就放開我好嗎！？”\r\n“放開你？這輩子都不可能！”",
-      "cover": "https://nbookimg.klynf.com/cppartner/1x1/11x0/110x0/11000162501/11000162501.jpg?t=20210728144159",
-      "viewCountDisplay": "10.6萬",
-      "lastChapterUtime": "2018-09-30 20:29:01",
-      "ratings": "9.0",
-      "chapterCount": "46",
-      "writeStatus": "完本",
-      "viewCount": "106068"
-    },
-    {
-      "author": "夏目",
-      "bookId": "11000162597",
-      "bookName": "撕情裂愛",
-      "introduction": "言歡和沈邵城的婚姻，是她祖母死前求了沈家老太太，換來的。\r\n       後來言歡被送進監獄，被廢掉一隻手，眼睛瞎掉，滿目絕望時。\r\n       她想，祖母若還在世，大抵是會後悔的。",
-      "cover": "https://nbookimg.klynf.com/cppartner/1x1/11x0/110x0/11000162597/11000162597.jpg?t=20210728115902",
-      "viewCountDisplay": "13.5萬",
-      "lastChapterUtime": "2018-09-30 01:02:20",
-      "ratings": "9.3",
-      "chapterCount": "40",
-      "writeStatus": "完本",
-      "viewCount": "134856"
-    },
-    {
-      "author": "風一樣",
-      "bookId": "11010024453",
-      "bookName": "極品贅婿神醫",
-      "introduction": "獲得仙醫傳承，重生於蘇家贅婿身份為廚子的黃青身上。",
-      "cover": "https://nbookimg.klynf.com/cppartner/1x1/11x0/110x1/11010024453/11010024453.jpg?t=20220711130154",
-      "viewCountDisplay": "3.7萬",
-      "lastChapterUtime": "2019-11-28 11:44:33",
-      "ratings": "7.4",
-      "chapterCount": "498",
-      "writeStatus": "完本",
-      "viewCount": "37488"
-    },
-    {
-      "author": "孤存",
-      "bookId": "11010027727",
-      "bookName": "垂釣超能力",
-      "introduction": "陳解放畢業回鄉承包魚塘，卻偶得一套垂釣係統，擁有了能夠垂釣各種超能力的神奇本領。\r\n　　可以看破情緒的眼鏡，能噴出水火的葫蘆。\r\n　　還死人肉白骨的丹藥，能百日飛升成就大神的秘籍。\r\n　　陳解放垂釣萬界，樂在其中，直到有一天，他釣上來一個口口聲聲自稱自己是龍王三公主的妹子，非要去拯救龜丞相。\r\n　　陳解...",
-      "cover": "https://nbookimg.klynf.com/cppartner/1x1/11x0/110x1/11010027727/11010027727.jpg?t=20210104174427",
-      "viewCountDisplay": "7805",
-      "lastChapterUtime": "2019-11-06 13:20:22",
-      "ratings": "9.3",
-      "chapterCount": "218",
-      "writeStatus": "完本",
-      "viewCount": "7805"
-    },
-    {
-      "author": "肆零八",
-      "bookId": "11010030841",
-      "bookName": "逆極巔峰",
-      "introduction": "被社會摧殘，無力翻身的小人物，因一次意外重活一世。這裏的世界與前世大不相同，他能依靠自己的力量，逆極而行，攀登巔峰嗎？\r\n       如果能讓你重來一世，如果能讓你有掌控自己命運的能力。\r\n       你會怎麼做？\r\n       是披荊斬棘，不留遺憾；還是美酒美人，掌禦蒼生？\r\n       看逆...",
-      "cover": "https://nbookimg.klynf.com/cppartner/1x1/11x0/110x1/11010030841/11010030841.jpg?t=20201231181717",
-      "viewCountDisplay": "2156",
-      "lastChapterUtime": "2019-10-03 10:02:14",
-      "ratings": "7.6",
-      "chapterCount": "146",
-      "writeStatus": "完本",
-      "viewCount": "2156"
-    },
-    {
-      "author": "燎原",
-      "bookId": "11010030842",
-      "bookName": "至尊仙帝",
-      "introduction": "淩天風，一個繼承了華夏複興使命的青年，掌握萬世銅母之力，凝聚九天星沙，滅蠻夷，殺仇寇，聚華夏之力破滅毀滅星族，成就仙界至尊。",
-      "cover": "https://nbookimg.klynf.com/cppartner/1x1/11x0/110x1/11010030842/11010030842.jpg?t=20201231154156",
-      "viewCountDisplay": "1263",
-      "lastChapterUtime": "2019-11-19 12:03:48",
-      "ratings": "7.7",
-      "chapterCount": "248",
-      "writeStatus": "完本",
-      "viewCount": "1263"
-    },
-    {
-      "author": "留白",
-      "bookId": "11010033033",
-      "bookName": "盛世雷帝",
-      "introduction": "但凡王朝，必有猛將！\r\n但凡盛世，必有天驕！\r\n但凡美女，必有狗蛋！\r\n“啊呸，老子不叫狗蛋！”\r\n江川一手指著正前方，另一隻手上，大旗獵獵作響。\r\n其上，碩大的“盜”字熠熠閃光。\r\n“前麵的人給我聽好了，老子要打劫！”\r\n“有錢捧個錢場，沒錢的......”",
-      "cover": "https://nbookimg.klynf.com/cppartner/1x1/11x0/110x1/11010033033/11010033033.jpg?t=20201231165954",
-      "viewCountDisplay": "1752",
-      "lastChapterUtime": "2019-11-07 12:05:14",
-      "ratings": "9.8",
-      "chapterCount": "253",
-      "writeStatus": "完本",
-      "viewCount": "1752"
-    },
-    {
-      "author": "春欲暮",
-      "bookId": "11010035254",
-      "bookName": "第一寵婚，霍少的鑽石甜妻",
-      "introduction": "五年前，她邂逅了一個不知道姓名的男人。\r\n黑暗中看不清那人的眉眼，隻聞到他身上清凜的鬆柏香氣。\r\n五年後，她是卑微的外賣員，卻接到一個神奇的訂單。\r\n一個眉眼精致唇紅齒白的萌寶，如同五年前那個霸道的男人一樣，對她命令道——“給你一千萬，做我媽咪！”",
-      "cover": "https://nbookimg.klynf.com/cppartner/1x1/11x0/110x1/11010035254/11010035254.jpg?t=20201231185931",
-      "viewCountDisplay": "3508",
-      "lastChapterUtime": "2019-12-13 15:30:49",
-      "ratings": "8.7",
-      "chapterCount": "183",
-      "writeStatus": "完本",
-      "viewCount": "3508"
-    },
-    {
-      "author": "鹵真人",
-      "bookId": "11010035259",
-      "bookName": "第一豪門女婿",
-      "introduction": "嶽母：三年婚約已到，你這個廢物，趕緊滾出我家。三日後，女婿重為豪門家主，嶽母求饒：好女婿，我求求你別離開我女兒",
-      "cover": "https://nbookimg.klynf.com/cppartner/1x1/11x0/110x1/11010035259/11010035259.jpg?t=20210329095857",
-      "viewCountDisplay": "8.8萬",
-      "lastChapterUtime": "2022-09-08 10:31:15",
-      "ratings": "9.2",
-      "chapterCount": "3291",
-      "writeStatus": "完本",
-      "viewCount": "87979"
-    },
-    {
-      "author": "三手煙",
-      "bookId": "11010035597",
-      "bookName": "修仙掌門人",
-      "introduction": "意外穿越修仙世界，機緣所獲成為五行法修，在殘酷的修仙摸爬滾打，成就一方大佬，修仙宗派掌門人",
-      "cover": "https://nbookimg.klynf.com/cppartner/1x1/11x0/110x1/11010035597/11010035597.jpg?t=20201231095114",
-      "viewCountDisplay": "2129",
-      "lastChapterUtime": "2019-12-11 19:30:43",
-      "ratings": "8.9",
-      "chapterCount": "191",
-      "writeStatus": "完本",
-      "viewCount": "2129"
+  const result = {
+    "retCode": 0,
+    "data": {
+      "bookInfos": [
+        {
+          "unit": "0",
+          "coverWap": "http://qnqat.kuaikandushu.cn/cppartner/1x1/11x0/110x1/11010069767/11010069767.jpg?t=1638261703574&imageView2/0/w/200/h/267",
+          "bookName": "至尊神婿",
+          "bookId": "11010069767",
+          "introduction": "入赘三年，活得不如狗。一朝崛起，岳母小姨子给跪了。 岳母：求求你别离开我女儿。小姨子：姐夫我错了......",
+          "introductionList": [
+            "入赘三年，活得不如狗。一朝崛起，岳母小姨子给跪了。",
+            "岳母：求求你别离开我女儿。",
+            "小姨子：姐夫我错了......"
+          ],
+          "author": "狼牙土豆",
+          "totalWordSize": "608万",
+          "totalChapterNum": "5614",
+          "lastChapterId": "542132688",
+          "lastChapterName": "第5617章",
+          "clickNum": "1.7亿",
+          "status": 0,
+          "cp": "",
+          "disclaimer": "本平台经版权方授权使用该作品。如您发现涉黄、涉黑、涉政等内容，或作品内容侵害您的权益，欢迎向本平台客服举报投诉，一经核实，立即删除，本平台不承担任何责任。\r\n本平台由北京点众科技股份有限公司提供支撑服务或运营。",
+          "tagList": [
+            "女婿",
+            "打脸",
+            "战神"
+          ],
+          "bookTypeName": "古玩鉴宝",
+          "bookScore": "6.4",
+          "threeTypeTag": [
+            "学霸",
+            "反派",
+            "女总裁",
+            "皇子",
+            "弃少",
+            "神豪",
+            "神话",
+            "九叔",
+            "大汉",
+            "三国",
+            "复仇",
+            "异能"
+          ],
+          "wordSize": "608",
+          "wordSizeUnit": "万",
+          "totalReadNum": "1.7",
+          "totalReadNumUnit": "亿",
+          "protagonist": "叶昊,郑漫儿",
+          "bookTypeThreeMap": {
+            "540": "古玩鉴宝"
+          }
+        },
+        {
+          "unit": "0",
+          "coverWap": "http://qnqat.kuaikandushu.cn/cppartner/1x1/11x0/110x0/11000001460/11000001460.jpg?t=1640336747840&imageView2/0/w/200/h/267",
+          "bookName": "冷少的替身妻",
+          "bookId": "11000001460",
+          "introduction": "“从今天起，你就是我冷某人的妻子，怎么？不想履行妻子的义务？”冷眸盯着面前缩在床边的新婚妻子。“你不过是我花钱买来的，还想守身如玉？”他是黑白两道闻风丧胆的枭雄，冷酷无情，人人口中的恶魔。她是秦家的养女，为了一场债务，她成了真正秦家掌上明珠的替身。一场欢爱，一场缠绵，心渐渐沉沦，到底能不能守住这份用钱买来的婚姻……",
+          "introductionList": [
+            "“从今天起，你就是我冷某人的妻子，怎么？不想履行妻子的义务？”冷眸盯着面前缩在床边的新婚妻子。“你不过是我花钱买来的，还想守身如玉？”他是黑白两道闻风丧胆的枭雄，冷酷无情，人人口中的恶魔。她是秦家的养女，为了一场债务，她成了真正秦家掌上明珠的替身。一场欢爱，一场缠绵，心渐渐沉沦，到底能不能守住这份用钱买来的婚姻……"
+          ],
+          "author": "汐汐 晚晴",
+          "totalWordSize": "271万",
+          "totalChapterNum": "1181",
+          "lastChapterId": "551800",
+          "lastChapterName": "念念情深：亲自戴上那枚戒指",
+          "clickNum": "17万",
+          "status": 0,
+          "cp": "",
+          "disclaimer": "本平台经版权方授权使用该作品。如您发现涉黄、涉黑、涉政等内容，或作品内容侵害您的权益，欢迎向本平台客服举报投诉，一经核实，立即删除，本平台不承担任何责任。\r\n本平台由北京点众科技股份有限公司提供支撑服务或运营。",
+          "tagList": [
+            "总裁",
+            "现言",
+            "豪门",
+            "虐文",
+            "虐恋",
+            "邪魅"
+          ],
+          "bookTypeName": "总裁豪门",
+          "bookScore": "7.5",
+          "wordSize": "271",
+          "wordSizeUnit": "万",
+          "totalReadNum": "17",
+          "totalReadNumUnit": "万",
+          "protagonist": "秦雅滢,冷慕宸",
+          "bookTypeThreeMap": {
+            "577": "总裁豪门"
+          }
+        },
+        {
+          "unit": "0",
+          "coverWap": "http://qnqat.kuaikandushu.cn/cppartner/1x1/11x0/110x0/11000001372/11000001372.jpg?t=1668762117850&imageView2/0/w/200/h/267",
+          "bookName": "凤凰错：替嫁弃妃",
+          "bookId": "11000001372",
+          "introduction": "试问女子的容颜能有多值钱？她是先帝亲点的皇后，却在颜容半毁时被一纸圣旨从后变妃。一旨双嫁，绝色的妹妹代她入宫为后，而她远嫁给那少年封王，权倾朝野，冷酷残暴的雪亲王……新婚夜，他说她的容颜只配呆在马厩里，虽有王妃之名却只能任人奚落…他中毒命在旦夕，她不顾一切救他，只为让自己活有尊严……以妻子这名，行幕僚之实她伴在他身边，可在滚滚黄河之上他却冷眼看她跌入那万劫不复之地……死而不灭，灵魂的不甘让她得以重生，世间男儿皆爱貌，那么这一世东方宁心定要惊才绝艳，这一世东方宁心定要荣耀满光华，这一世定东方宁心要凌驾九霄之上……",
+          "introductionList": [
+            "试问女子的容颜能有多值钱？她是先帝亲点的皇后，却在颜容半毁时被一纸圣旨从后变妃。一旨双嫁，绝色的妹妹代她入宫为后，而她远嫁给那少年封王，权倾朝野，冷酷残暴的雪亲王……新婚夜，他说她的容颜只配呆在马厩里，虽有王妃之名却只能任人奚落…他中毒命在旦夕，她不顾一切救他，只为让自己活有尊严……以妻子这名，行幕僚之实她伴在他身边，可在滚滚黄河之上他却冷眼看她跌入那万劫不复之地……死而不灭，灵魂的不甘让她得以重生，世间男儿皆爱貌，那么这一世东方宁心定要惊才绝艳，这一世东方宁心定要荣耀满光华，这一世定东方宁心要凌驾九霄之上……"
+          ],
+          "author": "阿彩",
+          "totalWordSize": "425万",
+          "totalChapterNum": "1455",
+          "lastChapterId": "476993",
+          "lastChapterName": "新书试读",
+          "clickNum": "2.36万",
+          "status": 1,
+          "cp": "",
+          "disclaimer": "本平台经版权方授权使用该作品。如您发现涉黄、涉黑、涉政等内容，或作品内容侵害您的权益，欢迎向本平台客服举报投诉，一经核实，立即删除，本平台不承担任何责任。\r\n本平台由北京点众科技股份有限公司提供支撑服务或运营。",
+          "tagList": [
+            "古言",
+            "穿越",
+            "虐文",
+            "权谋",
+            "女强",
+            "宫斗"
+          ],
+          "bookTypeName": "穿越时空",
+          "bookScore": "7.7",
+          "wordSize": "425",
+          "wordSizeUnit": "万",
+          "totalReadNum": "2.36",
+          "totalReadNumUnit": "万",
+          "protagonist": "",
+          "bookTypeThreeMap": {
+            "591": "穿越时空"
+          }
+        },
+        {
+          "unit": "0",
+          "coverWap": "http://qnqat.kuaikandushu.cn/cppartner/1x1/11x0/110x0/11000028040/11000028040.jpg?t=1638187074636&imageView2/0/w/200/h/267",
+          "bookName": "丹武至尊",
+          "bookId": "11000028040",
+          "introduction": "丹武鬼才宁越，遭人围攻陨落天魔之巅，重生在宁家大少身上，从此踏上一条逆天之路。五域，九境，十方天！顺我者昌！逆我者亡！",
+          "introductionList": [
+            "丹武鬼才宁越，遭人围攻陨落天魔之巅，重生在宁家大少身上，从此踏上一条逆天之路。",
+            "五域，九境，十方天！",
+            "顺我者昌！逆我者亡！"
+          ],
+          "author": "顽石",
+          "totalWordSize": "211万",
+          "totalChapterNum": "868",
+          "lastChapterId": "10495565",
+          "lastChapterName": "第八百七十五章 赶到",
+          "clickNum": "5.8万",
+          "status": 0,
+          "cp": "",
+          "disclaimer": "本平台经版权方授权使用该作品。如您发现涉黄、涉黑、涉政等内容，或作品内容侵害您的权益，欢迎向本平台客服举报投诉，一经核实，立即删除，本平台不承担任何责任。\r\n本平台由北京点众科技股份有限公司提供支撑服务或运营。",
+          "tagList": [
+            "热血",
+            "重生",
+            "至尊",
+            "武道"
+          ],
+          "bookTypeName": "",
+          "bookScore": "7.5",
+          "wordSize": "211",
+          "wordSizeUnit": "万",
+          "totalReadNum": "5.8",
+          "totalReadNumUnit": "万",
+          "protagonist": ""
+        },
+        {
+          "unit": "0",
+          "coverWap": "http://qnqat.kuaikandushu.cn/cppartner/1x1/11x0/110x1/11010033714/11010033714.jpg?t=1627877269000&imageView2/0/w/200/h/267",
+          "bookName": "一念吞天",
+          "bookId": "11010033714",
+          "introduction": "一枚神秘黑玉，一段被历史尘封的记忆。一名少年，一条跌宕起伏的成神之路。为了寻找身世之谜，少年横空出世，踏足诸天万界，碾压四方天骄，睥睨天下群雄。古语言，一念成神，一念成魔。而我林羽，一念可吞天噬地！",
+          "introductionList": [
+            "一枚神秘黑玉，一段被历史尘封的记忆。一名少年，一条跌宕起伏的成神之路。为了寻找身世之谜，少年横空出世，踏足诸天万界，碾压四方天骄，睥睨天下群雄。古语言，一念成神，一念成魔。而我林羽，一念可吞天噬地！"
+          ],
+          "author": "铁背小强",
+          "totalWordSize": "769万",
+          "totalChapterNum": "3694",
+          "lastChapterId": "522503734",
+          "lastChapterName": "　第三千七百章 无差别进攻",
+          "clickNum": "9402",
+          "status": 0,
+          "cp": "",
+          "disclaimer": "本平台经版权方授权使用该作品。如您发现涉黄、涉黑、涉政等内容，或作品内容侵害您的权益，欢迎向本平台客服举报投诉，一经核实，立即删除，本平台不承担任何责任。\r\n本平台由北京点众科技股份有限公司提供支撑服务或运营。",
+          "tagList": [],
+          "bookTypeName": "东方玄幻",
+          "bookScore": "7.9",
+          "threeTypeTag": [
+            "武修",
+            "废柴流",
+            "传统玄幻",
+            "吞噬",
+            "玄幻1"
+          ],
+          "wordSize": "769",
+          "wordSizeUnit": "万",
+          "totalReadNum": "9402",
+          "totalReadNumUnit": "",
+          "protagonist": "林羽",
+          "bookTypeThreeMap": {
+            "512": "东方玄幻"
+          }
+        },
+        {
+          "unit": "0",
+          "coverWap": "http://qnqat.kuaikandushu.cn/cppartner/1x1/11x0/110x1/11010056463/11010056463.jpg?t=202101010000&imageView2/0/w/200/h/267",
+          "bookName": "重生狂妻，大佬宠上天",
+          "bookId": "11010056463",
+          "introduction": "上一世的南景痴心错付，付出所有，换来一句你配吗？家破人亡，遭人暗害，她死在那个无人知晓的凄惨雨夜。一朝重生十八岁，强势来袭，打脸复仇虐渣渣！决心抱上某个大佬的腿，却一个不留神，被他拐到身边，宠上天！她放火，他添柴。她虐渣，他护航。于是人尽皆知，传闻中权势滔天不近女色的战家六爷，被一个名不见经传的小丫头降得服服帖帖！大佬冷哼：“我愿意！”直到某一天，她双重身份曝光，无数马甲掉落，众人才知，哪里是什么名不见经传，分明就是两个大佬的强强联手！",
+          "introductionList": [
+            "上一世的南景痴心错付，付出所有，换来一句你配吗？",
+            "家破人亡，遭人暗害，她死在那个无人知晓的凄惨雨夜。",
+            "一朝重生十八岁，强势来袭，打脸复仇虐渣渣！",
+            "决心抱上某个大佬的腿，却一个不留神，被他拐到身边，宠上天！",
+            "她放火，他添柴。",
+            "她虐渣，他护航。",
+            "于是人尽皆知，传闻中权势滔天不近女色的战家六爷，被一个名不见经传的小丫头降得服服帖帖！",
+            "大佬冷哼：“我愿意！”",
+            "直到某一天，她双重身份曝光，无数马甲掉落，众人才知，哪里是什么名不见经传，分明就是两个大佬的强强联手！"
+          ],
+          "author": "如沐清风",
+          "totalWordSize": "335万",
+          "totalChapterNum": "2949",
+          "lastChapterId": "522515376",
+          "lastChapterName": "第2949章",
+          "clickNum": "80万",
+          "status": 0,
+          "cp": "",
+          "disclaimer": "本平台经版权方授权使用该作品。如您发现涉黄、涉黑、涉政等内容，或作品内容侵害您的权益，欢迎向本平台客服举报投诉，一经核实，立即删除，本平台不承担任何责任。\r\n本平台由北京点众科技股份有限公司提供支撑服务或运营。",
+          "tagList": [
+            "重生",
+            "复仇",
+            "虐渣",
+            "甜宠",
+            "马甲"
+          ],
+          "bookTypeName": "重生异能",
+          "bookScore": "7.8",
+          "threeTypeTag": [
+            "短篇"
+          ],
+          "wordSize": "335",
+          "wordSizeUnit": "万",
+          "totalReadNum": "80",
+          "totalReadNumUnit": "万",
+          "protagonist": "南景,战北庭",
+          "bookTypeThreeMap": {
+            "579": "重生异能"
+          }
+        },
+        {
+          "unit": "0",
+          "coverWap": "http://qnqat.kuaikandushu.cn/cppartner/1x1/11x0/110x1/11010057627/11010057627.jpg?t=1640335140092&imageView2/0/w/200/h/267",
+          "bookName": "少年风水师",
+          "bookId": "11010057627",
+          "introduction": "爷爷去世的时候，轰动全城......",
+          "introductionList": [
+            "爷爷去世的时候，轰动全城......"
+          ],
+          "author": "听澜本尊",
+          "totalWordSize": "360万",
+          "totalChapterNum": "2653",
+          "lastChapterId": "514869793",
+          "lastChapterName": "第2653章",
+          "clickNum": "472万",
+          "status": 1,
+          "cp": "",
+          "disclaimer": "本平台经版权方授权使用该作品。如您发现涉黄、涉黑、涉政等内容，或作品内容侵害您的权益，欢迎向本平台客服举报投诉，一经核实，立即删除，本平台不承担任何责任。\r\n本平台由北京点众科技股份有限公司提供支撑服务或运营。",
+          "tagList": [
+            "金钱",
+            "风水",
+            "超能"
+          ],
+          "bookTypeName": "现代武侠",
+          "bookScore": "8.2",
+          "threeTypeTag": [
+            "灵异",
+            "算命"
+          ],
+          "wordSize": "360",
+          "wordSizeUnit": "万",
+          "totalReadNum": "472",
+          "totalReadNumUnit": "万",
+          "protagonist": "吴峥,唐思佳",
+          "bookTypeThreeMap": {
+            "530": "现代武侠",
+            "606": "原创灵异",
+            "607": "悬疑推理"
+          }
+        },
+        {
+          "unit": "0",
+          "coverWap": "http://qnqat.kuaikandushu.cn/cppartner/1x1/11x0/110x1/11010030861/11010030861.jpg?t=1634609613707&imageView2/0/w/200/h/267",
+          "bookName": "超级赘婿",
+          "bookId": "11010030861",
+          "introduction": "我遵循母亲的遗言，装成废物去给别人做上门女婿，为期三年。现在，三年时间结束了...",
+          "introductionList": [
+            "我遵循母亲的遗言，装成废物去给别人做上门女婿，为期三年。现在，三年时间结束了..."
+          ],
+          "author": "黑夜的瞳",
+          "totalWordSize": "590万",
+          "totalChapterNum": "4459",
+          "lastChapterId": "522505477",
+          "lastChapterName": "第4459章",
+          "clickNum": "1347万",
+          "status": 1,
+          "cp": "",
+          "disclaimer": "本平台经版权方授权使用该作品。如您发现涉黄、涉黑、涉政等内容，或作品内容侵害您的权益，欢迎向本平台客服举报投诉，一经核实，立即删除，本平台不承担任何责任。\r\n本平台由北京点众科技股份有限公司提供支撑服务或运营。",
+          "tagList": [
+            "王者",
+            "富豪",
+            "女婿",
+            "打脸"
+          ],
+          "bookTypeName": "",
+          "bookScore": "7.6",
+          "threeTypeTag": [
+            "复仇"
+          ],
+          "wordSize": "590",
+          "wordSizeUnit": "万",
+          "totalReadNum": "1347",
+          "totalReadNumUnit": "万",
+          "protagonist": "林阳,将小"
+        },
+        {
+          "unit": "0",
+          "coverWap": "http://qnqat.kuaikandushu.cn/cppartner/1x1/11x0/110x0/11000072091/11000072091.jpg?t=202101010000&imageView2/0/w/200/h/267",
+          "bookName": "无敌魔皇",
+          "bookId": "11000072091",
+          "introduction": "当我醒来的那一天，魔族在哪里？问苍天，问大地，九天九幽之内，我该如何回到魔族圣地？ 我是向青山，拳打八方，脚踢四宇，谁也阻挡不了我的回家之路",
+          "introductionList": [
+            "当我醒来的那一天，魔族在哪里？问苍天，问大地，九天九幽之内，我该如何回到魔族圣地？我是向青山，拳打八方，脚踢四宇，谁也阻挡不了我的回家之路"
+          ],
+          "author": "千笔不落",
+          "totalWordSize": "17万",
+          "totalChapterNum": "62",
+          "lastChapterId": "541685693",
+          "lastChapterName": "第62章",
+          "clickNum": "5075",
+          "status": 0,
+          "cp": "",
+          "disclaimer": "本平台经版权方授权使用该作品。如您发现涉黄、涉黑、涉政等内容，或作品内容侵害您的权益，欢迎向本平台客服举报投诉，一经核实，立即删除，本平台不承担任何责任。\r\n本平台由北京点众科技股份有限公司提供支撑服务或运营。",
+          "tagList": [
+            "无敌魔皇",
+            "千笔不落",
+            "玄幻奇幻"
+          ],
+          "bookTypeName": "东方玄幻",
+          "bookScore": "7.6",
+          "wordSize": "17",
+          "wordSizeUnit": "万",
+          "totalReadNum": "5075",
+          "totalReadNumUnit": "",
+          "bookTypeThreeMap": {
+            "512": "东方玄幻"
+          }
+        },
+        {
+          "unit": "0",
+          "coverWap": "http://qnqat.kuaikandushu.cn/cppartner/1x1/11x0/110x1/11010057208/11010057208.jpg?t=1639731764926&imageView2/0/w/200/h/267",
+          "bookName": "爱你成瘾：偏执霸总的罪妻",
+          "bookId": "11010057208",
+          "introduction": "深城首富易瑾离的未婚妻死亡，车祸肇事者凌依然被判入狱三年。 她出狱后，却意外招惹上了易瑾离。 她跪在地上求他，“易瑾离，你放过我吧。” 他却笑笑，“阿姐，我永远都不会放过你。” 都说易瑾离冷心绝情，可是却把一个坐过牢的环卫工宠上了天。 然而当年的车祸真相，却把她对他所有的爱都摧毁了，她从他身边逃离。多年后的一天，他跪在了她的面前，“依然，只要你回到我身边，怎么样都可以。” 她冷冷凝视着他，“那么你去死。”",
+          "introductionList": [
+            "深城首富易瑾离的未婚妻死亡，车祸肇事者凌依然被判入狱三年。",
+            "她出狱后，却意外招惹上了易瑾离。",
+            "她跪在地上求他，“易瑾离，你放过我吧。”",
+            "他却笑笑，“阿姐，我永远都不会放过你。”",
+            "都说易瑾离冷心绝情，可是却把一个坐过牢的环卫工宠上了天。",
+            "然而当年的车祸真相，却把她对他所有的爱都摧毁了，她从他身边逃离。",
+            "多年后的一天，他跪在了她的面前，“依然，只要你回到我身边，怎么样都可以。”",
+            "她冷冷凝视着他，“那么你去死。”"
+          ],
+          "author": "顾家小竹",
+          "totalWordSize": "402万",
+          "totalChapterNum": "3814",
+          "lastChapterId": "522482153",
+          "lastChapterName": "第3814章",
+          "clickNum": "312万",
+          "status": 0,
+          "cp": "",
+          "disclaimer": "本平台经版权方授权使用该作品。如您发现涉黄、涉黑、涉政等内容，或作品内容侵害您的权益，欢迎向本平台客服举报投诉，一经核实，立即删除，本平台不承担任何责任。\r\n本平台由北京点众科技股份有限公司提供支撑服务或运营。",
+          "tagList": [
+            "破镜重圆",
+            "虐恋",
+            "先虐后宠",
+            "豪门恩怨"
+          ],
+          "bookTypeName": "总裁豪门",
+          "bookScore": "8.3",
+          "wordSize": "402",
+          "wordSizeUnit": "万",
+          "totalReadNum": "312",
+          "totalReadNumUnit": "万",
+          "protagonist": "凌依然,易瑾离",
+          "bookTypeThreeMap": {
+            "577": "总裁豪门"
+          }
+        }
+      ],
+      "name": "男生精选",
+      "totalSize": 22
     }
-  ]
-
-  const result: INetRecommendRes = {
-    bookInfos: data.map((item, index) => {
-      return {
-        bookId: item.bookId,
-        bookName: item.bookName,
-        coverWap: item.cover,
-        introduction: item.introduction,
-        author: item.author,
-        protagonist: item.author,
-        bookTypeThreeMap: [item.author, '标签2', '标签3' ],
-        totalChapterNum: item.chapterCount + '',
-        totalWordSize: item.chapterCount + '1111xx字',
-      }
-    }),
-    totalSize: 100,
   }
 
   res.status(200).json(result)

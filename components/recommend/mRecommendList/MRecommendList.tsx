@@ -1,9 +1,10 @@
 import React, { FC } from 'react'
 import Link from "next/link";
 import ImageCover from "@/components/common/image/ImageCover";
-import { EBookStatus } from "@/typings/browse.interface";
 import { IBookInfo } from "@/typings/home.interface";
+import { EBookStatus2 } from "@/typings/book.interface";
 import styles from '@/components/recommend/mRecommendList/MRecommendList.module.scss';
+
 
 interface IProps {
   bookInfos: IBookInfo[];
@@ -31,10 +32,13 @@ const MRecommendList: FC<IProps> = ({ bookInfos }) => {
 
           <div>
             <Link href={`/book/${item.bookId}`} className={styles.bookAuthor}>
-              {[item.author, item?.bookTypeThreeMap?.[0], item?.status === EBookStatus.完结 ? '连载' : '完结', item?.hot].filter(val => val).join(' · ')}
+              {[item.author,
+                item?.bookTypeThreeMap ? Object.values(item?.bookTypeThreeMap)?.[0] : void 0,
+                item?.status === EBookStatus2.连载 ? '连载' : '完结',
+                item?.hot].filter(val => val).join(' · ')}
             </Link>
             <Link href={`/book/${item.bookId}`} className={styles.bookAuthor}>
-              {`最新章节: 第${item.lastChapterId}章   ${item.lastChapterUtime}`}
+              {`最新章节: ${item.lastChapterName}  ${item.lastChapterUtime}`}
             </Link>
           </div>
 

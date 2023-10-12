@@ -27,13 +27,16 @@ const RecommendList: FC<IProps> = ({ bookInfos }) => {
         </Link>
         <div className={styles.itemContent}>
           <Link className={styles.bookName} href={`/book/${item.bookId}`}>{item.bookName}</Link>
-          <Link className={styles.bookRate} href={`/book/${item.bookId}`}>{`9.6分`}</Link>
+          <Link className={styles.bookRate} href={`/book/${item.bookId}`}>{item.bookScore}</Link>
           <Link className={styles.bookIntro} href={`/book/${item.bookId}`}>{item.introduction}</Link>
           <Link href={`/book/${item.bookId}`} className={styles.bookAuthor}>
-            {[item.author, item?.bookTypeThreeMap?.[0], item?.status === EBookStatus.完结 ? '连载' : '完结', item.clickNum].filter(val => val).join(' · ')}
+            {[item.author,
+              item?.bookTypeThreeMap ? Object.values(item?.bookTypeThreeMap)?.[0] : void 0,
+              item?.status === EBookStatus.完结 ? '连载' : '完结',
+              item.totalWordSize].filter(val => val).join(' · ')}
           </Link>
           <Link href={`/book/${item.bookId}`} className={styles.bookAuthor}>
-            {`最新章节: 第${item.lastChapterId}章   ${item.lastChapterUtime}`}
+            {`最新章节: 第${item.totalChapterNum}章   ${item.lastChapterUtime}`}
           </Link>
         </div>
       </div>

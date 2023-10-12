@@ -33,21 +33,21 @@ const ContentList: FC<IProps> = ({ onRefresh, list, fontSize, theme }) => {
       onRefresh={onRefresh}>
       { list.map((item, itemInd) => {
         return <div
-          cid={item?.chapterInfo.chapterId}
-          key={item.chapterInfo.chapterId + '_' + itemInd}
+          cid={item.chapterId}
+          key={item.chapterId + '_' + itemInd}
           style={{ fontSize }}
-          className={classNames(styles.contentBox, item.chapterInfo.isCharge === EIsCharge.收费章节 && styles.contentChargeBox)}>
-          <h1 className={styles.title}>{item.chapterInfo.chapterName}</h1>
+          className={classNames(styles.contentBox, item.isCharge == EIsCharge.收费章节 && styles.contentChargeBox)}>
+          <h1 className={styles.title}>{item.chapterName}</h1>
           <div
             onClick={() => dispatch(setControlVisible(!controlVisible))}
             className={styles.content}>
-            { item.chapterInfo.content.map((val, index) => {
+            { item.content.map((val, index) => {
               return val ? <p key={index}>{val}</p> : null;
             }) }
           </div>
           <div
-            style={item.chapterInfo.isCharge === EIsCharge.收费章节 ? { background: `linear-gradient(180deg, transparent 0%, ${theme} 33%, ${theme} 100%)` } : {}}
-            className={item.chapterInfo.isCharge === EIsCharge.收费章节 ? styles.unlockBox : styles.downloadBox}>
+            style={item.isCharge === EIsCharge.收费章节 ? { background: `linear-gradient(180deg, transparent 0%, ${theme} 33%, ${theme} 100%)` } : {}}
+            className={item.isCharge === EIsCharge.收费章节 ? styles.unlockBox : styles.downloadBox}>
             <button className={styles.contentBtn}>打开点众阅读APP阅读本书</button>
           </div>
         </div>}

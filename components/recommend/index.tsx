@@ -18,7 +18,7 @@ interface IProps {
 const MRecommend: FC<IProps> = ({ bookInfos, pages, page, bookPackageId, code }) => {
 
   return <main className={styles.moreWrap}>
-    <NavBar backHref={'/'} title={"男频精选"}/>
+    <NavBar backHref={'/'} title={code == EChannelCode.男生 ? "男生精选" : "女生精选" }/>
     <DownloadBanner height={'0.1rem'}>
       {bookInfos.length > 0 ?
         <>

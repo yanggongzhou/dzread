@@ -3,12 +3,14 @@ import Link from "next/link";
 import Image from "next/image";
 import { IBookInfoItem } from "@/typings/book.interface";
 import styles from "@/components/book/firstChapter/FirstChapter.module.scss";
+import { INetChapterDetailRes } from "@/typings/chapter.interface";
 
 interface IProps {
   bookInfo: IBookInfoItem;
+  chapterInfo: INetChapterDetailRes;
 }
 
-const FirstChapter: FC<IProps> = ({ bookInfo }) => {
+const FirstChapter: FC<IProps> = ({ bookInfo, chapterInfo }) => {
 
   return <div className={styles.firstChapterBox}>
 
@@ -23,15 +25,13 @@ const FirstChapter: FC<IProps> = ({ bookInfo }) => {
     </div>
 
     <div className={styles.firstChapter}>
-
-      {/*<h4>第1章</h4>*/}
-      {/*<p>36号字周三晚上7点，苏溪准时出现的府酒店门外。</p>*/}
-      {/*<p>手机响了一下，苏溪打开微信，是苏俄正荣：【西西，谢谢你肯帮爸爸，我这里吃有点堵车，你先进去。】</p>*/}
-      {/*<p>苏溪放慢脚步，想着等下见道林九则佛该怎么打招呼。</p>*/}
-      {/*<p> 结婚三年，他们从来没见过面，不用费手机响了一下，苏溪打开微信，是苏俄正荣：【西西，谢谢你肯帮爸爸，我这里吃有点堵车，你先进去。】</p>*/}
+      <h4>{chapterInfo.chapterName}</h4>
+      { chapterInfo.content.map((val, index) => {
+        return <p key={index}>{val}</p>
+      }) }
       <div className={styles.mark}/>
     </div>
-    <Link href={`/chapter/${bookInfo.bookId}/${'next chapterid xxxx'}`} className={styles.chapterLink}>
+    <Link href={`/chapter/${bookInfo.bookId}/${chapterInfo.chapterId}`} className={styles.chapterLink}>
       剩余未加载内容，点击继续阅读
       <Image
         className={styles.icon}

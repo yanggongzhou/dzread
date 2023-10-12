@@ -25,16 +25,16 @@ const BookDetail: FC<IProps> = ({ book, chapterId }) => {
       <div className={styles.bookContent}>
         <div>
           {book.bookName ? <h1 className={styles.bookName}>{book.bookName}</h1> : null}
-          <p className={styles.bookStatus}>{book.tagList?.join(' · ')}</p>
+          {book.bookTypeThreeMap ? <p className={styles.bookStatus}>{Object.values(book.bookTypeThreeMap)?.join(' · ')}</p> : null}
           <p className={styles.bookChapter}>最新章节：第{book.totalChapterNum}章</p>
         </div>
         <p className={styles.updateTime}>更新时间：{book.lastChapterUtime}</p>
       </div>
     </div>
     <div className={styles.numBox}>
-      <div className={styles.numItem}>{book.scoreNum} <span>{book.scoreNumUnit}</span></div>
-      <div className={styles.numItem}>{book.clickNum } <span>xxxxxxxx</span></div>
-      <div className={styles.numItem}>{book.totalWordSize} <span>xxxxxxx字数</span></div>
+      <div className={styles.numItem}>{book.bookScore} <span>分</span></div>
+      <div className={styles.numItem}>{book.totalReadNum } <span>{book.totalReadNumUnit}</span></div>
+      <div className={styles.numItem}>{book.wordSize} <span>{book.wordSizeUnit}</span></div>
     </div>
 
     {book.introduction ? <div className={styles.introBox}>

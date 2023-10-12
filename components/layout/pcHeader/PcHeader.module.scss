@@ -92,11 +92,15 @@
   }
 }
 
-.slideLeft {
+
+.slideLeftBox {
   position: fixed;
   top: 50%;
   right: 0.4rem;
   z-index: 99;
+}
+
+.slideLeft {
 
   .slideLogo {
     width: 0.64rem;
@@ -159,5 +163,29 @@
     .slideBox {
       display: block;
     }
+  }
+}
+
+
+.itemBox {
+  margin-top: 0.2rem;
+  background-color: #FFFFFF;
+  box-shadow: 0 0.02rem 0.16rem 0 rgba(0,0,0,0.09);
+  border-radius: 0.06rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 0.76rem;
+  height: 0.76rem;
+  row-gap: 0.06rem;
+  font-size: 0.14rem;
+  color: rgba(0,0,0,0.7);
+  font-weight: 400;
+
+  .itemIcon {
+    width: 0.24rem;
+    height: 0.24rem;
   }
 }

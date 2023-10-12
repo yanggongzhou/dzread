@@ -67,7 +67,9 @@ const WapHome: FC<IProps> = ({ bannerList, seoColumnVos }) => {
 
             if (manage.type === EColumnType.分类推荐) {
               return <ColumnBox key={manage.id} href={`/browse/${column.code}-0-0-0-0`} title={manage.name} btnTxt={"全部分类"}>
-                <BrowseColumn bookTypeVos={manage.bookTypeVos}/>
+                <BrowseColumn
+                  code={column.code}
+                  bookTypeVos={manage.bookTypeVos}/>
               </ColumnBox>
             }
 

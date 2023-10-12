@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import styles from './ReaderPagination.module.scss'
 import Link from "next/link";
+import { setSessionBook } from "@/utils/storage/sessionStorages";
 
 interface IProps {
   bookId: string;
@@ -20,7 +21,7 @@ const ReaderPagination: FC<IProps> = (
       上一章
     </Link> : null}
 
-    <Link className={styles.linkItem} href={`/book/${bookId}`}>
+    <Link className={styles.linkItem} href={`/book/${bookId}`} onClick={() => {setSessionBook('1')}}>
       目录
     </Link>
     {nextChapterId ? <Link className={styles.linkItem} href={`/chapter/${bookId}/${nextChapterId}`} replace>

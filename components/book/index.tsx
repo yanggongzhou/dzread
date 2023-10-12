@@ -14,14 +14,16 @@ import classNames from "classnames";
 import { IBookSearchVo } from "@/typings/browse.interface";
 import { netBookRe } from "@/server/home";
 import styles from "@/components/book/index.module.scss";
+import { INetChapterDetailRes } from "@/typings/chapter.interface";
 
 interface IProps {
   book: IBookInfoItem;
   recommendBook: IBookSearchVo[];
   chapters: IChapterInfo[];
+  chapterInfo: INetChapterDetailRes;
 }
 
-const WapBook: FC<IProps> = ({ book, chapters, recommendBook }) => {
+const WapBook: FC<IProps> = ({ book, chapters, recommendBook, chapterInfo }) => {
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(false);
   const [list, setList] = useState(recommendBook);
@@ -59,12 +61,12 @@ const WapBook: FC<IProps> = ({ book, chapters, recommendBook }) => {
   const tabList = [
     { value: 'book_info', label: '书籍信息', child: <>
 
-        <FirstChapter bookInfo={book}/>
+        <FirstChapter bookInfo={book} chapterInfo={chapterInfo}/>
 
         <div className={styles.recommendBox}>
           <div className={styles.columnHead}>
             <h3 className={styles.columnTitle}>{'男生精选'}</h3>
-            <button className={styles.columnLink} onClick={() => onSwap()}>
+            {list.length < 3 ? null : <button className={styles.columnLink} onClick={() => onSwap()}>
               <span>换一换</span>
               <Image
                 className={classNames(styles.linkIcon, loading && styles.linkIconAni)}
@@ -73,14 +75,14 @@ const WapBook: FC<IProps> = ({ book, chapters, recommendBook }) => {
                 src={'/images/book/refresh.png'}
                 alt={''}
               />
-            </button>
+            </button>}
           </div>
 
           <BrowseList list={list}/>
         </div>
       </>
     },
-    { value: 'catalog_info', label: '目录', child: <CatalogBox chapters={chapters}/>},
+    { value: 'catalog_info', label: '目录', child: <CatalogBox bookId={book.bookId} chapters={chapters}/>},
   ]
 
   return <main className={styles.bookWrap}>

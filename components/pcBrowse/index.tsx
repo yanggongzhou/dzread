@@ -30,12 +30,12 @@ const PcBrowse: FC<IProps> = (
   }
 ) => {
 
-  const router = useRouter();
   const data = [
-    { title: '首页', link: "/home" },
-    { title: '小说分类', link: "/browse/0" },
+    { title: '首页', link: "/" },
+    { title: '小说分类', link: "/browse/" },
     { title: '都市小说' },
   ]
+
   return <main className={styles.browseWrap}>
     <Breadcrumb data={data}/>
     <div className={styles.container}>

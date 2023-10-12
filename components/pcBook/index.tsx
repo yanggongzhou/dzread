@@ -12,22 +12,24 @@ import RecommendBox from "@/components/pcBook/recommendBox";
 import Image from "next/image";
 import classNames from "classnames";
 import { netBookRe } from "@/server/home";
+import { INetChapterDetailRes } from "@/typings/chapter.interface";
 
 interface IProps {
   book: IBookInfoItem;
   recommendBook: IBookSearchVo[];
   chapters: IChapterInfo[];
+  chapterInfo: INetChapterDetailRes;
 }
 
-const PcBook: FC<IProps> = ({ book, recommendBook = [], chapters = [] }) => {
+const PcBook: FC<IProps> = ({ book, recommendBook = [], chapters = [], chapterInfo }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [loading, setLoading] = useState(false);
   const [list, setList] = useState(recommendBook);
   useEffect(() => {
     setActiveIndex(getSessionBook());
-    return () => {
-      removeSessionBook();
-    }
+    // return () => {
+    //   removeSessionBook();
+    // }
   }, []);
 
   const onSwap = async () => {
@@ -61,6 +63,7 @@ const PcBook: FC<IProps> = ({ book, recommendBook = [], chapters = [] }) => {
 
       <div className={styles.contentBox}>
         <PcBookTabs
+          chapterInfo={chapterInfo}
           chapters={chapters}
           bookInfo={book}
           activeIndex={activeIndex}
@@ -69,10 +72,10 @@ const PcBook: FC<IProps> = ({ book, recommendBook = [], chapters = [] }) => {
             setActiveIndex(ind)
           }}
         />
-        {recommendBook.length > 0 ? <div className={styles.recommendBox}>
+        {list.length > 0 ? <div className={styles.recommendBox}>
           <div className={styles.titleBox}>
             <h3 className={styles.title}>同类热门书</h3>
-            <button className={styles.columnLink} onClick={() => onSwap()}>
+            {list.length < 3 ? null : <button className={styles.columnLink} onClick={() => onSwap()}>
               <span>换一换</span>
               <Image
                 className={classNames(styles.linkIcon, loading && styles.linkIconAni)}
@@ -81,9 +84,9 @@ const PcBook: FC<IProps> = ({ book, recommendBook = [], chapters = [] }) => {
                 src={'/images/book/refresh.png'}
                 alt={''}
               />
-            </button>
+            </button>}
           </div>
-          <RecommendBox list={recommendBook}/>
+          <RecommendBox list={list}/>
         </div> : null }
       </div>
 

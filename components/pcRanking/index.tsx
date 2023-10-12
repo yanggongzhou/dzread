@@ -25,10 +25,22 @@ const PcRanking: FC<IProps> = (
   { rankData, rankBook, page, pages, rankStyle, rankId, rankType }
 ) => {
 
+  const lastName = useMemo(() => {
+    const data = rankData.find(val => val.rankType === rankType);
+    if (data) {
+      const obj = data.subList.find(item => item.id === rankId)
+      if (obj) {
+        return obj.name ? `${rankType === ERankSex.Male ? '男生' : "女生" }小说${obj.name}` : '男生小说排行榜';
+      }
+      return '男生小说排行榜';
+    }
+    return '男生小说排行榜';
+  }, [rankData, rankId]);
+
   const data = [
     { title: '首页', link: "/" },
     { title: '排行榜', link: "/ranking" },
-    { title: '都市小说' },
+    { title: lastName },
   ]
 
   const styleList: IFastRankStyleVo[] = useMemo(() => {
@@ -50,17 +62,17 @@ const PcRanking: FC<IProps> = (
 
       <div className={styles.rankContent}>
         <div className={styles.rankTitle}>
-          <h3>都市小说</h3>
-          <div className={styles.rankDate}>
-            {styleList.length > 0 ? styleList.map(val => {
+          <h3>{lastName}</h3>
+          {styleList.length > 1 ? <div className={styles.rankDate}>
+            {styleList.map(val => {
               return <Link
                 key={val.style}
                 className={classNames(styles.rankDateItem, rankStyle === val.style && styles.active)}
                 href={`/ranking/${rankType}-${rankId || 'null'}-${val.style}`}>
                 {val.styleName}
               </Link>
-            }) : null}
-          </div>
+            })}
+          </div> : null}
         </div>
         {rankBook.length === 0 ? <PcEmpty/> : <RankingList rankBook={rankBook}/>}
 

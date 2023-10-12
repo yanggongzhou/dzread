@@ -7,15 +7,15 @@ export const PcEmpty: FC = () => {
   return <div className={styles.emptyBox}>
     <Image
       className={styles.emptyIcon}
-      width={320}
-      height={240}
+      width={200}
+      height={200}
       src={'/images/common/empty.png'}
       placeholder="blur"
       blurDataURL={'/images/common/pc-empty.png'}
       alt={'没找到内容'}
     />
     <div className={styles.emptyIntro}>
-      没找到内容
+      敬请期待精品图书
     </div>
   </div>
 }

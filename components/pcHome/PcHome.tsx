@@ -33,7 +33,7 @@ const PcHome: FC<IProps> = ({ bannerList, seoColumnManageVos = [] }) => {
               return null;
             }
             return <div key={item.id} className={styles.bookColumn}>
-              <PcHomeTitle title={item.name} href={`/recommend/${item.bookPackageId}`}/>
+              <PcHomeTitle title={item.name} href={`/recommend/${item.id}-${item.bookPackageId}`}/>
               <div className={styles.listBox}>
                 {item.sex === ERankVoSex.男频 ? <Image
                   className={styles.listBg}

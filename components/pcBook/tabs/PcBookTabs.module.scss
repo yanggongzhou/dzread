@@ -1,13 +1,14 @@
 .tabsBox {
-  padding-top: 0.8rem;
+  padding-top: 0.22rem;
   flex: 1;
 
   .navMenu {
     display: flex;
     border-bottom: 0.01rem solid #E8E8E8;
+    column-gap: 0.5rem;
 
     .navItem {
-      padding: 0 0.25rem 0.14rem;
+      padding-bottom: 0.14rem;
       display: flex;
       align-items: center;
       color: #222222;
@@ -29,7 +30,7 @@
         position: absolute;
         left: 50%;
         bottom: 0;
-        width: 50%;
+        width: 100%;
         z-index: 9;
       }
     }

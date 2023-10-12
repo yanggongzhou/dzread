@@ -81,6 +81,7 @@ export enum EColumnType {
 export interface IBookInfo {
   bookId: string;
   bookName: string;
+  bookScore: string;
   coverWap: string;
   introduction: string;
   protagonist: string; // 主角
