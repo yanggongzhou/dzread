@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import styles from "@/components/pcBrowse/index.module.scss";
 import PaginationCom from "@/components/common/paginationCom";
-import { IBookSearchVo, ITypeOneVo } from "@/typings/browse.interface";
+import { IBookSearchVo, IBrowseParams, ITypeOneVo } from "@/typings/browse.interface";
 import { PcEmpty } from "@/components/common/empty";
 import PcCapsuleTabs from "@/components/pcBrowse/PcCapsuleTabs";
 import { useRouter } from "next/router";
@@ -15,7 +15,7 @@ interface IProps {
   typeOneVoList: ITypeOneVo[];
   statusMark: {title: string; markId: string}[]; // 书籍状态栏(四级)
   wordType: {name: string; type: string}[];// 分类书籍字数筛选
-  params: any;
+  params: IBrowseParams;
 }
 
 const PcBrowse: FC<IProps> = (
@@ -43,7 +43,8 @@ const PcBrowse: FC<IProps> = (
         wordType={wordType}
         statusMark={statusMark}
         typeOneVoList={typeOneVoList}
-        params={params}/>
+        params={params}
+      />
 
       <div className={styles.browseContent}>
 

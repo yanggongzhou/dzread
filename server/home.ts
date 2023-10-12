@@ -34,7 +34,6 @@ export const netRecommend = (body: INetRecommendReq): Promise<INetRecommendRes |
   return poFetch('/api/5003', body);
 }
 
-
 // 获取书籍详情
 export const netBook = (bookId: string): Promise<INetBookRes | 'BadRequest_404' | 'BadRequest_500'> => {
   return poFetch('/api/5051', { bookId });

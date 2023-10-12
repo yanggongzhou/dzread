@@ -10,8 +10,8 @@ import BrowseColumn from "@/components/home/browseColumn/BrowseColumn";
 import Image from "next/image";
 import { MEmpty } from "@/components/common/empty";
 import MFooter from "@/components/home/mFooter/MFooter";
-import styles from '@/components/home/index.module.scss';
 import { useAppSelector } from "@/store";
+import styles from '@/components/home/index.module.scss';
 
 interface IProps {
   bannerList: ISeoBannerManageVo[];
@@ -47,7 +47,7 @@ const WapHome: FC<IProps> = ({ bannerList, seoColumnVos }) => {
               />
               排行榜
             </Link>
-            <Link href={'/browse/0'} className={styles.navItem} title="分类">
+            <Link href={`/browse/${column.code}-0-0-0-0`} className={styles.navItem} title="分类">
               <Image
                 className={styles.navIcon}
                 width={64}
@@ -66,12 +66,12 @@ const WapHome: FC<IProps> = ({ bannerList, seoColumnVos }) => {
             }
 
             if (manage.type === EColumnType.分类推荐) {
-              return <ColumnBox key={manage.id} href={`/browse/0`} title={manage.name} btnTxt={"全部分类"}>
+              return <ColumnBox key={manage.id} href={`/browse/${column.code}-0-0-0-0`} title={manage.name} btnTxt={"全部分类"}>
                 <BrowseColumn bookTypeVos={manage.bookTypeVos}/>
               </ColumnBox>
             }
 
-            return <ColumnBox key={manage.id} href={`/recommend/${manage.bookPackageId}`} title={manage.name}
+            return <ColumnBox key={manage.id} href={`/recommend/${code}-${manage.bookPackageId}`} title={manage.name}
                               btnTxt={"更多精选"}>
               <FeaturedList bookInfos={manage?.bookInfos}/>
             </ColumnBox>

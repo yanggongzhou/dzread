@@ -1,6 +1,7 @@
 .browseWrap {
   padding-top: 0.96rem;
-  background-color: #F3F3F3;
+  background-color: #FFFFFF;
+  min-height: 100vh;
 
   :global {
     .adm-dropdown-popup {
@@ -12,10 +13,13 @@
     }
   }
 
+  .browseContentMark {
+    height: 0.2rem;
+    background-color: #F3F3F3;
+  }
   .browseContent {
     padding: 0.32rem 0.32rem 1.18rem;
     background-color: #FFFFFF;
-    margin-top: 0.2rem;
     overflow-y: auto;
   }
 

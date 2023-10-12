@@ -1,34 +1,28 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useState } from "react";
 import { Tabs } from "antd-mobile";
 import Link from "next/link";
 import Image from "next/image";
-import { EBookStatus, ITypeOneVo } from "@/typings/browse.interface";
+import { IBrowseParams, ITypeTwoVo } from "@/typings/browse.interface";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { setIsShowBrowse } from "@/store/modules/app.module";
 import classNames from "classnames";
-import { useRouter } from "next/router";
 import styles from "@/components/browse/browseType/BrowseType.module.scss";
 
 interface IProps {
-  typeOneVoList: ITypeOneVo[];
+  typeTwoVos: ITypeTwoVo[];
   statusMark: {title: string; markId: string}[]; // 书籍状态栏(四级)
   wordType: {name: string; type: string}[];// 分类书籍字数筛选
   isShowBox: boolean;
+  params: IBrowseParams;
 }
 
-interface IParams {
-  id: string | number; // 一级分类id，如果有cid，将不会按照这个传
-  cid: string; // 二级分类id，如果有tid，将不会按照这个传
-  tid: string; // 三级分类id，如果有三级id就查三级id不查二级id的
-  status: EBookStatus | 0;
-  wordType: string;
-}
 const BrowseType: FC<IProps> = (
   {
-    typeOneVoList,
+    typeTwoVos,
     statusMark,
     wordType,
-    isShowBox
+    isShowBox,
+    params
   }
 ) => {
   const isShowBrowse = useAppSelector(state => state.app.isShowBrowse);
@@ -36,28 +30,6 @@ const BrowseType: FC<IProps> = (
   const [isShowMore, setIsShowMore] = useState(false);
   const [isShowMore2, setIsShowMore2] = useState(false);
 
-  const router = useRouter();
-  const [params, setParams] = useState<IParams>({
-    id: typeOneVoList[0].categoryId,
-    cid: typeOneVoList?.[0]?.typeTwoVos?.[0]?.cid || '0',
-    tid: '0',
-    status: 0,
-    wordType: '0',
-  });
-
-  useEffect(() => {
-    const { types } = router.query as { types?: string; }
-    if (types) {
-      const typeArr = types.split('-');
-      setParams({
-        id: typeArr[0] || typeOneVoList[0].categoryId,
-        cid: typeArr[1] || typeOneVoList?.[0]?.typeTwoVos?.[0]?.cid || '0',
-        tid: typeArr[2] || '0',
-        status: Number(typeArr[3]) ? Number(typeArr[3]) as EBookStatus : 0,
-        wordType: typeArr[4] || '0',
-      })
-    }
-  }, [router.query]);
 
   return <div
     style={isShowBox && isShowBrowse ? { position: "sticky" } : { position: "fixed" }}
@@ -72,11 +44,11 @@ const BrowseType: FC<IProps> = (
           activeLineMode={'fixed'}
           activeKey={params.cid}
         >
-          {typeOneVoList[0].typeTwoVos.map((item) => {
+          {typeTwoVos.map((item) => {
             return <Tabs.Tab
               key={item.cid}
               title={
-                <Link href={`/browse/${params.id}-${item.cid}-${params.tid}-${params.status}-${params.wordType}`}>
+                <Link href={`/browse/${params.id}-${item.cid}-${item.cid === "0" ? "0" : params.tid}-${params.status}-${params.wordType}`}>
                   {item.title}
                 </Link>
               }/>
@@ -91,31 +63,44 @@ const BrowseType: FC<IProps> = (
           alt={'more'}
         />
       </div>
-      <div className={styles.tabBox} style={{ paddingTop: '0.2rem'}}>
-        <Tabs
-          className={isShowMore2 ? styles.tabContentMore : styles.tabContent}
-          activeLineMode={'fixed'}
-          activeKey={params.tid}
-        >
-          {typeOneVoList[0].typeTwoVos[0].categoryMark.map((item) => {
-            return <Tabs.Tab
-              key={item.type}
-              title={
-                <Link href={`/browse/${params.id}-${params.cid}-${item.type}-${params.status}-${params.wordType}`}>
-                  {item.name}
-                </Link>
-              }/>
-          })}
-        </Tabs>
-        <Image
-          onClick={() => setIsShowMore2(!isShowMore2)}
-          className={classNames(styles.moreIcon, isShowMore2 && styles.moreIconActive)}
-          width={24}
-          height={24}
-          src={'/images/browse/extend.png'}
-          alt={'more'}
-        />
-      </div>
+
+      {params.cid === "0" ? null : <>
+        { typeTwoVos.map(twoVo => {
+          return <div key={twoVo.cid} className={styles.tabBox} style={{ paddingTop: '0.2rem', display: params.cid === twoVo.cid ? "block" : 'none' }}>
+            <Tabs
+              className={isShowMore2 ? styles.tabContentMore : styles.tabContent}
+              activeLineMode={'fixed'}
+              activeKey={params.tid}
+            >
+              <Tabs.Tab
+                key={'0'}
+                title={
+                  <Link href={`/browse/${params.id}-${params.cid}-0-${params.status}-${params.wordType}`}>
+                    全部
+                  </Link>
+                }/>
+
+              {twoVo.categoryMark.map((item) => {
+                return <Tabs.Tab
+                  key={item.markId}
+                  title={
+                    <Link href={`/browse/${params.id}-${params.cid}-${item.markId}-${params.status}-${params.wordType}`}>
+                      {item.title}
+                    </Link>
+                  }/>
+              })}
+            </Tabs>
+            <Image
+              onClick={() => setIsShowMore2(!isShowMore2)}
+              className={classNames(styles.moreIcon, isShowMore2 && styles.moreIconActive)}
+              width={24}
+              height={24}
+              src={'/images/browse/extend.png'}
+              alt={'more'}
+            />
+          </div>
+        })}
+      </>}
 
       <div className={styles.statusBox}>
         { statusMark.map(val => {

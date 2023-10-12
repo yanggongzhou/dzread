@@ -1,6 +1,6 @@
 import React from "react";
 import { GetServerSideProps, GetServerSidePropsResult, NextPage } from "next";
-import { netSearch, netTag } from "@/server/home";
+import { netTag } from "@/server/home";
 import PcSearch from "@/components/pcSearch";
 import { ownOs } from "@/utils/tools";
 import WapSearch from "@/components/search";
@@ -14,13 +14,24 @@ interface IProps {
   isPc: boolean;
   bookList: IBookSearchVo[];
   isEmpty: boolean;
+  searchType?: ESearchType;
 }
 
-const Search: NextPage<IProps> = ({ isPc, sValue, bookList = [], isEmpty, page, pages}) => {
+const Search: NextPage<IProps> = ({ isPc, sValue, bookList = [], isEmpty, page, pages, searchType}) => {
   return <>
     { isPc ?
-      <PcSearch sValue={sValue} bookList={bookList} isEmpty={isEmpty} pages={pages} page={page}/> :
-      <WapSearch sValue={sValue} bookList={bookList} isEmpty={isEmpty} pages={pages} page={page} />}
+      <PcSearch
+        sValue={sValue}
+        bookList={bookList}
+        isEmpty={isEmpty}
+        pages={pages}
+        page={page}/> :
+      <WapSearch
+        sValue={sValue}
+        bookList={bookList}
+        isEmpty={isEmpty}
+        pages={pages}
+        page={page} />}
   </>
 }
 
@@ -55,6 +66,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, query }): Pr
         bookList,
         isEmpty: !data || (bookList.length === 0),
         isPc,
+        searchType: searchType as ESearchType,
       },
     }
   }

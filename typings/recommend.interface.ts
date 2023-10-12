@@ -7,6 +7,7 @@ export interface INetRecommendReq {
   index: number;
   size: number;
   bookPackageId: number; // 包ID
+  id: number;
 }
 /**
  * 书籍类型下行参数

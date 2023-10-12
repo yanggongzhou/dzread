@@ -1,63 +1,95 @@
 import Link from "next/link";
 import React, { CSSProperties, FC } from "react";
-import Image from "next/image";
-import styles from "@/components/pcBrowse/PcCapsuleTabs.module.scss";
-import { CapsuleTabs } from "antd-mobile";
-import { ITypeOneVo } from "@/typings/browse.interface";
+import { IBrowseParams, ITypeOneVo } from "@/typings/browse.interface";
 import classNames from "classnames";
+import styles from "@/components/pcBrowse/PcCapsuleTabs.module.scss";
 
 interface IProps {
   statusMark: {title: string; markId: string}[]; // 书籍状态栏(四级)
   wordType: {name: string; type: string}[];// 分类书籍字数筛选
   typeOneVoList: ITypeOneVo[];
-  params: any;
+  params: IBrowseParams;
   style?: CSSProperties | undefined;
 }
 
-const PcCapsuleTabs: FC<IProps> = ({ typeOneVoList, statusMark, wordType, style }) => {
+const PcCapsuleTabs: FC<IProps> = (
+  {
+    typeOneVoList,
+    statusMark,
+    wordType,
+    style,
+    params
+  }) => {
 
-  var typeTwoId = '';
 
   return <div style={style} className={styles.capsuleTabsBox}>
-    <CapsuleTabs defaultActiveKey='1'>
-      {typeOneVoList.map(val => {
-        return <CapsuleTabs.Tab title={val.categoryName} key={val.categoryId}>
-          分类
-          <div className={styles.tabsBox}>
-            {val.typeTwoVos.map((item) => {
-              return <Link
-                href={`/browse/${item.cid}`}
-                key={item.cid}
-                className={classNames(styles.tabItem, item.cid === typeTwoId && styles.tabItemActive)}>
-                {item.title}
-              </Link>
-            })}
-          </div>
-        </CapsuleTabs.Tab>
+    <div className={styles.oneVoBox}>
+      {typeOneVoList.map(oneVo => {
+        return <Link
+          key={oneVo.categoryId}
+          className={classNames(styles.oneVoItem, params.id == oneVo.categoryId && styles.oneVoItemActive)}
+          href={`/browse/${oneVo.categoryId}-0-0-${params.status}-${params.wordType}`}>{oneVo.categoryName}</Link>
       })}
-    </CapsuleTabs>
-    <div>
-      状态
-      <div className={styles.tabsBox}>
+    </div>
+
+    <div className={styles.twoVoBox}>
+      <h3>分类</h3>
+      {typeOneVoList.map(oneVo => {
+        return <div
+          key={oneVo.categoryId}
+          style={{ display: params.id == oneVo.categoryId ? "flex" : "none" }}
+          className={styles.twoVoContent}>
+          { oneVo.typeTwoVos.map(twoVo => {
+            return <div key={twoVo.cid} className={styles.twoVoItemBox}>
+              <Link className={classNames(styles.twoVoItem, params.cid === twoVo.cid && styles.twoVoItemActive)}
+                href={`/browse/${params.id}-${twoVo.cid}-0-${params.status}-${params.wordType}`}>
+                {twoVo.title}
+              </Link>
+
+              {twoVo.categoryMark.length !== 0 && params.cid != "0" ?
+                <div
+                  key={oneVo.categoryId + '_3'}
+                  style={{ display: params.cid == twoVo.cid ? "flex" : "none" }}
+                  className={styles.cateContent}
+                >
+                  {twoVo.categoryMark.map(cate => {
+                    return <Link
+                      key={cate.markId}
+                      className={classNames(styles.cateItem, params.tid === cate.markId && styles.cateItemActive)}
+                      href={`/browse/${params.id}-${params.cid}-${cate.markId}-${params.status}-${params.wordType}`}>
+                      {cate.title}
+                    </Link>
+                  })}
+                </div> : null}
+            </div>
+          })}
+
+        </div>
+      })}
+    </div>
+
+    <div className={styles.twoVoBox}>
+      <h3>状态</h3>
+      <div className={styles.twoVoContent}>
         {statusMark.map((item) => {
           return <Link
-            href={`/browse/${item.markId}`}
+            href={`/browse/${params.id}-${params.cid}-${params.tid}-${item.markId}-${params.wordType}`}
             key={item.markId}
-            className={classNames(styles.tabItem, item.markId === 'xxxx' && styles.tabItemActive)}>
+            className={classNames(styles.twoVoItem, item.markId == params.status && styles.twoVoItemActive)}>
             {item.title}
           </Link>
         })}
       </div>
     </div>
 
-    <div>
-      字数
-      <div className={styles.tabsBox}>
+    <div className={styles.twoVoBox}>
+      <h3>字数</h3>
+      <div className={styles.twoVoContent}>
         {wordType.map((item) => {
           return <Link
-            href={`/browse/${item.type}`}
+            href={`/browse/${params.id}-${params.cid}-${params.tid}-${params.status}-${item.type}`}
             key={item.type}
-            className={classNames(styles.tabItem, item.type === 'xxxx' && styles.tabItemActive)}>
+            className={classNames(styles.twoVoItem, item.type === params.wordType && styles.twoVoItemActive)}>
             {item.name}
           </Link>
         })}

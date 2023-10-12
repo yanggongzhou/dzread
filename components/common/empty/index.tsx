@@ -24,8 +24,8 @@ export const MEmpty: FC = () => {
   return <div className={styles.mEmptyBox}>
     <Image
       className={styles.emptyIcon}
-      width={320}
-      height={320}
+      width={240}
+      height={240}
       src={'/images/common/empty.png'}
       placeholder="blur"
       blurDataURL={'/images/common/empty.png'}

@@ -1,21 +1,31 @@
 .keywordsWrap {
-  padding-bottom: 0.5rem;
-  min-height: calc(100vh - 2rem);
-  background-color: #F5F6FA;
-
+  padding: 0.66rem 0 0.54rem;
+  min-height: calc(100vh - 2.24rem);
+  background-color: #FFFFFF;
 
   .keywordBox {
     width: 12rem;
     margin: 0 auto;
-    padding: 0.5rem 0;
+    padding: 0.6rem 0 1rem;
     height: 100%;
+    display: flex;
+    gap: 0.2rem;
+    flex-wrap: wrap;
 
     .keywordItem {
+      background-color: #F3F3F3;
+      border-radius: 0.22rem;
       font-size: 0.16rem;
-      padding: 0.08rem 0.2rem;
-      color: $theme_color;
+      padding: 0.12rem 0.3rem;
       display: inline-block;
-      text-decoration: underline !important;
+      font-weight: 400;
+      color: #555555;
+      transition: all 0.3s;
+
+      &:hover {
+        color: #FFFFFF;
+        background-color: $theme_color;
+      }
     }
   }
 }

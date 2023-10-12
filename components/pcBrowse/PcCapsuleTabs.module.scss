@@ -1,43 +1,125 @@
 .capsuleTabsBox {
-  background-color: #F4F6F8;
   position: sticky;
   top: 0.66rem;
   width: 2.1rem;
   max-height: calc(100vh - 384px);
+  flex-shrink: 0;
 
-
-  .tabsBox {
+  .oneVoBox {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.1rem;
-    align-items: center;
-    overflow-x: auto;
+    justify-content: space-between;
+    height: 0.4rem;
+    background-color: #F7F7F8;
 
-    .tabItem, .tabItemActive {
-      padding: 0 0.1rem;
-      height: 0.4rem;
-      border-radius: 0.04rem;
+    .oneVoItem {
+      border-top: 0.02rem solid transparent;
+      flex: 1;
       font-size: 0.16rem;
       font-weight: 400;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      color: #333333;
+      color: #222222;
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: #5f6b7c99;
-      transition: all 0.3s;
-
-      &:hover {
-        color: $theme_color;
-      }
     }
 
-    .tabItemActive {
-      color: $theme_color;
-      font-weight: 500;
-      background-color: rgb(201, 201, 137);
+    .oneVoItemActive {
+      border-color: #FF4614;
+      font-weight: 600;
+      color: #FF4614;
+      background-color: #FFF5EF;
+    }
+  }
+
+
+  .twoVoBox {
+    padding: 0.2rem 0;
+    border-bottom: 0.01rem solid #E8E8E8;
+
+    h3 {
+      font-size: 0.14rem;
+      font-weight: bold;
+      color: #222222;
+      margin-bottom: 0.2rem;
+    }
+
+    .twoVoContent {
+      display: flex;
+      flex-wrap: wrap;
+
+      .twoVoItemBox {
+        position: relative;
+        height: 0.3rem;
+      }
+
+      .twoVoItem {
+        display: inline-block;
+        height: 0.3rem;
+        line-height: 0.3rem;
+        padding: 0 0.12rem;
+        font-size: 0.14rem;
+        font-weight: 400;
+        color: #222222;
+        border-radius: 0.15rem;
+      }
+
+      .twoVoItemActive {
+        font-weight: bold;
+        color: #FF4614;
+        background-color: #FFF5EF;
+      }
+
+      .cateContent {
+        background-color: #F7F7F8;
+        border-radius: 0.04rem;
+        padding: 0.1rem 0.12rem;
+        display: flex;
+        flex-wrap: wrap;
+        column-gap: 0.24rem;
+        row-gap: 0.1rem;
+        position: absolute;
+        top: 0.4rem;
+        width: 2.1rem;
+        left: 0;
+        transform: translateX(-50%);
+        z-index: 9;
+
+        &:before {
+          content: "";
+          position: absolute;
+          top: -0.2rem;
+          left: 50%;
+          width: 0;
+          border-right: 0.12rem solid transparent;
+          border-bottom: 0.17rem solid #F7F7F8;
+          border-left: 0.12rem solid transparent;
+          transform: translateX(-50%);
+        }
+
+        .cateItem {
+          font-size: 0.12rem;
+          font-weight: 400;
+          color: #666666;
+        }
+
+        .cateItemActive {
+          font-weight: 600;
+          color: #FF4614;
+        }
+
+      }
+    }
+  }
+
+
+  .statusBox {
+    padding: 0.2rem 0;
+    border-bottom: 0.01rem solid #E8E8E8;
+
+    h3 {
+      font-size: 0.14rem;
+      font-weight: bold;
+      color: #222222;
+      margin-bottom: 0.2rem;
     }
   }
 }

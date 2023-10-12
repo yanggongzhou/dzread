@@ -7,6 +7,7 @@ import styles from "@/components/tag/index.module.scss";
 import ClientConfig from "@/client.config";
 import { IBookSearchVo } from "@/typings/browse.interface";
 import { ISeoKeyWords } from "@/typings/keywords.interface";
+import { ESearchType } from "@/typings/tag.interface";
 
 interface IProps {
   bookList: IBookSearchVo[];
@@ -17,7 +18,7 @@ interface IProps {
   keyword: string;
 }
 
-const WapTag: FC<IProps> = ({ page, pages, keywordId, bookList, keyword, words }) => {
+const WapTag: FC<IProps> = ({ page, pages, keywordId, bookList, keyword, words, searchType }) => {
   return <main className={styles.tagWrap}>
 
     <NavBar backHref={'/'} title={keyword} />

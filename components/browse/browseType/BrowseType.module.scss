@@ -68,6 +68,10 @@
           //gap: 0.16rem !important;
         }
 
+        .adm-tabs-tab-wrapper-stretch {
+          flex: none;
+        }
+
         .adm-tabs-tab-line {
           display: none;
         }
@@ -114,10 +118,6 @@
           flex-wrap: wrap;
           row-gap: 0.2rem;
           column-gap: 0.1rem;
-        }
-
-        .adm-tabs-tab-wrapper-stretch {
-          flex: none;
         }
       }
     }

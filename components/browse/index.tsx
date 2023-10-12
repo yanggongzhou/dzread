@@ -8,17 +8,17 @@ import DownloadBanner from "@/components/common/downloadBanner/DownloadBanner";
 import { setIsShowBrowse } from "@/store/modules/app.module";
 import { useAppDispatch } from "@/store";
 import MRecommendList from "@/components/recommend/mRecommendList/MRecommendList";
-import { IBookSearchVo, ITypeOneVo } from "@/typings/browse.interface";
+import { IBookSearchVo, IBrowseParams, ITypeTwoVo } from "@/typings/browse.interface";
 import styles from "@/components/browse/index.module.scss";
 
 interface IProps {
   page: number;
   pages: number;
   books: IBookSearchVo[];
-  typeOneVoList: ITypeOneVo[];
-  statusMark: {title: string; markId: string}[]; // 书籍状态栏(四级)
-  wordType: {name: string; type: string}[];// 分类书籍字数筛选
-  params: any;
+  typeTwoVos: ITypeTwoVo[];
+  statusMark: { title: string; markId: string }[]; // 书籍状态栏(四级)
+  wordType: { name: string; type: string }[];// 分类书籍字数筛选
+  params: IBrowseParams;
 }
 
 const MBrowse: FC<IProps> = (
@@ -26,7 +26,7 @@ const MBrowse: FC<IProps> = (
     page,
     pages,
     books,
-    typeOneVoList,
+    typeTwoVos,
     statusMark,
     wordType,
     params,
@@ -62,24 +62,29 @@ const MBrowse: FC<IProps> = (
 
   return (<main className={styles.browseWrap}>
 
-    <NavBar backHref={'/'} title={"男生小说分类"}/>
+    <NavBar backHref={'/'} title={"小说分类"}/>
 
     <BrowseType
       isShowBox={isShowBox}
-      typeOneVoList={typeOneVoList}
+      typeTwoVos={typeTwoVos}
       statusMark={statusMark}
       wordType={wordType}
+      params={params}
     />
 
+    <div className={styles.browseContentMark}/>
+
     <DownloadBanner height={'0.1rem'}>
-      {books.length > 0 ? <div className={styles.browseContent} ref={browseRef}>
-        <MRecommendList list={books} />
-        {pages && pages > 1 ? <MorePagination
-          prevPath={`/browse/${params.id}-${params.cid}-${params.tid}-${params.status}-${params.wordType}/`}
-          page={page}
-          totalPage={pages}
-        /> : null}
-      </div> : <MEmpty />}
+      <div className={styles.browseContent} ref={browseRef}>
+        {books.length > 0 ? <>
+          <MRecommendList bookInfos={books}/>
+          {pages && pages > 1 ? <MorePagination
+            prevPath={`/browse/${params?.id}-${params?.cid}-${params?.tid}-${params?.status}-${params?.wordType}/`}
+            page={page}
+            totalPage={pages}
+          /> : null}
+        </> : <MEmpty/>}
+      </div>
     </DownloadBanner>
   </main>)
 }

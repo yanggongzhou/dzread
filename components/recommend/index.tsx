@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { IBookInfo } from "@/typings/home.interface";
+import { EChannelCode, IBookInfo } from "@/typings/home.interface";
 import { MEmpty } from "@/components/common/empty";
 import MorePagination from "@/components/recommend/pagination/MorePagination";
 import MRecommendList from "@/components/recommend/mRecommendList/MRecommendList";
@@ -12,9 +12,10 @@ interface IProps {
   page: number;
   pages: number;
   bookPackageId: number;
+  code: EChannelCode;
 }
 
-const MRecommend: FC<IProps> = ({ bookInfos, pages, page, bookPackageId }) => {
+const MRecommend: FC<IProps> = ({ bookInfos, pages, page, bookPackageId, code }) => {
 
   return <main className={styles.moreWrap}>
     <NavBar backHref={'/'} title={"男频精选"}/>
@@ -23,7 +24,7 @@ const MRecommend: FC<IProps> = ({ bookInfos, pages, page, bookPackageId }) => {
         <>
           <MRecommendList bookInfos={bookInfos}/>
           {pages && pages > 1 ? <MorePagination
-            prevPath={`/recommend/${bookPackageId}/`}
+            prevPath={`/recommend/${code}-${bookPackageId}/`}
             page={page}
             totalPage={pages}
           /> : null}

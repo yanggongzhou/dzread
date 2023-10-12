@@ -20,14 +20,10 @@ interface IProps {
 }
 
 const TagPage: NextPage<IProps> = (
-  { isPc, page, pages = 0, keywordId, keyword, bookList, words = [] }) => {
-  const data = [
-    { title: '首页', link: "/home" },
-    { title: '关键词', link: "/keywords" },
-    { title: keyword },
-  ]
+  { isPc, page, pages = 0, keywordId, keyword, bookList, words = [], searchType }) => {
+
   return <>
-    <Breadcrumb data={data} style={isPc ? {} : { width: 0, height: 0, display: "none" }}/>
+
     {isPc ?
       <PcTag
         words={words}
