@@ -24,6 +24,16 @@ export const onImgError = (e: any) => {
     e.target.style.visibility = 'visible';
   }
 }
+export const onBannerError = (e: any) => {
+  console.log('imgError:')
+  e.target.style.visibility = 'hidden';
+  e.target.src = '/images/common/banner-default.png';
+  e.target.srcset = '/images/common/banner-default.png';
+  e.target.onload = function (){
+    e.target.style.visibility = 'visible';
+  }
+}
+
 
 const ImageCover: FC<IProps> = (props) => {
 

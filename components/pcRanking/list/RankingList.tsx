@@ -16,6 +16,13 @@ const RankingList: FC<IProps> = ({ rankBook = [], priority = false }) => {
     return null
   }
 
+  const rankColors = [
+    { color: "#E0B20A", icon: '/images/ranking/rank0.png'},
+    { color: "#98B2CE", icon: '/images/ranking/rank1.png'},
+    { color: "#CB857C", icon: '/images/ranking/rank2.png'},
+    { color: "#B1B1B1", icon: '/images/ranking/rank3.png'}
+  ]
+
   return <div className={styles.listBox}>
     {rankBook.map((book, index) => {
 
@@ -23,7 +30,15 @@ const RankingList: FC<IProps> = ({ rankBook = [], priority = false }) => {
 
       return <div key={book.bookId} className={styles.itemBox}>
         <Link href={routerToBookInfo} className={styles.bookIndex}>
-          {index + 1}
+          <Image
+            priority={priority}
+            className={styles.rankIcon}
+            width={27}
+            height={32}
+            src={index > 2 ? rankColors[3].icon : rankColors[index].icon}
+            alt={book.bookName}
+          />
+          <span style={{ color: index > 2 ? rankColors[3].color : rankColors[index].color }}>{index + 1}</span>
         </Link>
 
         <Link href={routerToBookInfo} className={styles.imageBox}>
@@ -44,17 +59,17 @@ const RankingList: FC<IProps> = ({ rankBook = [], priority = false }) => {
 
           <Link href={routerToBookInfo} className={styles.bookName}>
             <span>{book.bookName}</span>
-            <span className={styles.bookRate}>{book.num}</span>
+            <span className={styles.bookRate}>{book.commentScore}</span>
           </Link>
           <Link href={routerToBookInfo} className={styles.bookIntro}>
             {book.introduction}
           </Link>
 
-          <Link href={routerToBookInfo} className={styles.tagBox}>
-            {(book.bookTypeThreeMap || []).map(val => {
+          {book.bookTypeThreeMap ? <Link href={routerToBookInfo} className={styles.tagBox}>
+            {(Object.values(book.bookTypeThreeMap) || []).map(val => {
               return <span className={styles.tagItem} key={val}>{val}</span>
             })}
-          </Link>
+          </Link> : null}
         </div>
       </div>
     })}

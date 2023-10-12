@@ -62,7 +62,7 @@ export const netTag = (params: INetTagReq): Promise<INetTagRes | 'BadRequest_404
 
 // 5102 - 搜索联想词
 export const netThink = (keyword: string): Promise<INetThinkRes | 'BadRequest_404' | 'BadRequest_500'> => {
-  return ownFetch('/api/5102', { keyword })
+  return poFetch('/api/5102', { keyword })
 }
 
 // 5105- 书籍详情页推荐

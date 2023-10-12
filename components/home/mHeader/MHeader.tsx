@@ -7,6 +7,7 @@ import Link from "next/link";
 import { EChannelCode, ISeoColumnVo } from "@/typings/home.interface";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { setChannelCode } from "@/store/modules/app.module";
+import { downloadApp } from "@/utils/callapp";
 
 interface IProps {
   seoColumnVos: ISeoColumnVo[];
@@ -31,7 +32,7 @@ const MHeader: FC<IProps> = ({ seoColumnVos }) => {
         src={'/images/home/logo-txt.png'}
         alt={ClientConfig.name}
       />
-      <button className={styles.downloadBtn}>打开APP</button>
+      <button className={styles.downloadBtn} onClick={downloadApp}>打开APP</button>
     </header>
 
     <div className={styles.navContainer}>

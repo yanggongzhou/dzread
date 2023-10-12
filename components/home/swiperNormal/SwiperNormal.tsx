@@ -1,8 +1,10 @@
 import React, { FC } from 'react';
 import { Swiper } from 'antd-mobile';
 import { ISeoBannerManageVo } from "@/typings/home.interface";
-import ImageCover from "@/components/common/image/ImageCover";
+import { onBannerError } from "@/components/common/image/ImageCover";
 import styles from '@/components/home/swiperNormal/SwiperNormal.module.scss';
+import Link from "next/link";
+import Image from "next/image";
 
 interface IProps {
   bannerList: ISeoBannerManageVo[];
@@ -26,14 +28,19 @@ const SwiperNormal: FC<IProps> = ({ bannerList }) => {
       loop>
       {bannerList.map((item) => (
         <Swiper.Item key={item.bookId} className={styles.content}>
-          <ImageCover
-            href={`/book/${item.bookId}`}
-            className={styles.contentImgBox}
-            src={item.wapUrl}
-            width={218}
-            height={294}
-            alt={item.name}
-          />
+          <Link href={`/book/${item.bookId}`}>
+            <Image
+              src={item.wapUrl}
+              className={styles.contentImgBox}
+              onError={onBannerError}
+              placeholder="blur"
+              blurDataURL={item.wapUrl || '/images/common/banner-default.png'}
+              priority
+              width={702}
+              height={254}
+              alt={item.name}
+            />
+          </Link>
         </Swiper.Item>
       ))}
     </Swiper>

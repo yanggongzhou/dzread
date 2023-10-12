@@ -59,7 +59,8 @@ const nextConfig = {
       "nchapter.dramaboxdb.com",
       "nbookimg.klynf.com",
       "nres.webfic.com",
-      "hws3.klynf.com"
+      "hws3.klynf.com",
+      "qnqat.kuaikandushu.cn"
     ],
   },
   // 环境配置

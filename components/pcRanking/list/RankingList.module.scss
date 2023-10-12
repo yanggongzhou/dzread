@@ -10,15 +10,27 @@
     }
 
     .bookIndex {
+      flex-shrink: 0;
       width: 0.27rem;
       height: 0.32rem;
-      background: linear-gradient(180deg, #F9E953 0%, #F1CE29 100%);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.2rem;
+      font-size: 0.18rem;
       font-weight: bold;
       color: #333333;
+      position: relative;
+      padding-bottom: 0.04rem;
+      line-height: 0.25rem;
+
+      .rankIcon {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        width: 0.27rem;
+        height: 0.32rem;
+      }
     }
 
     .imageBox {

@@ -5,10 +5,10 @@ import { IFastRankStyleVo, IRankBookDataVo, IRankDataVo } from "@/typings/rankin
 import Breadcrumb from "@/components/common/breadcrumb";
 import { PcEmpty } from "@/components/common/empty";
 import RankingList from "@/components/pcRanking/list/RankingList";
-import styles from '@/components/pcRanking/index.module.scss';
 import { ERankSex } from "@/typings/home.interface";
 import Link from "next/link";
 import classNames from "classnames";
+import styles from '@/components/pcRanking/index.module.scss';
 
 interface IProps {
   page: number;
@@ -46,7 +46,7 @@ const PcRanking: FC<IProps> = (
   return <main className={styles.rankWrap}>
     <Breadcrumb data={data}/>
     <div className={styles.container}>
-      <RankingTab rankData={rankData} rankId={rankId}/>
+      <RankingTab rankData={rankData} rankId={rankId} rankType={rankType}/>
 
       <div className={styles.rankContent}>
         <div className={styles.rankTitle}>
@@ -66,7 +66,7 @@ const PcRanking: FC<IProps> = (
 
         {pages && pages > 1 ?
           <PaginationCom
-            path={`/ranking/${rankId}/`}
+            path={`/ranking/${rankType}-${rankId}-${rankType}`}
             pageNo={page}
             totalPage={pages}
             isScroll={true}/> : null}

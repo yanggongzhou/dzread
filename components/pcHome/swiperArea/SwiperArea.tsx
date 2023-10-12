@@ -1,7 +1,7 @@
 import React, { FC, useRef } from 'react';
 import { ISeoBannerManageVo } from "@/typings/home.interface";
 import Link from "next/link";
-import { onImgError } from "@/components/common/image/ImageCover";
+import { onBannerError } from "@/components/common/image/ImageCover";
 import Image from "next/image";
 import { Swiper, SwiperRef } from "antd-mobile";
 import { useRouter } from "next/router";
@@ -54,9 +54,9 @@ const SwiperArea: FC<IProps> = ({ bannerList = [] }) => {
               <Image
                 src={ban.pcUrl}
                 className={styles.contentImg}
-                onError={onImgError}
+                onError={onBannerError}
                 placeholder="blur"
-                blurDataURL={ban.pcUrl || '/images/defaultBook.png'}
+                blurDataURL={ban.pcUrl || '/images/common/banner-default.png'}
                 priority
                 width={1200}
                 height={310}

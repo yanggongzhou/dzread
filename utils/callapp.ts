@@ -1,20 +1,47 @@
 import { isAndroid } from "@/utils/tools";
+import ClientConfig from "@/client.config";
 
-var timer = null;
+let timer = null;
+let timerAndroid = null;
+let timerIos = null;
 
 const downLoadUrl = 'xxxxxxxx'
+// 下载逻辑：
+// 在不同页面扫码或点击下载，如用户已有快应用或者有客户端，则优先打开对应页面。
+// 如没有则拉起快应用，拉起失败，记录入落地页下载APP后进入对应页面
+// 如：在PC/WAP端的A书书籍详情页拉起快应用或客户端时仍进入A书的书籍详情页
+// 下载app -- 付费章节需引导打开快应用，拉起失败则自动下载APP。
+
+export const downloadApp = () => {
+  if(isAndroid(window.navigator.userAgent)) {
+    window.location.href = ClientConfig.android.quickapp;
+    timerAndroid = setTimeout(() => {
+      checkOpen(ClientConfig.android.apk)
+    }, 3000);
+  } else {
+    window.location.href = ClientConfig.ios.scheme;
+    timerIos = setTimeout(() => {
+      checkOpen(ClientConfig.ios.shop)
+    }, 3000);
+  }
+}
+
+
+
 // 下载app
-function checkOpen() {
+function checkOpen(downloadUrl: string) {
   timer = setTimeout(function () {
     var hidden = isPageHidden();
     if (!hidden) {
       // 下载app
-      downloadFile(downLoadUrl)
+      downloadFile(downloadUrl)
     }
   }, 0);
   const visibilityChangeProperty = getVisibilityChangeProperty();
   if (!visibilityChangeProperty) {
     clearTimeout(timer);
+    clearTimeout(timerAndroid);
+    clearTimeout(timerIos);
   } else {
     document.addEventListener(visibilityChangeProperty as string,evFn);
   }
@@ -26,6 +53,8 @@ function checkOpen() {
 var evFn = function (e) {
   console.log('e========>', e);
   clearTimeout(timer);
+  clearTimeout(timerAndroid);
+  clearTimeout(timerIos);
 }
 
 /**
@@ -67,7 +96,7 @@ function getPagePropertyPrefix() {
 
 
 function downloadFile(url) {
-  if(isAndroid) {
+  if(isAndroid(window.navigator.userAgent)) {
     const a = document.createElement("a");
     a.download = '下载小说app.apk';
     a.href = url;

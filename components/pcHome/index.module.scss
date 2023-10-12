@@ -10,7 +10,7 @@
     .listBox {
       padding: 0.36rem 0.3rem 0;
       position: relative;
-      height: 3.92rem;
+      min-height: 3.92rem;
 
       .listBg, .listBg2 {
         position: absolute;

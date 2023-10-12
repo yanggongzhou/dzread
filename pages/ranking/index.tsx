@@ -72,12 +72,19 @@ export const getServerSideProps: GetServerSideProps = async ({ req, query }): Pr
   }
   const _page = Number(page) || 1;
   const size = 10;
+  console.log({
+    index: _page,
+    size,
+    style: rankStyle,
+    rankId: _rankId,
+  })
   const response = await netRanking({
     index: _page,
     size,
     style: rankStyle,
     rankId: _rankId,
   });
+
   if (response === 'BadRequest_404') {
     return { notFound: true }
   }

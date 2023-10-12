@@ -1,178 +1,301 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { ownFetch } from "@/server/fetch";
-import { ERankVoSex, INetRankingRes } from "@/typings/ranking.interface";
-import { ERankSex } from "@/typings/home.interface";
 
 // 5001 排行榜页面
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<INetRankingRes>
+  res: NextApiResponse<any>
 ) {
 
-  const data = [
-    {
-      "author": "小妖本仙",
-      "bookId": "11000162501",
-      "bookName": "我曾愛你，奮不顧身",
-      "introduction": "結婚兩年，素手調羹，最終也比不過他心中的那個白月光。\r\n她受夠了，也煩了單向婚姻，可是卻還是被他圈在他的世界裏。\r\n“如果你不愛我，就放開我好嗎！？”\r\n“放開你？這輩子都不可能！”",
-      "cover": "https://nbookimg.klynf.com/cppartner/1x1/11x0/110x0/11000162501/11000162501.jpg?t=20210728144159",
-      "viewCountDisplay": "10.6萬",
-      "lastChapterUtime": "2018-09-30 20:29:01",
-      "ratings": "9.0",
-      "chapterCount": "46",
-      "writeStatus": "完本",
-      "viewCount": "106068"
-    },
-    {
-      "author": "夏目",
-      "bookId": "11000162597",
-      "bookName": "撕情裂愛",
-      "introduction": "言歡和沈邵城的婚姻，是她祖母死前求了沈家老太太，換來的。\r\n       後來言歡被送進監獄，被廢掉一隻手，眼睛瞎掉，滿目絕望時。\r\n       她想，祖母若還在世，大抵是會後悔的。",
-      "cover": "https://nbookimg.klynf.com/cppartner/1x1/11x0/110x0/11000162597/11000162597.jpg?t=20210728115902",
-      "viewCountDisplay": "13.5萬",
-      "lastChapterUtime": "2018-09-30 01:02:20",
-      "ratings": "9.3",
-      "chapterCount": "40",
-      "writeStatus": "完本",
-      "viewCount": "134856"
-    },
-    {
-      "author": "風一樣",
-      "bookId": "11010024453",
-      "bookName": "極品贅婿神醫",
-      "introduction": "獲得仙醫傳承，重生於蘇家贅婿身份為廚子的黃青身上。",
-      "cover": "https://nbookimg.klynf.com/cppartner/1x1/11x0/110x1/11010024453/11010024453.jpg?t=20220711130154",
-      "viewCountDisplay": "3.7萬",
-      "lastChapterUtime": "2019-11-28 11:44:33",
-      "ratings": "7.4",
-      "chapterCount": "498",
-      "writeStatus": "完本",
-      "viewCount": "37488"
-    },
-    {
-      "author": "孤存",
-      "bookId": "11010027727",
-      "bookName": "垂釣超能力",
-      "introduction": "陳解放畢業回鄉承包魚塘，卻偶得一套垂釣係統，擁有了能夠垂釣各種超能力的神奇本領。\r\n　　可以看破情緒的眼鏡，能噴出水火的葫蘆。\r\n　　還死人肉白骨的丹藥，能百日飛升成就大神的秘籍。\r\n　　陳解放垂釣萬界，樂在其中，直到有一天，他釣上來一個口口聲聲自稱自己是龍王三公主的妹子，非要去拯救龜丞相。\r\n　　陳解...",
-      "cover": "https://nbookimg.klynf.com/cppartner/1x1/11x0/110x1/11010027727/11010027727.jpg?t=20210104174427",
-      "viewCountDisplay": "7805",
-      "lastChapterUtime": "2019-11-06 13:20:22",
-      "ratings": "9.3",
-      "chapterCount": "218",
-      "writeStatus": "完本",
-      "viewCount": "7805"
-    },
-    {
-      "author": "肆零八",
-      "bookId": "11010030841",
-      "bookName": "逆極巔峰",
-      "introduction": "被社會摧殘，無力翻身的小人物，因一次意外重活一世。這裏的世界與前世大不相同，他能依靠自己的力量，逆極而行，攀登巔峰嗎？\r\n       如果能讓你重來一世，如果能讓你有掌控自己命運的能力。\r\n       你會怎麼做？\r\n       是披荊斬棘，不留遺憾；還是美酒美人，掌禦蒼生？\r\n       看逆...",
-      "cover": "https://nbookimg.klynf.com/cppartner/1x1/11x0/110x1/11010030841/11010030841.jpg?t=20201231181717",
-      "viewCountDisplay": "2156",
-      "lastChapterUtime": "2019-10-03 10:02:14",
-      "ratings": "7.6",
-      "chapterCount": "146",
-      "writeStatus": "完本",
-      "viewCount": "2156"
-    },
-    {
-      "author": "燎原",
-      "bookId": "11010030842",
-      "bookName": "至尊仙帝",
-      "introduction": "淩天風，一個繼承了華夏複興使命的青年，掌握萬世銅母之力，凝聚九天星沙，滅蠻夷，殺仇寇，聚華夏之力破滅毀滅星族，成就仙界至尊。",
-      "cover": "https://nbookimg.klynf.com/cppartner/1x1/11x0/110x1/11010030842/11010030842.jpg?t=20201231154156",
-      "viewCountDisplay": "1263",
-      "lastChapterUtime": "2019-11-19 12:03:48",
-      "ratings": "7.7",
-      "chapterCount": "248",
-      "writeStatus": "完本",
-      "viewCount": "1263"
-    },
-    {
-      "author": "留白",
-      "bookId": "11010033033",
-      "bookName": "盛世雷帝",
-      "introduction": "但凡王朝，必有猛將！\r\n但凡盛世，必有天驕！\r\n但凡美女，必有狗蛋！\r\n“啊呸，老子不叫狗蛋！”\r\n江川一手指著正前方，另一隻手上，大旗獵獵作響。\r\n其上，碩大的“盜”字熠熠閃光。\r\n“前麵的人給我聽好了，老子要打劫！”\r\n“有錢捧個錢場，沒錢的......”",
-      "cover": "https://nbookimg.klynf.com/cppartner/1x1/11x0/110x1/11010033033/11010033033.jpg?t=20201231165954",
-      "viewCountDisplay": "1752",
-      "lastChapterUtime": "2019-11-07 12:05:14",
-      "ratings": "9.8",
-      "chapterCount": "253",
-      "writeStatus": "完本",
-      "viewCount": "1752"
-    },
-    {
-      "author": "春欲暮",
-      "bookId": "11010035254",
-      "bookName": "第一寵婚，霍少的鑽石甜妻",
-      "introduction": "五年前，她邂逅了一個不知道姓名的男人。\r\n黑暗中看不清那人的眉眼，隻聞到他身上清凜的鬆柏香氣。\r\n五年後，她是卑微的外賣員，卻接到一個神奇的訂單。\r\n一個眉眼精致唇紅齒白的萌寶，如同五年前那個霸道的男人一樣，對她命令道——“給你一千萬，做我媽咪！”",
-      "cover": "https://nbookimg.klynf.com/cppartner/1x1/11x0/110x1/11010035254/11010035254.jpg?t=20201231185931",
-      "viewCountDisplay": "3508",
-      "lastChapterUtime": "2019-12-13 15:30:49",
-      "ratings": "8.7",
-      "chapterCount": "183",
-      "writeStatus": "完本",
-      "viewCount": "3508"
-    },
-    {
-      "author": "鹵真人",
-      "bookId": "11010035259",
-      "bookName": "第一豪門女婿",
-      "introduction": "嶽母：三年婚約已到，你這個廢物，趕緊滾出我家。三日後，女婿重為豪門家主，嶽母求饒：好女婿，我求求你別離開我女兒",
-      "cover": "https://nbookimg.klynf.com/cppartner/1x1/11x0/110x1/11010035259/11010035259.jpg?t=20210329095857",
-      "viewCountDisplay": "8.8萬",
-      "lastChapterUtime": "2022-09-08 10:31:15",
-      "ratings": "9.2",
-      "chapterCount": "3291",
-      "writeStatus": "完本",
-      "viewCount": "87979"
-    },
-    {
-      "author": "三手煙",
-      "bookId": "11010035597",
-      "bookName": "修仙掌門人",
-      "introduction": "意外穿越修仙世界，機緣所獲成為五行法修，在殘酷的修仙摸爬滾打，成就一方大佬，修仙宗派掌門人",
-      "cover": "https://nbookimg.klynf.com/cppartner/1x1/11x0/110x1/11010035597/11010035597.jpg?t=20201231095114",
-      "viewCountDisplay": "2129",
-      "lastChapterUtime": "2019-12-11 19:30:43",
-      "ratings": "8.9",
-      "chapterCount": "191",
-      "writeStatus": "完本",
-      "viewCount": "2129"
+  const result = {
+    "retCode": 0,
+    "data": {
+      "rankData": [
+        {
+          "rankType": 1,
+          "rankTypeName": "男生",
+          "subList": [
+            {
+              "id": 17,
+              "name": "经典榜",
+              "code": 20,
+              "rankStyle": "1",
+              "sex": 1,
+              "status": 1,
+              "sort": 1,
+              "comment": "1",
+              "ctime": 1696908483000,
+              "utime": 1696908483000,
+              "styleList": [
+                {
+                  "styleName": "日榜",
+                  "style": 1
+                }
+              ]
+            },
+            {
+              "id": 4,
+              "name": "畅销榜",
+              "code": 1,
+              "rankStyle": "1,2",
+              "sex": 1,
+              "status": 1,
+              "sort": 1,
+              "comment": "1",
+              "ctime": 1695708312000,
+              "utime": 1696908706000,
+              "styleList": [
+                {
+                  "styleName": "日榜",
+                  "style": 1
+                },
+                {
+                  "styleName": "月榜",
+                  "style": 2
+                }
+              ]
+            },
+            {
+              "id": 5,
+              "name": "完本榜",
+              "code": 3,
+              "rankStyle": "1,2",
+              "sex": 1,
+              "status": 1,
+              "sort": 2,
+              "comment": "1",
+              "ctime": 1695708377000,
+              "utime": 1696908710000,
+              "styleList": [
+                {
+                  "styleName": "日榜",
+                  "style": 1
+                },
+                {
+                  "styleName": "月榜",
+                  "style": 2
+                }
+              ]
+            },
+            {
+              "id": 6,
+              "name": "新书榜",
+              "code": 5,
+              "rankStyle": "1",
+              "sex": 1,
+              "status": 1,
+              "sort": 3,
+              "comment": "3",
+              "ctime": 1695708389000,
+              "utime": 1696908719000,
+              "styleList": [
+                {
+                  "styleName": "日榜",
+                  "style": 1
+                }
+              ]
+            },
+            {
+              "id": 7,
+              "name": "好评榜",
+              "code": 11,
+              "rankStyle": "1",
+              "sex": 1,
+              "status": 1,
+              "sort": 4,
+              "comment": "1",
+              "ctime": 1695708406000,
+              "utime": 1696908722000,
+              "styleList": [
+                {
+                  "styleName": "日榜",
+                  "style": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "rankType": 2,
+          "rankTypeName": "女生",
+          "subList": [
+            {
+              "id": 8,
+              "name": "畅销榜",
+              "code": 2,
+              "rankStyle": "1,2",
+              "sex": 2,
+              "status": 1,
+              "sort": 5,
+              "comment": "1",
+              "ctime": 1695708420000,
+              "utime": 1696908727000,
+              "styleList": [
+                {
+                  "styleName": "日榜",
+                  "style": 1
+                },
+                {
+                  "styleName": "月榜",
+                  "style": 2
+                }
+              ]
+            },
+            {
+              "id": 10,
+              "name": "完本榜",
+              "code": 4,
+              "rankStyle": "1,2",
+              "sex": 2,
+              "status": 1,
+              "sort": 6,
+              "comment": "1",
+              "ctime": 1695708599000,
+              "utime": 1696908733000,
+              "styleList": [
+                {
+                  "styleName": "日榜",
+                  "style": 1
+                },
+                {
+                  "styleName": "月榜",
+                  "style": 2
+                }
+              ]
+            },
+            {
+              "id": 11,
+              "name": "新书榜",
+              "code": 6,
+              "rankStyle": "1",
+              "sex": 2,
+              "status": 1,
+              "sort": 7,
+              "comment": "1",
+              "ctime": 1695708936000,
+              "utime": 1696908736000,
+              "styleList": [
+                {
+                  "styleName": "日榜",
+                  "style": 1
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "rankBook": [
+        {
+          "bookId": "11010069767",
+          "bookName": "至尊神婿",
+          "author": "狼牙土豆",
+          "coverWap": "http://qnqat.kuaikandushu.cn/cppartner/1x1/11x0/110x1/11010069767/11010069767.jpg?t=1638261703574&imageView2/0/w/200/h/267",
+          "introduction": "入赘三年，活得不如狗。一朝崛起，岳母小姨子给跪了。 岳母：求求你别离开我女儿。小姨子：姐夫我错了......",
+          "clickNum": "170266632",
+          "num": "1.7亿",
+          "bookTypeThreeMap": {
+            "540": "古玩鉴宝"
+          },
+          "commentScore": "6.4"
+        },
+        {
+          "bookId": "11010070556",
+          "bookName": "护国利剑",
+          "author": "会说话的香烟",
+          "coverWap": "http://qnqat.kuaikandushu.cn/cppartner/1x1/11x0/110x1/11010070556/11010070556.jpg?t=1631708681430&imageView2/0/w/200/h/267",
+          "introduction": "　　　　手握护国神剑，这世上，没他不敢杀的人。　　拿起银针，世间没他治不了的病。　　牵起她的手，这天下，再没人敢欺负她半分。",
+          "clickNum": "17784713",
+          "num": "1778万",
+          "commentScore": "8.1"
+        },
+        {
+          "bookId": "11010071180",
+          "bookName": "傲世枭雄",
+          "author": "而立之年",
+          "coverWap": "http://qnqat.kuaikandushu.cn/cppartner/1x1/11x0/110x1/11010071180/11010071180.jpg?t=202101010000&imageView2/0/w/200/h/267",
+          "introduction": "醒掌天下权，醉卧美人膝；人生在世，当一世逍遥。王超，因机缘巧合得到赤练仙人传承，从此，以一手医术闯荡江湖，纵横都市，掌握亿万家财，无上权力！",
+          "clickNum": "5128120",
+          "num": "513万",
+          "bookTypeThreeMap": {
+            "530": "现代武侠"
+          },
+          "commentScore": "7.5"
+        },
+        {
+          "bookId": "11010075026",
+          "bookName": "绝世无双",
+          "author": "燕北",
+          "coverWap": "http://qnqat.kuaikandushu.cn/cppartner/1x1/11x0/110x1/11010075026/11010075026.jpg?t=202101010000&imageView2/0/w/200/h/267",
+          "introduction": "战场浴血征战，女儿打来电话求救，一夜之间，三千世界顶级强者，齐赴大夏！他萧天策一生凄苦，身负血海深仇，女儿跟妻子就是他生命中的一道光。他这辈子绝对不允许自己的女儿跟妻子受到一丝一毫的伤害！",
+          "clickNum": "17204989",
+          "num": "1720万",
+          "commentScore": "8.1"
+        },
+        {
+          "bookId": "11010073953",
+          "bookName": "狂龙战婿",
+          "author": "一笔清风",
+          "coverWap": "http://qnqat.kuaikandushu.cn/cppartner/1x1/11x0/110x1/11010073953/11010073953.jpg?t=202101010000&imageView2/0/w/200/h/267",
+          "introduction": "一代战神出狱归来，却发现女儿身受重病，老婆竟然在陪别的男人喝酒,......",
+          "clickNum": "7177095",
+          "num": "718万",
+          "commentScore": "7.8"
+        },
+        {
+          "bookId": "11010072361",
+          "bookName": "万古帝婿",
+          "author": "城南一梦",
+          "coverWap": "http://qnqat.kuaikandushu.cn/cppartner/1x1/11x0/110x1/11010072361/11010072361.jpg?t=202101010000&imageView2/0/w/200/h/267",
+          "introduction": "夜玄魂穿万古，征战诸天，成就不死夜帝的传说，却因妻徒背叛，灵魂沉睡九万年。  九万年后，夜玄苏醒，魂归本体，成为了皇极仙宗的窝囊废女婿。  而他当年收下的弟子已登巅峰，一座他曾修炼过的枯山成为当世顶级修炼圣地，就连他随手救下的一只小猴子，也成为了妖族无敌大圣。  万古帝魂，一夕归来，自此之后，一代帝婿崛起，开启横推万古的无敌神话！",
+          "clickNum": "5826988",
+          "num": "583万",
+          "bookTypeThreeMap": {
+            "512": "东方玄幻"
+          },
+          "commentScore": "7.6"
+        },
+        {
+          "bookId": "11010058559",
+          "bookName": "天王殿水电费看激励刷卡就联发科路京东方看激励是空晶方科技了接口了快结束了复健科",
+          "author": "状元不出门离开的弗兰克家老师的看激励上来的凯乐科技SDK解封离开",
+          "coverWap": "http://qnqat.kuaikandushu.cn/cppartner/1x1/11x0/110x1/11010058559/11010058559.jpg?t=202101010000&imageView2/0/w/200/h/267",
+          "introduction": "六年浴血，王者归来，凭我七尺之躯，可拳打地痞恶霸，可护娇妻萌娃...",
+          "clickNum": "17110999",
+          "num": "1711万",
+          "commentScore": "7.6"
+        },
+        {
+          "bookId": "11010076155",
+          "bookName": "不败天王",
+          "author": "二师兄",
+          "coverWap": "http://qnqat.kuaikandushu.cn/cppartner/1x1/11x0/110x1/11010076155/11010076155.jpg?t=202101010000&imageView2/0/w/200/h/267",
+          "introduction": "上门女婿与老婆离婚后，无数大佬蜂拥而至，携千亿家财，求娶其女儿......",
+          "clickNum": "1474906",
+          "num": "147万",
+          "commentScore": "8.0"
+        },
+        {
+          "bookId": "11010031953",
+          "bookName": "神级狂婿",
+          "author": "吻天的狼",
+          "coverWap": "http://qnqat.kuaikandushu.cn/cppartner/1x1/11x0/110x1/11010031953/11010031953.jpg?t=202101010000&imageView2/0/w/200/h/267",
+          "introduction": "岳母：你赶紧离开我女儿，你个废物东西，配不上他。三日后，女婿开豪车上门岳母：我求求你别离开我女儿。",
+          "clickNum": "42949645",
+          "num": "4295万",
+          "commentScore": "4.8"
+        },
+        {
+          "bookId": "11010030861",
+          "bookName": "超级赘婿",
+          "author": "黑夜的瞳",
+          "coverWap": "http://qnqat.kuaikandushu.cn/cppartner/1x1/11x0/110x1/11010030861/11010030861.jpg?t=1634609613707&imageView2/0/w/200/h/267",
+          "introduction": "我遵循母亲的遗言，装成废物去给别人做上门女婿，为期三年。现在，三年时间结束了...",
+          "clickNum": "13469415",
+          "num": "1347万",
+          "commentScore": "7.6"
+        }
+      ],
+      "totalSize": 89
     }
-  ]
-
-  const subList = [
-    { id: 1, name: '热门榜', sex: ERankVoSex.男频, styleList: [{ style: 1, styleName: '日榜' },{ style: 2, styleName: '月榜' }]},
-    { id: 2, name: '畅销榜', sex: ERankVoSex.男频, styleList: [{ style: 1, styleName: '日榜' },{ style: 2, styleName: '月榜' }]},
-    { id: 3, name: '完本榜', sex: ERankVoSex.男频, styleList: [{ style: 1, styleName: '日榜' },{ style: 2, styleName: '月榜' }]},
-    { id: 4, name: '好评榜', sex: ERankVoSex.男频, styleList: [{ style: 1, styleName: '日榜' },{ style: 2, styleName: '月榜' }]},
-    { id: 5, name: '新书榜', sex: ERankVoSex.男频, styleList: [{ style: 1, styleName: '日榜' },{ style: 2, styleName: '月榜' }]},
-    { id: 6, name: '经典榜', sex: ERankVoSex.男频, styleList: [{ style: 1, styleName: '日榜' },{ style: 2, styleName: '月榜' }]},
-  ]
-  const result: INetRankingRes = {
-    rankData: [
-      {
-        rankType: ERankSex.Male,
-        rankTypeName: '男生',
-        subList,
-      },
-      {
-        rankType: ERankSex.Female,
-        rankTypeName: '女生',
-        subList,
-      }
-    ],
-    rankBook: data.map(val => {
-      return {
-        bookId: val.bookId,
-        bookName:  val.bookName,
-        coverWap: val.cover,
-        bookTypeThreeMap: [val.author, '标签2', '标签3' ],
-        num: val.viewCount + '万热度值',
-      }
-    }),
-    totalSize: 1001,
   }
 
   res.status(200).json(result)

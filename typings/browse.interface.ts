@@ -1,4 +1,5 @@
 import { EBookStatus2 } from "@/typings/book.interface";
+import { AnyObject } from "@/typings/hive.interfaces";
 
 /**
  * 分类上行参数
@@ -43,7 +44,7 @@ export interface IBookSearchVo {
   scoreNum?: string; // 书籍评分
   lastChapterId: string; // 最新章节ID
   lastChapterUtime: string; // 章节更新时间
-  bookTypeThreeMap: string[]; // 标签集合
+  bookTypeThreeMap: AnyObject; // 标签集合
   status: EBookStatus2; // 书籍状态
   totalChapterNum: string; // 总章节数
   hot?: string; // 热度信息
