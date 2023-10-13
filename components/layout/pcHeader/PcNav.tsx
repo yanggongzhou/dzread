@@ -23,6 +23,7 @@ const PcNav: FC<IProps> = () => {
   return <div className={styles.navLeft}>
     <Link href={'/'} title={ClientConfig.name}>
       <Image
+        priority
         quality={100}
         className={styles.logoTxtBox}
         width={118}

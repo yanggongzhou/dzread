@@ -6,11 +6,11 @@ export enum EOperateType {
 }
 
 export enum EThemeType {
-  default1 = '#F3F3F3',
+  default1 = '#F6E6C3',
   default2 = '#E7F0E0',
   default3 = '#DBE0E7',
   default4 = "#EFD8D0",
-  default5 = "#D9E0E8",
+  // default5 = "#D9E0E8",
 
 
   pc1 = "#EBEFF5",

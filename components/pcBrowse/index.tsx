@@ -1,12 +1,11 @@
-import React, { FC } from "react";
-import styles from "@/components/pcBrowse/index.module.scss";
+import React, { FC, useMemo } from "react";
 import PaginationCom from "@/components/common/paginationCom";
 import { IBookSearchVo, IBrowseParams, ITypeOneVo } from "@/typings/browse.interface";
 import { PcEmpty } from "@/components/common/empty";
 import PcCapsuleTabs from "@/components/pcBrowse/PcCapsuleTabs";
-import { useRouter } from "next/router";
 import BrowseList from "@/components/pcBrowse/browseList/BrowseList";
 import Breadcrumb from "@/components/common/breadcrumb";
+import styles from "@/components/pcBrowse/index.module.scss";
 
 interface IProps {
   page: number;
@@ -30,10 +29,34 @@ const PcBrowse: FC<IProps> = (
   }
 ) => {
 
+  const browseTitle = useMemo(() => {
+    if (params.tid && params.tid !== "0" && params.id && params.id !== "0" && params.cid && params.cid !== "0") {
+      const oneItem = typeOneVoList.find(one => one.categoryId == params.id);
+      if (oneItem) {
+        const twoItem = oneItem.typeTwoVos.find(two => two.cid == params.cid);
+        if (twoItem) {
+          const threeItem = twoItem.categoryMark.find(item => item.markId === params.tid);
+          return threeItem ? threeItem.title + '小说' : '全部小说'
+        }
+        return '全部小说'
+      }
+      return '全部小说'
+    }
+    if (params.cid && params.cid !== "0" && params.id && params.id !== "0") {
+      const oneItem = typeOneVoList.find(one => one.categoryId == params.id);
+      if (oneItem) {
+        const twoItem = oneItem.typeTwoVos.find(two => two.cid == params.cid);
+        return twoItem ? twoItem.title + '小说' : '全部小说'
+      }
+      return '全部小说'
+    }
+    return '全部小说'
+  }, [typeOneVoList, params]);
+
   const data = [
     { title: '首页', link: "/" },
     { title: '小说分类', link: "/browse/" },
-    { title: '都市小说' },
+    { title: browseTitle },
   ]
 
   return <main className={styles.browseWrap}>
@@ -49,7 +72,7 @@ const PcBrowse: FC<IProps> = (
       <div className={styles.browseContent}>
 
         <div className={styles.browseTitle}>
-          都市小说
+          {browseTitle}
         </div>
 
         {books.length === 0 ? <PcEmpty/> :

@@ -24,7 +24,7 @@ const MRecommend: FC<IProps> = ({ bookInfos, pages, page, bookPackageId, code })
         <>
           <MRecommendList bookInfos={bookInfos}/>
           {pages && pages > 1 ? <MorePagination
-            prevPath={`/recommend/${code}-${bookPackageId}/`}
+            prevPath={`/recommend/${bookPackageId}/`}
             page={page}
             totalPage={pages}
           /> : null}

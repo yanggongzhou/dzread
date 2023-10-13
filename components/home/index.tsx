@@ -73,7 +73,7 @@ const WapHome: FC<IProps> = ({ bannerList, seoColumnVos }) => {
               </ColumnBox>
             }
 
-            return <ColumnBox key={manage.id} href={`/recommend/${code}-${manage.bookPackageId}`} title={manage.name}
+            return <ColumnBox key={manage.id} href={`/recommend/${manage.bookPackageId}`} title={manage.name}
                               btnTxt={"更多精选"}>
               <FeaturedList bookInfos={manage?.bookInfos}/>
             </ColumnBox>

@@ -39,31 +39,40 @@ const PcCapsuleTabs: FC<IProps> = (
           key={oneVo.categoryId}
           style={{ display: params.id == oneVo.categoryId ? "flex" : "none" }}
           className={styles.twoVoContent}>
-          { oneVo.typeTwoVos.map(twoVo => {
-            return <div key={twoVo.cid} className={styles.twoVoItemBox}>
-              <Link className={classNames(styles.twoVoItem, params.cid === twoVo.cid && styles.twoVoItemActive)}
-                href={`/browse/${params.id}-${twoVo.cid}-0-${params.status}-${params.wordType}`}>
-                {twoVo.title}
-              </Link>
 
-              {twoVo.categoryMark.length !== 0 && params.cid != "0" ?
-                <div
-                  key={oneVo.categoryId + '_3'}
-                  style={{ display: params.cid == twoVo.cid ? "flex" : "none" }}
-                  className={styles.cateContent}
-                >
-                  {twoVo.categoryMark.map(cate => {
-                    return <Link
-                      key={cate.markId}
-                      className={classNames(styles.cateItem, params.tid === cate.markId && styles.cateItemActive)}
-                      href={`/browse/${params.id}-${params.cid}-${cate.markId}-${params.status}-${params.wordType}`}>
-                      {cate.title}
-                    </Link>
-                  })}
-                </div> : null}
+          { Array.from({ length: Math.ceil(oneVo.typeTwoVos.length / 4) }, (v, i) => {
+            return <div key={i} className={styles.lineBox}>
+              <div className={styles.twoBox}>
+                { oneVo.typeTwoVos.slice(i * 4, (i + 1) * 4).map(twoVo => {
+                  return  <Link
+                    key={twoVo.cid}
+                    className={classNames(styles.twoVoItem, params.cid === twoVo.cid && styles.twoVoItemActive)}
+                    href={`/browse/${params.id}-${twoVo.cid}-0-${params.status}-${params.wordType}`}>
+                    {twoVo.title}
+                  </Link>
+                })}
+              </div>
+
+              <div className={styles.threeBox} style={{ display: params.cid != "0" ? "block" : "none" }}>
+                { oneVo.typeTwoVos.slice(i * 4, (i + 1) * 4).map(twoVo => {
+                  return <div
+                    key={twoVo.cid + '_3'}
+                    style={{ display: params.cid == twoVo.cid ? "flex" : "none" }}
+                    className={styles.threeBoxItem}>
+                    {twoVo.categoryMark.map(cate => {
+                      return <Link
+                        key={cate.markId}
+                        className={classNames(styles.cateItem, params.tid === cate.markId && styles.cateItemActive)}
+                        href={`/browse/${params.id}-${params.cid}-${cate.markId}-${params.status}-${params.wordType}`}>
+                        {cate.title}
+                      </Link>
+                    })}
+                  </div>
+                })}
+              </div>
+
             </div>
           })}
-
         </div>
       })}
     </div>

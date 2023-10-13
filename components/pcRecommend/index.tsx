@@ -20,7 +20,7 @@ const PcRecommend: FC<IProps> = ({ bookInfos, pages, page, bookPackageId, code }
       <div className={styles.recommendList}>
         <RecommendList bookInfos={bookInfos}/>
         {pages && pages > 1 ? <PaginationCom
-          path={`/recommend/${code}-${bookPackageId}/`}
+          path={`/recommend/${bookPackageId}/`}
           pageNo={page}
           totalPage={pages}
           isScroll={true}
