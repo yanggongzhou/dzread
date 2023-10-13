@@ -1,5 +1,6 @@
 import { IBookSearchVo } from "@/typings/browse.interface";
 import { AnyObject } from "@/typings/hive.interfaces";
+import { IBookTypeThreeVo } from "@/typings/home.interface";
 /**
  * 书籍下行参数
  */
@@ -36,6 +37,7 @@ export interface IBookInfoItem {
   status: EBookStatus2;
   tagList?: string[]; //标签列表，最多下放6个
   bookTypeThreeMap?: AnyObject; // 三级分类
+  bookTypeThree?: IBookTypeThreeVo[]; // 三级分类
   lastChapterId?: string;
   lastChapterName?: string;
   lastChapterUtime?: string;

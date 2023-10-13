@@ -4,6 +4,7 @@
 import { EDevice } from "@/store/store.interfaces";
 import { ERankVoSex, IRankBookDataVo } from "@/typings/ranking.interface";
 import { IBookSearchVo } from "@/typings/browse.interface";
+import { AnyObject } from "@/typings/hive.interfaces";
 
 export interface INetHomeRes {
   seoBannerManageVos: ISeoBannerManageVo[];
@@ -85,14 +86,20 @@ export interface IBookInfo {
   coverWap: string;
   introduction: string;
   protagonist: string; // 主角
-  bookTypeThreeMap?: string[]; // 三级标签
+  bookTypeThreeMap?: AnyObject; // 三级标签
+  bookTypeThree?: IBookTypeThreeVo[]
   author: string;
   totalChapterNum: string; // 总章节数
   totalWordSize: string; // 总字数
 }
 
+export interface IBookTypeThreeVo {
+  id: number;
+  name: string;
+}
+
 export interface IRankVo {
-  rankId: number; // 排行榜ID
+  rankCode: number; // 排行榜ID
   rankName: string;
   bookInfos: IRankBookDataVo[];
 }

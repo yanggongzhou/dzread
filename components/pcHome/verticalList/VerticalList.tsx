@@ -18,6 +18,12 @@ const rankData = [
 ]
 
 const VerticalItem: FC<{ list: IRankBookDataVo[] }> = ({ list }) => {
+  const rankColors = [
+    { color: "#E0B20A", icon: '/images/ranking/rank0.png'},
+    { color: "#98B2CE", icon: '/images/ranking/rank1.png'},
+    { color: "#CB857C", icon: '/images/ranking/rank2.png'},
+    { color: "#B1B1B1", icon: '/images/ranking/rank3.png'}
+  ]
 
   return <div className={styles.verticalItemBox}>
     {list.map((item, itemInd) => {
@@ -25,8 +31,16 @@ const VerticalItem: FC<{ list: IRankBookDataVo[] }> = ({ list }) => {
 
       return <div key={item.bookId} className={styles.itemBox}>
         <Link href={routerToBookInfo} className={styles.bookIndex}>
-          {itemInd + 1}
+          <Image
+            className={styles.rankIcon}
+            width={27}
+            height={32}
+            src={itemInd > 2 ? rankColors[3].icon : rankColors[itemInd].icon}
+            alt={item.bookName}
+          />
+          <span style={{ color: itemInd > 2 ? rankColors[3].color : rankColors[itemInd].color }}>{itemInd + 1}</span>
         </Link>
+
         <Link href={routerToBookInfo} className={styles.imageBox}>
           <Image
             className={styles.bookImage}
@@ -45,9 +59,12 @@ const VerticalItem: FC<{ list: IRankBookDataVo[] }> = ({ list }) => {
           <Link href={routerToBookInfo} className={styles.viewCountDisplay}>
             {item.num}
           </Link>
-          <Link href={`/book/${item.bookId}`} className={styles.bookAuthor}>
-            {item.bookTypeThreeMap ? Object.values(item.bookTypeThreeMap).join(' · ') : null}
-          </Link>
+          {item?.bookTypeThree ? <Link href={`/book/${item.bookId}`} className={styles.bookAuthor}>
+            {item?.bookTypeThree.map((val, ind) => {
+              if (ind === 0) return val.name;
+              return ` · ${val.name}`
+            })}
+          </Link> : null}
         </div>
       </div>
     })}
@@ -67,7 +84,7 @@ const VerticalList: FC<IProps> = ({ rankVos = [], rankSex = ERankSex.Male }) => 
           alt={''}
         />
 
-        <Link className={styles.rankTitle} href={`/ranking/${rankSex}-${rank.rankId}`}>
+        <Link className={styles.rankTitle} href={`/ranking/${rankSex}-${rank.rankCode}`}>
           <h3 className={styles.titleText} style={{ color: rankData[index].color }}>{rank.rankName}</h3>
           <Image
             className={styles.titleIcon}

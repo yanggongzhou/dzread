@@ -24,7 +24,7 @@ const PcHome: FC<IProps> = ({ bannerList, seoColumnManageVos = [] }) => {
             if (item.type === EColumnType.排行榜) {
               return <div key={item.id} className={styles.rankColumn}>
                 <div className={styles.rankContent}>
-                  <h2 className={styles.titleText}>排行榜</h2>
+                  <h2 className={styles.titleText}>{item.name}</h2>
                   <VerticalList rankVos={item.rankVos?.slice(0, 3)} rankSex={item.rankSex}/>
                 </div>
               </div>;

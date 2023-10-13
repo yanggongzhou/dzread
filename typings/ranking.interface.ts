@@ -1,7 +1,7 @@
 /**
  * 上行参数
  */
-import { ERankSex } from "@/typings/home.interface";
+import { ERankSex, IBookTypeThreeVo } from "@/typings/home.interface";
 import { AnyObject } from "@/typings/hive.interfaces";
 
 export interface INetRankingReq {
@@ -47,7 +47,8 @@ export interface IRankBookDataVo {
   bookId: string; // 书籍ID
   bookName: string; // 书籍名称
   coverWap: string; // 封面
-  bookTypeThreeMap: AnyObject; // 标签集合
+  bookTypeThreeMap?: AnyObject; // 标签集合
+  bookTypeThree?: IBookTypeThreeVo[]; // 标签集合
   num: string; // 影响力值
   commentScore: string;
 }

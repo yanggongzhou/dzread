@@ -28,7 +28,7 @@ const BrowseList: FC<{ list: IBookSearchVo[] }> = ({ list = [] }) => {
           <Link href={`/book/${item.bookId}`} className={styles.bookAuthor}>
             {[
               item.author,
-              item?.bookTypeThreeMap ? Object.values(item?.bookTypeThreeMap)?.[0] : item?.bookTypeThreeMap,
+              item?.bookTypeThree ? item?.bookTypeThree?.[0]?.name : void 0,
               item?.status === EBookStatus.完结 ? '连载' : '完结',
               item?.hot ? item?.hot + '人在读' : void 0
             ].filter(val => val).join(' · ')}

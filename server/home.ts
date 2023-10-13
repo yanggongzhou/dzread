@@ -13,6 +13,7 @@ import { INetCatalogReq, INetCatalogRes } from "@/typings/catalog.interface";
 import { INetKeyRes } from "@/typings/keywords.interface";
 import { INetChapterDetailRes } from "@/typings/chapter.interface";
 import { INetThinkRes } from "@/typings/search.interface";
+import { INetCommonRes } from "@/typings/common.interface";
 
 // 5000获取首页
 export const netHome = (type: EDevice): Promise<INetHomeRes | 'BadRequest_404' | 'BadRequest_500'> => {
@@ -72,4 +73,9 @@ export const netBookRe = (params: INetBookReReq): Promise<INetBookReRes | 'BadRe
 // 搜索接口
 export const netSearch = (keyWord: string): Promise<IBookSearchVo[] | 'BadRequest_404' | 'BadRequest_500'> => {
   return ownFetch('/search.do', { keyWord })
+}
+
+// 5054公共数据接口
+export const netCommon = (): Promise<INetCommonRes | 'BadRequest_404' | 'BadRequest_500'> => {
+  return poFetch('/api/5054')
 }

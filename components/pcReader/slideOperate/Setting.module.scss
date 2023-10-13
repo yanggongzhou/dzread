@@ -84,14 +84,18 @@
       border-radius: 0.06rem;
       position: relative;
       cursor: pointer;
+      border: 0.01rem solid transparent;
+    }
+    .bgActive {
+      border-color: #FF4614
     }
 
     .bgChecked {
-      width: 0.18rem;
-      height: 0.18rem;
+      width: 0.32rem;
+      height: 0.32rem;
       position: absolute !important;
-      right: -0.06rem;
-      top: -0.06rem;
+      left: 0.27rem;
+      top: 0.04rem;
     }
   }
 }

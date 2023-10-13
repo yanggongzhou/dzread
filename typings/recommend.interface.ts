@@ -4,10 +4,9 @@
 import { IBookInfo } from "@/typings/home.interface";
 
 export interface INetRecommendReq {
-  index: number;
+  index: number | string;
   size: number;
   bookPackageId: number; // 包ID
-  id: number;
 }
 /**
  * 书籍类型下行参数
@@ -15,4 +14,5 @@ export interface INetRecommendReq {
 export interface INetRecommendRes {
   bookInfos: IBookInfo[];
   totalSize: number;
+  name: string;
 }

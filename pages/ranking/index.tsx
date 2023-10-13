@@ -56,7 +56,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, query }): Pr
   const ua = req?.headers['user-agent'] || ''
   const { page = '1', types } = query as { page?: string, types?: string };
   let rankType = ERankSex.Male;
-  let rankStyle = undefined;
+  let rankStyle = 1;
   let _rankId = undefined;
   if (types) {
     const typeArr = types.split('-');
@@ -99,13 +99,14 @@ export const getServerSideProps: GetServerSideProps = async ({ req, query }): Pr
       rankStyle = rankData[0].subList[0].styleList[0].style;
     }
   }
-  if (rankStyle === undefined) {
-    rankData.forEach(val => {
-      const obj = val.subList.find(sub => sub.id === _rankId);
-      if (obj) {
+  if (rankStyle == undefined) {
+    const rankItem = rankData.find(item => item.rankType == rankType) || rankData[0];
+    if (rankItem) {
+      const obj = rankItem.subList.find(sub => sub.id == _rankId);
+      if (obj && obj.styleList && obj.styleList.length > 0) {
         rankStyle = obj.styleList[0].style;
       }
-    })
+    }
   }
 
   return {

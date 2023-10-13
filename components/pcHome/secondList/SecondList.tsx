@@ -42,7 +42,7 @@ const SecondList: FC<IProps> = ({ bookInfos = [], priority = false }) => {
           {book.introduction}
         </Link>
         <Link href={routerToBookInfo} className={styles.bookAuthor}>
-          {[book.author, book?.bookTypeThreeMap?.[0]].filter(val => val).join(' · ')}
+          {[book.author, book?.bookTypeThree?.[0]?.name].filter(val => val).join(' · ')}
         </Link>
       </div>
     })}

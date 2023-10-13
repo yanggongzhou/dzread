@@ -48,8 +48,8 @@ const BrowseList: FC<IProps> = ({ books = [], priority = false }) => {
           </Link>
 
           <Link href={routerToBookInfo} className={styles.tagBox}>
-            {(Object.values(book.bookTypeThreeMap) || []).map(val => {
-              return <span className={styles.tagItem} key={val}>{val}</span>
+            {(book.bookTypeThree || []).map(val => {
+              return <span className={styles.tagItem} key={val.id}>{val.name}</span>
             })}
           </Link>
         </div>

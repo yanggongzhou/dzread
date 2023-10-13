@@ -12,13 +12,13 @@ interface IProps {
   page: number;
   pages: number;
   bookPackageId: number;
-  code: EChannelCode;
+  name: string;
 }
 
-const MRecommend: FC<IProps> = ({ bookInfos, pages, page, bookPackageId, code }) => {
+const MRecommend: FC<IProps> = ({ bookInfos, pages, page, bookPackageId, name }) => {
 
   return <main className={styles.moreWrap}>
-    <NavBar backHref={'/'} title={code == EChannelCode.男生 ? "男生精选" : "女生精选" }/>
+    <NavBar backHref={'/'} title={name}/>
     <DownloadBanner height={'0.1rem'}>
       {bookInfos.length > 0 ?
         <>

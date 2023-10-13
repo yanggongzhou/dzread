@@ -31,7 +31,7 @@ const RecommendList: FC<IProps> = ({ bookInfos }) => {
           <Link className={styles.bookIntro} href={`/book/${item.bookId}`}>{item.introduction}</Link>
           <Link href={`/book/${item.bookId}`} className={styles.bookAuthor}>
             {[item.author,
-              item?.bookTypeThreeMap ? Object.values(item?.bookTypeThreeMap)?.[0] : void 0,
+              item?.bookTypeThree ? item.bookTypeThree?.[0]?.name : void 0,
               item?.status === EBookStatus.完结 ? '连载' : '完结',
               item.totalWordSize].filter(val => val).join(' · ')}
           </Link>

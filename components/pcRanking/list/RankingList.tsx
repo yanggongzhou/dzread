@@ -31,7 +31,6 @@ const RankingList: FC<IProps> = ({ rankBook = [], priority = false }) => {
       return <div key={book.bookId} className={styles.itemBox}>
         <Link href={routerToBookInfo} className={styles.bookIndex}>
           <Image
-            priority={priority}
             className={styles.rankIcon}
             width={27}
             height={32}
@@ -65,9 +64,9 @@ const RankingList: FC<IProps> = ({ rankBook = [], priority = false }) => {
             {book.introduction}
           </Link>
 
-          {book.bookTypeThreeMap ? <Link href={routerToBookInfo} className={styles.tagBox}>
-            {(Object.values(book.bookTypeThreeMap) || []).map(val => {
-              return <span className={styles.tagItem} key={val}>{val}</span>
+          {book.bookTypeThree ? <Link href={routerToBookInfo} className={styles.tagBox}>
+            {(book.bookTypeThree || []).map(val => {
+              return <span className={styles.tagItem} key={val.id}>{val.name}</span>
             })}
           </Link> : null}
         </div>

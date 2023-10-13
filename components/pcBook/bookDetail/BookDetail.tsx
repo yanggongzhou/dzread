@@ -46,9 +46,9 @@ const PcBookDetail: FC<IProps> = ({ book }) => {
           更新时间：{book.lastChapterUtime}
         </Link>
 
-        {book?.bookTypeThreeMap ? <Link className={styles.tagsBox} href={routerToBook}>
-          {Object.values(book?.bookTypeThreeMap).map(val => {
-            return <span key={val} className={styles.tagItem}>{val}</span>
+        {book?.bookTypeThree ? <Link className={styles.tagsBox} href={routerToBook}>
+          {book?.bookTypeThree.map(val => {
+            return <span key={val.id} className={styles.tagItem}>{val.name}</span>
           })}
         </Link> : null}
 

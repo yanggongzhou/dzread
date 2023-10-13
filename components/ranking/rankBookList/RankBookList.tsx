@@ -24,8 +24,12 @@ const RankBookList: FC<IProps> = ({ rankBook = [] }) => {
         <div className={styles.itemContent}>
           <div>
             <h4><Link className={styles.bookName} href={`/book/${item.bookId}`}>{item.bookName}</Link></h4>
-            {item.bookTypeThreeMap ?
-              <Link href={`/book/${item.bookId}`} className={styles.bookAuthor}>{Object.values(item.bookTypeThreeMap).join(' · ')}</Link>
+            {item.bookTypeThree ?
+              <Link href={`/book/${item.bookId}`} className={styles.bookAuthor}>
+                {item.bookTypeThree.map((val, ind) => {
+                  return ind === 0 ? val.name : ` · ${val.name}`
+                  })}
+              </Link>
               : null}
           </div>
           <Link href={`/book/${item.bookId}`} className={styles.bookType}>{item.num}</Link>

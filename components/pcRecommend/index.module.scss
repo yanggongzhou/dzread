@@ -1,7 +1,8 @@
 .recommendWrap {
   width: 12rem;
   margin: 0 auto;
-  padding-top: .66rem;
+  padding-top: .76rem;
+  min-height: calc(100vh - 2.24rem);
 
   .recommendList {
     padding-bottom: 0.6rem;

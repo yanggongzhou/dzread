@@ -25,7 +25,10 @@ const BookDetail: FC<IProps> = ({ book, chapterId }) => {
       <div className={styles.bookContent}>
         <div>
           {book.bookName ? <h1 className={styles.bookName}>{book.bookName}</h1> : null}
-          {book.bookTypeThreeMap ? <p className={styles.bookStatus}>{Object.values(book.bookTypeThreeMap)?.join(' · ')}</p> : null}
+          {book.bookTypeThree ? <p className={styles.bookStatus}>
+            {book.bookTypeThree.map((val,ind) => {
+              return ind === 0 ? val.name : ` · ${val.name}`
+            })}</p> : null}
           <p className={styles.bookChapter}>最新章节：第{book.totalChapterNum}章</p>
         </div>
         <p className={styles.updateTime}>更新时间：{book.lastChapterUtime}</p>

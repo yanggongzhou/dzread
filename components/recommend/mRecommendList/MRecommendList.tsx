@@ -33,7 +33,7 @@ const MRecommendList: FC<IProps> = ({ bookInfos }) => {
           <div>
             <Link href={`/book/${item.bookId}`} className={styles.bookAuthor}>
               {[item.author,
-                item?.bookTypeThreeMap ? Object.values(item?.bookTypeThreeMap)?.[0] : void 0,
+                item?.bookTypeThree ? item?.bookTypeThree?.[0]?.name : void 0,
                 item?.status === EBookStatus2.连载 ? '连载' : '完结',
                 item?.hot].filter(val => val).join(' · ')}
             </Link>

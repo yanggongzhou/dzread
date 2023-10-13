@@ -31,8 +31,8 @@ const PcSlide: FC = () => {
       <Image
         className={styles.slideLogo}
         width={64}
-        height={66}
-        src={'/images/logo.png'}
+        height={42}
+        src={'/images/home/logo-href.png'}
         alt={ClientConfig.name}
       />
 

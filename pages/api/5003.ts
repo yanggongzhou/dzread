@@ -26,15 +26,11 @@ export default async function handler(
           "totalChapterNum": "5614",
           "lastChapterId": "542132688",
           "lastChapterName": "第5617章",
+          "lastChapterUtime": "2023-09-19",
           "clickNum": "1.7亿",
           "status": 0,
           "cp": "",
           "disclaimer": "本平台经版权方授权使用该作品。如您发现涉黄、涉黑、涉政等内容，或作品内容侵害您的权益，欢迎向本平台客服举报投诉，一经核实，立即删除，本平台不承担任何责任。\r\n本平台由北京点众科技股份有限公司提供支撑服务或运营。",
-          "tagList": [
-            "女婿",
-            "打脸",
-            "战神"
-          ],
           "bookTypeName": "古玩鉴宝",
           "bookScore": "6.4",
           "threeTypeTag": [
@@ -56,9 +52,12 @@ export default async function handler(
           "totalReadNum": "1.7",
           "totalReadNumUnit": "亿",
           "protagonist": "叶昊,郑漫儿",
-          "bookTypeThreeMap": {
-            "540": "古玩鉴宝"
-          }
+          "bookTypeThree": [
+            {
+              "id": 540,
+              "name": "古玩鉴宝"
+            }
+          ]
         },
         {
           "unit": "0",
@@ -74,18 +73,11 @@ export default async function handler(
           "totalChapterNum": "1181",
           "lastChapterId": "551800",
           "lastChapterName": "念念情深：亲自戴上那枚戒指",
+          "lastChapterUtime": "2015-11-24",
           "clickNum": "17万",
           "status": 0,
           "cp": "",
           "disclaimer": "本平台经版权方授权使用该作品。如您发现涉黄、涉黑、涉政等内容，或作品内容侵害您的权益，欢迎向本平台客服举报投诉，一经核实，立即删除，本平台不承担任何责任。\r\n本平台由北京点众科技股份有限公司提供支撑服务或运营。",
-          "tagList": [
-            "总裁",
-            "现言",
-            "豪门",
-            "虐文",
-            "虐恋",
-            "邪魅"
-          ],
           "bookTypeName": "总裁豪门",
           "bookScore": "7.5",
           "wordSize": "271",
@@ -93,9 +85,12 @@ export default async function handler(
           "totalReadNum": "17",
           "totalReadNumUnit": "万",
           "protagonist": "秦雅滢,冷慕宸",
-          "bookTypeThreeMap": {
-            "577": "总裁豪门"
-          }
+          "bookTypeThree": [
+            {
+              "id": 577,
+              "name": "总裁豪门"
+            }
+          ]
         },
         {
           "unit": "0",
@@ -111,18 +106,11 @@ export default async function handler(
           "totalChapterNum": "1455",
           "lastChapterId": "476993",
           "lastChapterName": "新书试读",
+          "lastChapterUtime": "2015-11-24",
           "clickNum": "2.36万",
           "status": 1,
           "cp": "",
           "disclaimer": "本平台经版权方授权使用该作品。如您发现涉黄、涉黑、涉政等内容，或作品内容侵害您的权益，欢迎向本平台客服举报投诉，一经核实，立即删除，本平台不承担任何责任。\r\n本平台由北京点众科技股份有限公司提供支撑服务或运营。",
-          "tagList": [
-            "古言",
-            "穿越",
-            "虐文",
-            "权谋",
-            "女强",
-            "宫斗"
-          ],
           "bookTypeName": "穿越时空",
           "bookScore": "7.7",
           "wordSize": "425",
@@ -130,9 +118,12 @@ export default async function handler(
           "totalReadNum": "2.36",
           "totalReadNumUnit": "万",
           "protagonist": "",
-          "bookTypeThreeMap": {
-            "591": "穿越时空"
-          }
+          "bookTypeThree": [
+            {
+              "id": 591,
+              "name": "穿越时空"
+            }
+          ]
         },
         {
           "unit": "0",
@@ -150,16 +141,11 @@ export default async function handler(
           "totalChapterNum": "868",
           "lastChapterId": "10495565",
           "lastChapterName": "第八百七十五章 赶到",
+          "lastChapterUtime": "2017-01-09",
           "clickNum": "5.8万",
           "status": 0,
           "cp": "",
           "disclaimer": "本平台经版权方授权使用该作品。如您发现涉黄、涉黑、涉政等内容，或作品内容侵害您的权益，欢迎向本平台客服举报投诉，一经核实，立即删除，本平台不承担任何责任。\r\n本平台由北京点众科技股份有限公司提供支撑服务或运营。",
-          "tagList": [
-            "热血",
-            "重生",
-            "至尊",
-            "武道"
-          ],
           "bookTypeName": "",
           "bookScore": "7.5",
           "wordSize": "211",
@@ -182,11 +168,11 @@ export default async function handler(
           "totalChapterNum": "3694",
           "lastChapterId": "522503734",
           "lastChapterName": "　第三千七百章 无差别进攻",
+          "lastChapterUtime": "2022-04-20",
           "clickNum": "9402",
           "status": 0,
           "cp": "",
           "disclaimer": "本平台经版权方授权使用该作品。如您发现涉黄、涉黑、涉政等内容，或作品内容侵害您的权益，欢迎向本平台客服举报投诉，一经核实，立即删除，本平台不承担任何责任。\r\n本平台由北京点众科技股份有限公司提供支撑服务或运营。",
-          "tagList": [],
           "bookTypeName": "东方玄幻",
           "bookScore": "7.9",
           "threeTypeTag": [
@@ -201,9 +187,12 @@ export default async function handler(
           "totalReadNum": "9402",
           "totalReadNumUnit": "",
           "protagonist": "林羽",
-          "bookTypeThreeMap": {
-            "512": "东方玄幻"
-          }
+          "bookTypeThree": [
+            {
+              "id": 512,
+              "name": "东方玄幻"
+            }
+          ]
         },
         {
           "unit": "0",
@@ -227,17 +216,11 @@ export default async function handler(
           "totalChapterNum": "2949",
           "lastChapterId": "522515376",
           "lastChapterName": "第2949章",
+          "lastChapterUtime": "2022-04-21",
           "clickNum": "80万",
           "status": 0,
           "cp": "",
           "disclaimer": "本平台经版权方授权使用该作品。如您发现涉黄、涉黑、涉政等内容，或作品内容侵害您的权益，欢迎向本平台客服举报投诉，一经核实，立即删除，本平台不承担任何责任。\r\n本平台由北京点众科技股份有限公司提供支撑服务或运营。",
-          "tagList": [
-            "重生",
-            "复仇",
-            "虐渣",
-            "甜宠",
-            "马甲"
-          ],
           "bookTypeName": "重生异能",
           "bookScore": "7.8",
           "threeTypeTag": [
@@ -248,9 +231,12 @@ export default async function handler(
           "totalReadNum": "80",
           "totalReadNumUnit": "万",
           "protagonist": "南景,战北庭",
-          "bookTypeThreeMap": {
-            "579": "重生异能"
-          }
+          "bookTypeThree": [
+            {
+              "id": 579,
+              "name": "重生异能"
+            }
+          ]
         },
         {
           "unit": "0",
@@ -266,15 +252,11 @@ export default async function handler(
           "totalChapterNum": "2653",
           "lastChapterId": "514869793",
           "lastChapterName": "第2653章",
+          "lastChapterUtime": "2021-12-23",
           "clickNum": "472万",
           "status": 1,
           "cp": "",
           "disclaimer": "本平台经版权方授权使用该作品。如您发现涉黄、涉黑、涉政等内容，或作品内容侵害您的权益，欢迎向本平台客服举报投诉，一经核实，立即删除，本平台不承担任何责任。\r\n本平台由北京点众科技股份有限公司提供支撑服务或运营。",
-          "tagList": [
-            "金钱",
-            "风水",
-            "超能"
-          ],
           "bookTypeName": "现代武侠",
           "bookScore": "8.2",
           "threeTypeTag": [
@@ -286,11 +268,20 @@ export default async function handler(
           "totalReadNum": "472",
           "totalReadNumUnit": "万",
           "protagonist": "吴峥,唐思佳",
-          "bookTypeThreeMap": {
-            "530": "现代武侠",
-            "606": "原创灵异",
-            "607": "悬疑推理"
-          }
+          "bookTypeThree": [
+            {
+              "id": 530,
+              "name": "现代武侠"
+            },
+            {
+              "id": 606,
+              "name": "原创灵异"
+            },
+            {
+              "id": 607,
+              "name": "悬疑推理"
+            }
+          ]
         },
         {
           "unit": "0",
@@ -306,16 +297,11 @@ export default async function handler(
           "totalChapterNum": "4459",
           "lastChapterId": "522505477",
           "lastChapterName": "第4459章",
+          "lastChapterUtime": "2022-04-20",
           "clickNum": "1347万",
           "status": 1,
           "cp": "",
           "disclaimer": "本平台经版权方授权使用该作品。如您发现涉黄、涉黑、涉政等内容，或作品内容侵害您的权益，欢迎向本平台客服举报投诉，一经核实，立即删除，本平台不承担任何责任。\r\n本平台由北京点众科技股份有限公司提供支撑服务或运营。",
-          "tagList": [
-            "王者",
-            "富豪",
-            "女婿",
-            "打脸"
-          ],
           "bookTypeName": "",
           "bookScore": "7.6",
           "threeTypeTag": [
@@ -341,24 +327,23 @@ export default async function handler(
           "totalChapterNum": "62",
           "lastChapterId": "541685693",
           "lastChapterName": "第62章",
+          "lastChapterUtime": "2023-05-06",
           "clickNum": "5075",
           "status": 0,
           "cp": "",
           "disclaimer": "本平台经版权方授权使用该作品。如您发现涉黄、涉黑、涉政等内容，或作品内容侵害您的权益，欢迎向本平台客服举报投诉，一经核实，立即删除，本平台不承担任何责任。\r\n本平台由北京点众科技股份有限公司提供支撑服务或运营。",
-          "tagList": [
-            "无敌魔皇",
-            "千笔不落",
-            "玄幻奇幻"
-          ],
           "bookTypeName": "东方玄幻",
           "bookScore": "7.6",
           "wordSize": "17",
           "wordSizeUnit": "万",
           "totalReadNum": "5075",
           "totalReadNumUnit": "",
-          "bookTypeThreeMap": {
-            "512": "东方玄幻"
-          }
+          "bookTypeThree": [
+            {
+              "id": 512,
+              "name": "东方玄幻"
+            }
+          ]
         },
         {
           "unit": "0",
@@ -381,16 +366,11 @@ export default async function handler(
           "totalChapterNum": "3814",
           "lastChapterId": "522482153",
           "lastChapterName": "第3814章",
+          "lastChapterUtime": "2022-04-20",
           "clickNum": "312万",
           "status": 0,
           "cp": "",
           "disclaimer": "本平台经版权方授权使用该作品。如您发现涉黄、涉黑、涉政等内容，或作品内容侵害您的权益，欢迎向本平台客服举报投诉，一经核实，立即删除，本平台不承担任何责任。\r\n本平台由北京点众科技股份有限公司提供支撑服务或运营。",
-          "tagList": [
-            "破镜重圆",
-            "虐恋",
-            "先虐后宠",
-            "豪门恩怨"
-          ],
           "bookTypeName": "总裁豪门",
           "bookScore": "8.3",
           "wordSize": "402",
@@ -398,9 +378,12 @@ export default async function handler(
           "totalReadNum": "312",
           "totalReadNumUnit": "万",
           "protagonist": "凌依然,易瑾离",
-          "bookTypeThreeMap": {
-            "577": "总裁豪门"
-          }
+          "bookTypeThree": [
+            {
+              "id": 577,
+              "name": "总裁豪门"
+            }
+          ]
         }
       ],
       "name": "男生精选",

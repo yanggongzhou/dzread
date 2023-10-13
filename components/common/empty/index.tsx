@@ -9,7 +9,7 @@ export const PcEmpty: FC = () => {
       className={styles.emptyIcon}
       width={200}
       height={200}
-      src={'/images/common/empty.png'}
+      src={'/images/common/pc-empty.png'}
       placeholder="blur"
       blurDataURL={'/images/common/pc-empty.png'}
       alt={'没找到内容'}
@@ -26,9 +26,9 @@ export const MEmpty: FC = () => {
       className={styles.emptyIcon}
       width={240}
       height={240}
-      src={'/images/common/empty.png'}
+      src={'/images/common/pc-empty.png'}
       placeholder="blur"
-      blurDataURL={'/images/common/empty.png'}
+      blurDataURL={'/images/common/pc-empty.png'}
       alt={'没找到内容'}
     />
     <div className={styles.emptyIntro}>

@@ -64,15 +64,15 @@ const PcSetting: FC<IProps> = () => {
         { backgroundList.map(backgroundColor => {
           return <div
             key={backgroundColor}
-            className={styles.bg}
+            className={classNames(styles.bg, theme === backgroundColor && styles.bgActive)}
             style={{ backgroundColor } }
             onClick={() => changeBg(backgroundColor)}>
             { theme === backgroundColor ?
               <Image
                 className={styles.bgChecked}
-                width={48}
-                height={48}
-                src={'/images/reader/bg-checked.png'}
+                width={32}
+                height={32}
+                src={'/images/reader/pc-checked.png'}
                 alt={''}
               /> : null}
           </div>
