@@ -1,11 +1,22 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import Link from "next/link";
 import styles from '@/components/layout/pcFooter/PcFooter.module.scss';
+import { netCommon } from "@/server/home";
 
 interface IProps {
 }
 
 const PcFooter: FC<IProps> = () => {
+
+  useEffect(() => {
+    getCommon();
+  }, []);
+
+  const getCommon = async () => {
+    const ss = await netCommon();
+    console.log('ss', ss);
+  }
+
 
   return <div className={styles.footerWrap}>
 

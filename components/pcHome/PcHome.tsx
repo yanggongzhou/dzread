@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import SecondList from "@/components/pcHome/secondList/SecondList";
-import { EColumnType, ERankSex, ISeoBannerManageVo, ISeoColumnManage } from "@/typings/home.interface";
+import { EColumnType, ISeoBannerManageVo, ISeoColumnManage } from "@/typings/home.interface";
 import SwiperArea from "@/components/pcHome/swiperArea/SwiperArea";
 import PcHomeTitle from "@/components/pcHome/homeTitle/HomeTitle";
 import { PcEmpty } from "@/components/common/empty";

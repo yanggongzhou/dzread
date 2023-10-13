@@ -17,13 +17,15 @@ const rankData = [
   { color: '#CF6300', bg: "/images/home/rank-bg2.png", icon: "/images/home/rank-more2.png" },
 ]
 
+const rankColors = [
+  { color: "#E0B20A", icon: '/images/ranking/rank0.png'},
+  { color: "#98B2CE", icon: '/images/ranking/rank1.png'},
+  { color: "#CB857C", icon: '/images/ranking/rank2.png'},
+  { color: "#B1B1B1", icon: '/images/ranking/rank3.png'}
+]
+
+
 const VerticalItem: FC<{ list: IRankBookDataVo[] }> = ({ list }) => {
-  const rankColors = [
-    { color: "#E0B20A", icon: '/images/ranking/rank0.png'},
-    { color: "#98B2CE", icon: '/images/ranking/rank1.png'},
-    { color: "#CB857C", icon: '/images/ranking/rank2.png'},
-    { color: "#B1B1B1", icon: '/images/ranking/rank3.png'}
-  ]
 
   return <div className={styles.verticalItemBox}>
     {list.map((item, itemInd) => {
